@@ -93,7 +93,7 @@ export const Group: Story = {
       <Avatar.Root
         style={{
           marginLeft: "-0.75rem",
-          border: "2px solid var(--sigvelo-background-color)",
+          border: "2px solid var(--sigvelo-color-canvas)",
         }}
       >
         <Avatar.Image
@@ -105,7 +105,7 @@ export const Group: Story = {
       <Avatar.Root
         style={{
           marginLeft: "-0.75rem",
-          border: "2px solid var(--sigvelo-background-color)",
+          border: "2px solid var(--sigvelo-color-canvas)",
         }}
       >
         <Avatar.Image
@@ -117,7 +117,7 @@ export const Group: Story = {
       <Avatar.Root
         style={{
           marginLeft: "-0.75rem",
-          border: "2px solid var(--sigvelo-background-color)",
+          border: "2px solid var(--sigvelo-color-canvas)",
         }}
       >
         <Avatar.Fallback>+5</Avatar.Fallback>
@@ -137,7 +137,7 @@ export const WithDelayedFallback: Story = {
 
 export const SquareAvatar: Story = {
   render: () => (
-    <Avatar.Root style={{ borderRadius: "var(--sigvelo-border-radius-md)" }}>
+    <Avatar.Root style={{ borderRadius: "var(--sigvelo-radius-md)" }}>
       <Avatar.Image
         src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?w=128&h=128&fit=crop"
         alt="Square avatar"

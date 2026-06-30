@@ -36,7 +36,7 @@ export const Default: Story = {
                       width: "48px",
                       height: "48px",
                       borderRadius: "50%",
-                      backgroundColor: "var(--sigvelo-neutral-fill-softer)",
+                      backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -51,7 +51,7 @@ export const Default: Story = {
                     <div
                       style={{
                         fontSize: "0.75rem",
-                        color: "var(--sigvelo-text-muted)",
+                        color: "var(--sigvelo-color-text-muted)",
                       }}
                     >
                       @johndoe
@@ -66,14 +66,14 @@ export const Default: Story = {
                     display: "flex",
                     gap: "1rem",
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   <span>
-                    <strong style={{ color: "var(--sigvelo-text-body)" }}>1.2k</strong> followers
+                    <strong style={{ color: "var(--sigvelo-color-text)" }}>1.2k</strong> followers
                   </span>
                   <span>
-                    <strong style={{ color: "var(--sigvelo-text-body)" }}>856</strong> following
+                    <strong style={{ color: "var(--sigvelo-color-text)" }}>856</strong> following
                   </span>
                 </div>
               </div>
@@ -108,8 +108,8 @@ export const ArticlePreview: Story = {
                 <div
                   style={{
                     height: "100px",
-                    backgroundColor: "var(--sigvelo-neutral-fill-softer)",
-                    borderRadius: "var(--sigvelo-border-radius-sm)",
+                    backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
+                    borderRadius: "var(--sigvelo-radius-sm)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -122,7 +122,7 @@ export const ArticlePreview: Story = {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    style={{ color: "var(--sigvelo-text-muted)" }}
+                    style={{ color: "var(--sigvelo-color-text-muted)" }}
                   >
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                     <polyline points="14,2 14,8 20,8" />
@@ -137,7 +137,7 @@ export const ArticlePreview: Story = {
                   style={{
                     margin: 0,
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   Learn best practices for creating accessible React components that work for
@@ -146,7 +146,7 @@ export const ArticlePreview: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   5 min read
@@ -218,9 +218,9 @@ export const ProductPreview: Story = {
                     <span
                       style={{
                         padding: "0.25rem 0.5rem",
-                        backgroundColor: "var(--sigvelo-primary-fill-mid)",
-                        color: "var(--sigvelo-primary-text-on-mid)",
-                        borderRadius: "var(--sigvelo-border-radius-sm)",
+                        backgroundColor: "var(--sigvelo-color-primary-bg)",
+                        color: "var(--sigvelo-color-primary-text-on-bg)",
+                        borderRadius: "var(--sigvelo-radius-sm)",
                         fontSize: "0.75rem",
                         fontWeight: 500,
                       }}
@@ -233,7 +233,7 @@ export const ProductPreview: Story = {
                     <span
                       style={{
                         fontSize: "0.875rem",
-                        color: "var(--sigvelo-text-muted)",
+                        color: "var(--sigvelo-color-text-muted)",
                       }}
                     >
                       /month

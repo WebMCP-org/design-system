@@ -94,8 +94,8 @@ export const BillingPeriod: Story = {
                   fontSize: "0.625rem",
                   fontWeight: 600,
                   padding: "0.125rem 0.375rem",
-                  backgroundColor: "var(--sigvelo-success-fill-mid)",
-                  color: "var(--sigvelo-success-text-on-mid)",
+                  backgroundColor: "var(--sigvelo-color-success-bg)",
+                  color: "var(--sigvelo-color-success-text-on-bg)",
                   borderRadius: "9999px",
                 }}
               >
@@ -112,8 +112,8 @@ export const BillingPeriod: Story = {
               style={{
                 padding: "1rem",
                 textAlign: "center",
-                border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-                borderRadius: "var(--sigvelo-border-radius-md)",
+                border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+                borderRadius: "var(--sigvelo-radius-md)",
                 minWidth: "100px",
               }}
             >
@@ -122,7 +122,7 @@ export const BillingPeriod: Story = {
                   fontSize: "0.875rem",
                   fontWeight: 500,
                   textTransform: "capitalize",
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                 }}
               >
                 {plan}
@@ -131,7 +131,7 @@ export const BillingPeriod: Story = {
                 style={{
                   fontSize: "1.5rem",
                   fontWeight: 700,
-                  color: "var(--sigvelo-text-body)",
+                  color: "var(--sigvelo-color-text)",
                   marginTop: "0.25rem",
                 }}
               >
@@ -140,7 +140,7 @@ export const BillingPeriod: Story = {
                   style={{
                     fontSize: "0.875rem",
                     fontWeight: 400,
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   /mo
@@ -188,7 +188,9 @@ export const Controlled: Story = {
             </svg>
           </ToggleGroupItem>
         </ToggleGroup>
-        <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>View: {value[0]}</p>
+        <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
+          View: {value[0]}
+        </p>
       </div>
     );
   },

@@ -4,15 +4,16 @@
   gap: 1rem;
   padding: 1.5rem;
   margin: 0;
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
 }
 
 .fieldset__legend {
   padding: 0 0.5rem;
   margin: 0 -0.5rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-bold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }

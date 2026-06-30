@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
 }
 
 .reasoning__trigger {
@@ -14,8 +14,8 @@
   padding-inline: 0.75rem;
   background-color: transparent;
   border: none;
-  border-radius: var(--sigvelo-border-radius-sm);
-  color: var(--sigvelo-text-muted);
+  border-radius: var(--sigvelo-radius-sm);
+  color: var(--sigvelo-color-text-muted);
   font-family: inherit;
   font-size: 0.8125rem;
   font-weight: var(--sigvelo-font-weight-semibold);
@@ -26,15 +26,15 @@
 }
 
 .reasoning__trigger:hover:not([data-disabled]) {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-text-body);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-text);
 }
 
 .reasoning__trigger:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .reasoning__trigger[data-streaming] .reasoning__trigger-label {
@@ -85,8 +85,8 @@
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
   margin-inline-start: 0.75rem;
-  border-inline-start: var(--sigvelo-border-style) 2px var(--sigvelo-neutral-stroke-softer);
-  color: var(--sigvelo-text-muted);
+  border-inline-start: var(--sigvelo-border-style) 2px var(--sigvelo-color-neutral-border-subtle);
+  color: var(--sigvelo-color-text-muted);
   font-size: 0.8125rem;
   line-height: 1.6;
   white-space: pre-wrap;

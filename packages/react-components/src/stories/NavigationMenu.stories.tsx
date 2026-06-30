@@ -104,7 +104,7 @@ export const WithDescriptions: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   Learn the basics of our platform
@@ -115,7 +115,7 @@ export const WithDescriptions: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   Step-by-step setup guide
@@ -126,7 +126,7 @@ export const WithDescriptions: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   Build your first project
@@ -149,7 +149,7 @@ export const WithDescriptions: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   Interactive button components
@@ -160,7 +160,7 @@ export const WithDescriptions: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   Input and form controls
@@ -171,7 +171,7 @@ export const WithDescriptions: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   Dialog and overlay components

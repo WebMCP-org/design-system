@@ -6,9 +6,9 @@
   width: 2.5rem;
   height: 2.5rem;
   overflow: hidden;
-  font-family: var(--sigvelo-font-family);
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-pill);
+  font-family: var(--sigvelo-font-sans);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-full);
   flex-shrink: 0;
 }
 
@@ -26,6 +26,6 @@
   height: 100%;
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   text-transform: uppercase;
 }

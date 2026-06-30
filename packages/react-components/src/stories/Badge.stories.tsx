@@ -107,25 +107,25 @@ export const StatusBadges: Story = {
     <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <Badge color="success">Active</Badge>
-        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           Subscription is active
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <Badge color="warning">Pending</Badge>
-        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           Payment processing
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <Badge color="destructive">Expired</Badge>
-        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           Subscription ended
         </span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
         <Badge color="neutral">Trial</Badge>
-        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           14 days remaining
         </span>
       </div>
@@ -139,8 +139,8 @@ export const InContext: Story = {
     <div
       style={{
         padding: "1.5rem",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
         maxWidth: "300px",
       }}
     >
@@ -148,12 +148,14 @@ export const InContext: Story = {
         <h3 style={{ fontSize: "1.125rem", fontWeight: 600, margin: 0 }}>Pro Plan</h3>
         <Badge color="success">Popular</Badge>
       </div>
-      <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)", margin: 0 }}>
+      <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)", margin: 0 }}>
         Best for growing teams
       </p>
       <div style={{ marginTop: "1rem" }}>
         <span style={{ fontSize: "2rem", fontWeight: 700 }}>$29</span>
-        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>/month</span>
+        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
+          /month
+        </span>
       </div>
     </div>
   ),

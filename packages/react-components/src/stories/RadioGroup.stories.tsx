@@ -126,7 +126,7 @@ export const Controlled: Story = {
             <Label>Spacious</Label>
           </div>
         </RadioGroup>
-        <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           Selected: {value}
         </p>
       </div>
@@ -182,10 +182,10 @@ export const PlanSelection: Story = {
                 alignItems: "flex-start",
                 gap: "0.75rem",
                 padding: "1rem",
-                borderColor: plan === p.value ? "var(--sigvelo-primary-fill-mid)" : undefined,
+                borderColor: plan === p.value ? "var(--sigvelo-color-primary-bg)" : undefined,
                 backgroundColor:
                   plan === p.value
-                    ? "color-mix(in oklab, var(--sigvelo-primary-fill-mid), transparent 95%)"
+                    ? "color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 95%)"
                     : undefined,
               }}
             >
@@ -197,7 +197,7 @@ export const PlanSelection: Story = {
                   <span
                     style={{
                       fontWeight: 600,
-                      color: "var(--sigvelo-text-body)",
+                      color: "var(--sigvelo-color-text)",
                     }}
                   >
                     {p.name}
@@ -210,8 +210,8 @@ export const PlanSelection: Story = {
                         textTransform: "uppercase",
                         letterSpacing: "0.05em",
                         padding: "0.125rem 0.375rem",
-                        backgroundColor: "var(--sigvelo-primary-fill-mid)",
-                        color: "var(--sigvelo-primary-text-on-mid)",
+                        backgroundColor: "var(--sigvelo-color-primary-bg)",
+                        color: "var(--sigvelo-color-primary-text-on-bg)",
                         borderRadius: "9999px",
                       }}
                     >
@@ -222,7 +222,7 @@ export const PlanSelection: Story = {
                 <p
                   style={{
                     fontSize: "0.875rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                     margin: "0.25rem 0 0",
                   }}
                 >
@@ -233,7 +233,7 @@ export const PlanSelection: Story = {
                 style={{
                   fontWeight: 600,
                   fontSize: "1.125rem",
-                  color: "var(--sigvelo-text-body)",
+                  color: "var(--sigvelo-color-text)",
                 }}
               >
                 {p.price}
@@ -241,7 +241,7 @@ export const PlanSelection: Story = {
                   style={{
                     fontWeight: 400,
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   /mo

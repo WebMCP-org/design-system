@@ -1,8 +1,8 @@
 .toggle-group {
   display: inline-flex;
   align-items: center;
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-md);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-md);
   padding: 0.25rem;
   gap: 0.125rem;
 }
@@ -21,13 +21,13 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   background-color: transparent;
   border: none;
-  border-radius: calc(var(--sigvelo-border-radius-md) - 2px);
+  border-radius: calc(var(--sigvelo-radius-md) - 2px);
   cursor: pointer;
   transition:
     background-color 150ms ease,
@@ -46,23 +46,23 @@
 }
 
 .toggle-group__item:hover:not([data-disabled]) {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .toggle-group__item:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
   z-index: 1;
 }
 
 .toggle-group__item[data-pressed] {
-  background-color: var(--sigvelo-background-color);
-  color: var(--sigvelo-text-body);
+  background-color: var(--sigvelo-color-canvas);
+  color: var(--sigvelo-color-text);
   box-shadow:
-    0 1px 3px 0 color-mix(in oklab, var(--sigvelo-text-body), transparent 90%),
-    0 1px 2px -1px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%);
+    0 1px 3px 0 color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
+    0 1px 2px -1px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
 }
 
 .toggle-group__item[data-disabled] {

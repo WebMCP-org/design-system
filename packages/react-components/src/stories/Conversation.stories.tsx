@@ -133,9 +133,9 @@ const FrameBox = ({ children }: { children: React.ReactNode }) => (
       width: "min(40rem, 90vw)",
       height: "28rem",
       border:
-        "var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-softer)",
-      borderRadius: "var(--sigvelo-border-radius-md)",
-      background: "var(--sigvelo-paper-color)",
+        "var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-color-neutral-border-subtle)",
+      borderRadius: "var(--sigvelo-radius-md)",
+      background: "var(--sigvelo-color-surface)",
       overflow: "hidden",
       position: "relative",
     }}

@@ -4,13 +4,13 @@
   justify-content: center;
   padding-block: 0.125rem;
   padding-inline: 0.5rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
   font-weight: var(--sigvelo-font-weight-bold);
   line-height: 1.25;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  border-radius: var(--sigvelo-border-radius-pill);
+  border-radius: var(--sigvelo-radius-full);
   white-space: nowrap;
 }
 
@@ -23,34 +23,35 @@
 /* Normal appearance */
 
 .badge--normal.badge--primary {
-  background-color: var(--sigvelo-primary-fill-mid);
-  color: var(--sigvelo-primary-text-on-mid);
+  background-color: var(--sigvelo-color-primary-bg);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }
 
 .badge--normal.badge--neutral {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .badge--normal.badge--success {
-  background-color: var(--sigvelo-success-fill-mid);
-  color: var(--sigvelo-success-text-on-mid);
+  background-color: var(--sigvelo-color-success-bg);
+  color: var(--sigvelo-color-success-text-on-bg);
 }
 
 .badge--normal.badge--warning {
-  background-color: var(--sigvelo-warning-fill-mid);
-  color: var(--sigvelo-warning-text-on-mid);
+  background-color: var(--sigvelo-color-warning-bg);
+  color: var(--sigvelo-color-warning-text-on-bg);
 }
 
 .badge--normal.badge--destructive {
-  background-color: var(--sigvelo-destructive-fill-mid);
-  color: var(--sigvelo-destructive-text-on-mid);
+  background-color: var(--sigvelo-color-danger-bg);
+  color: var(--sigvelo-color-danger-text-on-bg);
 }
 
 /* Outline appearance */
 
 .badge--outline {
   background-color: transparent;
-  color: var(--sigvelo-text-body);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  color: var(--sigvelo-color-text);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
 }

@@ -169,19 +169,19 @@ export const SubscriptionCancel: Story = {
             style={{
               padding: "0.75rem",
               marginBottom: "1rem",
-              backgroundColor: "var(--sigvelo-neutral-fill-softer)",
-              borderRadius: "var(--sigvelo-border-radius-md)",
+              backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
+              borderRadius: "var(--sigvelo-radius-md)",
               fontSize: "0.875rem",
             }}
           >
-            <p style={{ margin: 0, color: "var(--sigvelo-text-body)", fontWeight: 500 }}>
+            <p style={{ margin: 0, color: "var(--sigvelo-color-text)", fontWeight: 500 }}>
               You&apos;ll lose access to:
             </p>
             <ul
               style={{
                 margin: "0.5rem 0 0",
                 paddingLeft: "1.25rem",
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
               }}
             >
               <li>Unlimited projects</li>
@@ -216,15 +216,15 @@ export const UpgradeConfirmation: Story = {
             style={{
               padding: "0.75rem",
               marginBottom: "1rem",
-              backgroundColor: "var(--sigvelo-neutral-fill-softer)",
-              borderRadius: "var(--sigvelo-border-radius-md)",
+              backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
+              borderRadius: "var(--sigvelo-radius-md)",
               fontSize: "0.875rem",
               display: "flex",
               justifyContent: "space-between",
             }}
           >
-            <span style={{ color: "var(--sigvelo-text-muted)" }}>Pro Plan (Monthly)</span>
-            <span style={{ color: "var(--sigvelo-text-body)", fontWeight: 600 }}>$29.00</span>
+            <span style={{ color: "var(--sigvelo-color-text-muted)" }}>Pro Plan (Monthly)</span>
+            <span style={{ color: "var(--sigvelo-color-text)", fontWeight: 600 }}>$29.00</span>
           </div>
           <div style={{ display: "flex", gap: "0.75rem", justifyContent: "flex-end" }}>
             <AlertDialogClose>Cancel</AlertDialogClose>
@@ -246,7 +246,7 @@ export const Controlled: Story = {
         <Button onClick={() => setOpen(true)}>Open Controlled Dialog</Button>
 
         {confirmed && (
-          <p style={{ color: "var(--sigvelo-success-fill-mid)", fontWeight: 500 }}>
+          <p style={{ color: "var(--sigvelo-color-success-bg)", fontWeight: 500 }}>
             Action confirmed!
           </p>
         )}

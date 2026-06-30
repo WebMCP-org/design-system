@@ -39,19 +39,19 @@ These elements are exempt from contrast requirements:
 Primary actions use the semantic fill/text pair. Components should consume the semantic aliases instead of raw palette values:
 
 ```css
---sigvelo-primary-fill-mid: color-mix(in oklab, var(--sigvelo-primary-600), black 2.5%);
---sigvelo-primary-text-on-mid: white;
+--sigvelo-color-primary-bg: color-mix(in oklab, var(--sigvelo-color-primary-600), black 2.5%);
+--sigvelo-color-primary-text-on-bg: white;
 ```
 
-Do not brighten action fills without checking contrast against `--sigvelo-primary-text-on-mid`.
+Do not brighten action fills without checking contrast against `--sigvelo-color-primary-text-on-bg`.
 
 ### Success Color (Green)
 
 Green can be low-contrast with both white and black text. Use the semantic pair and test both light and dark modes:
 
 ```css
---sigvelo-success-fill-mid: color-mix(in oklab, var(--sigvelo-success-600), black 12%);
---sigvelo-success-text-on-mid: white;
+--sigvelo-color-success-bg: color-mix(in oklab, var(--sigvelo-color-success-600), black 12%);
+--sigvelo-color-success-text-on-bg: white;
 ```
 
 ### Warning Color (Yellow/Orange)
@@ -59,8 +59,8 @@ Green can be low-contrast with both white and black text. Use the semantic pair 
 Warning colors use dark text on light backgrounds because yellow with white text is nearly impossible to make accessible:
 
 ```css
---sigvelo-warning-fill-mid: color-mix(in oklab, var(--sigvelo-warning-600), black 15%);
---sigvelo-warning-text-on-mid: white;
+--sigvelo-color-warning-bg: color-mix(in oklab, var(--sigvelo-color-warning-600), black 15%);
+--sigvelo-color-warning-text-on-bg: white;
 ```
 
 ### Destructive Color (Red)
@@ -68,8 +68,8 @@ Warning colors use dark text on light backgrounds because yellow with white text
 Red is more forgiving than green, but we still ensure proper contrast:
 
 ```css
---sigvelo-destructive-fill-mid: color-mix(in oklab, var(--sigvelo-destructive-600), black 2.5%);
---sigvelo-destructive-text-on-mid: white;
+--sigvelo-color-danger-bg: color-mix(in oklab, var(--sigvelo-color-danger-600), black 2.5%);
+--sigvelo-color-danger-text-on-bg: white;
 ```
 
 ## Common Patterns & Solutions

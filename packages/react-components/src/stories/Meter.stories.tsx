@@ -125,7 +125,7 @@ export const BatteryLevel: Story = {
         <Meter.Track>
           <Meter.Indicator
             style={{
-              backgroundColor: "var(--sigvelo-warning-fill-mid)",
+              backgroundColor: "var(--sigvelo-color-warning-bg)",
             }}
           />
         </Meter.Track>
@@ -157,7 +157,7 @@ export const MultipleMeters: Story = {
           <Meter.Value />
         </div>
         <Meter.Track>
-          <Meter.Indicator style={{ backgroundColor: "var(--sigvelo-destructive-fill-mid)" }} />
+          <Meter.Indicator style={{ backgroundColor: "var(--sigvelo-color-danger-bg)" }} />
         </Meter.Track>
       </Meter.Root>
 
@@ -173,7 +173,7 @@ export const MultipleMeters: Story = {
           <Meter.Value />
         </div>
         <Meter.Track>
-          <Meter.Indicator style={{ backgroundColor: "var(--sigvelo-warning-fill-mid)" }} />
+          <Meter.Indicator style={{ backgroundColor: "var(--sigvelo-color-warning-bg)" }} />
         </Meter.Track>
       </Meter.Root>
 
@@ -189,7 +189,7 @@ export const MultipleMeters: Story = {
           <Meter.Value />
         </div>
         <Meter.Track>
-          <Meter.Indicator style={{ backgroundColor: "var(--sigvelo-success-fill-mid)" }} />
+          <Meter.Indicator style={{ backgroundColor: "var(--sigvelo-color-success-bg)" }} />
         </Meter.Track>
       </Meter.Root>
     </div>

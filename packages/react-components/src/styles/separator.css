@@ -1,5 +1,5 @@
 .separator {
-  background-color: var(--sigvelo-neutral-stroke-soft);
+  background-color: var(--sigvelo-color-neutral-border-muted);
   flex-shrink: 0;
 }
 

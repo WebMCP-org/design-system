@@ -2,7 +2,7 @@
   "name": "@mcp-b/react-components",
   "version": "0.1.1",
   "description": "MCP-B React components built on Base UI and shared design tokens.",
-  "homepage": "https://github.com/WebMCP-org/design-system#readme",
+  "homepage": "https://mcp-b-design-system-storybook.alexmnahas.workers.dev",
   "bugs": {
     "url": "https://github.com/WebMCP-org/design-system/issues"
   },

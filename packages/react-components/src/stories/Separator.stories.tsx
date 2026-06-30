@@ -55,11 +55,11 @@ export const InCard: Story = {
   render: (args) => (
     <Card style={{ width: "350px" }}>
       <h3 style={{ marginTop: 0 }}>Card Title</h3>
-      <p style={{ marginBottom: "1rem", color: "var(--sigvelo-text-muted)" }}>
+      <p style={{ marginBottom: "1rem", color: "var(--sigvelo-color-text-muted)" }}>
         This is some content above the separator.
       </p>
       <Separator {...args} style={{ marginBottom: "1rem" }} />
-      <p style={{ margin: 0, color: "var(--sigvelo-text-muted)" }}>
+      <p style={{ margin: 0, color: "var(--sigvelo-color-text-muted)" }}>
         This is content below the separator.
       </p>
     </Card>
@@ -81,11 +81,11 @@ export const BetweenSections: Story = {
             marginBottom: "0.5rem",
           }}
         >
-          <span style={{ color: "var(--sigvelo-text-muted)" }}>Total Features:</span>
+          <span style={{ color: "var(--sigvelo-color-text-muted)" }}>Total Features:</span>
           <strong>247</strong>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span style={{ color: "var(--sigvelo-text-muted)" }}>Collaborators:</span>
+          <span style={{ color: "var(--sigvelo-color-text-muted)" }}>Collaborators:</span>
           <strong>5</strong>
         </div>
       </div>
@@ -98,7 +98,7 @@ export const BetweenSections: Story = {
           style={{
             margin: 0,
             fontSize: "0.875rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           Last edited 2 hours ago by Sarah
@@ -155,10 +155,10 @@ export const FormSections: Story = {
             style={{
               width: "100%",
               padding: "0.5rem",
-              border: "1px solid var(--sigvelo-neutral-stroke-soft)",
+              border: "1px solid var(--sigvelo-color-neutral-border-muted)",
               borderRadius: "0.375rem",
-              backgroundColor: "var(--sigvelo-background-color)",
-              color: "var(--sigvelo-text-body)",
+              backgroundColor: "var(--sigvelo-color-canvas)",
+              color: "var(--sigvelo-color-text)",
             }}
           />
         </div>
@@ -178,10 +178,10 @@ export const FormSections: Story = {
             style={{
               width: "100%",
               padding: "0.5rem",
-              border: "1px solid var(--sigvelo-neutral-stroke-soft)",
+              border: "1px solid var(--sigvelo-color-neutral-border-muted)",
               borderRadius: "0.375rem",
-              backgroundColor: "var(--sigvelo-background-color)",
-              color: "var(--sigvelo-text-body)",
+              backgroundColor: "var(--sigvelo-color-canvas)",
+              color: "var(--sigvelo-color-text)",
               fontFamily: "inherit",
               resize: "vertical",
             }}
@@ -227,7 +227,7 @@ export const ListItems: Story = {
           style={{
             margin: 0,
             fontSize: "0.875rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           42 features • 3 collaborators
@@ -242,7 +242,7 @@ export const ListItems: Story = {
           style={{
             margin: 0,
             fontSize: "0.875rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           18 features • 2 collaborators
@@ -257,7 +257,7 @@ export const ListItems: Story = {
           style={{
             margin: 0,
             fontSize: "0.875rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           67 features • 5 collaborators
@@ -279,7 +279,7 @@ export const WithCustomStyles: Story = {
         style={{
           margin: "1rem 0 0.5rem 0",
           fontSize: "0.875rem",
-          color: "var(--sigvelo-text-muted)",
+          color: "var(--sigvelo-color-text-muted)",
         }}
       >
         Default separator:
@@ -290,7 +290,7 @@ export const WithCustomStyles: Story = {
         style={{
           margin: "1rem 0 0.5rem 0",
           fontSize: "0.875rem",
-          color: "var(--sigvelo-text-muted)",
+          color: "var(--sigvelo-color-text-muted)",
         }}
       >
         Thicker separator:
@@ -301,18 +301,18 @@ export const WithCustomStyles: Story = {
         style={{
           margin: "1rem 0 0.5rem 0",
           fontSize: "0.875rem",
-          color: "var(--sigvelo-text-muted)",
+          color: "var(--sigvelo-color-text-muted)",
         }}
       >
         Accent color separator:
       </p>
-      <Separator {...args} style={{ backgroundColor: "var(--sigvelo-neutral-fill-softer)" }} />
+      <Separator {...args} style={{ backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)" }} />
 
       <p
         style={{
           margin: "1rem 0 0.5rem 0",
           fontSize: "0.875rem",
-          color: "var(--sigvelo-text-muted)",
+          color: "var(--sigvelo-color-text-muted)",
         }}
       >
         With margin:

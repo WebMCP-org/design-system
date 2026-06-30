@@ -2,6 +2,8 @@
 
 Reusable design tokens and React components shared by SigVelo, Nanites, and WebMCP.
 
+Storybook: https://mcp-b-design-system-storybook.alexmnahas.workers.dev
+
 ## Packages
 
 - `@mcp-b/design-tokens` - CSS custom properties for primitives, semantic colors, spacing, type, focus, borders, motion, and light/dark modes.
@@ -38,4 +40,4 @@ vp run guidance:search -- "accessible React design system component"
 vp run guidance:retrieve -- "accessibility,css,dark-mode"
 ```
 
-The public package scope is `@mcp-b`. The CSS token contract intentionally keeps the existing `--sigvelo-*` variables so app migrations only need package imports to change.
+The public package scope is `@mcp-b`; the CSS token prefix is `--sigvelo-*`. Apps should not redefine that contract unless they own a documented theme override.

@@ -19,16 +19,16 @@ type Story = StoryObj;
 
 const LogoIcon = () => (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="32" height="32" rx="8" fill="var(--sigvelo-primary-fill-mid)" />
+    <rect width="32" height="32" rx="8" fill="var(--sigvelo-color-primary-bg)" />
     <path
       d="M8 12L16 8L24 12V20L16 24L8 20V12Z"
-      stroke="var(--sigvelo-primary-text-on-mid)"
+      stroke="var(--sigvelo-color-primary-text-on-bg)"
       strokeWidth="2"
       fill="none"
     />
     <path
       d="M16 8V24M8 12L24 20M24 12L8 20"
-      stroke="var(--sigvelo-primary-text-on-mid)"
+      stroke="var(--sigvelo-color-primary-text-on-bg)"
       strokeWidth="1.5"
     />
   </svg>
@@ -139,7 +139,7 @@ export const Default: Story = {
           display: "flex",
           flexDirection: "column",
           height: "100vh",
-          backgroundColor: "var(--sigvelo-background-color)",
+          backgroundColor: "var(--sigvelo-color-canvas)",
         }}
       >
         {/* Header */}
@@ -149,8 +149,8 @@ export const Default: Story = {
             alignItems: "center",
             justifyContent: "space-between",
             padding: "0.75rem 1.5rem",
-            borderBottom: "1px solid var(--sigvelo-neutral-stroke-soft)",
-            backgroundColor: "var(--sigvelo-background-color)",
+            borderBottom: "1px solid var(--sigvelo-color-neutral-border-muted)",
+            backgroundColor: "var(--sigvelo-color-canvas)",
           }}
         >
           {/* Logo */}
@@ -160,7 +160,7 @@ export const Default: Story = {
               style={{
                 fontSize: "1.125rem",
                 fontWeight: 600,
-                color: "var(--sigvelo-text-body)",
+                color: "var(--sigvelo-color-text)",
               }}
             >
               Sigvelo
@@ -187,9 +187,9 @@ export const Default: Story = {
           <aside
             style={{
               width: "280px",
-              borderRight: "1px solid var(--sigvelo-neutral-stroke-soft)",
+              borderRight: "1px solid var(--sigvelo-color-neutral-border-muted)",
               backgroundColor:
-                "color-mix(in oklab, var(--sigvelo-neutral-fill-softer), transparent 70%)",
+                "color-mix(in oklab, var(--sigvelo-color-neutral-bg-subtle), transparent 70%)",
               display: "flex",
               flexDirection: "column",
             }}
@@ -197,7 +197,7 @@ export const Default: Story = {
             <div
               style={{
                 padding: "1rem 1rem 0.5rem",
-                borderBottom: "1px solid var(--sigvelo-neutral-stroke-soft)",
+                borderBottom: "1px solid var(--sigvelo-color-neutral-border-muted)",
               }}
             >
               <h2
@@ -207,7 +207,7 @@ export const Default: Story = {
                   fontWeight: 600,
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                 }}
               >
                 Course Content
@@ -229,8 +229,8 @@ export const Default: Story = {
                           border: "none",
                           background: "none",
                           cursor: "pointer",
-                          borderRadius: "var(--sigvelo-border-radius-md)",
-                          color: "var(--sigvelo-text-body)",
+                          borderRadius: "var(--sigvelo-radius-md)",
+                          color: "var(--sigvelo-color-text)",
                           fontSize: "0.875rem",
                           fontWeight: 500,
                           textAlign: "left",
@@ -264,14 +264,14 @@ export const Default: Story = {
                                 border: "none",
                                 background:
                                   activeLesson === lesson.id
-                                    ? "color-mix(in oklab, var(--sigvelo-primary-fill-mid), transparent 90%)"
+                                    ? "color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 90%)"
                                     : "none",
                                 cursor: "pointer",
-                                borderRadius: "var(--sigvelo-border-radius-md)",
+                                borderRadius: "var(--sigvelo-radius-md)",
                                 color:
                                   activeLesson === lesson.id
-                                    ? "var(--sigvelo-primary-text-colorful)"
-                                    : "var(--sigvelo-text-muted)",
+                                    ? "var(--sigvelo-color-primary-text)"
+                                    : "var(--sigvelo-color-text-muted)",
                                 fontSize: "0.8125rem",
                                 textAlign: "left",
                               }}
@@ -279,8 +279,8 @@ export const Default: Story = {
                               <span
                                 style={{
                                   color: lesson.completed
-                                    ? "var(--sigvelo-primary-text-colorful)"
-                                    : "var(--sigvelo-text-muted)",
+                                    ? "var(--sigvelo-color-primary-text)"
+                                    : "var(--sigvelo-color-text-muted)",
                                 }}
                               >
                                 {lesson.completed ? <CheckCircleIcon /> : <CircleIcon />}
@@ -303,7 +303,7 @@ export const Default: Story = {
             <div
               style={{
                 padding: "1rem",
-                borderTop: "1px solid var(--sigvelo-neutral-stroke-soft)",
+                borderTop: "1px solid var(--sigvelo-color-neutral-border-muted)",
               }}
             >
               <div
@@ -312,7 +312,7 @@ export const Default: Story = {
                   justifyContent: "space-between",
                   marginBottom: "0.5rem",
                   fontSize: "0.75rem",
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                 }}
               >
                 <span>Progress</span>
@@ -321,7 +321,7 @@ export const Default: Story = {
               <div
                 style={{
                   height: "4px",
-                  backgroundColor: "var(--sigvelo-neutral-fill-softer)",
+                  backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
                   borderRadius: "2px",
                   overflow: "hidden",
                 }}
@@ -330,7 +330,7 @@ export const Default: Story = {
                   style={{
                     width: "22%",
                     height: "100%",
-                    backgroundColor: "var(--sigvelo-primary-fill-mid)",
+                    backgroundColor: "var(--sigvelo-color-primary-bg)",
                     borderRadius: "2px",
                   }}
                 />
@@ -346,13 +346,13 @@ export const Default: Story = {
                 flex: 1,
                 display: "flex",
                 flexDirection: "column",
-                borderRight: "1px solid var(--sigvelo-neutral-stroke-soft)",
+                borderRight: "1px solid var(--sigvelo-color-neutral-border-muted)",
               }}
             >
               <div
                 style={{
                   padding: "1.5rem 2rem",
-                  borderBottom: "1px solid var(--sigvelo-neutral-stroke-soft)",
+                  borderBottom: "1px solid var(--sigvelo-color-neutral-border-muted)",
                 }}
               >
                 <div
@@ -362,19 +362,19 @@ export const Default: Story = {
                     gap: "0.5rem",
                     marginBottom: "0.5rem",
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                   }}
                 >
                   <span>Getting Started</span>
                   <ChevronRightIcon />
-                  <span style={{ color: "var(--sigvelo-text-body)" }}>Your First Component</span>
+                  <span style={{ color: "var(--sigvelo-color-text)" }}>Your First Component</span>
                 </div>
                 <h1
                   style={{
                     margin: 0,
                     fontSize: "1.5rem",
                     fontWeight: 600,
-                    color: "var(--sigvelo-text-body)",
+                    color: "var(--sigvelo-color-text)",
                   }}
                 >
                   Your First Component
@@ -387,7 +387,7 @@ export const Default: Story = {
                     <p
                       style={{
                         margin: "0 0 1rem",
-                        color: "var(--sigvelo-text-body)",
+                        color: "var(--sigvelo-color-text)",
                         lineHeight: 1.7,
                       }}
                     >
@@ -400,7 +400,7 @@ export const Default: Story = {
                         margin: "1.5rem 0 1rem",
                         fontSize: "1.125rem",
                         fontWeight: 600,
-                        color: "var(--sigvelo-text-body)",
+                        color: "var(--sigvelo-color-text)",
                       }}
                     >
                       Creating a Button Component
@@ -409,7 +409,7 @@ export const Default: Story = {
                     <p
                       style={{
                         margin: "0 0 1rem",
-                        color: "var(--sigvelo-text-body)",
+                        color: "var(--sigvelo-color-text)",
                         lineHeight: 1.7,
                       }}
                     >
@@ -417,8 +417,8 @@ export const Default: Story = {
                       <code
                         style={{
                           padding: "0.125rem 0.375rem",
-                          backgroundColor: "var(--sigvelo-neutral-fill-softer)",
-                          borderRadius: "var(--sigvelo-border-radius-md)",
+                          backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
+                          borderRadius: "var(--sigvelo-radius-md)",
                           fontSize: "0.875rem",
                         }}
                       >
@@ -464,7 +464,7 @@ export const Default: Story = {
                         margin: "1.5rem 0 1rem",
                         fontSize: "1.125rem",
                         fontWeight: 600,
-                        color: "var(--sigvelo-text-body)",
+                        color: "var(--sigvelo-color-text)",
                       }}
                     >
                       Try it out
@@ -473,7 +473,7 @@ export const Default: Story = {
                     <p
                       style={{
                         margin: "0 0 1rem",
-                        color: "var(--sigvelo-text-body)",
+                        color: "var(--sigvelo-color-text)",
                         lineHeight: 1.7,
                       }}
                     >
@@ -582,7 +582,7 @@ export const Default: Story = {
                         gap: "0.375rem",
                         padding: "0.25rem 0.5rem",
                         backgroundColor: "hsl(220 13% 18%)",
-                        borderRadius: "var(--sigvelo-border-radius-md)",
+                        borderRadius: "var(--sigvelo-radius-md)",
                         color: "#e2e8f0",
                       }}
                     >
@@ -700,7 +700,7 @@ export const Default: Story = {
                       color: "#e2e8f0",
                       fontSize: "0.75rem",
                       cursor: "pointer",
-                      borderRadius: "var(--sigvelo-border-radius-md)",
+                      borderRadius: "var(--sigvelo-radius-md)",
                     }}
                   >
                     <PlayIcon />
@@ -717,7 +717,7 @@ export const Default: Story = {
                       color: "#94a3b8",
                       fontSize: "0.75rem",
                       cursor: "pointer",
-                      borderRadius: "var(--sigvelo-border-radius-md)",
+                      borderRadius: "var(--sigvelo-radius-md)",
                     }}
                   >
                     <TerminalIcon />
@@ -737,10 +737,10 @@ export const Default: Story = {
                   <button
                     style={{
                       padding: "0.625rem 1.25rem",
-                      backgroundColor: "var(--sigvelo-primary-fill-mid)",
-                      color: "var(--sigvelo-primary-text-on-mid)",
+                      backgroundColor: "var(--sigvelo-color-primary-bg)",
+                      color: "var(--sigvelo-color-primary-text-on-bg)",
                       border: "none",
-                      borderRadius: "var(--sigvelo-border-radius-md)",
+                      borderRadius: "var(--sigvelo-radius-md)",
                       fontSize: "0.875rem",
                       fontWeight: 500,
                       cursor: "pointer",

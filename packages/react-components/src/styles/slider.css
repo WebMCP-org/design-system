@@ -7,11 +7,11 @@
 }
 
 .slider__output {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   font-variant-numeric: tabular-nums;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   text-align: end;
 }
 
@@ -34,8 +34,8 @@
   align-items: center;
   width: 100%;
   height: 0.5rem;
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-full);
 }
 
 .slider[data-disabled] .slider__track {
@@ -44,8 +44,8 @@
 
 .slider__indicator {
   height: 100%;
-  background-color: var(--sigvelo-primary-fill-mid);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-primary-bg);
+  border-radius: var(--sigvelo-radius-full);
 }
 
 .slider__thumb {
@@ -54,9 +54,9 @@
   justify-content: center;
   width: 1.25rem;
   height: 1.25rem;
-  background-color: var(--sigvelo-background-color);
-  border: 2px solid var(--sigvelo-primary-fill-mid);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-canvas);
+  border: 2px solid var(--sigvelo-color-primary-bg);
+  border-radius: var(--sigvelo-radius-full);
   cursor: grab;
   transition:
     box-shadow 150ms ease,
@@ -74,8 +74,8 @@
 .slider__thumb:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .slider[data-disabled] .slider__thumb {

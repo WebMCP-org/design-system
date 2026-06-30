@@ -2,7 +2,7 @@
   "name": "@mcp-b/design-tokens",
   "version": "0.1.1",
   "description": "Shared design tokens for MCP-B React applications.",
-  "homepage": "https://github.com/WebMCP-org/design-system#readme",
+  "homepage": "https://mcp-b-design-system-storybook.alexmnahas.workers.dev",
   "bugs": {
     "url": "https://github.com/WebMCP-org/design-system/issues"
   },

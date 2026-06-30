@@ -4,14 +4,15 @@
   justify-content: center;
   padding-block: 0.5rem;
   padding-inline: 1rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   line-height: 1.25;
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
     background-color 150ms ease,
@@ -19,22 +20,22 @@
 }
 
 .popover__trigger:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .popover__trigger:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .popover__backdrop {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background-color: color-mix(in oklab, var(--sigvelo-text-body), transparent 50%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-text), transparent 50%);
   transition: opacity 150ms ease;
 }
 
@@ -52,13 +53,14 @@
   min-width: 12rem;
   max-width: 20rem;
   padding: 1rem;
-  font-family: var(--sigvelo-font-family);
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  font-family: var(--sigvelo-font-sans);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   box-shadow:
-    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%),
-    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%);
+    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
+    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
   outline: none;
   transform-origin: var(--transform-origin);
   transition:
@@ -75,8 +77,9 @@
 .popover__arrow {
   width: 0.75rem;
   height: 0.75rem;
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
   transform: rotate(45deg);
 }
 
@@ -105,14 +108,14 @@
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-bold);
   line-height: 1.25;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .popover__description {
   margin: 0;
   font-size: 0.875rem;
   line-height: 1.5;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .popover__close {
@@ -122,13 +125,14 @@
   padding-block: 0.25rem;
   padding-inline: 0.5rem;
   margin-block-start: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   background-color: transparent;
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-sm);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   transition:
     background-color 150ms ease,
@@ -136,13 +140,13 @@
 }
 
 .popover__close:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .popover__close:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }

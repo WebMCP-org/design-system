@@ -2,7 +2,7 @@
   display: grid;
   gap: 0.75rem;
   min-inline-size: 0;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .agent-connect__header {
@@ -18,10 +18,11 @@
   place-items: center;
   inline-size: 2rem;
   block-size: 2rem;
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-primary-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
-  background: var(--sigvelo-primary-fill-softer);
-  color: var(--sigvelo-primary-text-colorful);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-primary-border-muted);
+  border-radius: var(--sigvelo-radius-md);
+  background: var(--sigvelo-color-primary-bg-subtle);
+  color: var(--sigvelo-color-primary-text);
 }
 
 .agent-connect__title-group {
@@ -32,7 +33,7 @@
 
 .agent-connect__title-group :where(h2, h3) {
   margin: 0;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   font-size: 0.95rem;
   font-weight: var(--sigvelo-font-weight-bold);
   line-height: 1.2;
@@ -41,7 +42,7 @@
 
 .agent-connect__title-group p {
   margin: 0;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-size: 0.78rem;
   line-height: 1.35;
 }
@@ -54,9 +55,9 @@
   margin: 0;
   padding: 0.25rem;
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-md);
-  background: var(--sigvelo-neutral-fill-softer);
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-md);
+  background: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .agent-connect__legend {
@@ -79,9 +80,9 @@
   min-inline-size: 0;
   padding: 0 0.45rem;
   border: 0;
-  border-radius: var(--sigvelo-border-radius-sm);
+  border-radius: var(--sigvelo-radius-sm);
   background: transparent;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   cursor: pointer;
   font: inherit;
   font-size: 0.72rem;
@@ -98,8 +99,8 @@
 }
 
 .agent-connect__target:hover {
-  color: var(--sigvelo-text-body);
-  background: color-mix(in oklab, var(--sigvelo-neutral-fill-soft), transparent 38%);
+  color: var(--sigvelo-color-text);
+  background: color-mix(in oklab, var(--sigvelo-color-neutral-bg-muted), transparent 38%);
 }
 
 .agent-connect__target:focus-visible {
@@ -108,9 +109,9 @@
 }
 
 .agent-connect__target[data-selected="true"] {
-  background: var(--sigvelo-paper-color);
-  color: var(--sigvelo-text-body);
-  box-shadow: var(--sigvelo-shadow-softer);
+  background: var(--sigvelo-color-surface);
+  color: var(--sigvelo-color-text);
+  box-shadow: var(--sigvelo-shadow-xs);
 }
 
 .agent-connect .code-block {

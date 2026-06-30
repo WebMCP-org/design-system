@@ -6,11 +6,11 @@
   white-space: nowrap;
   border: none;
   cursor: pointer;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-weight: var(--sigvelo-font-weight-semibold);
   line-height: 1.25;
   text-decoration: none;
-  border-radius: var(--sigvelo-border-radius-md);
+  border-radius: var(--sigvelo-radius-md);
   transition:
     background-color 150ms ease,
     color 150ms ease,
@@ -31,81 +31,80 @@
 /* Normal appearance */
 
 .button--normal.button--primary {
-  background-color: var(--sigvelo-primary-fill-mid);
-  color: var(--sigvelo-primary-text-on-mid);
+  background-color: var(--sigvelo-color-primary-bg);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }
 
 .button--normal.button--primary:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, var(--sigvelo-primary-fill-mid), black 5%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-primary-bg), black 5%);
 }
 
 .button--normal.button--neutral {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .button--normal.button--neutral:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, var(--sigvelo-neutral-fill-softer), black 5%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-neutral-bg-subtle), black 5%);
 }
 
 .button--normal.button--destructive {
-  background-color: var(--sigvelo-destructive-fill-mid);
-  color: var(--sigvelo-destructive-text-on-mid);
+  background-color: var(--sigvelo-color-danger-bg);
+  color: var(--sigvelo-color-danger-text-on-bg);
 }
 
 .button--normal.button--destructive:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, var(--sigvelo-destructive-fill-mid), black 5%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-danger-bg), black 5%);
 }
 
 /* Outline appearance */
 
 .button--outline.button--neutral {
   background-color: transparent;
-  color: var(--sigvelo-neutral-text-colorful);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-fill-mid);
+  color: var(--sigvelo-color-neutral-text);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-color-neutral-bg);
 }
 
 .button--outline.button--neutral:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, transparent, var(--sigvelo-neutral-fill-mid) 7.5%);
+  background-color: color-mix(in oklab, transparent, var(--sigvelo-color-neutral-bg) 7.5%);
 }
 
 .button--outline.button--primary {
   background-color: transparent;
-  color: var(--sigvelo-primary-text-colorful);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-primary-fill-mid);
+  color: var(--sigvelo-color-primary-text);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-color-primary-bg);
 }
 
 .button--outline.button--primary:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, transparent, var(--sigvelo-primary-fill-mid) 7.5%);
+  background-color: color-mix(in oklab, transparent, var(--sigvelo-color-primary-bg) 7.5%);
 }
 
 .button--outline.button--destructive {
   background-color: transparent;
-  color: var(--sigvelo-destructive-text-colorful);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-destructive-fill-mid);
+  color: var(--sigvelo-color-danger-text);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-color-danger-bg);
 }
 
 .button--outline.button--destructive:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, transparent, var(--sigvelo-destructive-fill-mid) 7.5%);
+  background-color: color-mix(in oklab, transparent, var(--sigvelo-color-danger-bg) 7.5%);
 }
 
 /* Ghost appearance */
 
 .button--ghost {
   background: none;
-  color: var(--sigvelo-neutral-text-on-soft);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .button--ghost:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, transparent, var(--sigvelo-text-body) 5%);
+  background-color: color-mix(in oklab, transparent, var(--sigvelo-color-text) 5%);
 }
 
 /* Link appearance */
 
 .button--link {
   background-color: transparent;
-  color: var(--sigvelo-primary-text-colorful);
+  color: var(--sigvelo-color-primary-text);
   text-underline-offset: 4px;
 }
 
@@ -116,45 +115,45 @@
 /* Sizes */
 
 .button--xs {
-  min-height: var(--sigvelo-form-control-height-xs);
+  min-height: var(--sigvelo-control-height-xs);
   padding-block: 0;
   padding-inline: 0.65rem;
-  font-size: var(--sigvelo-form-control-font-size-xs);
-  border-radius: var(--sigvelo-border-radius-sm);
+  font-size: var(--sigvelo-control-text-xs);
+  border-radius: var(--sigvelo-radius-sm);
 }
 
 .button--sm {
-  min-height: var(--sigvelo-form-control-height-sm);
+  min-height: var(--sigvelo-control-height-sm);
   padding-block: 0;
   padding-inline: 0.85rem;
-  font-size: var(--sigvelo-form-control-font-size-sm);
-  border-radius: var(--sigvelo-border-radius-sm);
+  font-size: var(--sigvelo-control-text-sm);
+  border-radius: var(--sigvelo-radius-sm);
 }
 
 .button--md {
-  min-height: var(--sigvelo-form-control-height-md);
+  min-height: var(--sigvelo-control-height-md);
   padding-block: 0;
   padding-inline: 1.25rem;
-  font-size: var(--sigvelo-form-control-font-size-md);
+  font-size: var(--sigvelo-control-text-md);
 }
 
 .button--lg {
-  min-height: var(--sigvelo-form-control-height-lg);
+  min-height: var(--sigvelo-control-height-lg);
   padding-block: 0;
   padding-inline: 1.5rem;
-  font-size: var(--sigvelo-form-control-font-size-lg);
+  font-size: var(--sigvelo-control-text-lg);
 }
 
 .button--xl {
-  min-height: var(--sigvelo-form-control-height-xl);
+  min-height: var(--sigvelo-control-height-xl);
   padding-block: 0;
   padding-inline: 1.75rem;
-  font-size: var(--sigvelo-form-control-font-size-xl);
+  font-size: var(--sigvelo-control-text-xl);
 }
 
 .button--icon {
-  min-height: var(--sigvelo-form-control-height-md);
-  width: var(--sigvelo-form-control-height-md);
+  min-height: var(--sigvelo-control-height-md);
+  width: var(--sigvelo-control-height-md);
   padding: 0;
 }
 

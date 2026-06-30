@@ -14,11 +14,11 @@
 }
 
 body {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-background-color);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-canvas);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -27,7 +27,7 @@ code,
 kbd,
 samp,
 pre {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
 }
 
 button,
@@ -40,8 +40,8 @@ a {
 }
 
 ::selection {
-  background-color: var(--sigvelo-selection-background-color);
-  color: var(--sigvelo-selection-color);
+  background-color: var(--sigvelo-color-selection-bg);
+  color: var(--sigvelo-color-selection-text);
 }
 
 .tabular-nums {
@@ -61,9 +61,9 @@ a {
 
 @media (prefers-contrast: more) {
   :root {
-    --sigvelo-neutral-stroke-soft: var(--sigvelo-neutral-600);
-    --sigvelo-neutral-stroke-softer: var(--sigvelo-neutral-500);
-    --sigvelo-neutral-fill-softer: var(--sigvelo-neutral-200);
+    --sigvelo-color-neutral-border-muted: var(--sigvelo-color-neutral-600);
+    --sigvelo-color-neutral-border-subtle: var(--sigvelo-color-neutral-500);
+    --sigvelo-color-neutral-bg-subtle: var(--sigvelo-color-neutral-200);
   }
 }
 

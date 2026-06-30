@@ -15,13 +15,14 @@
   height: 2.5rem;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   line-height: 1.25;
   text-align: center;
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
   border-inline: none;
   transition:
     border-color 150ms ease,
@@ -30,7 +31,7 @@
 
 .number-field__input:focus-visible {
   outline: none;
-  border-color: var(--sigvelo-focus-color);
+  border-color: var(--sigvelo-color-focus);
   z-index: 1;
 }
 
@@ -40,7 +41,7 @@
 }
 
 .number-field__input[data-invalid] {
-  border-color: var(--sigvelo-destructive-fill-mid);
+  border-color: var(--sigvelo-color-danger-bg);
 }
 
 .number-field__decrement,
@@ -50,12 +51,13 @@
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
   cursor: pointer;
   user-select: none;
   transition:
@@ -64,27 +66,27 @@
 }
 
 .number-field__decrement {
-  border-start-start-radius: var(--sigvelo-border-radius-md);
-  border-end-start-radius: var(--sigvelo-border-radius-md);
+  border-start-start-radius: var(--sigvelo-radius-md);
+  border-end-start-radius: var(--sigvelo-radius-md);
 }
 
 .number-field__increment {
-  border-start-end-radius: var(--sigvelo-border-radius-md);
-  border-end-end-radius: var(--sigvelo-border-radius-md);
+  border-start-end-radius: var(--sigvelo-radius-md);
+  border-end-end-radius: var(--sigvelo-radius-md);
 }
 
 .number-field__decrement:hover,
 .number-field__increment:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .number-field__decrement:focus-visible,
 .number-field__increment:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
   z-index: 1;
 }
 

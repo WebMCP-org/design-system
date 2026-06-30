@@ -21,10 +21,10 @@ export const Default: Story = {
         <div
           style={{
             padding: "3rem 4rem",
-            border: "2px dashed var(--sigvelo-neutral-stroke-soft)",
-            borderRadius: "var(--sigvelo-border-radius-md)",
+            border: "2px dashed var(--sigvelo-color-neutral-border-muted)",
+            borderRadius: "var(--sigvelo-radius-md)",
             textAlign: "center",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
             fontSize: "0.875rem",
           }}
         >
@@ -66,8 +66,8 @@ export const FileActions: Story = {
             alignItems: "center",
             gap: "0.75rem",
             padding: "1rem",
-            border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-            borderRadius: "var(--sigvelo-border-radius-md)",
+            border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+            borderRadius: "var(--sigvelo-radius-md)",
             cursor: "context-menu",
           }}
         >
@@ -84,7 +84,9 @@ export const FileActions: Story = {
           </svg>
           <div>
             <div style={{ fontWeight: 500 }}>document.pdf</div>
-            <div style={{ fontSize: "0.75rem", color: "var(--sigvelo-text-muted)" }}>2.4 MB</div>
+            <div style={{ fontSize: "0.75rem", color: "var(--sigvelo-color-text-muted)" }}>
+              2.4 MB
+            </div>
           </div>
         </div>
       </ContextMenu.Trigger>
@@ -125,10 +127,10 @@ export const WithDisabledItems: Story = {
         <div
           style={{
             padding: "3rem 4rem",
-            border: "2px dashed var(--sigvelo-neutral-stroke-soft)",
-            borderRadius: "var(--sigvelo-border-radius-md)",
+            border: "2px dashed var(--sigvelo-color-neutral-border-muted)",
+            borderRadius: "var(--sigvelo-radius-md)",
             textAlign: "center",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
             fontSize: "0.875rem",
           }}
         >
@@ -159,7 +161,7 @@ export const ImageContext: Story = {
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop"
           alt="Mountain landscape"
           style={{
-            borderRadius: "var(--sigvelo-border-radius-md)",
+            borderRadius: "var(--sigvelo-radius-md)",
             display: "block",
           }}
         />

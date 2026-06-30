@@ -36,14 +36,14 @@ document.documentElement.classList.toggle("sigvelo-dark", prefersDark);
 
 ## Design Tokens
 
-Tokens live in `packages/design-tokens/src` and are exported as CSS. Component styles consume semantic tokens such as `--sigvelo-background-color`, `--sigvelo-text-body`, and `--sigvelo-primary-fill-mid`.
+Tokens live in `packages/design-tokens/src` and are exported as CSS. Component styles consume semantic tokens such as `--sigvelo-color-canvas`, `--sigvelo-color-text`, and `--sigvelo-color-primary-bg`.
 
 You can customize them in your app by overriding the variables:
 
 ```css
 :root {
-  --sigvelo-primary-seed: #4a97f4;
-  --sigvelo-font-family: system-ui, sans-serif;
+  --sigvelo-color-primary-seed: #4a97f4;
+  --sigvelo-font-sans: system-ui, sans-serif;
 }
 ```
 

@@ -1,6 +1,6 @@
 :where(.message__content pre, .observability-table-wrap) {
-  --scrollbar-thumb: var(--app-scrollbar-thumb, var(--sigvelo-neutral-stroke-soft));
-  --scrollbar-track: var(--app-scrollbar-track, var(--sigvelo-neutral-fill-softer));
+  --scrollbar-thumb: var(--app-scrollbar-thumb, var(--sigvelo-color-neutral-border-muted));
+  --scrollbar-track: var(--app-scrollbar-track, var(--sigvelo-color-neutral-bg-subtle));
 
   overflow: auto;
   overscroll-behavior: contain;
@@ -11,8 +11,8 @@
 
 @media (prefers-contrast: more) {
   :where(.message__content pre, .observability-table-wrap) {
-    --scrollbar-thumb: var(--sigvelo-strident);
-    --scrollbar-track: var(--sigvelo-silent);
+    --scrollbar-thumb: var(--sigvelo-color-text);
+    --scrollbar-track: var(--sigvelo-color-canvas);
   }
 }
 

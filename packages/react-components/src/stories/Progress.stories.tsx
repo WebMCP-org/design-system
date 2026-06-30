@@ -46,7 +46,7 @@ export const WithLabel: Story = {
             fontSize: "0.875rem",
             fontWeight: 500,
             fontVariantNumeric: "tabular-nums",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           60%
@@ -67,7 +67,7 @@ export const Colors: Story = {
       <div>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
           <Label id="default-progress-label">Default</Label>
-          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-text-muted)" }}>45%</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-color-text-muted)" }}>45%</span>
         </div>
         <Progress value={45} aria-labelledby="default-progress-label">
           <ProgressTrack>
@@ -78,7 +78,9 @@ export const Colors: Story = {
       <div>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
           <Label id="success-progress-label">Success</Label>
-          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-text-muted)" }}>100%</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-color-text-muted)" }}>
+            100%
+          </span>
         </div>
         <Progress value={100} color="success" aria-labelledby="success-progress-label">
           <ProgressTrack>
@@ -89,7 +91,7 @@ export const Colors: Story = {
       <div>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
           <Label id="warning-progress-label">Warning</Label>
-          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-text-muted)" }}>78%</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-color-text-muted)" }}>78%</span>
         </div>
         <Progress value={78} color="warning" aria-labelledby="warning-progress-label">
           <ProgressTrack>
@@ -100,7 +102,7 @@ export const Colors: Story = {
       <div>
         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
           <Label id="destructive-progress-label">Destructive</Label>
-          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-text-muted)" }}>92%</span>
+          <span style={{ fontSize: "0.75rem", color: "var(--sigvelo-color-text-muted)" }}>92%</span>
         </div>
         <Progress value={92} color="destructive" aria-labelledby="destructive-progress-label">
           <ProgressTrack>
@@ -150,7 +152,7 @@ export const Animated: Story = {
               fontSize: "0.875rem",
               fontWeight: 500,
               fontVariantNumeric: "tabular-nums",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
             }}
           >
             {progress}%
@@ -187,9 +189,9 @@ export const UsageLimits: Story = {
         style={{
           width: "350px",
           padding: "1.5rem",
-          border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-          borderRadius: "var(--sigvelo-border-radius-md)",
-          backgroundColor: "var(--sigvelo-paper-color)",
+          border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+          borderRadius: "var(--sigvelo-radius-md)",
+          backgroundColor: "var(--sigvelo-color-surface)",
         }}
       >
         <h3
@@ -197,7 +199,7 @@ export const UsageLimits: Story = {
             fontSize: "1rem",
             fontWeight: 600,
             marginBottom: "1.25rem",
-            color: "var(--sigvelo-text-body)",
+            color: "var(--sigvelo-color-text)",
           }}
         >
           Usage This Month
@@ -221,8 +223,8 @@ export const UsageLimits: Story = {
                       fontVariantNumeric: "tabular-nums",
                       color:
                         percentage >= 90
-                          ? "var(--sigvelo-destructive-text-colorful)"
-                          : "var(--sigvelo-text-muted)",
+                          ? "var(--sigvelo-color-danger-text)"
+                          : "var(--sigvelo-color-text-muted)",
                     }}
                   >
                     {item.used.toLocaleString()} / {item.limit.toLocaleString()} {item.unit}
@@ -245,7 +247,7 @@ export const UsageLimits: Story = {
           style={{
             marginTop: "1.25rem",
             fontSize: "0.75rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           Resets in 12 days

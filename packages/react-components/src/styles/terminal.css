@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  background-color: var(--sigvelo-neutral-950, var(--sigvelo-neutral-900));
-  color: var(--sigvelo-neutral-100);
+  font-family: var(--sigvelo-font-sans);
+  background-color: var(--sigvelo-color-neutral-950, var(--sigvelo-color-neutral-900));
+  color: var(--sigvelo-color-neutral-100);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-md);
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-md);
   overflow: hidden;
 }
 
@@ -17,15 +17,15 @@
   gap: 0.5rem;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  background-color: color-mix(in oklab, var(--sigvelo-neutral-950) 80%, white 20%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-neutral-950) 80%, white 20%);
   border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    color-mix(in oklab, var(--sigvelo-neutral-700) 40%, transparent);
+    color-mix(in oklab, var(--sigvelo-color-neutral-700) 40%, transparent);
 }
 
 .terminal__title {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;
-  color: var(--sigvelo-neutral-300);
+  color: var(--sigvelo-color-neutral-300);
 }
 
 .terminal__status {
@@ -41,7 +41,7 @@
 
 .terminal__copy,
 .terminal__clear {
-  color: var(--sigvelo-neutral-300);
+  color: var(--sigvelo-color-neutral-300);
 }
 
 .terminal__content {
@@ -60,10 +60,10 @@
 
 .terminal__output {
   margin: 0;
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;
   line-height: 1.6;
-  color: var(--sigvelo-neutral-100);
+  color: var(--sigvelo-color-neutral-100);
   white-space: pre-wrap;
   word-break: break-word;
 }
@@ -73,7 +73,7 @@
   width: 0.5rem;
   height: 1em;
   vertical-align: text-bottom;
-  background-color: var(--sigvelo-neutral-100);
+  background-color: var(--sigvelo-color-neutral-100);
   margin-inline-start: 0.125rem;
   animation: terminal-blink 1s step-end infinite;
 }

@@ -2,14 +2,15 @@
   z-index: 50;
   padding-block: 0.375rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
   line-height: 1.25;
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-paper-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
-  box-shadow: var(--sigvelo-shadow-soft);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-surface);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
+  box-shadow: var(--sigvelo-shadow-sm);
 }
 
 .tooltip__popup[data-starting-style],
@@ -21,8 +22,9 @@
 .tooltip__arrow {
   width: 0.5rem;
   height: 0.5rem;
-  background-color: var(--sigvelo-paper-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  background-color: var(--sigvelo-color-surface);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
   border-right: none;
   border-bottom: none;
   transform: rotate(45deg);

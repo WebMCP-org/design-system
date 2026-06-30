@@ -25,7 +25,7 @@
 }
 
 .scroll-area__scrollbar:hover {
-  background-color: color-mix(in oklab, var(--sigvelo-neutral-fill-softer), transparent 50%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-neutral-bg-subtle), transparent 50%);
 }
 
 .scroll-area__scrollbar[data-orientation="vertical"] {
@@ -46,22 +46,22 @@
 
 .scroll-area__thumb {
   flex: 1;
-  background-color: color-mix(in oklab, var(--sigvelo-text-muted), transparent 70%);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: color-mix(in oklab, var(--sigvelo-color-text-muted), transparent 70%);
+  border-radius: var(--sigvelo-radius-full);
   transition: background-color 150ms ease;
 }
 
 .scroll-area__thumb:hover {
-  background-color: color-mix(in oklab, var(--sigvelo-text-muted), transparent 50%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-text-muted), transparent 50%);
 }
 
 .scroll-area__scrollbar[data-scrolling] .scroll-area__thumb {
-  background-color: color-mix(in oklab, var(--sigvelo-text-muted), transparent 50%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-text-muted), transparent 50%);
 }
 
 .scroll-area__corner {
   position: absolute;
   right: 0;
   bottom: 0;
-  background-color: color-mix(in oklab, var(--sigvelo-neutral-fill-softer), transparent 50%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-neutral-bg-subtle), transparent 50%);
 }

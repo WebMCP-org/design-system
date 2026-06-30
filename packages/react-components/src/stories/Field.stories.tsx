@@ -44,7 +44,7 @@ export const Required: Story = {
     <div style={{ width: "300px" }}>
       <Field.Root>
         <Field.Label>
-          Name <span style={{ color: "var(--sigvelo-destructive-fill-mid)" }}>*</span>
+          Name <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
         </Field.Label>
         <Field.Control required placeholder="Enter your name" />
         <Field.Error match="valueMissing">Name is required</Field.Error>
@@ -188,23 +188,19 @@ export const WithValidity: Story = {
                 margin: "0.5rem 0 0",
                 padding: "0 0 0 1.25rem",
                 fontSize: "0.75rem",
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
               }}
             >
               <li
                 style={{
-                  color: state.validity.valueMissing
-                    ? "var(--sigvelo-destructive-fill-mid)"
-                    : "inherit",
+                  color: state.validity.valueMissing ? "var(--sigvelo-color-danger-bg)" : "inherit",
                 }}
               >
                 Required
               </li>
               <li
                 style={{
-                  color: state.validity.tooShort
-                    ? "var(--sigvelo-destructive-fill-mid)"
-                    : "inherit",
+                  color: state.validity.tooShort ? "var(--sigvelo-color-danger-bg)" : "inherit",
                 }}
               >
                 At least 8 characters
@@ -230,7 +226,7 @@ export const FormExample: Story = {
       <Form onSubmit={handleSubmit} style={{ width: "320px" }}>
         <Field.Root name="name">
           <Field.Label>
-            Name <span style={{ color: "var(--sigvelo-destructive-fill-mid)" }}>*</span>
+            Name <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
           </Field.Label>
           <Field.Control required placeholder="John Doe" />
           <Field.Error match="valueMissing">Name is required</Field.Error>
@@ -238,7 +234,7 @@ export const FormExample: Story = {
 
         <Field.Root name="email">
           <Field.Label>
-            Email <span style={{ color: "var(--sigvelo-destructive-fill-mid)" }}>*</span>
+            Email <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
           </Field.Label>
           <Field.Control type="email" required placeholder="john@example.com" />
           <Field.Error match="valueMissing">Email is required</Field.Error>
@@ -253,7 +249,7 @@ export const FormExample: Story = {
 
         <Field.Root name="password">
           <Field.Label>
-            Password <span style={{ color: "var(--sigvelo-destructive-fill-mid)" }}>*</span>
+            Password <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
           </Field.Label>
           <Field.Control
             type="password"

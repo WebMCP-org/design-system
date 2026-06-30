@@ -8,34 +8,34 @@
 [data-theme="light"],
 [data-theme="dark"] {
   /* Spacing scale */
-  --sigvelo-space-xs: 0.25rem;
-  --sigvelo-space-sm: 0.5rem;
-  --sigvelo-space-md: 1rem;
-  --sigvelo-space-lg: 1.5rem;
-  --sigvelo-space-xl: 2rem;
-  --sigvelo-space-2xl: 3rem;
+  --sigvelo-spacing-1: 0.25rem;
+  --sigvelo-spacing-2: 0.5rem;
+  --sigvelo-spacing-4: 1rem;
+  --sigvelo-spacing-6: 1.5rem;
+  --sigvelo-spacing-8: 2rem;
+  --sigvelo-spacing-12: 3rem;
 
-  --sigvelo-content-spacing: 1.75rem;
+  --sigvelo-spacing-content: 1.75rem;
 
   /* Form control heights per size */
-  --sigvelo-form-control-height-xs: 1.75rem;
-  --sigvelo-form-control-height-sm: 2.25rem;
-  --sigvelo-form-control-height-md: 2.75rem;
-  --sigvelo-form-control-height-lg: 3.25rem;
-  --sigvelo-form-control-height-xl: 3.75rem;
+  --sigvelo-control-height-xs: 1.75rem;
+  --sigvelo-control-height-sm: 2.25rem;
+  --sigvelo-control-height-md: 2.75rem;
+  --sigvelo-control-height-lg: 3.25rem;
+  --sigvelo-control-height-xl: 3.75rem;
 
   /* Form control font sizes per size */
-  --sigvelo-form-control-font-size-xs: 0.75rem;
-  --sigvelo-form-control-font-size-sm: 0.875rem;
-  --sigvelo-form-control-font-size-md: 1rem;
-  --sigvelo-form-control-font-size-lg: 1.25rem;
-  --sigvelo-form-control-font-size-xl: 1.5rem;
+  --sigvelo-control-text-xs: 0.75rem;
+  --sigvelo-control-text-sm: 0.875rem;
+  --sigvelo-control-text-md: 1rem;
+  --sigvelo-control-text-lg: 1.25rem;
+  --sigvelo-control-text-xl: 1.5rem;
 
   /* Form control misc */
-  --sigvelo-form-control-required-content: "*";
-  --sigvelo-form-control-placeholder-color: color-mix(
+  --sigvelo-control-required-content: "*";
+  --sigvelo-control-placeholder-color: color-mix(
     in oklab,
-    var(--sigvelo-text-muted),
+    var(--sigvelo-color-text-muted),
     transparent 25%
   );
 

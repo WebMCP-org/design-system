@@ -50,8 +50,8 @@ export const Default: Story = {
       style={{
         display: "flex",
         alignItems: "center",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
         width: "240px",
       }}
     >
@@ -129,8 +129,8 @@ export const WithGroups: Story = {
         style={{
           display: "flex",
           alignItems: "center",
-          border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-          borderRadius: "var(--sigvelo-border-radius-md)",
+          border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+          borderRadius: "var(--sigvelo-radius-md)",
           width: "240px",
         }}
       >
@@ -181,8 +181,8 @@ export const WithDefaultValue: Story = {
       style={{
         display: "flex",
         alignItems: "center",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
         width: "240px",
       }}
     >
@@ -231,8 +231,8 @@ export const FormField: Story = {
         style={{
           display: "flex",
           alignItems: "center",
-          border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-          borderRadius: "var(--sigvelo-border-radius-md)",
+          border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+          borderRadius: "var(--sigvelo-radius-md)",
         }}
       >
         <Combobox.Root items={fruits}>
@@ -263,7 +263,7 @@ export const FormField: Story = {
         style={{
           marginTop: "0.5rem",
           fontSize: "0.75rem",
-          color: "var(--sigvelo-text-muted)",
+          color: "var(--sigvelo-color-text-muted)",
         }}
       >
         Choose your favorite fruit from the list.

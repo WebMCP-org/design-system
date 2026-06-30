@@ -22,13 +22,13 @@
   gap: 0.25rem;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   background-color: transparent;
   border: none;
-  border-radius: var(--sigvelo-border-radius-sm);
+  border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   transition:
     background-color 150ms ease,
@@ -36,19 +36,19 @@
 }
 
 .navigation-menu__trigger:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .navigation-menu__trigger:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .navigation-menu__trigger[data-popup-open] {
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .navigation-menu__icon {
@@ -70,31 +70,31 @@
   display: block;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   text-decoration: none;
-  border-radius: var(--sigvelo-border-radius-sm);
+  border-radius: var(--sigvelo-radius-sm);
   transition:
     background-color 150ms ease,
     color 150ms ease;
 }
 
 .navigation-menu__link:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .navigation-menu__link:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .navigation-menu__link[data-active] {
   font-weight: var(--sigvelo-font-weight-bold);
-  color: var(--sigvelo-primary-fill-mid);
+  color: var(--sigvelo-color-primary-bg);
 }
 
 .navigation-menu__positioner {
@@ -103,13 +103,14 @@
 
 .navigation-menu__popup {
   min-width: 200px;
-  background-color: var(--sigvelo-paper-color);
-  color: var(--sigvelo-text-body);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  background-color: var(--sigvelo-color-surface);
+  color: var(--sigvelo-color-text);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   box-shadow:
-    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%),
-    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%);
+    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
+    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
   animation: navigation-menu-enter 150ms ease;
   overflow: hidden;
 }
@@ -149,8 +150,9 @@
   width: 10px;
   height: 10px;
   transform: rotate(45deg);
-  background-color: var(--sigvelo-paper-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  background-color: var(--sigvelo-color-surface);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
   border-right: none;
   border-bottom: none;
 }

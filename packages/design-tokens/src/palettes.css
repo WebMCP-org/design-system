@@ -14,67 +14,67 @@
 [data-theme="light"],
 [data-theme="dark"] {
   /* Primary */
-  --sigvelo-primary-50: color-mix(in oklab, var(--sigvelo-primary-seed), white 95%);
-  --sigvelo-primary-100: color-mix(in oklab, var(--sigvelo-primary-seed), white 87%);
-  --sigvelo-primary-200: color-mix(in oklab, var(--sigvelo-primary-seed), white 70%);
-  --sigvelo-primary-300: color-mix(in oklab, var(--sigvelo-primary-seed), white 47%);
-  --sigvelo-primary-400: color-mix(in oklab, var(--sigvelo-primary-seed), white 23%);
-  --sigvelo-primary-500: var(--sigvelo-primary-seed);
-  --sigvelo-primary-600: color-mix(in oklab, var(--sigvelo-primary-seed), black 15.5%);
-  --sigvelo-primary-700: color-mix(in oklab, var(--sigvelo-primary-seed), black 28.25%);
-  --sigvelo-primary-800: color-mix(in oklab, var(--sigvelo-primary-seed), black 43.5%);
-  --sigvelo-primary-900: color-mix(in oklab, var(--sigvelo-primary-seed), black 58.5%);
-  --sigvelo-primary-950: color-mix(in oklab, var(--sigvelo-primary-seed), black 73.75%);
+  --sigvelo-color-primary-50: color-mix(in oklab, var(--sigvelo-color-primary-seed), white 95%);
+  --sigvelo-color-primary-100: color-mix(in oklab, var(--sigvelo-color-primary-seed), white 87%);
+  --sigvelo-color-primary-200: color-mix(in oklab, var(--sigvelo-color-primary-seed), white 70%);
+  --sigvelo-color-primary-300: color-mix(in oklab, var(--sigvelo-color-primary-seed), white 47%);
+  --sigvelo-color-primary-400: color-mix(in oklab, var(--sigvelo-color-primary-seed), white 23%);
+  --sigvelo-color-primary-500: var(--sigvelo-color-primary-seed);
+  --sigvelo-color-primary-600: color-mix(in oklab, var(--sigvelo-color-primary-seed), black 15.5%);
+  --sigvelo-color-primary-700: color-mix(in oklab, var(--sigvelo-color-primary-seed), black 28.25%);
+  --sigvelo-color-primary-800: color-mix(in oklab, var(--sigvelo-color-primary-seed), black 43.5%);
+  --sigvelo-color-primary-900: color-mix(in oklab, var(--sigvelo-color-primary-seed), black 58.5%);
+  --sigvelo-color-primary-950: color-mix(in oklab, var(--sigvelo-color-primary-seed), black 73.75%);
 
   /* Neutral */
-  --sigvelo-neutral-50: color-mix(in oklab, var(--sigvelo-neutral-seed), white 95%);
-  --sigvelo-neutral-100: color-mix(in oklab, var(--sigvelo-neutral-seed), white 87%);
-  --sigvelo-neutral-200: color-mix(in oklab, var(--sigvelo-neutral-seed), white 70%);
-  --sigvelo-neutral-300: color-mix(in oklab, var(--sigvelo-neutral-seed), white 47%);
-  --sigvelo-neutral-400: color-mix(in oklab, var(--sigvelo-neutral-seed), white 23%);
-  --sigvelo-neutral-500: var(--sigvelo-neutral-seed);
-  --sigvelo-neutral-600: color-mix(in oklab, var(--sigvelo-neutral-seed), black 15.5%);
-  --sigvelo-neutral-700: color-mix(in oklab, var(--sigvelo-neutral-seed), black 28.25%);
-  --sigvelo-neutral-800: color-mix(in oklab, var(--sigvelo-neutral-seed), black 43.5%);
-  --sigvelo-neutral-900: color-mix(in oklab, var(--sigvelo-neutral-seed), black 58.5%);
-  --sigvelo-neutral-950: color-mix(in oklab, var(--sigvelo-neutral-seed), black 73.75%);
+  --sigvelo-color-neutral-50: color-mix(in oklab, var(--sigvelo-color-neutral-seed), white 95%);
+  --sigvelo-color-neutral-100: color-mix(in oklab, var(--sigvelo-color-neutral-seed), white 87%);
+  --sigvelo-color-neutral-200: color-mix(in oklab, var(--sigvelo-color-neutral-seed), white 70%);
+  --sigvelo-color-neutral-300: color-mix(in oklab, var(--sigvelo-color-neutral-seed), white 47%);
+  --sigvelo-color-neutral-400: color-mix(in oklab, var(--sigvelo-color-neutral-seed), white 23%);
+  --sigvelo-color-neutral-500: var(--sigvelo-color-neutral-seed);
+  --sigvelo-color-neutral-600: color-mix(in oklab, var(--sigvelo-color-neutral-seed), black 15.5%);
+  --sigvelo-color-neutral-700: color-mix(in oklab, var(--sigvelo-color-neutral-seed), black 28.25%);
+  --sigvelo-color-neutral-800: color-mix(in oklab, var(--sigvelo-color-neutral-seed), black 43.5%);
+  --sigvelo-color-neutral-900: color-mix(in oklab, var(--sigvelo-color-neutral-seed), black 58.5%);
+  --sigvelo-color-neutral-950: color-mix(in oklab, var(--sigvelo-color-neutral-seed), black 73.75%);
 
   /* Constructive */
-  --sigvelo-success-50: color-mix(in oklab, var(--sigvelo-success-seed), white 95%);
-  --sigvelo-success-100: color-mix(in oklab, var(--sigvelo-success-seed), white 87%);
-  --sigvelo-success-200: color-mix(in oklab, var(--sigvelo-success-seed), white 70%);
-  --sigvelo-success-300: color-mix(in oklab, var(--sigvelo-success-seed), white 47%);
-  --sigvelo-success-400: color-mix(in oklab, var(--sigvelo-success-seed), white 23%);
-  --sigvelo-success-500: var(--sigvelo-success-seed);
-  --sigvelo-success-600: color-mix(in oklab, var(--sigvelo-success-seed), black 15.5%);
-  --sigvelo-success-700: color-mix(in oklab, var(--sigvelo-success-seed), black 28.25%);
-  --sigvelo-success-800: color-mix(in oklab, var(--sigvelo-success-seed), black 43.5%);
-  --sigvelo-success-900: color-mix(in oklab, var(--sigvelo-success-seed), black 58.5%);
-  --sigvelo-success-950: color-mix(in oklab, var(--sigvelo-success-seed), black 73.75%);
+  --sigvelo-color-success-50: color-mix(in oklab, var(--sigvelo-color-success-seed), white 95%);
+  --sigvelo-color-success-100: color-mix(in oklab, var(--sigvelo-color-success-seed), white 87%);
+  --sigvelo-color-success-200: color-mix(in oklab, var(--sigvelo-color-success-seed), white 70%);
+  --sigvelo-color-success-300: color-mix(in oklab, var(--sigvelo-color-success-seed), white 47%);
+  --sigvelo-color-success-400: color-mix(in oklab, var(--sigvelo-color-success-seed), white 23%);
+  --sigvelo-color-success-500: var(--sigvelo-color-success-seed);
+  --sigvelo-color-success-600: color-mix(in oklab, var(--sigvelo-color-success-seed), black 15.5%);
+  --sigvelo-color-success-700: color-mix(in oklab, var(--sigvelo-color-success-seed), black 28.25%);
+  --sigvelo-color-success-800: color-mix(in oklab, var(--sigvelo-color-success-seed), black 43.5%);
+  --sigvelo-color-success-900: color-mix(in oklab, var(--sigvelo-color-success-seed), black 58.5%);
+  --sigvelo-color-success-950: color-mix(in oklab, var(--sigvelo-color-success-seed), black 73.75%);
 
   /* Caution */
-  --sigvelo-warning-50: color-mix(in oklab, var(--sigvelo-warning-seed), white 95%);
-  --sigvelo-warning-100: color-mix(in oklab, var(--sigvelo-warning-seed), white 87%);
-  --sigvelo-warning-200: color-mix(in oklab, var(--sigvelo-warning-seed), white 70%);
-  --sigvelo-warning-300: color-mix(in oklab, var(--sigvelo-warning-seed), white 47%);
-  --sigvelo-warning-400: color-mix(in oklab, var(--sigvelo-warning-seed), white 23%);
-  --sigvelo-warning-500: var(--sigvelo-warning-seed);
-  --sigvelo-warning-600: color-mix(in oklab, var(--sigvelo-warning-seed), black 15.5%);
-  --sigvelo-warning-700: color-mix(in oklab, var(--sigvelo-warning-seed), black 28.25%);
-  --sigvelo-warning-800: color-mix(in oklab, var(--sigvelo-warning-seed), black 43.5%);
-  --sigvelo-warning-900: color-mix(in oklab, var(--sigvelo-warning-seed), black 58.5%);
-  --sigvelo-warning-950: color-mix(in oklab, var(--sigvelo-warning-seed), black 73.75%);
+  --sigvelo-color-warning-50: color-mix(in oklab, var(--sigvelo-color-warning-seed), white 95%);
+  --sigvelo-color-warning-100: color-mix(in oklab, var(--sigvelo-color-warning-seed), white 87%);
+  --sigvelo-color-warning-200: color-mix(in oklab, var(--sigvelo-color-warning-seed), white 70%);
+  --sigvelo-color-warning-300: color-mix(in oklab, var(--sigvelo-color-warning-seed), white 47%);
+  --sigvelo-color-warning-400: color-mix(in oklab, var(--sigvelo-color-warning-seed), white 23%);
+  --sigvelo-color-warning-500: var(--sigvelo-color-warning-seed);
+  --sigvelo-color-warning-600: color-mix(in oklab, var(--sigvelo-color-warning-seed), black 15.5%);
+  --sigvelo-color-warning-700: color-mix(in oklab, var(--sigvelo-color-warning-seed), black 28.25%);
+  --sigvelo-color-warning-800: color-mix(in oklab, var(--sigvelo-color-warning-seed), black 43.5%);
+  --sigvelo-color-warning-900: color-mix(in oklab, var(--sigvelo-color-warning-seed), black 58.5%);
+  --sigvelo-color-warning-950: color-mix(in oklab, var(--sigvelo-color-warning-seed), black 73.75%);
 
   /* Destructive */
-  --sigvelo-destructive-50: color-mix(in oklab, var(--sigvelo-destructive-seed), white 95%);
-  --sigvelo-destructive-100: color-mix(in oklab, var(--sigvelo-destructive-seed), white 87%);
-  --sigvelo-destructive-200: color-mix(in oklab, var(--sigvelo-destructive-seed), white 70%);
-  --sigvelo-destructive-300: color-mix(in oklab, var(--sigvelo-destructive-seed), white 47%);
-  --sigvelo-destructive-400: color-mix(in oklab, var(--sigvelo-destructive-seed), white 23%);
-  --sigvelo-destructive-500: var(--sigvelo-destructive-seed);
-  --sigvelo-destructive-600: color-mix(in oklab, var(--sigvelo-destructive-seed), black 15.5%);
-  --sigvelo-destructive-700: color-mix(in oklab, var(--sigvelo-destructive-seed), black 28.25%);
-  --sigvelo-destructive-800: color-mix(in oklab, var(--sigvelo-destructive-seed), black 43.5%);
-  --sigvelo-destructive-900: color-mix(in oklab, var(--sigvelo-destructive-seed), black 58.5%);
-  --sigvelo-destructive-950: color-mix(in oklab, var(--sigvelo-destructive-seed), black 73.75%);
+  --sigvelo-color-danger-50: color-mix(in oklab, var(--sigvelo-color-danger-seed), white 95%);
+  --sigvelo-color-danger-100: color-mix(in oklab, var(--sigvelo-color-danger-seed), white 87%);
+  --sigvelo-color-danger-200: color-mix(in oklab, var(--sigvelo-color-danger-seed), white 70%);
+  --sigvelo-color-danger-300: color-mix(in oklab, var(--sigvelo-color-danger-seed), white 47%);
+  --sigvelo-color-danger-400: color-mix(in oklab, var(--sigvelo-color-danger-seed), white 23%);
+  --sigvelo-color-danger-500: var(--sigvelo-color-danger-seed);
+  --sigvelo-color-danger-600: color-mix(in oklab, var(--sigvelo-color-danger-seed), black 15.5%);
+  --sigvelo-color-danger-700: color-mix(in oklab, var(--sigvelo-color-danger-seed), black 28.25%);
+  --sigvelo-color-danger-800: color-mix(in oklab, var(--sigvelo-color-danger-seed), black 43.5%);
+  --sigvelo-color-danger-900: color-mix(in oklab, var(--sigvelo-color-danger-seed), black 58.5%);
+  --sigvelo-color-danger-950: color-mix(in oklab, var(--sigvelo-color-danger-seed), black 73.75%);
 }

@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-paper-color);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-surface);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-md);
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-md);
   overflow: hidden;
 }
 
@@ -20,32 +20,30 @@
   padding-inline: 0.75rem;
   background-color: transparent;
   border: none;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   font-family: inherit;
   font-size: 0.8125rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   text-align: start;
   cursor: pointer;
-  transition: background-color var(--sigvelo-motion-duration-fast)
-    var(--sigvelo-motion-easing-standard);
+  transition: background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .tool__header:hover:not([data-disabled]) {
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .tool__header:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .tool__header-icon {
   display: inline-flex;
-  color: var(--sigvelo-text-muted);
-  transition: transform var(--sigvelo-motion-duration-medium)
-    var(--sigvelo-motion-easing-emphasized);
+  color: var(--sigvelo-color-text-muted);
+  transition: transform var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized);
 }
 
 .tool__header[data-panel-open] .tool__header-icon {
@@ -57,23 +55,23 @@
   align-items: center;
   padding-block: 0.125rem;
   padding-inline: 0.4375rem;
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  color: var(--sigvelo-text-muted);
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-sm);
+  color: var(--sigvelo-color-text-muted);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-sm);
 }
 
 .tool__header-name {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.8125rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .tool__header-title {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-weight: var(--sigvelo-font-weight-normal);
 }
 
@@ -84,8 +82,8 @@
 .tool__content {
   overflow: hidden;
   transition:
-    height var(--sigvelo-motion-duration-medium) var(--sigvelo-motion-easing-emphasized),
-    opacity var(--sigvelo-motion-duration-fast) var(--sigvelo-motion-easing-standard);
+    height var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized),
+    opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .tool__content[data-closed] {
@@ -111,10 +109,10 @@
   padding-block: 0.75rem;
   padding-inline: 0.75rem;
   border-block-start: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
+    var(--sigvelo-color-neutral-border-subtle);
   transition:
-    transform var(--sigvelo-motion-duration-medium) var(--sigvelo-motion-easing-emphasized),
-    opacity var(--sigvelo-motion-duration-fast) var(--sigvelo-motion-easing-standard);
+    transform var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized),
+    opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .tool__content[data-closed] .tool__content-inner,
@@ -141,7 +139,7 @@
   font-weight: var(--sigvelo-font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .tool__code-block {
@@ -158,13 +156,13 @@
 
 .tool__error-text {
   padding: 0.5rem 0.75rem;
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;
-  color: var(--sigvelo-destructive-text-colorful);
-  background-color: var(--sigvelo-destructive-fill-softer);
+  color: var(--sigvelo-color-danger-text);
+  background-color: var(--sigvelo-color-danger-bg-subtle);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-destructive-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-sm);
+    var(--sigvelo-color-danger-border-subtle);
+  border-radius: var(--sigvelo-radius-sm);
   white-space: pre-wrap;
 }
 

@@ -5,11 +5,11 @@
 }
 
 .field__label {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   line-height: 1;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .field__label[data-disabled] {
@@ -23,28 +23,29 @@
   height: 2.5rem;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   line-height: 1.25;
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   transition:
     border-color 150ms ease,
     box-shadow 150ms ease;
 }
 
 .field__control::placeholder {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .field__control:focus-visible {
   outline: none;
-  border-color: var(--sigvelo-focus-color);
+  border-color: var(--sigvelo-color-focus);
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px color-mix(in oklab, var(--sigvelo-focus-color), transparent 80%);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-focus), transparent 80%);
 }
 
 .field__control:disabled {
@@ -53,28 +54,28 @@
 }
 
 .field__control[data-invalid] {
-  border-color: var(--sigvelo-destructive-fill-mid);
+  border-color: var(--sigvelo-color-danger-bg);
 }
 
 .field__control[data-invalid]:focus-visible {
-  border-color: var(--sigvelo-destructive-fill-mid);
+  border-color: var(--sigvelo-color-danger-bg);
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px color-mix(in oklab, var(--sigvelo-destructive-fill-mid), transparent 80%);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 80%);
 }
 
 .field__description {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
   line-height: 1.4;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   margin: 0;
 }
 
 .field__error {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
   line-height: 1.4;
-  color: var(--sigvelo-destructive-fill-mid);
+  color: var(--sigvelo-color-danger-bg);
   margin: 0;
 }

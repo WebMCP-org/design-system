@@ -10,27 +10,27 @@
   width: 100%;
   height: 0.5rem;
   overflow: hidden;
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-full);
 }
 
 .meter__indicator {
   height: 100%;
-  background-color: var(--sigvelo-primary-fill-mid);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-primary-bg);
+  border-radius: var(--sigvelo-radius-full);
   transition: width 300ms ease;
 }
 
 .meter__label {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .meter__value {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }

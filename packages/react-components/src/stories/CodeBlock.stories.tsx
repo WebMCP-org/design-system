@@ -46,13 +46,13 @@ const CSS_SAMPLE = `.button {
   display: inline-flex;
   align-items: center;
   padding-inline: 1rem;
-  border-radius: var(--sigvelo-border-radius-md);
-  background-color: var(--sigvelo-primary-fill-mid);
-  color: var(--sigvelo-primary-text-on-mid);
+  border-radius: var(--sigvelo-radius-md);
+  background-color: var(--sigvelo-color-primary-bg);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }
 
 .button:hover {
-  background-color: var(--sigvelo-primary-fill-loud);
+  background-color: var(--sigvelo-color-primary-bg-strong);
 }`;
 
 export const Default: Story = {
