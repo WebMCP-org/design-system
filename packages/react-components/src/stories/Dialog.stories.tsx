@@ -152,7 +152,7 @@ export const LargeSize: Story = {
                   marginTop: "1.5rem",
                   padding: "1rem",
                   backgroundColor: "var(--bg-secondary)",
-                  borderRadius: "var(--sigvelo-border-radius-md)",
+                  borderRadius: "var(--sigvelo-radius-md)",
                 }}
               >
                 <p style={{ margin: 0 }}>

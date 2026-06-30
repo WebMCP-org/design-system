@@ -12,9 +12,9 @@
 .sigvelo-dark,
 [data-theme="light"],
 [data-theme="dark"] {
-  --sigvelo-primary-seed: #4a97f4;
-  --sigvelo-neutral-seed: #8b8c93;
-  --sigvelo-success-seed: #5dbb55;
-  --sigvelo-warning-seed: #e89a26;
-  --sigvelo-destructive-seed: #ef5655;
+  --sigvelo-color-primary-seed: #4a97f4;
+  --sigvelo-color-neutral-seed: #8b8c93;
+  --sigvelo-color-success-seed: #5dbb55;
+  --sigvelo-color-warning-seed: #e89a26;
+  --sigvelo-color-danger-seed: #ef5655;
 }

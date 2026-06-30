@@ -3,8 +3,8 @@
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
 }
 
 .queue__section {
@@ -20,13 +20,13 @@
   padding-inline: 0.5rem;
   background-color: transparent;
   border: none;
-  border-radius: var(--sigvelo-border-radius-sm);
+  border-radius: var(--sigvelo-radius-sm);
   font-family: inherit;
   font-size: 0.75rem;
   font-weight: var(--sigvelo-font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   cursor: pointer;
   text-align: start;
   transition:
@@ -35,15 +35,15 @@
 }
 
 .queue__section-trigger:hover:not([data-disabled]) {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-text-body);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-text);
 }
 
 .queue__section-trigger:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .queue__section-icon {
@@ -101,12 +101,12 @@
   gap: 0.625rem;
   padding-block: 0.5rem;
   padding-inline: 0.5rem;
-  border-radius: var(--sigvelo-border-radius-sm);
+  border-radius: var(--sigvelo-radius-sm);
   transition: background-color 150ms ease;
 }
 
 .queue__item:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .queue__item:hover .queue__item-actions {
@@ -114,7 +114,7 @@
 }
 
 .queue__item--complete .queue__item-content {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   text-decoration: line-through;
 }
 
@@ -125,18 +125,18 @@
   width: 1rem;
   height: 1rem;
   margin-block-start: 0.125rem;
-  border-radius: var(--sigvelo-border-radius-pill);
-  color: var(--sigvelo-text-muted);
+  border-radius: var(--sigvelo-radius-full);
+  color: var(--sigvelo-color-text-muted);
   flex-shrink: 0;
 }
 
 .queue__item-indicator--active {
-  color: var(--sigvelo-primary-text-colorful);
+  color: var(--sigvelo-color-primary-text);
 }
 
 .queue__item-indicator--complete {
-  background-color: var(--sigvelo-success-fill-mid);
-  color: var(--sigvelo-success-text-on-mid);
+  background-color: var(--sigvelo-color-success-bg);
+  color: var(--sigvelo-color-success-text-on-bg);
 }
 
 .queue__item-content {
@@ -146,14 +146,14 @@
   flex-direction: column;
   gap: 0.25rem;
   font-size: 0.875rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   line-height: 1.4;
 }
 
 .queue__item-description {
   margin: 0;
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   line-height: 1.4;
 }
 
@@ -181,9 +181,9 @@
   width: 2.5rem;
   height: 2.5rem;
   object-fit: cover;
-  border-radius: var(--sigvelo-border-radius-sm);
+  border-radius: var(--sigvelo-radius-sm);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
+    var(--sigvelo-color-neutral-border-subtle);
 }
 
 .queue__item-file {
@@ -192,25 +192,25 @@
   gap: 0.375rem;
   padding-block: 0.3125rem;
   padding-inline: 0.5rem;
-  background-color: var(--sigvelo-paper-color);
+  background-color: var(--sigvelo-color-surface);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-sm);
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-sm);
   font-size: 0.75rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .queue__item-file-icon {
   display: inline-flex;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .queue__item-file-name {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
 }
 
 .queue__item-file-size {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-variant-numeric: tabular-nums;
 }
 

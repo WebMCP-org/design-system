@@ -53,6 +53,14 @@ for (const file of sourceFiles) {
     }
   }
 
+  for (const match of text.matchAll(/var\(\s*(--mcp-b-[\w-]+)/g)) {
+    failures.push(`${rel}: references retired token ${match[1]}`);
+  }
+
+  for (const match of text.matchAll(/(^|[\s{;"'])(--mcp-b-[\w-]+)\s*:/gm)) {
+    failures.push(`${rel}: defines retired token ${match[2]}`);
+  }
+
   for (const token of legacyTokens) {
     const legacyToken = `--${token}`;
     const legacyUses = [...text.matchAll(/var\(\s*(--[\w-]+)/g)].some(

@@ -83,6 +83,10 @@ test-results
 # Vendored agent skills are reproducible from skills-lock.json — track the lock, not the copies.
 skills/
 
+# Repo-authored agent skills are source, not generated compatibility copies.
+!.agents/skills/
+!.agents/skills/**
+
 # Local secrets
 *.private-key.pem
 *.pem

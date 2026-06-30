@@ -1,31 +1,32 @@
 .input {
   display: flex;
   width: 100%;
-  height: var(--sigvelo-form-control-height-md);
+  height: var(--sigvelo-control-height-md);
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
-  font-size: var(--sigvelo-form-control-font-size-md);
+  font-family: var(--sigvelo-font-sans);
+  font-size: var(--sigvelo-control-text-md);
   line-height: 1.25;
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   transition:
     border-color 150ms ease,
     box-shadow 150ms ease;
 }
 
 .input::placeholder {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .input:focus-visible {
   outline: none;
-  border-color: var(--sigvelo-focus-color);
+  border-color: var(--sigvelo-color-focus);
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px color-mix(in oklab, var(--sigvelo-focus-color), transparent 80%);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-focus), transparent 80%);
 }
 
 .input:disabled {

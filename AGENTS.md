@@ -21,6 +21,10 @@ Docs are local at `node_modules/vite-plus/docs` or online at https://viteplus.de
 - `packages/react-components` owns the React component library and Storybook.
 - Keep shared UI here. Do not reintroduce parallel component copies in app repos.
 
+## Repo-authored Skills
+
+- For internal app UI work that should consume this design system, load `.agents/skills/use-mcp-b-design-system/SKILL.md`.
+
 ## Modern Web Guidance
 
 For HTML, CSS, accessibility, or client-side React changes, run Chrome's guidance CLI first through Vite+ so it uses the repo-managed Node runtime:

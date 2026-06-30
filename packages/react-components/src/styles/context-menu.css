@@ -10,13 +10,14 @@
 .context-menu__popup {
   min-width: 10rem;
   padding: 0.25rem;
-  font-family: var(--sigvelo-font-family);
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  font-family: var(--sigvelo-font-sans);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   box-shadow:
-    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%),
-    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%);
+    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
+    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
   outline: none;
   transform-origin: var(--transform-origin);
   transition:
@@ -38,8 +39,8 @@
   padding-inline: 0.75rem;
   font-size: 0.875rem;
   line-height: 1.25;
-  color: var(--sigvelo-text-body);
-  border-radius: var(--sigvelo-border-radius-sm);
+  color: var(--sigvelo-color-text);
+  border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   user-select: none;
   outline: none;
@@ -47,13 +48,13 @@
 }
 
 .context-menu__item[data-highlighted] {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .context-menu__item:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 var(--sigvelo-focus-width) var(--sigvelo-focus-color);
+  box-shadow: inset 0 0 0 var(--sigvelo-focus-width) var(--sigvelo-color-focus);
 }
 
 .context-menu__item[data-disabled] {
@@ -64,5 +65,5 @@
 .context-menu__separator {
   height: 1px;
   margin: 0.25rem 0;
-  background-color: var(--sigvelo-neutral-stroke-soft);
+  background-color: var(--sigvelo-color-neutral-border-muted);
 }

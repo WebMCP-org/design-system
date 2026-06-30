@@ -31,19 +31,19 @@ export const Default: Story = {
             <Menubar.Popup>
               <Menubar.Item onClick={() => console.log("New")}>
                 New
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+N
                 </span>
               </Menubar.Item>
               <Menubar.Item onClick={() => console.log("Open")}>
                 Open
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+O
                 </span>
               </Menubar.Item>
               <Menubar.Item onClick={() => console.log("Save")}>
                 Save
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+S
                 </span>
               </Menubar.Item>
@@ -61,32 +61,32 @@ export const Default: Story = {
             <Menubar.Popup>
               <Menubar.Item onClick={() => console.log("Undo")}>
                 Undo
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+Z
                 </span>
               </Menubar.Item>
               <Menubar.Item onClick={() => console.log("Redo")}>
                 Redo
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+Y
                 </span>
               </Menubar.Item>
               <Menubar.Separator />
               <Menubar.Item onClick={() => console.log("Cut")}>
                 Cut
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+X
                 </span>
               </Menubar.Item>
               <Menubar.Item onClick={() => console.log("Copy")}>
                 Copy
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+C
                 </span>
               </Menubar.Item>
               <Menubar.Item onClick={() => console.log("Paste")}>
                 Paste
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+V
                 </span>
               </Menubar.Item>
@@ -101,20 +101,22 @@ export const Default: Story = {
             <Menubar.Popup>
               <Menubar.Item onClick={() => console.log("Zoom In")}>
                 Zoom In
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl++
                 </span>
               </Menubar.Item>
               <Menubar.Item onClick={() => console.log("Zoom Out")}>
                 Zoom Out
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
                   Ctrl+-
                 </span>
               </Menubar.Item>
               <Menubar.Separator />
               <Menubar.Item onClick={() => console.log("Full Screen")}>
                 Full Screen
-                <span style={{ color: "var(--sigvelo-text-muted)", fontSize: "0.75rem" }}>F11</span>
+                <span style={{ color: "var(--sigvelo-color-text-muted)", fontSize: "0.75rem" }}>
+                  F11
+                </span>
               </Menubar.Item>
             </Menubar.Popup>
           </Menubar.Positioner>
@@ -206,12 +208,12 @@ export const TextEditor: Story = {
         style={{
           marginTop: "1rem",
           padding: "1rem",
-          border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-          borderRadius: "var(--sigvelo-border-radius-md)",
+          border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+          borderRadius: "var(--sigvelo-radius-md)",
           minHeight: "200px",
         }}
       >
-        <p style={{ margin: 0, color: "var(--sigvelo-text-muted)" }}>Start typing here...</p>
+        <p style={{ margin: 0, color: "var(--sigvelo-color-text-muted)" }}>Start typing here...</p>
       </div>
     </div>
   ),

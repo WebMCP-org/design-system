@@ -53,7 +53,7 @@ export const Default: Story = {
             style={{
               marginBlockStart: "0.75rem",
               fontSize: "0.8125rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
             }}
           >
             Submitted: {last}
@@ -108,7 +108,7 @@ export const WithHeader: Story = {
           <span
             style={{
               fontSize: "0.75rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontWeight: "var(--sigvelo-font-weight-semibold)",
             }}
           >
@@ -146,17 +146,17 @@ export const SubmitStates: Story = {
                 onClick={() => setStatus(s)}
                 style={{
                   padding: "0.25rem 0.625rem",
-                  borderRadius: "var(--sigvelo-border-radius-sm)",
+                  borderRadius: "var(--sigvelo-radius-sm)",
                   border:
-                    "var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-softer)",
+                    "var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-color-neutral-border-subtle)",
                   background:
                     status === s
-                      ? "var(--sigvelo-primary-fill)"
-                      : "var(--sigvelo-neutral-fill-softer)",
+                      ? "var(--sigvelo-color-primary-bg)"
+                      : "var(--sigvelo-color-neutral-bg-subtle)",
                   color:
                     status === s
-                      ? "var(--sigvelo-primary-fill-contrast)"
-                      : "var(--sigvelo-text-body)",
+                      ? "var(--sigvelo-color-primary-text-on-bg)"
+                      : "var(--sigvelo-color-text)",
                   fontSize: "0.75rem",
                   cursor: "pointer",
                 }}

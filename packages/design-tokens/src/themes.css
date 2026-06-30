@@ -4,12 +4,12 @@
 
 :root {
   color-scheme: light dark;
-  accent-color: var(--sigvelo-primary-fill-mid);
+  accent-color: var(--sigvelo-color-primary-bg);
 }
 
 .sigvelo-light,
 .sigvelo-dark,
 [data-theme="light"],
 [data-theme="dark"] {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }

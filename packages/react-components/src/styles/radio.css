@@ -19,9 +19,10 @@
   justify-content: center;
   width: 1.125rem;
   height: 1.125rem;
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-full);
   cursor: pointer;
   transition:
     border-color 150ms ease,
@@ -29,19 +30,19 @@
 }
 
 .radio:hover:not([data-disabled]) {
-  border-color: var(--sigvelo-primary-fill-mid);
+  border-color: var(--sigvelo-color-primary-bg);
 }
 
 .radio:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .radio[data-checked] {
-  border-color: var(--sigvelo-primary-fill-mid);
-  background-color: var(--sigvelo-primary-fill-mid);
+  border-color: var(--sigvelo-color-primary-bg);
+  background-color: var(--sigvelo-color-primary-bg);
 }
 
 .radio[data-disabled] {
@@ -53,8 +54,8 @@
   display: block;
   width: 0.5rem;
   height: 0.5rem;
-  background-color: var(--sigvelo-primary-text-on-mid);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-primary-text-on-bg);
+  border-radius: var(--sigvelo-radius-full);
   transform: scale(0);
   transition: transform 150ms ease;
 }

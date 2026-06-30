@@ -63,7 +63,7 @@ export const WithValidation: Story = {
       <Form onSubmit={handleWithValidationSubmit} style={{ width: "320px" }}>
         <Field.Root name="name">
           <Field.Label>
-            Name <span style={{ color: "var(--sigvelo-destructive-fill-mid)" }}>*</span>
+            Name <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
           </Field.Label>
           <Field.Control required placeholder="John Doe" />
           <Field.Error match="valueMissing">Name is required</Field.Error>
@@ -71,7 +71,7 @@ export const WithValidation: Story = {
 
         <Field.Root name="email">
           <Field.Label>
-            Email <span style={{ color: "var(--sigvelo-destructive-fill-mid)" }}>*</span>
+            Email <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
           </Field.Label>
           <Field.Control type="email" required placeholder="john@example.com" />
           <Field.Error match="valueMissing">Email is required</Field.Error>
@@ -86,7 +86,7 @@ export const WithValidation: Story = {
 
         <Field.Root name="password">
           <Field.Label>
-            Password <span style={{ color: "var(--sigvelo-destructive-fill-mid)" }}>*</span>
+            Password <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
           </Field.Label>
           <Field.Control
             type="password"

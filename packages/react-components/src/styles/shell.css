@@ -4,9 +4,10 @@
   flex-direction: column;
   height: 100%;
   min-height: 400px;
-  border-radius: var(--sigvelo-border-radius-md);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  background: var(--sigvelo-paper-color);
+  border-radius: var(--sigvelo-radius-md);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  background: var(--sigvelo-color-surface);
   overflow: hidden;
 }
 
@@ -14,16 +15,16 @@
   display: flex;
   align-items: center;
   padding: 0.75rem 1rem;
-  background: var(--sigvelo-neutral-fill-softer);
+  background: var(--sigvelo-color-neutral-bg-subtle);
   border-bottom: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-soft);
+    var(--sigvelo-color-neutral-border-muted);
 }
 
 .shell__heading {
   margin: 0;
   font-size: 0.9375rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .shell__body {
@@ -39,9 +40,9 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.5rem;
-  background: var(--sigvelo-neutral-fill-softer);
+  background: var(--sigvelo-color-neutral-bg-subtle);
   border-right: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-soft);
+    var(--sigvelo-color-neutral-border-muted);
 }
 
 .shell__action {
@@ -52,9 +53,9 @@
   height: 2.5rem;
   padding: 0;
   border: none;
-  border-radius: var(--sigvelo-border-radius-md);
+  border-radius: var(--sigvelo-radius-md);
   background: transparent;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   cursor: pointer;
   transition:
     background-color 0.15s ease,
@@ -62,18 +63,18 @@
 }
 
 .shell__action:hover {
-  background: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .shell__action--active {
-  background: var(--sigvelo-primary-fill-mid);
-  color: var(--sigvelo-primary-text-on-mid);
+  background: var(--sigvelo-color-primary-bg);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }
 
 .shell__action--active:hover {
-  background: color-mix(in oklab, var(--sigvelo-primary-fill-mid), black 5%);
-  color: var(--sigvelo-primary-text-on-mid);
+  background: color-mix(in oklab, var(--sigvelo-color-primary-bg), black 5%);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }
 
 .shell__action svg {
@@ -87,9 +88,9 @@
   flex-direction: column;
   width: 260px;
   max-width: 100%;
-  background: var(--sigvelo-paper-color);
+  background: var(--sigvelo-color-surface);
   border-right: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-soft);
+    var(--sigvelo-color-neutral-border-muted);
   overflow: hidden;
 }
 
@@ -101,9 +102,9 @@
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-bold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   border-bottom: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-soft);
+    var(--sigvelo-color-neutral-border-muted);
 }
 
 .shell__panel-content {

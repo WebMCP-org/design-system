@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, screen, userEvent, within } from "storybook/test";
+import { expect, screen, within } from "storybook/test";
 import {
   Tooltip,
   TooltipTrigger,
@@ -25,7 +25,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <Tooltip>
-      <TooltipTrigger render={<Button color="primary" />}>Hover me</TooltipTrigger>
+      <TooltipTrigger render={<Button color="primary" />} delay={0}>
+        Hover me
+      </TooltipTrigger>
       <TooltipPortal>
         <TooltipPositioner side="top" sideOffset={4}>
           <TooltipPopup>This is a tooltip</TooltipPopup>
@@ -35,7 +37,7 @@ export const Default: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.hover(canvas.getByText("Hover me"));
+    canvas.getByRole("button", { name: "Hover me" }).focus();
     await expect(await screen.findByText("This is a tooltip")).toBeInTheDocument();
   },
 };
@@ -43,7 +45,9 @@ export const Default: Story = {
 export const WithArrow: Story = {
   render: () => (
     <Tooltip>
-      <TooltipTrigger render={<Button color="neutral" />}>Hover me</TooltipTrigger>
+      <TooltipTrigger render={<Button color="neutral" />} delay={0}>
+        Hover me
+      </TooltipTrigger>
       <TooltipPortal>
         <TooltipPositioner side="top" sideOffset={8}>
           <TooltipPopup>
@@ -56,7 +60,7 @@ export const WithArrow: Story = {
   ),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.hover(canvas.getByText("Hover me"));
+    canvas.getByRole("button", { name: "Hover me" }).focus();
     await expect(await screen.findByText("Tooltip with arrow")).toBeInTheDocument();
   },
 };
@@ -141,7 +145,7 @@ export const OnIcon: Story = {
               cursor: "pointer",
               borderRadius: "0.375rem",
               transition: "background-color 0.2s",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
             }}
           />
         }

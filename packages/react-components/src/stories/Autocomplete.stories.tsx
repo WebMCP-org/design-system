@@ -33,8 +33,8 @@ export const Default: Story = {
       style={{
         display: "flex",
         alignItems: "center",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
         width: "280px",
       }}
     >
@@ -88,8 +88,8 @@ export const WithObjects: Story = {
       style={{
         display: "flex",
         alignItems: "center",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
         width: "280px",
       }}
     >
@@ -106,7 +106,7 @@ export const WithObjects: Story = {
                       <div
                         style={{
                           fontSize: "0.75rem",
-                          color: "var(--sigvelo-text-muted)",
+                          color: "var(--sigvelo-color-text-muted)",
                         }}
                       >
                         {city.country}
@@ -147,8 +147,8 @@ export const WithGroups: Story = {
         style={{
           display: "flex",
           alignItems: "center",
-          border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-          borderRadius: "var(--sigvelo-border-radius-md)",
+          border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+          borderRadius: "var(--sigvelo-radius-md)",
           width: "280px",
         }}
       >
@@ -204,11 +204,11 @@ export const SearchField: Story = {
         style={{
           display: "flex",
           alignItems: "center",
-          border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-          borderRadius: "var(--sigvelo-border-radius-md)",
+          border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+          borderRadius: "var(--sigvelo-radius-md)",
         }}
       >
-        <span style={{ paddingLeft: "0.75rem", color: "var(--sigvelo-text-muted)" }}>
+        <span style={{ paddingLeft: "0.75rem", color: "var(--sigvelo-color-text-muted)" }}>
           <svg
             width="16"
             height="16"
@@ -243,7 +243,7 @@ export const SearchField: Story = {
         style={{
           marginTop: "0.5rem",
           fontSize: "0.75rem",
-          color: "var(--sigvelo-text-muted)",
+          color: "var(--sigvelo-color-text-muted)",
         }}
       >
         Try searching for React, Vue, or Angular.
@@ -258,8 +258,8 @@ export const WithClear: Story = {
       style={{
         display: "flex",
         alignItems: "center",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
         width: "280px",
       }}
     >

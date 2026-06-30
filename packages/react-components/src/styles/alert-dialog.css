@@ -31,13 +31,14 @@
   z-index: 50;
   width: calc(100% - 2rem);
   max-width: 28rem;
-  background-color: var(--sigvelo-background-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  background-color: var(--sigvelo-color-canvas);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   padding: 1.5rem;
   box-shadow:
-    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%),
-    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%);
+    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
+    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
 }
 
 .alert-dialog__popup[data-starting-style],
@@ -55,19 +56,19 @@
 }
 
 .alert-dialog__title {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1.125rem;
   font-weight: var(--sigvelo-font-weight-bold);
   line-height: 1.25;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   margin: 0 0 0.5rem;
 }
 
 .alert-dialog__description {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   line-height: 1.5;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   margin: 0 0 1.5rem;
 }
 
@@ -77,11 +78,11 @@
   justify-content: center;
   height: 2.5rem;
   padding: 0 1rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   border: none;
-  border-radius: var(--sigvelo-border-radius-md);
+  border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
     background-color 150ms ease,
@@ -91,54 +92,55 @@
 .alert-dialog__action:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .alert-dialog__action--primary {
-  background-color: var(--sigvelo-primary-fill-mid);
-  color: var(--sigvelo-primary-text-on-mid);
+  background-color: var(--sigvelo-color-primary-bg);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }
 
 .alert-dialog__action--primary:hover {
-  background-color: color-mix(in oklab, var(--sigvelo-primary-fill-mid), transparent 10%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 10%);
 }
 
 .alert-dialog__action--secondary {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .alert-dialog__action--secondary:hover {
-  background-color: color-mix(in oklab, var(--sigvelo-neutral-fill-softer), transparent 20%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-neutral-bg-subtle), transparent 20%);
 }
 
 .alert-dialog__action--destructive {
-  background-color: var(--sigvelo-destructive-fill-mid);
-  color: var(--sigvelo-destructive-text-on-mid);
+  background-color: var(--sigvelo-color-danger-bg);
+  color: var(--sigvelo-color-danger-text-on-bg);
 }
 
 .alert-dialog__action--destructive:hover {
-  background-color: color-mix(in oklab, var(--sigvelo-destructive-fill-mid), transparent 10%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 10%);
 }
 
 .alert-dialog__action--outline {
   background-color: transparent;
-  color: var(--sigvelo-text-body);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  color: var(--sigvelo-color-text);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
 }
 
 .alert-dialog__action--outline:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .alert-dialog__action--ghost {
   background-color: transparent;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .alert-dialog__action--ghost:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }

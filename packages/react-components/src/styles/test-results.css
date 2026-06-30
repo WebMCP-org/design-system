@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-paper-color);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-surface);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-md);
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-md);
   overflow: hidden;
 }
 
@@ -18,7 +18,7 @@
   padding-block: 0.75rem;
   padding-inline: 0.875rem;
   border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
+    var(--sigvelo-color-neutral-border-subtle);
 }
 
 .test-results__summary {
@@ -37,20 +37,20 @@
   align-items: center;
   gap: 0.75rem;
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-variant-numeric: tabular-nums;
 }
 
 .test-results__stat--passed {
-  color: var(--sigvelo-success-text-colorful);
+  color: var(--sigvelo-color-success-text);
 }
 
 .test-results__stat--failed {
-  color: var(--sigvelo-destructive-text-colorful);
+  color: var(--sigvelo-color-danger-text);
 }
 
 .test-results__stat--skipped {
-  color: var(--sigvelo-warning-text-colorful);
+  color: var(--sigvelo-color-warning-text);
 }
 
 .test-results__progress {
@@ -66,7 +66,7 @@
   display: flex;
   flex-direction: column;
   border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
+    var(--sigvelo-color-neutral-border-subtle);
 }
 
 .test-results__suite:last-child {
@@ -82,7 +82,7 @@
   padding-inline: 0.875rem;
   background-color: transparent;
   border: none;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   font-family: inherit;
   font-size: 0.8125rem;
   font-weight: var(--sigvelo-font-weight-semibold);
@@ -92,19 +92,19 @@
 }
 
 .test-results__suite-trigger:hover:not([data-disabled]) {
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .test-results__suite-trigger:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .test-results__suite-icon {
   display: inline-flex;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   transition: transform 200ms ease;
 }
 
@@ -115,7 +115,7 @@
 .test-results__suite-name {
   flex: 1;
   min-width: 0;
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.8125rem;
   font-weight: var(--sigvelo-font-weight-normal);
   overflow: hidden;
@@ -150,7 +150,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .test-results__test {
@@ -162,7 +162,7 @@
   padding-inline: 1.5rem;
   font-size: 0.8125rem;
   border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
+    var(--sigvelo-color-neutral-border-subtle);
 }
 
 .test-results__test:last-child {
@@ -175,33 +175,33 @@
   justify-content: center;
   width: 1rem;
   height: 1rem;
-  border-radius: var(--sigvelo-border-radius-pill);
+  border-radius: var(--sigvelo-radius-full);
   flex-shrink: 0;
 }
 
 .test-results__test-status--passed {
-  color: var(--sigvelo-success-text-colorful);
+  color: var(--sigvelo-color-success-text);
 }
 
 .test-results__test-status--failed {
-  color: var(--sigvelo-destructive-text-colorful);
+  color: var(--sigvelo-color-danger-text);
 }
 
 .test-results__test-status--skipped {
-  color: var(--sigvelo-warning-text-colorful);
+  color: var(--sigvelo-color-warning-text);
 }
 
 .test-results__test-status--running {
-  color: var(--sigvelo-primary-text-colorful);
+  color: var(--sigvelo-color-primary-text);
   animation: test-results-spin 1.4s linear infinite;
 }
 
 .test-results__test-name {
   flex: 1;
   min-width: 0;
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.8125rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -209,7 +209,7 @@
 
 .test-results__test-duration {
   font-size: 0.6875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -225,14 +225,14 @@
 .test-results__error-text {
   margin: 0;
   padding: 0.5rem 0.75rem;
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.6875rem;
   line-height: 1.55;
-  color: var(--sigvelo-destructive-text-colorful);
-  background-color: var(--sigvelo-destructive-fill-softer);
+  color: var(--sigvelo-color-danger-text);
+  background-color: var(--sigvelo-color-danger-bg-subtle);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-destructive-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-sm);
+    var(--sigvelo-color-danger-border-subtle);
+  border-radius: var(--sigvelo-radius-sm);
   white-space: pre-wrap;
   word-break: break-word;
   overflow-x: auto;

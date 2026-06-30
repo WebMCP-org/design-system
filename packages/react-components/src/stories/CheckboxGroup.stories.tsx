@@ -60,7 +60,7 @@ export const Controlled: Story = {
             </label>
           </div>
         </CheckboxGroup>
-        <div style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <div style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           Selected: {values.length > 0 ? values.join(", ") : "none"}
         </div>
       </div>
@@ -124,10 +124,10 @@ export const FormExample: Story = {
           style={{
             marginTop: "1rem",
             padding: "0.5rem 1rem",
-            backgroundColor: "var(--sigvelo-primary-fill-mid)",
-            color: "var(--sigvelo-primary-text-on-mid)",
+            backgroundColor: "var(--sigvelo-color-primary-bg)",
+            color: "var(--sigvelo-color-primary-text-on-bg)",
             border: "none",
-            borderRadius: "var(--sigvelo-border-radius-md)",
+            borderRadius: "var(--sigvelo-radius-md)",
             cursor: "pointer",
           }}
         >

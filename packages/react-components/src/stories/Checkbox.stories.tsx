@@ -102,7 +102,7 @@ export const Controlled: Story = {
             Toggle me {checked ? "✓" : ""}
           </Label>
         </div>
-        <p style={{ margin: 0, color: "var(--sigvelo-text-muted)", fontSize: "0.875rem" }}>
+        <p style={{ margin: 0, color: "var(--sigvelo-color-text-muted)", fontSize: "0.875rem" }}>
           State: {checked ? "Checked" : "Unchecked"}
         </p>
       </div>

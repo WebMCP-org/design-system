@@ -41,7 +41,7 @@ export const TextFormatting: Story = {
               onClick={() => setBold(!bold)}
               style={{
                 fontWeight: bold ? "bold" : "normal",
-                backgroundColor: bold ? "var(--sigvelo-neutral-fill-softer)" : undefined,
+                backgroundColor: bold ? "var(--sigvelo-color-neutral-bg-subtle)" : undefined,
               }}
             >
               B
@@ -52,7 +52,7 @@ export const TextFormatting: Story = {
               onClick={() => setItalic(!italic)}
               style={{
                 fontStyle: italic ? "italic" : "normal",
-                backgroundColor: italic ? "var(--sigvelo-neutral-fill-softer)" : undefined,
+                backgroundColor: italic ? "var(--sigvelo-color-neutral-bg-subtle)" : undefined,
               }}
             >
               I
@@ -63,7 +63,7 @@ export const TextFormatting: Story = {
               onClick={() => setUnderline(!underline)}
               style={{
                 textDecoration: underline ? "underline" : "none",
-                backgroundColor: underline ? "var(--sigvelo-neutral-fill-softer)" : undefined,
+                backgroundColor: underline ? "var(--sigvelo-color-neutral-bg-subtle)" : undefined,
               }}
             >
               U
@@ -127,8 +127,8 @@ export const TextFormatting: Story = {
             fontStyle: italic ? "italic" : "normal",
             textDecoration: underline ? "underline" : "none",
             padding: "1rem",
-            border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-            borderRadius: "var(--sigvelo-border-radius-md)",
+            border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+            borderRadius: "var(--sigvelo-radius-md)",
             margin: 0,
           }}
         >

@@ -57,7 +57,7 @@ export const WithCards: Story = {
           >
             Overview
           </h3>
-          <p style={{ margin: 0, color: "var(--sigvelo-text-muted)" }}>
+          <p style={{ margin: 0, color: "var(--sigvelo-color-text-muted)" }}>
             View a summary of your account activity and key metrics.
           </p>
         </Card>
@@ -74,7 +74,7 @@ export const WithCards: Story = {
           >
             Analytics
           </h3>
-          <p style={{ margin: 0, color: "var(--sigvelo-text-muted)" }}>
+          <p style={{ margin: 0, color: "var(--sigvelo-color-text-muted)" }}>
             Detailed analytics and insights about your data.
           </p>
         </Card>
@@ -91,7 +91,7 @@ export const WithCards: Story = {
           >
             Settings
           </h3>
-          <p style={{ margin: 0, color: "var(--sigvelo-text-muted)" }}>
+          <p style={{ margin: 0, color: "var(--sigvelo-color-text-muted)" }}>
             Configure your account preferences and settings.
           </p>
         </Card>
@@ -153,7 +153,7 @@ export const LayersAndClassify: Story = {
               style={{
                 padding: "0.75rem",
                 backgroundColor: "var(--bg-secondary)",
-                borderRadius: "var(--sigvelo-border-radius-sm)",
+                borderRadius: "var(--sigvelo-radius-sm)",
               }}
             >
               Layer 1: US States
@@ -162,7 +162,7 @@ export const LayersAndClassify: Story = {
               style={{
                 padding: "0.75rem",
                 backgroundColor: "var(--bg-secondary)",
-                borderRadius: "var(--sigvelo-border-radius-sm)",
+                borderRadius: "var(--sigvelo-radius-sm)",
               }}
             >
               Layer 2: Counties
@@ -171,7 +171,7 @@ export const LayersAndClassify: Story = {
               style={{
                 padding: "0.75rem",
                 backgroundColor: "var(--bg-secondary)",
-                borderRadius: "var(--sigvelo-border-radius-sm)",
+                borderRadius: "var(--sigvelo-radius-sm)",
               }}
             >
               Layer 3: Cities
@@ -199,8 +199,8 @@ export const LayersAndClassify: Story = {
                 style={{
                   width: "100%",
                   padding: "0.5rem",
-                  borderRadius: "var(--sigvelo-border-radius-sm)",
-                  border: "1px solid var(--sigvelo-neutral-stroke-soft)",
+                  borderRadius: "var(--sigvelo-radius-sm)",
+                  border: "1px solid var(--sigvelo-color-neutral-border-muted)",
                 }}
               >
                 <option>Quantile</option>
@@ -245,7 +245,7 @@ export const Controlled: Story = {
           style={{
             marginBottom: "1rem",
             fontSize: "0.875rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           Current tab: <strong>{value}</strong>

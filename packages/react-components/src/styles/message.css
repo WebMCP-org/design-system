@@ -3,8 +3,8 @@
   flex-direction: column;
   gap: 0.25rem;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
 }
 
 .message[data-from="user"] {
@@ -22,18 +22,18 @@
   max-width: min(42rem, 85%);
   padding-block: 0.625rem;
   padding-inline: 0.875rem;
-  border-radius: var(--sigvelo-border-radius-md);
+  border-radius: var(--sigvelo-radius-md);
   font-size: 0.875rem;
   line-height: 1.55;
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-text-body);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-text);
   word-wrap: break-word;
   overflow-wrap: anywhere;
 }
 
 .message[data-from="user"] .message__content {
-  background-color: var(--sigvelo-primary-fill);
-  color: var(--sigvelo-primary-fill-contrast);
+  background-color: var(--sigvelo-color-primary-bg);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }
 
 .message[data-from="assistant"] .message__content {
@@ -46,7 +46,7 @@
 
 .message[data-from="system"] .message__content {
   background-color: transparent;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-style: italic;
 }
 
@@ -63,7 +63,7 @@
   align-items: center;
   gap: 0.125rem;
   padding: 0;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .message[data-from="user"] .message__actions {
@@ -71,11 +71,11 @@
 }
 
 .message__action {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .message__action:hover:not([data-disabled]) {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .message__toolbar {
@@ -102,13 +102,13 @@
   display: inline-flex;
   align-items: center;
   gap: 0.125rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .message__branch-page {
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   padding-inline: 0.375rem;
   user-select: none;
 }

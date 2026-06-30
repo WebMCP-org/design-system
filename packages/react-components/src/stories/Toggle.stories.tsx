@@ -31,7 +31,7 @@ export const Controlled: Story = {
         <Toggle pressed={pressed} onPressedChange={setPressed}>
           {pressed ? "On" : "Off"}
         </Toggle>
-        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           Status: {pressed ? "Pressed" : "Not pressed"}
         </span>
       </div>
@@ -137,7 +137,7 @@ export const WithLabel: Story = {
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
       <Toggle defaultPressed>Notifications</Toggle>
-      <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+      <span style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
         Receive email notifications
       </span>
     </div>

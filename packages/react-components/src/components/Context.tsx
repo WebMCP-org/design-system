@@ -258,7 +258,7 @@ function ProgressRing({
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke="var(--sigvelo-neutral-stroke-softer)"
+        stroke="var(--sigvelo-color-neutral-border-subtle)"
         strokeWidth={stroke}
       />
       <circle
@@ -266,7 +266,7 @@ function ProgressRing({
         cy={size / 2}
         r={radius}
         fill="none"
-        stroke="var(--sigvelo-primary-fill-mid)"
+        stroke="var(--sigvelo-color-primary-bg)"
         strokeWidth={stroke}
         strokeDasharray={circumference}
         strokeDashoffset={offset}

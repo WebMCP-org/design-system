@@ -4,9 +4,10 @@
   justify-content: center;
   width: 1rem;
   height: 1rem;
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: calc(var(--sigvelo-border-radius-md) - 4px);
-  background-color: var(--sigvelo-background-color);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: calc(var(--sigvelo-radius-md) - 4px);
+  background-color: var(--sigvelo-color-canvas);
   cursor: pointer;
   transition:
     background-color 150ms ease,
@@ -14,19 +15,19 @@
 }
 
 .checkbox:hover:not([data-disabled]) {
-  border-color: var(--sigvelo-primary-fill-mid);
+  border-color: var(--sigvelo-color-primary-bg);
 }
 
 .checkbox:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .checkbox[data-checked] {
-  background-color: var(--sigvelo-primary-fill-mid);
-  border-color: var(--sigvelo-primary-fill-mid);
+  background-color: var(--sigvelo-color-primary-bg);
+  border-color: var(--sigvelo-color-primary-bg);
 }
 
 .checkbox[data-disabled] {
@@ -38,5 +39,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--sigvelo-primary-text-on-mid);
+  color: var(--sigvelo-color-primary-text-on-bg);
 }

@@ -127,7 +127,7 @@ export const NestedContent: Story = {
       <Collapsible.Panel>
         <div>
           <h4 style={{ margin: "0 0 0.75rem" }}>Overview</h4>
-          <p style={{ margin: "0 0 0.75rem", color: "var(--sigvelo-text-muted)" }}>
+          <p style={{ margin: "0 0 0.75rem", color: "var(--sigvelo-color-text-muted)" }}>
             This project contains various components and utilities for building modern user
             interfaces.
           </p>

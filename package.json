@@ -7,7 +7,7 @@
     "ready": "vp check && vp test && vp run audit:tokens && vp run audit:modern-web-guidance && vp run test:storybook && vp run -r build && vp run validate:packages && vp run check:storybook-deploy",
     "storybook": "vp run @mcp-b/react-components#storybook",
     "build-storybook": "vp run @mcp-b/react-components#build-storybook",
-    "build:storybook-worker": "vp run build-storybook && vp build --config storybook.worker.vite.config.ts && cp -R packages/react-components/storybook-static/. dist/mcp_b_design_system_storybook",
+    "build:storybook-worker": "vp run build-storybook && rm -rf dist/mcp_b_design_system_storybook && vp build --config storybook.worker.vite.config.ts && cp -R packages/react-components/storybook-static/. dist/mcp_b_design_system_storybook",
     "deploy:storybook": "vp run build:storybook-worker && vp exec wrangler deploy --config dist/mcp_b_design_system_storybook/wrangler.json",
     "check:storybook-deploy": "vp run build:storybook-worker && vp exec wrangler deploy --dry-run --config dist/mcp_b_design_system_storybook/wrangler.json",
     "test:storybook": "vp run @mcp-b/react-components#test",

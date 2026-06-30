@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-paper-color);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-surface);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-md);
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-md);
   overflow: hidden;
 }
 
@@ -20,7 +20,7 @@
   padding-inline: 0.75rem;
   background-color: transparent;
   border: none;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   font-family: inherit;
   font-size: 0.8125rem;
   text-align: start;
@@ -29,20 +29,20 @@
 }
 
 .commit__header:hover:not([data-disabled]) {
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .commit__header:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .commit__header-icon {
   display: inline-flex;
   flex-shrink: 0;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   transition: transform 200ms ease;
 }
 
@@ -80,18 +80,18 @@
 }
 
 .commit__hash {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   padding-block: 0.0625rem;
   padding-inline: 0.375rem;
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-sm);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-sm);
 }
 
 .commit__timestamp {
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -125,7 +125,7 @@
 
 .commit__content-inner {
   border-block-start: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
+    var(--sigvelo-color-neutral-border-subtle);
 }
 
 .commit__files {
@@ -144,7 +144,7 @@
   padding-inline: 0.75rem;
   font-size: 0.8125rem;
   border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
+    var(--sigvelo-color-neutral-border-subtle);
 }
 
 .commit__file:last-child {
@@ -159,14 +159,14 @@
 
 .commit__file-icon {
   display: inline-flex;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   flex-shrink: 0;
 }
 
 .commit__file-path {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -175,16 +175,16 @@
 }
 
 .commit__file-additions {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;
-  color: var(--sigvelo-success-text-colorful);
+  color: var(--sigvelo-color-success-text);
   font-variant-numeric: tabular-nums;
 }
 
 .commit__file-deletions {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;
-  color: var(--sigvelo-destructive-text-colorful);
+  color: var(--sigvelo-color-danger-text);
   font-variant-numeric: tabular-nums;
 }
 

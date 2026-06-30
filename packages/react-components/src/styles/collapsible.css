@@ -12,14 +12,15 @@
   width: 100%;
   padding-block: 0.75rem;
   padding-inline: 1rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   text-align: start;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   background-color: transparent;
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
     background-color 150ms ease,
@@ -27,14 +28,14 @@
 }
 
 .collapsible__trigger:hover {
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .collapsible__trigger:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .collapsible__trigger[data-disabled] {
@@ -64,9 +65,9 @@
 
 .collapsible__panel {
   overflow: hidden;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   transition:
     height 200ms ease,
     opacity 200ms ease;
@@ -88,8 +89,9 @@
 
 .collapsible__panel > * {
   padding: 1rem;
-  background-color: var(--sigvelo-paper-color);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
+  background-color: var(--sigvelo-color-surface);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
   border-top: none;
-  border-radius: 0 0 var(--sigvelo-border-radius-md) var(--sigvelo-border-radius-md);
+  border-radius: 0 0 var(--sigvelo-radius-md) var(--sigvelo-radius-md);
 }

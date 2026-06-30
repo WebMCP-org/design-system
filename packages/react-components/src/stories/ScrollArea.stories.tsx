@@ -37,8 +37,8 @@ export const Default: Story = {
       style={{
         height: "200px",
         width: "250px",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
       }}
     >
       <ScrollArea.Viewport style={{ padding: "1rem" }}>
@@ -48,7 +48,7 @@ export const Default: Story = {
             key={tag}
             style={{
               padding: "0.5rem 0",
-              borderBottom: "1px solid var(--sigvelo-neutral-stroke-soft)",
+              borderBottom: "1px solid var(--sigvelo-color-neutral-border-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -68,8 +68,8 @@ export const HorizontalScroll: Story = {
     <ScrollArea.Root
       style={{
         width: "300px",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
       }}
     >
       <ScrollArea.Viewport style={{ padding: "1rem" }}>
@@ -79,8 +79,8 @@ export const HorizontalScroll: Story = {
               key={tag}
               style={{
                 padding: "0.5rem 1rem",
-                backgroundColor: "var(--sigvelo-neutral-fill-softer)",
-                borderRadius: "var(--sigvelo-border-radius-md)",
+                backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
+                borderRadius: "var(--sigvelo-radius-md)",
                 fontSize: "0.875rem",
                 whiteSpace: "nowrap",
               }}
@@ -103,8 +103,8 @@ export const BothScrollbars: Story = {
       style={{
         height: "200px",
         width: "300px",
-        border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+        borderRadius: "var(--sigvelo-radius-md)",
       }}
     >
       <ScrollArea.Viewport style={{ padding: "1rem" }}>
@@ -142,8 +142,8 @@ export const CodeBlock: Story = {
       style={{
         height: "200px",
         width: "400px",
-        backgroundColor: "var(--sigvelo-neutral-fill-softer)",
-        borderRadius: "var(--sigvelo-border-radius-md)",
+        backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
+        borderRadius: "var(--sigvelo-radius-md)",
       }}
     >
       <ScrollArea.Viewport>
@@ -201,8 +201,8 @@ export const ChatMessages: Story = {
         style={{
           height: "300px",
           width: "350px",
-          border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-          borderRadius: "var(--sigvelo-border-radius-md)",
+          border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+          borderRadius: "var(--sigvelo-radius-md)",
         }}
       >
         <ScrollArea.Viewport style={{ padding: "1rem" }}>
@@ -218,7 +218,7 @@ export const ChatMessages: Story = {
                 <div
                   style={{
                     fontSize: "0.75rem",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                     marginBottom: "0.25rem",
                   }}
                 >
@@ -229,10 +229,11 @@ export const ChatMessages: Story = {
                     padding: "0.5rem 0.75rem",
                     backgroundColor:
                       msg.sender === "You"
-                        ? "var(--sigvelo-primary-fill-mid)"
-                        : "var(--sigvelo-neutral-fill-softer)",
-                    color: msg.sender === "You" ? "var(--sigvelo-primary-text-on-mid)" : "inherit",
-                    borderRadius: "var(--sigvelo-border-radius-md)",
+                        ? "var(--sigvelo-color-primary-bg)"
+                        : "var(--sigvelo-color-neutral-bg-subtle)",
+                    color:
+                      msg.sender === "You" ? "var(--sigvelo-color-primary-text-on-bg)" : "inherit",
+                    borderRadius: "var(--sigvelo-radius-md)",
                     fontSize: "0.875rem",
                   }}
                 >

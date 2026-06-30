@@ -109,7 +109,7 @@ export const Controlled: Story = {
           </Switch>
           <Label>Airplane mode</Label>
         </div>
-        <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+        <p style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}>
           Status: {checked ? "On" : "Off"}
         </p>
       </div>
@@ -127,7 +127,7 @@ export const BillingToggle: Story = {
           style={{
             fontSize: "0.875rem",
             fontWeight: yearly ? 400 : 600,
-            color: yearly ? "var(--sigvelo-text-muted)" : "var(--sigvelo-text-body)",
+            color: yearly ? "var(--sigvelo-color-text-muted)" : "var(--sigvelo-color-text)",
           }}
         >
           Monthly
@@ -139,7 +139,7 @@ export const BillingToggle: Story = {
           style={{
             fontSize: "0.875rem",
             fontWeight: yearly ? 600 : 400,
-            color: yearly ? "var(--sigvelo-text-body)" : "var(--sigvelo-text-muted)",
+            color: yearly ? "var(--sigvelo-color-text)" : "var(--sigvelo-color-text-muted)",
           }}
         >
           Yearly
@@ -147,7 +147,7 @@ export const BillingToggle: Story = {
             style={{
               marginLeft: "0.5rem",
               fontSize: "0.75rem",
-              color: "var(--sigvelo-primary-fill-mid)",
+              color: "var(--sigvelo-color-primary-bg)",
               fontWeight: 500,
             }}
           >

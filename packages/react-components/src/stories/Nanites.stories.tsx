@@ -27,7 +27,7 @@ export const Scenes: Story = {
           }}
         >
           <NaniteScene variant={variant} mode="solo" title={`Nanite ${variant}`} />
-          <span style={{ color: "var(--sigvelo-text-body)", textTransform: "capitalize" }}>
+          <span style={{ color: "var(--sigvelo-color-text)", textTransform: "capitalize" }}>
             {variant}
           </span>
         </div>
@@ -43,7 +43,7 @@ export const GithubMotion: Story = {
         display: "inline-flex",
         alignItems: "center",
         gap: "0.75rem",
-        color: "var(--sigvelo-primary-text-colorful)",
+        color: "var(--sigvelo-color-primary-text)",
         fontWeight: "var(--sigvelo-font-weight-semibold)",
       }}
     >

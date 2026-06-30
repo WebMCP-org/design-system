@@ -3,16 +3,16 @@
   min-width: 0;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   background-color: transparent;
   border: none;
   outline: none;
 }
 
 .combobox__input::placeholder {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .combobox__trigger {
@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.5rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -28,7 +28,7 @@
 }
 
 .combobox__trigger:hover {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .combobox__trigger:focus-visible {
@@ -36,7 +36,7 @@
 }
 
 .combobox__trigger[data-popup-open] {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .combobox__clear {
@@ -44,10 +44,10 @@
   align-items: center;
   justify-content: center;
   padding: 0.25rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   background-color: transparent;
   border: none;
-  border-radius: var(--sigvelo-border-radius-sm);
+  border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   transition:
     color 150ms ease,
@@ -55,8 +55,8 @@
 }
 
 .combobox__clear:hover {
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-neutral-fill-softer);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .combobox__positioner {
@@ -67,13 +67,14 @@
   min-width: 200px;
   max-height: 300px;
   overflow: auto;
-  background-color: var(--sigvelo-paper-color);
-  color: var(--sigvelo-text-body);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width) var(--sigvelo-neutral-stroke-soft);
-  border-radius: var(--sigvelo-border-radius-md);
+  background-color: var(--sigvelo-color-surface);
+  color: var(--sigvelo-color-text);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-muted);
+  border-radius: var(--sigvelo-radius-md);
   box-shadow:
-    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%),
-    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%);
+    0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
+    0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
   animation: combobox-popup-enter 150ms ease;
 }
 
@@ -113,10 +114,10 @@
   gap: 0.5rem;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-body);
-  border-radius: var(--sigvelo-border-radius-sm);
+  color: var(--sigvelo-color-text);
+  border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   outline: none;
   transition:
@@ -126,8 +127,8 @@
 
 .combobox__item:hover,
 .combobox__item[data-highlighted] {
-  background-color: var(--sigvelo-neutral-fill-softer);
-  color: var(--sigvelo-neutral-text-on-soft);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
 .combobox__item[data-selected] {
@@ -144,14 +145,14 @@
   align-items: center;
   justify-content: center;
   width: 1rem;
-  color: var(--sigvelo-primary-fill-mid);
+  color: var(--sigvelo-color-primary-bg);
 }
 
 .combobox__empty {
   padding: 1rem;
   text-align: center;
   font-size: 0.875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .combobox__group {
@@ -159,7 +160,7 @@
 }
 
 .combobox__group + .combobox__group {
-  border-block-start: 1px solid var(--sigvelo-neutral-stroke-soft);
+  border-block-start: 1px solid var(--sigvelo-color-neutral-border-muted);
 }
 
 .combobox__group-label {
@@ -167,5 +168,5 @@
   padding-inline: 0.75rem;
   font-size: 0.75rem;
   font-weight: var(--sigvelo-font-weight-semibold);
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }

@@ -77,7 +77,7 @@ export const MinMax: Story = {
             justifyContent: "space-between",
             marginTop: "0.25rem",
             fontSize: "0.75rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           <span>$100</span>
@@ -116,7 +116,7 @@ export const Controlled: Story = {
                 fontSize: "0.875rem",
                 fontWeight: 500,
                 fontVariantNumeric: "tabular-nums",
-                color: "var(--sigvelo-text-body)",
+                color: "var(--sigvelo-color-text)",
               }}
             >
               {value}%
@@ -159,9 +159,9 @@ export const UsageCalculator: Story = {
         <div
           style={{
             padding: "1.5rem",
-            border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-            borderRadius: "var(--sigvelo-border-radius-md)",
-            backgroundColor: "var(--sigvelo-paper-color)",
+            border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+            borderRadius: "var(--sigvelo-radius-md)",
+            backgroundColor: "var(--sigvelo-color-surface)",
           }}
         >
           <h3
@@ -169,7 +169,7 @@ export const UsageCalculator: Story = {
               fontSize: "1.125rem",
               fontWeight: 600,
               marginBottom: "1.5rem",
-              color: "var(--sigvelo-text-body)",
+              color: "var(--sigvelo-color-text)",
             }}
           >
             Estimate your usage
@@ -191,7 +191,7 @@ export const UsageCalculator: Story = {
                   fontSize: "1rem",
                   fontWeight: 600,
                   fontVariantNumeric: "tabular-nums",
-                  color: "var(--sigvelo-primary-fill-mid)",
+                  color: "var(--sigvelo-color-primary-bg)",
                 }}
               >
                 {formatNumber(apiCalls)}
@@ -209,7 +209,7 @@ export const UsageCalculator: Story = {
                 justifyContent: "space-between",
                 marginTop: "0.5rem",
                 fontSize: "0.75rem",
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
               }}
             >
               <span>0</span>
@@ -221,7 +221,7 @@ export const UsageCalculator: Story = {
             style={{
               marginTop: "1.5rem",
               paddingTop: "1.5rem",
-              borderTop: "1px solid var(--sigvelo-neutral-stroke-soft)",
+              borderTop: "1px solid var(--sigvelo-color-neutral-border-muted)",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "baseline",
@@ -230,7 +230,7 @@ export const UsageCalculator: Story = {
             <span
               style={{
                 fontSize: "0.875rem",
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
               }}
             >
               Estimated monthly cost
@@ -240,7 +240,7 @@ export const UsageCalculator: Story = {
                 style={{
                   fontSize: "2rem",
                   fontWeight: 700,
-                  color: "var(--sigvelo-text-body)",
+                  color: "var(--sigvelo-color-text)",
                 }}
               >
                 ${price}
@@ -248,7 +248,7 @@ export const UsageCalculator: Story = {
               <span
                 style={{
                   fontSize: "0.875rem",
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                 }}
               >
                 /month
@@ -261,7 +261,7 @@ export const UsageCalculator: Story = {
               style={{
                 marginTop: "0.75rem",
                 fontSize: "0.875rem",
-                color: "var(--sigvelo-success-fill-mid)",
+                color: "var(--sigvelo-color-success-bg)",
                 fontWeight: 500,
               }}
             >
@@ -293,7 +293,7 @@ export const RangeSlider: Story = {
                 fontSize: "0.875rem",
                 fontWeight: 500,
                 fontVariantNumeric: "tabular-nums",
-                color: "var(--sigvelo-text-body)",
+                color: "var(--sigvelo-color-text)",
               }}
             >
               ${range[0]} - ${range[1]}

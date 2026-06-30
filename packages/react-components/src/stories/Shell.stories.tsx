@@ -75,7 +75,7 @@ export const Default: Story = {
               alignItems: "center",
               justifyContent: "center",
               height: "100%",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -105,13 +105,13 @@ export const WithPanel: Story = {
           </Shell.ActionBar>
           <Shell.Panel heading="Filters" open={filterOpen}>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-              <label style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-body)" }}>
+              <label style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text)" }}>
                 <input type="checkbox" defaultChecked /> Show markers
               </label>
-              <label style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-body)" }}>
+              <label style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text)" }}>
                 <input type="checkbox" /> Show boundaries
               </label>
-              <label style={{ fontSize: "0.875rem", color: "var(--sigvelo-text-body)" }}>
+              <label style={{ fontSize: "0.875rem", color: "var(--sigvelo-color-text)" }}>
                 <input type="checkbox" defaultChecked /> Show labels
               </label>
             </div>
@@ -123,7 +123,7 @@ export const WithPanel: Story = {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "100%",
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
                 fontSize: "0.875rem",
               }}
             >
@@ -168,12 +168,16 @@ export const MultiplePanels: Story = {
             />
           </Shell.ActionBar>
           <Shell.Panel heading="Filters" open={activePanel === "filter"}>
-            <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+            <p
+              style={{ margin: 0, fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}
+            >
               Filter controls go here.
             </p>
           </Shell.Panel>
           <Shell.Panel heading="Layers" open={activePanel === "layers"}>
-            <p style={{ margin: 0, fontSize: "0.875rem", color: "var(--sigvelo-text-muted)" }}>
+            <p
+              style={{ margin: 0, fontSize: "0.875rem", color: "var(--sigvelo-color-text-muted)" }}
+            >
               Layer toggles go here.
             </p>
           </Shell.Panel>
@@ -184,11 +188,11 @@ export const MultiplePanels: Story = {
               style={{
                 width: "100%",
                 padding: "0.5rem",
-                border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-                borderRadius: "var(--sigvelo-border-radius-md)",
+                border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+                borderRadius: "var(--sigvelo-radius-md)",
                 fontSize: "0.875rem",
-                background: "var(--sigvelo-background-color)",
-                color: "var(--sigvelo-text-body)",
+                background: "var(--sigvelo-color-canvas)",
+                color: "var(--sigvelo-color-text)",
                 boxSizing: "border-box",
               }}
             />
@@ -200,7 +204,7 @@ export const MultiplePanels: Story = {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "100%",
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
                 fontSize: "0.875rem",
               }}
             >
@@ -228,7 +232,7 @@ export const NoHeader: Story = {
               alignItems: "center",
               justifyContent: "center",
               height: "100%",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -251,7 +255,7 @@ export const ContentOnly: Story = {
               alignItems: "center",
               justifyContent: "center",
               height: "100%",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >

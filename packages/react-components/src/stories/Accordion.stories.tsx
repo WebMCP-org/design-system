@@ -106,7 +106,7 @@ export const FAQ: Story = {
           fontSize: "1.25rem",
           fontWeight: 600,
           marginBottom: "1.5rem",
-          color: "var(--sigvelo-text-body)",
+          color: "var(--sigvelo-color-text)",
         }}
       >
         Frequently Asked Questions

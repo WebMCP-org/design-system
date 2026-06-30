@@ -139,9 +139,9 @@ export const ControlledPanels: Story = {
         <StepperPanel
           style={{
             padding: "1rem",
-            border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-            borderRadius: "var(--sigvelo-border-radius-md)",
-            backgroundColor: "var(--sigvelo-paper-color)",
+            border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+            borderRadius: "var(--sigvelo-radius-md)",
+            backgroundColor: "var(--sigvelo-color-surface)",
           }}
         >
           {setupSteps.slice(0, 4).map((item) => (
@@ -152,7 +152,7 @@ export const ControlledPanels: Story = {
                     style={{
                       margin: 0,
                       fontSize: "1rem",
-                      color: "var(--sigvelo-text-body)",
+                      color: "var(--sigvelo-color-text)",
                     }}
                   >
                     {item.title}
@@ -160,7 +160,7 @@ export const ControlledPanels: Story = {
                   <p
                     style={{
                       margin: "0.25rem 0 0",
-                      color: "var(--sigvelo-text-muted)",
+                      color: "var(--sigvelo-color-text-muted)",
                       fontSize: "0.875rem",
                     }}
                   >

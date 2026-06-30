@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
-  background-color: var(--sigvelo-paper-color);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-surface);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  border-radius: var(--sigvelo-border-radius-lg, var(--sigvelo-border-radius-md));
-  box-shadow: var(--sigvelo-shadow-softer);
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-lg, var(--sigvelo-radius-md));
+  box-shadow: var(--sigvelo-shadow-xs);
   overflow: hidden;
 }
 
@@ -20,8 +20,8 @@
   padding-block: 0.75rem;
   padding-inline: 1rem;
   border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-neutral-stroke-softer);
-  background-color: var(--sigvelo-paper-color);
+    var(--sigvelo-color-neutral-border-subtle);
+  background-color: var(--sigvelo-color-surface);
 }
 
 .artifact__title {
@@ -29,7 +29,7 @@
   font-family: inherit;
   font-size: 0.9375rem;
   font-weight: var(--sigvelo-font-weight-bold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   line-height: 1.3;
 }
 
@@ -37,7 +37,7 @@
   margin: 0;
   margin-block-start: 0.125rem;
   font-size: 0.8125rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   line-height: 1.4;
 }
 

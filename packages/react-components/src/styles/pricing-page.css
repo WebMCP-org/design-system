@@ -13,18 +13,18 @@
 }
 
 .pricing-page__title {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.2;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   margin: 0 0 0.75rem;
 }
 
 .pricing-page__subtitle {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1.125rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   margin: 0 0 2rem;
 }
 
@@ -48,15 +48,15 @@
 }
 
 .pricing-page__period-label {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   transition: color 150ms ease;
 }
 
 .pricing-page__period-label--active {
   font-weight: 600;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 /* Plans Grid */
@@ -76,10 +76,10 @@
 }
 
 .pricing-page__plan--popular {
-  border-color: var(--sigvelo-primary-fill-mid);
+  border-color: var(--sigvelo-color-primary-bg);
   box-shadow:
-    0 4px 6px -1px color-mix(in oklab, var(--sigvelo-primary-fill-mid), transparent 90%),
-    0 2px 4px -2px color-mix(in oklab, var(--sigvelo-primary-fill-mid), transparent 90%);
+    0 4px 6px -1px color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 90%),
+    0 2px 4px -2px color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 90%);
 }
 
 .pricing-page__popular-badge {
@@ -94,17 +94,17 @@
 }
 
 .pricing-page__plan-name {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   margin: 0 0 0.25rem;
 }
 
 .pricing-page__plan-description {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   margin: 0;
 }
 
@@ -113,25 +113,25 @@
 }
 
 .pricing-page__price-amount {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 2.5rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .pricing-page__price-period {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .pricing-page__price-savings {
   display: block;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--sigvelo-success-fill-mid);
+  color: var(--sigvelo-color-success-bg);
   margin-top: 0.25rem;
 }
 
@@ -155,13 +155,13 @@
   align-items: flex-start;
   gap: 0.75rem;
   padding: 0.5rem 0;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .pricing-page__feature--disabled {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   text-decoration: line-through;
 }
 
@@ -172,11 +172,11 @@
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .pricing-page__feature-icon--included {
-  color: var(--sigvelo-success-fill-mid);
+  color: var(--sigvelo-color-success-bg);
 }
 
 .pricing-page__feature-name {
@@ -185,7 +185,7 @@
 
 .pricing-page__feature-limit {
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   margin-left: 0.25rem;
 }
 
@@ -196,13 +196,13 @@
   padding: 0;
   background: none;
   border: none;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   cursor: pointer;
   transition: color 150ms ease;
 }
 
 .pricing-page__feature-info:hover {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 /* Calculator */
@@ -214,17 +214,17 @@
 }
 
 .pricing-page__calculator-title {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   margin: 0 0 0.5rem;
 }
 
 .pricing-page__calculator-description {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   margin: 0 0 1.5rem;
 }
 
@@ -240,20 +240,20 @@
 }
 
 .pricing-page__calculator-value {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1.125rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: var(--sigvelo-primary-fill-mid);
+  color: var(--sigvelo-color-primary-bg);
 }
 
 .pricing-page__calculator-range {
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .pricing-page__calculator-result {
@@ -264,9 +264,9 @@
 }
 
 .pricing-page__calculator-result-label {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .pricing-page__calculator-result-price {
@@ -274,17 +274,17 @@
 }
 
 .pricing-page__calculator-amount {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 2rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .pricing-page__calculator-period {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .pricing-page__tiers {
@@ -302,18 +302,18 @@
 .pricing-page__tier-info {
   display: flex;
   justify-content: space-between;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.8125rem;
 }
 
 .pricing-page__tier-label {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .pricing-page__tier-price {
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 /* FAQ */
@@ -324,16 +324,16 @@
 }
 
 .pricing-page__faq-title {
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   text-align: center;
   margin: 0 0 2rem;
 }
 
 .pricing-page__faq-accordion {
-  border-top: 1px solid var(--sigvelo-neutral-stroke-soft);
+  border-top: 1px solid var(--sigvelo-color-neutral-border-muted);
 }
 
 /* Confirmation Dialog */
@@ -341,21 +341,21 @@
 .pricing-page__confirm-summary {
   padding: 1rem;
   margin-bottom: 1rem;
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-md);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-md);
 }
 
 .pricing-page__confirm-row {
   display: flex;
   justify-content: space-between;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   padding: 0.25rem 0;
 }
 
 .pricing-page__confirm-row--savings {
-  color: var(--sigvelo-success-fill-mid);
+  color: var(--sigvelo-color-success-bg);
   font-weight: 500;
 }
 

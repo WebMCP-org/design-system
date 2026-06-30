@@ -1,0 +1,4 @@
+interface:
+  display_name: "Use MCP-B Design System"
+  short_description: "Use shared MCP-B UI in internal apps."
+  default_prompt: "Use $use-mcp-b-design-system when adding UI to an internal app so shared components come from the MCP-B design system."

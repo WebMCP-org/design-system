@@ -65,9 +65,9 @@ export const Controlled: Story = {
           style={{
             flex: 1,
             padding: "0.5rem",
-            fontFamily: "var(--sigvelo-font-family-code)",
+            fontFamily: "var(--sigvelo-font-mono)",
             fontSize: "0.75rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
           }}
         >
           <div>Expanded: {Array.from(expanded).join(", ") || "none"}</div>

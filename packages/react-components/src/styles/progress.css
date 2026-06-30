@@ -7,29 +7,29 @@
   width: 100%;
   height: 0.5rem;
   overflow: hidden;
-  background-color: var(--sigvelo-neutral-fill-softer);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border-radius: var(--sigvelo-radius-full);
 }
 
 .progress__indicator {
   height: 100%;
-  background-color: var(--sigvelo-primary-fill-mid);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-primary-bg);
+  border-radius: var(--sigvelo-radius-full);
   transition: width 300ms ease;
 }
 
 /* Variants */
 
 .progress--success .progress__indicator {
-  background-color: var(--sigvelo-success-fill-mid);
+  background-color: var(--sigvelo-color-success-bg);
 }
 
 .progress--warning .progress__indicator {
-  background-color: var(--sigvelo-warning-fill-mid);
+  background-color: var(--sigvelo-color-warning-bg);
 }
 
 .progress--destructive .progress__indicator {
-  background-color: var(--sigvelo-destructive-fill-mid);
+  background-color: var(--sigvelo-color-danger-bg);
 }
 
 /* Indeterminate animation */

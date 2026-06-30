@@ -1,6 +1,6 @@
 .context {
   display: inline-block;
-  font-family: var(--sigvelo-font-family);
+  font-family: var(--sigvelo-font-sans);
 }
 
 .context__trigger {
@@ -16,14 +16,14 @@
 
 .context__trigger-label {
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .context__content {
   width: 20rem;
   padding: 0;
-  font-family: var(--sigvelo-font-family);
-  color: var(--sigvelo-text-body);
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
 }
 
 .context__header {
@@ -52,7 +52,7 @@
   justify-content: center;
   font-size: 0.625rem;
   font-weight: var(--sigvelo-font-weight-bold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -67,19 +67,19 @@
 .context__header-title {
   font-size: 0.8125rem;
   font-weight: var(--sigvelo-font-weight-bold);
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
 }
 
 .context__header-meta {
   font-size: 0.75rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
   font-variant-numeric: tabular-nums;
 }
 
 .context__header-model {
-  font-family: var(--sigvelo-font-family-code);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.6875rem;
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .context__body {
@@ -105,17 +105,17 @@
 }
 
 .context__row-label {
-  color: var(--sigvelo-text-muted);
+  color: var(--sigvelo-color-text-muted);
 }
 
 .context__row-value {
-  color: var(--sigvelo-text-body);
+  color: var(--sigvelo-color-text);
   font-variant-numeric: tabular-nums;
 }
 
 .context__row-cost {
-  color: var(--sigvelo-text-muted);
-  font-family: var(--sigvelo-font-family-code);
+  color: var(--sigvelo-color-text-muted);
+  font-family: var(--sigvelo-font-mono);
   font-size: 0.6875rem;
   font-variant-numeric: tabular-nums;
 }
@@ -136,7 +136,7 @@
 }
 
 .context__footer-cost {
-  font-family: var(--sigvelo-font-family-code);
-  color: var(--sigvelo-primary-text-colorful);
+  font-family: var(--sigvelo-font-mono);
+  color: var(--sigvelo-color-primary-text);
   font-variant-numeric: tabular-nums;
 }

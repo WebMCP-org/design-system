@@ -5,7 +5,7 @@ import Anser from "anser";
  *
  * Colors are emitted as inline CSS custom-property references when they match
  * a standard 16-color code, and as raw `rgb(...)` strings for 256/truecolor.
- * This lets terminal output respect the sigvelo palette while still supporting
+ * This lets terminal output respect the Sigvelo palette while still supporting
  * arbitrary ANSI sequences.
  */
 export interface AnsiSegment {
@@ -21,26 +21,26 @@ export interface AnsiSegment {
 
 /**
  * Maps Anser's standard 16-color RGB strings to CSS variables bound to the
- * sigvelo palette. Values come from anser's internal PALETTE. Any RGB triple
+ * Sigvelo palette. Values come from anser's internal PALETTE. Any RGB triple
  * not in this map falls through to a raw `rgb(...)` literal.
  */
 const STANDARD_COLOR_MAP: Record<string, string> = {
-  "0, 0, 0": "var(--sigvelo-neutral-300)",
-  "187, 0, 0": "var(--sigvelo-destructive-300)",
-  "0, 187, 0": "var(--sigvelo-success-300)",
-  "187, 187, 0": "var(--sigvelo-warning-300)",
-  "0, 0, 187": "var(--sigvelo-primary-300)",
-  "187, 0, 187": "var(--sigvelo-primary-200)",
-  "0, 187, 187": "var(--sigvelo-primary-200)",
-  "255, 255, 255": "var(--sigvelo-neutral-100)",
-  "85, 85, 85": "var(--sigvelo-neutral-400)",
-  "255, 85, 85": "var(--sigvelo-destructive-300)",
-  "85, 255, 85": "var(--sigvelo-success-300)",
-  "255, 255, 85": "var(--sigvelo-warning-300)",
-  "85, 85, 255": "var(--sigvelo-primary-300)",
-  "255, 85, 255": "var(--sigvelo-primary-200)",
-  "85, 255, 255": "var(--sigvelo-primary-200)",
-  "187, 187, 187": "var(--sigvelo-neutral-300)",
+  "0, 0, 0": "var(--sigvelo-color-neutral-300)",
+  "187, 0, 0": "var(--sigvelo-color-danger-300)",
+  "0, 187, 0": "var(--sigvelo-color-success-300)",
+  "187, 187, 0": "var(--sigvelo-color-warning-300)",
+  "0, 0, 187": "var(--sigvelo-color-primary-300)",
+  "187, 0, 187": "var(--sigvelo-color-primary-200)",
+  "0, 187, 187": "var(--sigvelo-color-primary-200)",
+  "255, 255, 255": "var(--sigvelo-color-neutral-100)",
+  "85, 85, 85": "var(--sigvelo-color-neutral-400)",
+  "255, 85, 85": "var(--sigvelo-color-danger-300)",
+  "85, 255, 85": "var(--sigvelo-color-success-300)",
+  "255, 255, 85": "var(--sigvelo-color-warning-300)",
+  "85, 85, 255": "var(--sigvelo-color-primary-300)",
+  "255, 85, 255": "var(--sigvelo-color-primary-200)",
+  "85, 255, 255": "var(--sigvelo-color-primary-200)",
+  "187, 187, 187": "var(--sigvelo-color-neutral-300)",
 };
 
 function toCss(raw: string | null): string | undefined {

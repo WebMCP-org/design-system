@@ -94,9 +94,9 @@ export const Default: Story = {
                 width: "28px",
                 height: "28px",
                 borderRadius: "50%",
-                backgroundColor: "var(--sigvelo-primary-fill-mid)",
-                color: "var(--sigvelo-primary-text-on-mid)",
-                border: "2px solid var(--sigvelo-background-color)",
+                backgroundColor: "var(--sigvelo-color-primary-bg)",
+                color: "var(--sigvelo-color-primary-text-on-bg)",
+                border: "2px solid var(--sigvelo-color-canvas)",
                 cursor: "pointer",
                 display: "flex",
                 alignItems: "center",
@@ -120,7 +120,7 @@ export const Default: Story = {
                   margin: 0,
                   fontSize: "1.5rem",
                   fontWeight: 600,
-                  color: "var(--sigvelo-text-body)",
+                  color: "var(--sigvelo-color-text)",
                 }}
               >
                 Sarah Chen
@@ -130,7 +130,7 @@ export const Default: Story = {
             <p
               style={{
                 margin: "0 0 0.75rem",
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
                 fontSize: "0.875rem",
               }}
             >
@@ -139,7 +139,7 @@ export const Default: Story = {
             <p
               style={{
                 margin: 0,
-                color: "var(--sigvelo-text-body)",
+                color: "var(--sigvelo-color-text)",
                 fontSize: "0.875rem",
                 lineHeight: 1.5,
               }}
@@ -158,8 +158,8 @@ export const Default: Story = {
             gap: "1rem",
             marginTop: "1.5rem",
             padding: "1rem",
-            backgroundColor: "var(--sigvelo-neutral-fill-softer)",
-            borderRadius: "var(--sigvelo-border-radius-md)",
+            backgroundColor: "var(--sigvelo-color-neutral-bg-subtle)",
+            borderRadius: "var(--sigvelo-radius-md)",
           }}
         >
           <div
@@ -167,7 +167,7 @@ export const Default: Story = {
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -179,7 +179,7 @@ export const Default: Story = {
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -191,7 +191,7 @@ export const Default: Story = {
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -203,14 +203,14 @@ export const Default: Story = {
               display: "flex",
               alignItems: "center",
               gap: "0.5rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
             <LinkIcon />
             <a
               href="#"
-              style={{ color: "var(--sigvelo-primary-text-colorful)", textDecoration: "none" }}
+              style={{ color: "var(--sigvelo-color-primary-text)", textDecoration: "none" }}
             >
               sarahchen.design
             </a>
@@ -242,7 +242,7 @@ export const WithTabs: Story = {
             style={{
               height: "120px",
               background:
-                "linear-gradient(135deg, var(--sigvelo-primary-fill-mid) 0%, color-mix(in oklab, var(--sigvelo-primary-fill-mid), transparent 30%) 100%)",
+                "linear-gradient(135deg, var(--sigvelo-color-primary-bg) 0%, color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 30%) 100%)",
             }}
           />
 
@@ -260,7 +260,7 @@ export const WithTabs: Story = {
                   width: "96px",
                   height: "96px",
                   fontSize: "2rem",
-                  border: "4px solid var(--sigvelo-background-color)",
+                  border: "4px solid var(--sigvelo-color-canvas)",
                 }}
               >
                 <Avatar.Image src="https://i.pravatar.cc/150?u=alex" alt="Alex Johnson" />
@@ -276,7 +276,7 @@ export const WithTabs: Story = {
                     margin: 0,
                     fontSize: "1.25rem",
                     fontWeight: 600,
-                    color: "var(--sigvelo-text-body)",
+                    color: "var(--sigvelo-color-text)",
                   }}
                 >
                   Alex Johnson
@@ -286,7 +286,7 @@ export const WithTabs: Story = {
               <p
                 style={{
                   margin: "0.25rem 0 0",
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                   fontSize: "0.875rem",
                 }}
               >
@@ -319,7 +319,7 @@ export const WithTabs: Story = {
                       margin: "0 0 0.75rem",
                       fontSize: "0.875rem",
                       fontWeight: 600,
-                      color: "var(--sigvelo-text-body)",
+                      color: "var(--sigvelo-color-text)",
                     }}
                   >
                     About
@@ -327,7 +327,7 @@ export const WithTabs: Story = {
                   <p
                     style={{
                       margin: 0,
-                      color: "var(--sigvelo-text-muted)",
+                      color: "var(--sigvelo-color-text-muted)",
                       fontSize: "0.875rem",
                       lineHeight: 1.6,
                     }}
@@ -344,7 +344,7 @@ export const WithTabs: Story = {
                       margin: "0 0 0.75rem",
                       fontSize: "0.875rem",
                       fontWeight: 600,
-                      color: "var(--sigvelo-text-body)",
+                      color: "var(--sigvelo-color-text)",
                     }}
                   >
                     Skills
@@ -366,7 +366,7 @@ export const WithTabs: Story = {
                       margin: "0 0 0.75rem",
                       fontSize: "0.875rem",
                       fontWeight: 600,
-                      color: "var(--sigvelo-text-body)",
+                      color: "var(--sigvelo-color-text)",
                     }}
                   >
                     Contact
@@ -377,7 +377,7 @@ export const WithTabs: Story = {
                         display: "flex",
                         alignItems: "center",
                         gap: "0.5rem",
-                        color: "var(--sigvelo-text-muted)",
+                        color: "var(--sigvelo-color-text-muted)",
                         fontSize: "0.875rem",
                       }}
                     >
@@ -389,7 +389,7 @@ export const WithTabs: Story = {
                         display: "flex",
                         alignItems: "center",
                         gap: "0.5rem",
-                        color: "var(--sigvelo-text-muted)",
+                        color: "var(--sigvelo-color-text-muted)",
                         fontSize: "0.875rem",
                       }}
                     >
@@ -404,7 +404,7 @@ export const WithTabs: Story = {
             <TabPanel value="activity" style={{ padding: "1.5rem 2rem" }}>
               <p
                 style={{
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                   fontSize: "0.875rem",
                 }}
               >
@@ -415,7 +415,7 @@ export const WithTabs: Story = {
             <TabPanel value="settings" style={{ padding: "1.5rem 2rem" }}>
               <p
                 style={{
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                   fontSize: "0.875rem",
                 }}
               >
@@ -455,7 +455,7 @@ export const EditableProfile: Story = {
               margin: "0 0 1.5rem",
               fontSize: "1.25rem",
               fontWeight: 600,
-              color: "var(--sigvelo-text-body)",
+              color: "var(--sigvelo-color-text)",
             }}
           >
             Edit Profile
@@ -482,7 +482,7 @@ export const EditableProfile: Story = {
                 style={{
                   margin: 0,
                   fontSize: "0.75rem",
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                 }}
               >
                 JPG, PNG or GIF. Max size 2MB.
@@ -546,7 +546,7 @@ export const EditableProfile: Story = {
                     left: "0.75rem",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                     fontSize: "0.875rem",
                   }}
                 >
@@ -575,10 +575,10 @@ export const EditableProfile: Story = {
                   padding: "0.5rem 0.75rem",
                   fontSize: "0.875rem",
                   fontFamily: "inherit",
-                  border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-                  borderRadius: "var(--sigvelo-border-radius-md)",
-                  backgroundColor: "var(--sigvelo-background-color)",
-                  color: "var(--sigvelo-text-body)",
+                  border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+                  borderRadius: "var(--sigvelo-radius-md)",
+                  backgroundColor: "var(--sigvelo-color-canvas)",
+                  color: "var(--sigvelo-color-text)",
                   resize: "vertical",
                 }}
               />
@@ -586,7 +586,7 @@ export const EditableProfile: Story = {
                 style={{
                   margin: "0.25rem 0 0",
                   fontSize: "0.75rem",
-                  color: "var(--sigvelo-text-muted)",
+                  color: "var(--sigvelo-color-text-muted)",
                 }}
               >
                 Brief description for your profile. Max 160 characters.
@@ -693,7 +693,7 @@ function PreferenceRow({
           style={{
             margin: 0,
             fontWeight: 500,
-            color: "var(--sigvelo-text-body)",
+            color: "var(--sigvelo-color-text)",
             fontSize: "0.875rem",
           }}
         >
@@ -702,7 +702,7 @@ function PreferenceRow({
         <p
           style={{
             margin: "0.25rem 0 0",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
             fontSize: "0.75rem",
           }}
         >
@@ -743,7 +743,7 @@ export const PreferencesPage: Story = {
               margin: "0 0 0.5rem",
               fontSize: "1rem",
               fontWeight: 600,
-              color: "var(--sigvelo-text-body)",
+              color: "var(--sigvelo-color-text)",
             }}
           >
             Notifications
@@ -751,7 +751,7 @@ export const PreferencesPage: Story = {
           <p
             style={{
               margin: "0 0 1rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -794,7 +794,7 @@ export const PreferencesPage: Story = {
               margin: "0 0 0.5rem",
               fontSize: "1rem",
               fontWeight: 600,
-              color: "var(--sigvelo-text-body)",
+              color: "var(--sigvelo-color-text)",
             }}
           >
             Privacy
@@ -802,7 +802,7 @@ export const PreferencesPage: Story = {
           <p
             style={{
               margin: "0 0 1rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -838,7 +838,7 @@ export const PreferencesPage: Story = {
               margin: "0 0 0.5rem",
               fontSize: "1rem",
               fontWeight: 600,
-              color: "var(--sigvelo-text-body)",
+              color: "var(--sigvelo-color-text)",
             }}
           >
             Security
@@ -846,7 +846,7 @@ export const PreferencesPage: Story = {
           <p
             style={{
               margin: "0 0 1rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -873,7 +873,7 @@ export const PreferencesPage: Story = {
                   style={{
                     margin: 0,
                     fontWeight: 500,
-                    color: "var(--sigvelo-text-body)",
+                    color: "var(--sigvelo-color-text)",
                     fontSize: "0.875rem",
                   }}
                 >
@@ -882,7 +882,7 @@ export const PreferencesPage: Story = {
                 <p
                   style={{
                     margin: "0.25rem 0 0",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                     fontSize: "0.75rem",
                   }}
                 >
@@ -908,7 +908,7 @@ export const PreferencesPage: Story = {
                   style={{
                     margin: 0,
                     fontWeight: 500,
-                    color: "var(--sigvelo-destructive-fill-mid)",
+                    color: "var(--sigvelo-color-danger-bg)",
                     fontSize: "0.875rem",
                   }}
                 >
@@ -917,7 +917,7 @@ export const PreferencesPage: Story = {
                 <p
                   style={{
                     margin: "0.25rem 0 0",
-                    color: "var(--sigvelo-text-muted)",
+                    color: "var(--sigvelo-color-text-muted)",
                     fontSize: "0.75rem",
                   }}
                 >
@@ -957,7 +957,7 @@ export const CompactProfile: Story = {
             margin: "0 0 0.25rem",
             fontSize: "1.125rem",
             fontWeight: 600,
-            color: "var(--sigvelo-text-body)",
+            color: "var(--sigvelo-color-text)",
           }}
         >
           Michael Park
@@ -965,7 +965,7 @@ export const CompactProfile: Story = {
         <p
           style={{
             margin: "0 0 0.5rem",
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
             fontSize: "0.875rem",
           }}
         >
@@ -986,7 +986,7 @@ export const CompactProfile: Story = {
         <p
           style={{
             margin: "0 0 1.25rem",
-            color: "var(--sigvelo-text-body)",
+            color: "var(--sigvelo-color-text)",
             fontSize: "0.875rem",
             lineHeight: 1.5,
           }}
@@ -1000,8 +1000,8 @@ export const CompactProfile: Story = {
             justifyContent: "center",
             gap: "2rem",
             padding: "1rem 0",
-            borderTop: "1px solid var(--sigvelo-neutral-stroke-soft)",
-            borderBottom: "1px solid var(--sigvelo-neutral-stroke-soft)",
+            borderTop: "1px solid var(--sigvelo-color-neutral-border-muted)",
+            borderBottom: "1px solid var(--sigvelo-color-neutral-border-muted)",
             marginBottom: "1.25rem",
           }}
         >
@@ -1011,7 +1011,7 @@ export const CompactProfile: Story = {
                 margin: 0,
                 fontWeight: 600,
                 fontSize: "1.125rem",
-                color: "var(--sigvelo-text-body)",
+                color: "var(--sigvelo-color-text)",
               }}
             >
               128
@@ -1019,7 +1019,7 @@ export const CompactProfile: Story = {
             <p
               style={{
                 margin: 0,
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
                 fontSize: "0.75rem",
               }}
             >
@@ -1032,7 +1032,7 @@ export const CompactProfile: Story = {
                 margin: 0,
                 fontWeight: 600,
                 fontSize: "1.125rem",
-                color: "var(--sigvelo-text-body)",
+                color: "var(--sigvelo-color-text)",
               }}
             >
               2.4K
@@ -1040,7 +1040,7 @@ export const CompactProfile: Story = {
             <p
               style={{
                 margin: 0,
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
                 fontSize: "0.75rem",
               }}
             >
@@ -1053,7 +1053,7 @@ export const CompactProfile: Story = {
                 margin: 0,
                 fontWeight: 600,
                 fontSize: "1.125rem",
-                color: "var(--sigvelo-text-body)",
+                color: "var(--sigvelo-color-text)",
               }}
             >
               847
@@ -1061,7 +1061,7 @@ export const CompactProfile: Story = {
             <p
               style={{
                 margin: 0,
-                color: "var(--sigvelo-text-muted)",
+                color: "var(--sigvelo-color-text-muted)",
                 fontSize: "0.75rem",
               }}
             >
@@ -1091,7 +1091,7 @@ export const AccountOverview: Story = {
             margin: "0 0 0.5rem",
             fontSize: "1.5rem",
             fontWeight: 600,
-            color: "var(--sigvelo-text-body)",
+            color: "var(--sigvelo-color-text)",
           }}
         >
           Account
@@ -1099,7 +1099,7 @@ export const AccountOverview: Story = {
         <p
           style={{
             margin: 0,
-            color: "var(--sigvelo-text-muted)",
+            color: "var(--sigvelo-color-text-muted)",
             fontSize: "0.875rem",
           }}
         >
@@ -1141,7 +1141,7 @@ export const AccountOverview: Story = {
               margin: "0 0 0.5rem",
               fontSize: "1.125rem",
               fontWeight: 600,
-              color: "var(--sigvelo-text-body)",
+              color: "var(--sigvelo-color-text)",
             }}
           >
             Profile
@@ -1149,7 +1149,7 @@ export const AccountOverview: Story = {
           <p
             style={{
               margin: "0 0 1.5rem",
-              color: "var(--sigvelo-text-muted)",
+              color: "var(--sigvelo-color-text-muted)",
               fontSize: "0.875rem",
             }}
           >
@@ -1226,10 +1226,10 @@ export const AccountOverview: Story = {
                     padding: "0.5rem 0.75rem",
                     fontSize: "0.875rem",
                     fontFamily: "inherit",
-                    border: "1px solid var(--sigvelo-neutral-stroke-soft)",
-                    borderRadius: "var(--sigvelo-border-radius-md)",
-                    backgroundColor: "var(--sigvelo-background-color)",
-                    color: "var(--sigvelo-text-body)",
+                    border: "1px solid var(--sigvelo-color-neutral-border-muted)",
+                    borderRadius: "var(--sigvelo-radius-md)",
+                    backgroundColor: "var(--sigvelo-color-canvas)",
+                    color: "var(--sigvelo-color-text)",
                     resize: "vertical",
                   }}
                 />

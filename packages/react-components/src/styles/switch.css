@@ -5,30 +5,30 @@
   width: 2.75rem;
   height: 1.5rem;
   padding: 0.125rem;
-  background-color: var(--sigvelo-neutral-fill-softer);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
   border: none;
-  border-radius: var(--sigvelo-border-radius-pill);
+  border-radius: var(--sigvelo-radius-full);
   cursor: pointer;
   transition: background-color 150ms ease;
 }
 
 .switch:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, var(--sigvelo-neutral-fill-softer), transparent 20%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-neutral-bg-subtle), transparent 20%);
 }
 
 .switch:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--sigvelo-background-color),
-    0 0 0 4px var(--sigvelo-focus-color);
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .switch[data-checked] {
-  background-color: var(--sigvelo-primary-fill-mid);
+  background-color: var(--sigvelo-color-primary-bg);
 }
 
 .switch[data-checked]:hover:not([data-disabled]) {
-  background-color: color-mix(in oklab, var(--sigvelo-primary-fill-mid), transparent 10%);
+  background-color: color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 10%);
 }
 
 .switch[data-disabled] {
@@ -55,11 +55,11 @@
   display: block;
   width: 1.25rem;
   height: 1.25rem;
-  background-color: var(--sigvelo-background-color);
-  border-radius: var(--sigvelo-border-radius-pill);
+  background-color: var(--sigvelo-color-canvas);
+  border-radius: var(--sigvelo-radius-full);
   box-shadow:
-    0 1px 3px 0 color-mix(in oklab, var(--sigvelo-text-body), transparent 90%),
-    0 1px 2px -1px color-mix(in oklab, var(--sigvelo-text-body), transparent 90%);
+    0 1px 3px 0 color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
+    0 1px 2px -1px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
   transition: transform 150ms ease;
 }
 
