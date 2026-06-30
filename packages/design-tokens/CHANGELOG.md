@@ -1,5 +1,11 @@
 # @mcp-b/design-tokens
 
+## 0.1.1
+
+### Patch Changes
+
+- Republish the initial design-token package after npm reserved 0.1.0 during trusted-publishing bootstrap.
+
 ## 0.1.0
 
 ### Minor Changes

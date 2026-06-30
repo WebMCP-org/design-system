@@ -1,5 +1,13 @@
 # @mcp-b/react-components
 
+## 0.1.1
+
+### Patch Changes
+
+- Republish the initial React component package after npm reserved 0.1.0 during trusted-publishing bootstrap.
+- Updated dependencies
+  - @mcp-b/design-tokens@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
