@@ -6,7 +6,7 @@
     "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "noUncheckedSideEffectImports": false,
-    "types": ["vite-plus/client"]
+    "types": ["node", "vite-plus/client"]
   },
   "exclude": ["opensrc"]
 }

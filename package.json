@@ -26,6 +26,7 @@
     "@changesets/cli": "catalog:",
     "@cloudflare/vite-plugin": "catalog:",
     "@cloudflare/workers-types": "catalog:",
+    "@types/node": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "playwright": "catalog:",
     "publint": "catalog:",

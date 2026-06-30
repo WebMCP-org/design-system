@@ -14,7 +14,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": false,
-    "types": ["vite-plus/client"],
+    "types": ["node", "vite-plus/client"],
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": false
