@@ -40,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: vp install --frozen-lockfile
 
+      - name: Install Playwright browsers
+        run: vp exec playwright install --with-deps chromium
+
       - name: Use npm with trusted publishing support
         run: npm install --global npm@11.14.1
 
