@@ -1,0 +1,18 @@
+* @MiguelsPizza @omarkawach
+
+.github/** @MiguelsPizza @omarkawach
+.changeset/** @MiguelsPizza @omarkawach
+CODE_OF_CONDUCT.md @MiguelsPizza @omarkawach
+CONTRIBUTING.md @MiguelsPizza @omarkawach
+LICENSE @MiguelsPizza @omarkawach
+SECURITY.md @MiguelsPizza @omarkawach
+SUPPORT.md @MiguelsPizza @omarkawach
+package.json @MiguelsPizza @omarkawach
+packages/*/package.json @MiguelsPizza @omarkawach
+pnpm-lock.yaml @MiguelsPizza @omarkawach
+pnpm-workspace.yaml @MiguelsPizza @omarkawach
+scripts/** @MiguelsPizza @omarkawach
+storybook.worker.vite.config.ts @MiguelsPizza @omarkawach
+storybook-worker/** @MiguelsPizza @omarkawach
+vite.config.ts @MiguelsPizza @omarkawach
+wrangler.jsonc @MiguelsPizza @omarkawach

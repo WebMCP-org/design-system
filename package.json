@@ -1,0 +1,46 @@
+{
+  "name": "@mcp-b/design-system-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ready": "vp check && vp test && vp run audit:tokens && vp run audit:modern-web-guidance && vp run test:storybook && vp run -r build && vp run validate:packages && vp run check:storybook-deploy",
+    "storybook": "vp run @mcp-b/react-components#storybook",
+    "build-storybook": "vp run @mcp-b/react-components#build-storybook",
+    "build:storybook-worker": "vp run build-storybook && vp build --config storybook.worker.vite.config.ts && cp -R packages/react-components/storybook-static/. dist/mcp_b_design_system_storybook",
+    "deploy:storybook": "vp run build:storybook-worker && vp exec wrangler deploy --config dist/mcp_b_design_system_storybook/wrangler.json",
+    "check:storybook-deploy": "vp run build:storybook-worker && vp exec wrangler deploy --dry-run --config dist/mcp_b_design_system_storybook/wrangler.json",
+    "test:storybook": "vp run @mcp-b/react-components#test",
+    "audit:tokens": "node scripts/audit-design-tokens.mjs",
+    "audit:modern-web-guidance": "node scripts/audit-modern-web-guidance.mjs",
+    "validate:packages": "node scripts/verify-packed-packages.mjs && vp exec publint packages/design-tokens && vp exec publint packages/react-components",
+    "guidance:list": "npx -y modern-web-guidance@latest list",
+    "guidance:search": "npx -y modern-web-guidance@latest search",
+    "guidance:retrieve": "npx -y modern-web-guidance@latest retrieve",
+    "changeset": "changeset",
+    "changeset:version": "changeset version && vp install --no-frozen-lockfile && vp fmt",
+    "changeset:publish": "vp run validate:packages && changeset publish",
+    "prepare": "vp config"
+  },
+  "devDependencies": {
+    "@changesets/cli": "catalog:",
+    "@cloudflare/vite-plugin": "catalog:",
+    "@cloudflare/workers-types": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "playwright": "catalog:",
+    "publint": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:",
+    "wrangler": "catalog:"
+  },
+  "engines": {
+    "node": ">=22.14.0"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

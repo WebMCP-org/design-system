@@ -1,0 +1,7 @@
+if [ -n "${VP_HOME-}" ] && [ -x "$VP_HOME/bin/vp" ]; then
+  "$VP_HOME/bin/vp" staged
+elif [ -n "${HOME-}" ] && [ -x "$HOME/.vite-plus/bin/vp" ]; then
+  "$HOME/.vite-plus/bin/vp" staged
+else
+  vp staged
+fi

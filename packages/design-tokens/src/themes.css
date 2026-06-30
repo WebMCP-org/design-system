@@ -1,0 +1,15 @@
+/*
+ * Global theme styles
+ */
+
+:root {
+  color-scheme: light dark;
+  accent-color: var(--sigvelo-primary-fill-mid);
+}
+
+.sigvelo-light,
+.sigvelo-dark,
+[data-theme="light"],
+[data-theme="dark"] {
+  color: var(--sigvelo-text-body);
+}

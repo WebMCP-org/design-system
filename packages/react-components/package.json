@@ -1,0 +1,77 @@
+{
+  "name": "@mcp-b/react-components",
+  "version": "0.0.0",
+  "description": "MCP-B React components built on Base UI and shared design tokens.",
+  "homepage": "https://github.com/WebMCP-org/design-system#readme",
+  "bugs": {
+    "url": "https://github.com/WebMCP-org/design-system/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebMCP-org/design-system.git",
+    "directory": "packages/react-components"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles": "./dist/styles/index.css",
+    "./styles/tokens": "./dist/styles/tokens.css",
+    "./styles/base": "./dist/styles/base.css",
+    "./styles/*": "./dist/styles/*.css",
+    "./styles/*.css": "./dist/styles/*.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "test": "vp test",
+    "check": "vp check",
+    "storybook": "storybook dev -p 6011",
+    "build-storybook": "storybook build",
+    "prepublishOnly": "vp run build"
+  },
+  "dependencies": {
+    "@base-ui/react": "catalog:",
+    "@mcp-b/design-tokens": "workspace:*",
+    "anser": "catalog:",
+    "shiki": "catalog:"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "catalog:",
+    "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-vitest": "catalog:",
+    "@storybook/react": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "@vitest/mocker": "catalog:",
+    "playwright": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "storybook": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

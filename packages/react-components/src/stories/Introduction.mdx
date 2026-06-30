@@ -1,0 +1,56 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Introduction" />
+
+# Sigvelo component library
+
+Reusable design tokens and React components for Sigvelo, Nanites, and WebMCP. Components are built on [Base UI](https://base-ui.com/) primitives and styled with CSS custom properties from `@mcp-b/design-tokens`.
+
+## Features
+
+- **Accessible by Default**: Built on Base UI's unstyled, accessible primitives
+- **Framework-Friendly**: Works with Astro, Next.js, Remix, and any React framework
+- **Themeable**: Built-in dark/light theme support using CSS variables
+- **Type-Safe**: Full TypeScript support
+- **No Tailwind**: Pure CSS styling with design tokens
+
+## Components
+
+Explore the components in the sidebar:
+
+- **Button** - Multiple variants and sizes
+- **Input** - Form inputs with focus states
+- **Checkbox** - Accessible checkboxes with state management
+- **Card** - Container component with optional hover effect
+- **Label** - Form labels
+
+## Theming
+
+The design system supports light and dark modes. Set `data-theme` on the root element, or use the matching class when an app cannot control attributes:
+
+```javascript
+document.documentElement.setAttribute("data-theme", "light");
+document.documentElement.setAttribute("data-theme", "dark");
+document.documentElement.classList.toggle("sigvelo-dark", prefersDark);
+```
+
+## Design Tokens
+
+Tokens live in `packages/design-tokens/src` and are exported as CSS. Component styles consume semantic tokens such as `--sigvelo-background-color`, `--sigvelo-text-body`, and `--sigvelo-primary-fill-mid`.
+
+You can customize them in your app by overriding the variables:
+
+```css
+:root {
+  --sigvelo-primary-seed: #4a97f4;
+  --sigvelo-font-family: system-ui, sans-serif;
+}
+```
+
+## Resources
+
+- https://base-ui.com/llms.txt
+- https://github.com/GoogleChrome/modern-web-guidance
+- https://www.designtokens.org/tr/drafts/format/
+- https://storybook.js.org/docs/writing-docs/autodocs
+- https://storybook.js.org/docs/writing-tests/accessibility-testing

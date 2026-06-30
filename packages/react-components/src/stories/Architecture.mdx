@@ -1,0 +1,130 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Architecture" />
+
+# Architecture
+
+## Overview
+
+Built on Base UI and provides a framework-agnostic component library with a clear separation of concerns between design tokens and application-specific styles.
+
+## CSS Architecture
+
+### Token Package
+
+**Location**: `packages/design-tokens/src`
+
+The token package owns the CSS custom property contract:
+
+- `seeds.css` and `palettes.css` define primitive color inputs.
+- `semantic-light.css` and `semantic-dark.css` map primitives to mode-aware semantic aliases.
+- `spacing.css`, `typography.css`, `borders.css`, `focus.css`, and `motion.css` define the shared non-color scales.
+
+### Component Package
+
+**Location**: `packages/react-components/src`
+
+The component package owns React wrappers, component CSS, Storybook stories, and tests. Its default stylesheet imports the base token contract and component styles:
+
+```typescript
+import "@mcp-b/react-components/styles";
+```
+
+### Application-Specific Styles
+
+**Location**: `apps/user-application/src/styles/global.css`
+
+This file contains:
+
+- **Font definitions**: `@font-face` declarations for custom fonts
+- **Base HTML element styles**: `body`, `h1-h6`, `a`, `p`, `img`, etc.
+- **Utility classes**: App-specific helpers like `.sr-only`, `.prose`, etc.
+
+Do not redefine the `--sigvelo-*` contract in application styles. Override documented tokens only when the app intentionally owns a theme.
+
+## Import Order
+
+Import design system styles before app-specific styles:
+
+```typescript
+import "@mcp-b/react-components/styles";
+import "../styles/global.css";
+```
+
+This ensures:
+
+1. CSS variables are defined before use
+2. App-specific styles can override design system defaults if needed
+3. No CSS variable duplication
+
+## Token Layers
+
+- Primitive tokens: raw seeds and palettes, for palette generation and documentation.
+- Semantic tokens: mode-aware aliases used by component CSS.
+- Component tokens: component-local variables only when a component needs a narrow override point.
+
+Compatibility aliases and speculative presets are intentionally not part of the default package. Add a new token only when a component or documented consumer needs it.
+
+## Theme Switching
+
+Theme is controlled by `data-theme` or the matching Sigvelo class on `<html>`. Apps that own theme state should also set `<meta name="color-scheme">` to `light`, `dark`, or `light dark` so browser UI matches the active mode:
+
+```javascript
+document.documentElement.setAttribute("data-theme", "light");
+document.documentElement.setAttribute("data-theme", "dark");
+document.documentElement.classList.add("sigvelo-dark");
+document.querySelector('meta[name="color-scheme"]').content = "light dark";
+```
+
+## Component Architecture
+
+All components:
+
+1. Import Base UI primitives
+2. Wrap them with library-specific styling
+3. Export TypeScript-typed interfaces
+4. Use CSS variables for theming
+
+## Best Practices
+
+1. Import design system styles before application styles.
+2. Use semantic tokens in component CSS instead of raw palette values.
+3. Keep app layout and page-specific CSS out of this package.
+4. Cover public component states with CSF stories and Storybook interaction tests.
+5. Run `vp run audit:tokens` before publishing token changes.
+6. Run `vp run guidance:search -- "<task>"` before HTML, CSS, or client-side React changes.
+
+## Files Structure
+
+```
+packages/design-tokens/src/index.css
+packages/react-components/src/index.ts
+packages/react-components/src/styles/index.css
+packages/react-components/src/stories/*.stories.tsx
+```
+
+## Migration Guide for New Apps
+
+To use the design system in a new app:
+
+1. Add dependency:
+
+   ```json
+   "@mcp-b/react-components": "workspace:*"
+   ```
+
+2. Import styles in your base layout/head:
+
+   ```typescript
+   import "@mcp-b/react-components/styles";
+   ```
+
+3. Use components:
+
+   ```typescript
+   import { Button, Card } from "@mcp-b/react-components";
+   ```
+
+4. Set `data-theme="light"` or `data-theme="dark"` on the document root when the app owns theme state.
+
+That's it! Your app now has full access to the design system.

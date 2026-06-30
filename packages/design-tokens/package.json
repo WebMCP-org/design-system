@@ -1,0 +1,50 @@
+{
+  "name": "@mcp-b/design-tokens",
+  "version": "0.0.0",
+  "description": "Shared design tokens for MCP-B React applications.",
+  "homepage": "https://github.com/WebMCP-org/design-system#readme",
+  "bugs": {
+    "url": "https://github.com/WebMCP-org/design-system/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebMCP-org/design-system.git",
+    "directory": "packages/design-tokens"
+  },
+  "files": [
+    "src"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./src/index.css",
+    "./index.css": "./src/index.css",
+    "./borders": "./src/borders.css",
+    "./borders.css": "./src/borders.css",
+    "./focus": "./src/focus.css",
+    "./focus.css": "./src/focus.css",
+    "./motion": "./src/motion.css",
+    "./motion.css": "./src/motion.css",
+    "./palettes": "./src/palettes.css",
+    "./palettes.css": "./src/palettes.css",
+    "./seeds": "./src/seeds.css",
+    "./seeds.css": "./src/seeds.css",
+    "./semantic-dark": "./src/semantic-dark.css",
+    "./semantic-dark.css": "./src/semantic-dark.css",
+    "./semantic-light": "./src/semantic-light.css",
+    "./semantic-light.css": "./src/semantic-light.css",
+    "./spacing": "./src/spacing.css",
+    "./spacing.css": "./src/spacing.css",
+    "./themes": "./src/themes.css",
+    "./themes.css": "./src/themes.css",
+    "./typography": "./src/typography.css",
+    "./typography.css": "./src/typography.css",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
