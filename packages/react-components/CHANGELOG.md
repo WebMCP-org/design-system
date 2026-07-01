@@ -6,7 +6,7 @@
 
 - Publish the semantic `--sigvelo-color-*` token names consumed by the React component CSS.
 - Updated dependencies
-  - @mcp-b/design-tokens@0.1.2
+  - @mcp-b/design-tokens@0.1.3
 
 ## 0.1.2
 
