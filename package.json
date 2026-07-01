@@ -21,7 +21,7 @@
     "changeset": "changeset",
     "changeset:version": "changeset version && vp install --no-frozen-lockfile && vp fmt",
     "changeset:publish": "vp run validate:packages && changeset publish",
-    "prepare": "vp config"
+    "prepare": "node scripts/prepare-vite-plus.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "catalog:",
@@ -38,12 +38,7 @@
     "wrangler": "catalog:"
   },
   "engines": {
-    "node": ">=22.14.0"
+    "node": "^22.18.0 || >=24.11.0"
   },
-  "packageManager": "pnpm@10.33.0",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
-  }
+  "packageManager": "pnpm@10.33.0"
 }
