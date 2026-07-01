@@ -18,7 +18,7 @@ export default defineConfig(
 
     return {
       pack: {
-        entry: ["src/index.ts"],
+        entry: ["src/components/*.{ts,tsx}", "!src/components/*.test.{ts,tsx}", "src/utils/*.ts"],
         sourcemap: false,
         fixedExtension: false,
         copy: [{ from: "src/styles", to: "dist", flatten: false }],

@@ -1,10 +1,18 @@
 import { execFileSync } from "node:child_process";
-import { copyFileSync, mkdtempSync, unlinkSync, writeFileSync } from "node:fs";
+import { copyFileSync, mkdtempSync, readdirSync, unlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const reactComponentEntrypoints = entrypointFiles(
+  "packages/react-components/src/components",
+  "dist/components",
+);
+const reactUtilityEntrypoints = entrypointFiles(
+  "packages/react-components/src/utils",
+  "dist/utils",
+);
 const packages = [
   {
     dir: "packages/design-tokens",
@@ -24,13 +32,17 @@ const packages = [
     name: "@mcp-b/react-components",
     requiredFiles: [
       "package.json",
-      "dist/index.d.ts",
-      "dist/index.js",
       "dist/styles/index.css",
       "dist/styles/tokens.css",
       "dist/styles/base.css",
+      ...reactComponentEntrypoints,
+      ...reactUtilityEntrypoints,
     ],
-    forbiddenFiles: [/^src\//, /(^|\/)(tests?|stories?|\.storybook)\//],
+    forbiddenFiles: [
+      /^src\//,
+      /^dist\/index\.(?:d\.ts|js)$/,
+      /(^|\/)(tests?|stories?|\.storybook)\//,
+    ],
   },
 ];
 
@@ -117,9 +129,15 @@ function verifyConsumer(tempDir, tarballs) {
       "--input-type=module",
       "-e",
       [
-        'const components = await import("@mcp-b/react-components");',
-        'if (!("Button" in components)) throw new Error("Missing Button export");',
+        'const button = await import("@mcp-b/react-components/components/Button");',
+        'const utils = await import("@mcp-b/react-components/utils/structured-code");',
+        'if (!("Button" in button)) throw new Error("Missing Button export");',
+        'if (!("formatStructuredCodeDisplay" in utils)) throw new Error("Missing structured-code export");',
         'for (const spec of ["@mcp-b/design-tokens", "@mcp-b/design-tokens/palettes.css", "@mcp-b/design-tokens/semantic-light.css", "@mcp-b/react-components/styles", "@mcp-b/react-components/styles/base"]) import.meta.resolve(spec);',
+        "let rootExported = true;",
+        'try { await import("@mcp-b/react-components"); }',
+        'catch (error) { if (error.code !== "ERR_PACKAGE_PATH_NOT_EXPORTED") throw error; rootExported = false; }',
+        'if (rootExported) throw new Error("Root @mcp-b/react-components export should stay closed");',
       ].join(" "),
     ],
     { cwd: tempDir },
@@ -127,7 +145,7 @@ function verifyConsumer(tempDir, tarballs) {
   writeFileSync(
     join(tempDir, "index.ts"),
     [
-      'import { Button, type ButtonProps } from "@mcp-b/react-components";',
+      'import { Button, type ButtonProps } from "@mcp-b/react-components/components/Button";',
       "",
       'const props: ButtonProps = { children: "Save" };',
       "console.log(Boolean(Button) && Boolean(props));",
@@ -153,6 +171,17 @@ function verifyConsumer(tempDir, tarballs) {
     ],
     { cwd: tempDir },
   );
+}
+
+function entrypointFiles(sourceDir, distDir) {
+  return readdirSync(join(root, sourceDir), { withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .filter((entry) => /\.(ts|tsx)$/.test(entry.name))
+    .filter((entry) => !entry.name.includes(".test."))
+    .flatMap((entry) => {
+      const name = entry.name.replace(/\.(ts|tsx)$/, "");
+      return [`${distDir}/${name}.d.ts`, `${distDir}/${name}.js`];
+    });
 }
 
 function run(command, args, options) {
