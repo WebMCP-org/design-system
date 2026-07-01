@@ -1,5 +1,11 @@
 # @mcp-b/react-components
 
+## 0.1.2
+
+### Patch Changes
+
+- Publish component and utility subpath exports for direct npm consumers.
+
 ## 0.1.1
 
 ### Patch Changes
