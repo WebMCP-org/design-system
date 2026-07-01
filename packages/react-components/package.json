@@ -1,6 +1,6 @@
 {
   "name": "@mcp-b/react-components",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "MCP-B React components built on Base UI and shared design tokens.",
   "homepage": "https://design-system.sigvelo.com",
   "bugs": {
