@@ -135,7 +135,7 @@ export function Component() {}
 
 ```
 packages/design-tokens/src/index.css
-packages/react-components/src/index.ts
+packages/react-components/src/components/Button.tsx
 packages/react-components/src/styles/index.css
 packages/react-components/src/stories/*.stories.tsx
 ```
@@ -159,7 +159,8 @@ To use the design system in a new app:
 3. Use components:
 
    ```typescript
-   import { Button, Card } from "@mcp-b/react-components";
+   import { Button } from "@mcp-b/react-components/components/Button";
+   import { Card } from "@mcp-b/react-components/components/Card";
    ```
 
 4. Set `data-theme="light"` or `data-theme="dark"` on the document root when the app owns theme state.

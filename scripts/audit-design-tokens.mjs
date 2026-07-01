@@ -13,10 +13,13 @@ const cssTokenFiles = walk(join(root, "packages/design-tokens/src")).filter((fil
   file.endsWith(".css"),
 );
 const reactStylesDir = join(root, "packages/react-components/src/styles");
-const reactComponentsDir = join(root, "packages/react-components/src/components");
 const reactStyleIndex = readFileSync(join(reactStylesDir, "index.css"), "utf8");
-const reactPackageIndex = readFileSync(
-  join(root, "packages/react-components/src/index.ts"),
+const reactPackageManifest = JSON.parse(
+  readFileSync(join(root, "packages/react-components/package.json"), "utf8"),
+);
+const reactPackageExports = reactPackageManifest.exports ?? {};
+const reactPackConfig = readFileSync(
+  join(root, "packages/react-components/vite.config.ts"),
   "utf8",
 );
 const baseUiWrapperOwners = new Map([
@@ -177,15 +180,25 @@ for (const file of readdirSync(reactStylesDir).filter((file) => file.endsWith(".
   }
 }
 
-for (const file of readdirSync(reactComponentsDir).filter((file) => file.endsWith(".tsx"))) {
-  if (file.endsWith(".test.tsx")) {
-    continue;
-  }
-  const componentPath = `./components/${file.replace(/\.tsx$/, ".js")}`;
-  if (!reactPackageIndex.includes(componentPath)) {
-    failures.push(
-      `packages/react-components/src/components/${file}: is not exported by src/index.ts`,
-    );
+if (reactPackageManifest.types) {
+  failures.push("packages/react-components/package.json: top-level types reopens the root barrel");
+}
+
+if (reactPackageExports["."]) {
+  failures.push("packages/react-components/package.json: root export reopens the root barrel");
+}
+
+if (!reactPackageExports["./components/*"]) {
+  failures.push("packages/react-components/package.json: missing ./components/* subpath export");
+}
+
+if (!reactPackageExports["./utils/*"]) {
+  failures.push("packages/react-components/package.json: missing ./utils/* subpath export");
+}
+
+for (const entry of ['"src/components/*.{ts,tsx}"', '"src/utils/*.ts"']) {
+  if (!reactPackConfig.includes(entry)) {
+    failures.push(`packages/react-components/vite.config.ts: missing pack entry ${entry}`);
   }
 }
 

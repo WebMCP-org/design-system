@@ -156,7 +156,7 @@ export const CodeBlock: Story = {
             lineHeight: 1.6,
           }}
         >
-          {`import { ScrollArea } from '@mcp-b/react-components';
+          {`import { ScrollArea } from '@mcp-b/react-components/components/ScrollArea';
 
 function MyComponent() {
   return (
