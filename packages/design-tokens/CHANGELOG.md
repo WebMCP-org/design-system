@@ -1,5 +1,11 @@
 # @mcp-b/design-tokens
 
+## 0.1.2
+
+### Patch Changes
+
+- Publish the semantic `--sigvelo-color-*` token names consumed by the React component CSS.
+
 ## 0.1.1
 
 ### Patch Changes
