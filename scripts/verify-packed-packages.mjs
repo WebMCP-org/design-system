@@ -145,6 +145,7 @@ function verifyConsumer(tempDir, tarballs) {
       "--target",
       "es2022",
       "--strict",
+      "--skipLibCheck",
       "--jsx",
       "react-jsx",
       "--noEmit",

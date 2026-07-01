@@ -10,7 +10,6 @@ export default defineConfig({
   },
   plugins: [
     cloudflare({
-      assetsOnly: true,
       configPath: "../wrangler.jsonc",
     }),
   ],

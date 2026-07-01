@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { RadioGroup, Radio, RadioIndicator } from "../components/RadioGroup";
 import { Label } from "../components/Label";
@@ -92,6 +92,25 @@ export const WithDisabled: Story = {
           <RadioIndicator />
         </Radio>
         <Label>Another available option</Label>
+      </div>
+    </RadioGroup>
+  ),
+};
+
+export const Invalid: Story = {
+  render: () => (
+    <RadioGroup aria-label="Select a required option">
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <Radio value="option1" aria-invalid aria-label="Option 1">
+          <RadioIndicator />
+        </Radio>
+        <Label>Option 1</Label>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <Radio value="option2" aria-invalid aria-label="Option 2">
+          <RadioIndicator />
+        </Radio>
+        <Label>Option 2</Label>
       </div>
     </RadioGroup>
   ),

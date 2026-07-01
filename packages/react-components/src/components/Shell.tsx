@@ -55,6 +55,22 @@ export interface ShellContentProps extends React.HTMLAttributes<HTMLDivElement> 
 /**
  * Root container for the shell layout.
  * Provides a structured layout with optional header, action bar, panel, and content areas.
+ *
+ * Built internally for dense tools with side actions and optional panels. Use
+ * for app-like work surfaces, not marketing pages or generic sections.
+ *
+ * Styling consumes Sigvelo layout, border, surface, spacing, and focus tokens.
+ * Actions need labels because the visible affordance is usually icon-only.
+ *
+ * @example
+ * ```tsx
+ * <Shell.Root heading="Project">
+ *   <Shell.ActionBar>
+ *     <Shell.Action icon={<FilterIcon />} label="Filter" />
+ *   </Shell.ActionBar>
+ *   <Shell.Content>Map or tool content</Shell.Content>
+ * </Shell.Root>
+ * ```
  */
 function ShellRoot({
   className = "",

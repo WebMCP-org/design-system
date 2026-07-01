@@ -46,12 +46,21 @@ export interface ProgressIndicatorProps extends Omit<
 export function Progress({
   color = "primary",
   className = "",
+  children,
   ref,
   ...props
 }: ProgressProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["progress", `progress--${color}`, className].filter(Boolean).join(" ");
 
-  return <BaseProgress.Root ref={ref} className={classes} {...props} />;
+  return (
+    <BaseProgress.Root ref={ref} data-slot="progress" className={classes} {...props}>
+      {children ?? (
+        <ProgressTrack>
+          <ProgressIndicator />
+        </ProgressTrack>
+      )}
+    </BaseProgress.Root>
+  );
 }
 
 export function ProgressTrack({
@@ -69,5 +78,12 @@ export function ProgressIndicator({
   ...props
 }: ProgressIndicatorProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["progress__indicator", className].filter(Boolean).join(" ");
-  return <BaseProgress.Indicator ref={ref} className={classes} {...props} />;
+  return (
+    <BaseProgress.Indicator
+      ref={ref}
+      data-slot="progress-indicator"
+      className={classes}
+      {...props}
+    />
+  );
 }

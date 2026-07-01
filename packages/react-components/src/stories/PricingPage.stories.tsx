@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { PricingPage } from "../components/PricingPage";
-import type { Plan, FAQItem, UsageTier } from "../components/PricingPage";
+import type { FAQItem, Plan, UsageTier } from "../components/PricingPage";
 
-const meta: Meta<typeof PricingPage> = {
+const meta = {
   title: "Examples/PricingPage",
   component: PricingPage,
   parameters: {
     layout: "fullscreen",
   },
   tags: ["autodocs"],
-};
+} satisfies Meta<typeof PricingPage>;
 
 export default meta;
-type Story = StoryObj<typeof PricingPage>;
+type Story = StoryObj<typeof meta>;
 
 const defaultPlans: Plan[] = [
   {

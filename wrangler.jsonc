@@ -1,13 +1,23 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "mcp-b-design-system-storybook",
+  "main": "storybook-worker/src/index.ts",
   "compatibility_date": "2026-06-30",
+  "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
   "preview_urls": true,
+  "routes": [
+    {
+      "pattern": "design-system.sigvelo.com",
+      "custom_domain": true,
+    },
+  ],
   "observability": {
     "enabled": true,
   },
   "assets": {
+    "binding": "ASSETS",
     "not_found_handling": "single-page-application",
+    "run_worker_first": ["/mcp", "/mcp/*"],
   },
 }

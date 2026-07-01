@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
+import { XIcon } from "./_internal/icons.js";
 
 export interface DialogProps extends BaseDialog.Root.Props {}
 export interface DialogTriggerProps extends BaseDialog.Trigger.Props {}
@@ -29,6 +30,14 @@ export interface DialogDescriptionProps extends Omit<BaseDialog.Description.Prop
 export interface DialogCloseProps extends Omit<BaseDialog.Close.Props, "className"> {
   className?: string;
 }
+export type DialogOverlayProps = DialogBackdropProps;
+export type DialogContentProps = DialogPopupProps & {
+  showCloseButton?: boolean;
+};
+export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {
+  showCloseButton?: boolean;
+}
 
 /**
  * A dialog component for modal interactions.
@@ -50,7 +59,11 @@ export interface DialogCloseProps extends Omit<BaseDialog.Close.Props, "classNam
  * @see {@link https://base-ui.com/react/components/dialog | Base UI Dialog}
  */
 export const Dialog = BaseDialog.Root;
-export const DialogTrigger = BaseDialog.Trigger;
+
+export function DialogTrigger(props: DialogTriggerProps) {
+  return <BaseDialog.Trigger data-slot="dialog-trigger" {...props} />;
+}
+
 export const DialogPortal = BaseDialog.Portal;
 
 export function DialogBackdrop({
@@ -59,8 +72,12 @@ export function DialogBackdrop({
   ...props
 }: DialogBackdropProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["dialog__backdrop", className].filter(Boolean).join(" ");
-  return <BaseDialog.Backdrop ref={ref} className={classes} {...props} />;
+  return (
+    <BaseDialog.Backdrop ref={ref} data-slot="dialog-overlay" className={classes} {...props} />
+  );
 }
+
+export const DialogOverlay = DialogBackdrop;
 
 export function DialogPopup({
   size = "md",
@@ -71,7 +88,54 @@ export function DialogPopup({
   const classes = ["dialog__popup", size !== "md" && `dialog__popup--${size}`, className]
     .filter(Boolean)
     .join(" ");
-  return <BaseDialog.Popup ref={ref} className={classes} {...props} />;
+  return <BaseDialog.Popup ref={ref} data-slot="dialog-content" className={classes} {...props} />;
+}
+
+export function DialogContent({
+  children,
+  showCloseButton = true,
+  ref,
+  ...props
+}: DialogContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <DialogPortal>
+      <DialogBackdrop />
+      <DialogPopup ref={ref} {...props}>
+        {children}
+        {showCloseButton ? (
+          <DialogClose className="dialog__close--icon">
+            <XIcon />
+            <span className="dialog__close-label">Close</span>
+          </DialogClose>
+        ) : null}
+      </DialogPopup>
+    </DialogPortal>
+  );
+}
+
+export function DialogHeader({
+  className = "",
+  ref,
+  ...props
+}: DialogHeaderProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["dialog__header", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="dialog-header" className={classes} {...props} />;
+}
+
+export function DialogFooter({
+  className = "",
+  showCloseButton = false,
+  children,
+  ref,
+  ...props
+}: DialogFooterProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["dialog__footer", className].filter(Boolean).join(" ");
+  return (
+    <div ref={ref} data-slot="dialog-footer" className={classes} {...props}>
+      {children}
+      {showCloseButton ? <DialogClose>Close</DialogClose> : null}
+    </div>
+  );
 }
 
 export function DialogTitle({
@@ -80,7 +144,7 @@ export function DialogTitle({
   ...props
 }: DialogTitleProps & { ref?: React.Ref<HTMLHeadingElement> }) {
   const classes = ["dialog__title", className].filter(Boolean).join(" ");
-  return <BaseDialog.Title ref={ref} className={classes} {...props} />;
+  return <BaseDialog.Title ref={ref} data-slot="dialog-title" className={classes} {...props} />;
 }
 
 export function DialogDescription({
@@ -89,7 +153,14 @@ export function DialogDescription({
   ...props
 }: DialogDescriptionProps & { ref?: React.Ref<HTMLParagraphElement> }) {
   const classes = ["dialog__description", className].filter(Boolean).join(" ");
-  return <BaseDialog.Description ref={ref} className={classes} {...props} />;
+  return (
+    <BaseDialog.Description
+      ref={ref}
+      data-slot="dialog-description"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 export function DialogClose({
@@ -98,5 +169,5 @@ export function DialogClose({
   ...props
 }: DialogCloseProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["dialog__close", className].filter(Boolean).join(" ");
-  return <BaseDialog.Close ref={ref} className={classes} {...props} />;
+  return <BaseDialog.Close ref={ref} data-slot="dialog-close" className={classes} {...props} />;
 }

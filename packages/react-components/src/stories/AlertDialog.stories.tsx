@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import * as React from "react";
 import {
@@ -7,9 +7,13 @@ import {
   AlertDialogPortal,
   AlertDialogBackdrop,
   AlertDialogPopup,
+  AlertDialogContent,
+  AlertDialogFooter,
   AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogClose,
+  AlertDialogAction,
+  AlertDialogCancel,
 } from "../components/AlertDialog";
 import { Button } from "../components/Button";
 
@@ -54,6 +58,34 @@ export const Default: Story = {
     await expect(await screen.findByText("Are you absolutely sure?")).toBeInTheDocument();
     await expect(screen.getByText("Cancel")).toBeInTheDocument();
     await expect(screen.getByText("Delete Account")).toBeInTheDocument();
+  },
+};
+
+export const ShadcnContentAliases: Story = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger render={<Button variant="outline" />}>
+        Open Composed Alert
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogTitle>Continue?</AlertDialogTitle>
+        <AlertDialogDescription>
+          This content path includes the portal and overlay by default.
+        </AlertDialogDescription>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByText("Open Composed Alert"));
+
+    await expect(await screen.findByText("Continue?")).toBeInTheDocument();
+    await expect(screen.getByText("Cancel")).toBeInTheDocument();
+    await expect(screen.getByText("Continue")).toBeInTheDocument();
   },
 };
 

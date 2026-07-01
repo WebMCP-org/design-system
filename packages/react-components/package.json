@@ -2,7 +2,7 @@
   "name": "@mcp-b/react-components",
   "version": "0.1.1",
   "description": "MCP-B React components built on Base UI and shared design tokens.",
-  "homepage": "https://mcp-b-design-system-storybook.alexmnahas.workers.dev",
+  "homepage": "https://design-system.sigvelo.com",
   "bugs": {
     "url": "https://github.com/WebMCP-org/design-system/issues"
   },
@@ -46,15 +46,21 @@
   "dependencies": {
     "@base-ui/react": "catalog:",
     "@mcp-b/design-tokens": "workspace:*",
+    "@streamdown/cjk": "catalog:",
+    "@streamdown/code": "catalog:",
+    "@streamdown/math": "catalog:",
+    "@streamdown/mermaid": "catalog:",
     "anser": "catalog:",
-    "shiki": "catalog:"
+    "shiki": "catalog:",
+    "streamdown": "catalog:"
   },
   "devDependencies": {
     "@storybook/addon-a11y": "catalog:",
     "@storybook/addon-docs": "catalog:",
+    "@storybook/addon-mcp": "catalog:",
     "@storybook/addon-vitest": "catalog:",
-    "@storybook/react": "catalog:",
     "@storybook/react-vite": "catalog:",
+    "@tanstack/react-form": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

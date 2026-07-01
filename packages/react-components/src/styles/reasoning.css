@@ -51,8 +51,13 @@
   margin: 0;
 }
 
+.reasoning__trigger-leading-icon,
 .reasoning__trigger-icon {
   display: inline-flex;
+  color: var(--sigvelo-color-text-muted);
+}
+
+.reasoning__trigger-icon {
   transition: transform 200ms ease;
 }
 
@@ -89,7 +94,6 @@
   color: var(--sigvelo-color-text-muted);
   font-size: 0.8125rem;
   line-height: 1.6;
-  white-space: pre-wrap;
 }
 
 .reasoning__text > * + * {

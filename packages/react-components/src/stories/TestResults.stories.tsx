@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Test, TestError, TestResults, TestSuite } from "../components/TestResults";
 
 const meta = {
@@ -17,6 +17,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  name: "Failed suite report",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Summary, progress, passing suites, failed suite expansion, and inline error output.",
+      },
+    },
+  },
   render: (args) => (
     <div style={{ width: "36rem" }}>
       <TestResults {...args}>
@@ -49,6 +58,14 @@ export const Default: Story = {
 };
 
 export const AllPassed: Story = {
+  name: "All passed",
+  parameters: {
+    docs: {
+      description: {
+        story: "Compact success report when no suite needs attention.",
+      },
+    },
+  },
   args: {
     summary: { passed: 12, failed: 0, skipped: 0, total: 12, duration: 890 },
   },
@@ -65,6 +82,14 @@ export const AllPassed: Story = {
 };
 
 export const Running: Story = {
+  name: "Running suite",
+  parameters: {
+    docs: {
+      description: {
+        story: "In-progress status while a suite is still executing.",
+      },
+    },
+  },
   args: {
     summary: { passed: 5, failed: 0, skipped: 0, total: 12, duration: 0 },
   },

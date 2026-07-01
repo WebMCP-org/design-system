@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import { Combobox } from "../components/Combobox";
 
@@ -7,6 +7,12 @@ const meta = {
   component: Combobox.Root,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Base UI Combobox wrapped with Sigvelo class names and CSS-token styling. Use it for bounded selection with search; use Autocomplete when free text remains valid.",
+      },
+    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof Combobox.Root>;
@@ -45,6 +51,15 @@ const fruits: Fruit[] = [
 ];
 
 export const Default: Story = {
+  name: "Fruit picker",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Single-select combobox with trigger, popup, list items, and selected-item indicator.",
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -107,6 +122,14 @@ const countries: Country[] = [
 ];
 
 export const WithGroups: Story = {
+  name: "Grouped country picker",
+  parameters: {
+    docs: {
+      description: {
+        story: "Groups options by region while preserving Base UI listbox keyboard behavior.",
+      },
+    },
+  },
   render: () => {
     const groupedCountries = countries.reduce(
       (acc, country) => {
@@ -176,6 +199,15 @@ export const WithGroups: Story = {
 };
 
 export const WithDefaultValue: Story = {
+  name: "Default value",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Starts with a selected item while still allowing the user to search and replace it.",
+      },
+    },
+  },
   render: () => (
     <div
       style={{

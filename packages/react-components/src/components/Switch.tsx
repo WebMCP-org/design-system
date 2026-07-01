@@ -8,9 +8,9 @@ export interface SwitchProps extends Omit<
   className?: string;
   /**
    * The size of the switch.
-   * @default 'md'
+   * @default 'default'
    */
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "default";
 }
 
 export interface SwitchThumbProps extends Omit<
@@ -42,16 +42,28 @@ export interface SwitchThumbProps extends Omit<
  * @see {@link https://base-ui.com/react/components/switch | Base UI Switch}
  */
 export function Switch({
-  size = "md",
+  size = "default",
   className = "",
+  children,
   ref,
   ...props
 }: SwitchProps & { ref?: React.Ref<HTMLButtonElement> }) {
-  const classes = ["switch", size !== "md" && `switch--${size}`, className]
+  const normalizedSize = size === "md" ? "default" : size;
+  const classes = ["switch", normalizedSize !== "default" && `switch--${normalizedSize}`, className]
     .filter(Boolean)
     .join(" ");
 
-  return <BaseSwitch.Root ref={ref} className={classes} {...props} />;
+  return (
+    <BaseSwitch.Root
+      ref={ref}
+      data-slot="switch"
+      data-size={normalizedSize}
+      className={classes}
+      {...props}
+    >
+      {children ?? <SwitchThumb />}
+    </BaseSwitch.Root>
+  );
 }
 
 /**
@@ -63,5 +75,5 @@ export function SwitchThumb({
   ...props
 }: SwitchThumbProps & { ref?: React.Ref<HTMLSpanElement> }) {
   const classes = ["switch__thumb", className].filter(Boolean).join(" ");
-  return <BaseSwitch.Thumb ref={ref} className={classes} {...props} />;
+  return <BaseSwitch.Thumb ref={ref} data-slot="switch-thumb" className={classes} {...props} />;
 }

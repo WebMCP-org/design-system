@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   Accordion,
   AccordionItem,
@@ -27,6 +27,7 @@ const meta = {
   parameters: {
     layout: "padded",
   },
+  tags: ["!manifest"],
 } satisfies Meta;
 
 export default meta;

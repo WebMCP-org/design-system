@@ -61,7 +61,7 @@ export function RadioGroup({
     .filter(Boolean)
     .join(" ");
 
-  return <BaseRadioGroup ref={ref} className={classes} {...props} />;
+  return <BaseRadioGroup ref={ref} data-slot="radio-group" className={classes} {...props} />;
 }
 
 /**
@@ -73,7 +73,14 @@ export function Radio({
   ...props
 }: RadioProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["radio", className].filter(Boolean).join(" ");
-  return <BaseRadio.Root ref={ref} className={classes} {...props} />;
+  return <BaseRadio.Root ref={ref} data-slot="radio-group-item" className={classes} {...props} />;
+}
+
+export function RadioGroupItem({
+  children,
+  ...props
+}: RadioProps & { ref?: React.Ref<HTMLButtonElement> }) {
+  return <Radio {...props}>{children ?? <RadioIndicator />}</Radio>;
 }
 
 /**
@@ -85,5 +92,12 @@ export function RadioIndicator({
   ...props
 }: RadioIndicatorProps & { ref?: React.Ref<HTMLSpanElement> }) {
   const classes = ["radio__indicator", className].filter(Boolean).join(" ");
-  return <BaseRadio.Indicator ref={ref} className={classes} {...props} />;
+  return (
+    <BaseRadio.Indicator
+      ref={ref}
+      data-slot="radio-group-indicator"
+      className={classes}
+      {...props}
+    />
+  );
 }

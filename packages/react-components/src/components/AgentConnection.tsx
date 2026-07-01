@@ -23,6 +23,13 @@ export type AgentConnectionCommand = {
   readonly code: string;
 };
 
+export type ConnectionProps = React.SVGProps<SVGGElement> & {
+  readonly fromX: number;
+  readonly fromY: number;
+  readonly toX: number;
+  readonly toY: number;
+};
+
 export type NanitesAgentConnectionOptions = {
   readonly mcpName?: string;
   readonly pluginMarketplace?: string;
@@ -44,6 +51,31 @@ export type AgentConnectionPopoverProps = Omit<AgentConnectionPanelProps, "secti
 };
 
 const DEFAULT_LOCAL_ORIGIN = "http://localhost:5173";
+const CONNECTION_CURVE_MIDPOINT = 0.5;
+
+export function Connection({ fromX, fromY, toX, toY, ...props }: ConnectionProps) {
+  const controlX = fromX + (toX - fromX) * CONNECTION_CURVE_MIDPOINT;
+
+  return (
+    <g {...props}>
+      <path
+        className="animated"
+        d={`M${fromX},${fromY} C ${controlX},${fromY} ${controlX},${toY} ${toX},${toY}`}
+        fill="none"
+        stroke="var(--sigvelo-color-focus)"
+        strokeWidth={1}
+      />
+      <circle
+        cx={toX}
+        cy={toY}
+        fill="var(--sigvelo-color-canvas)"
+        r={3}
+        stroke="var(--sigvelo-color-focus)"
+        strokeWidth={1}
+      />
+    </g>
+  );
+}
 
 function getBrowserOrigin(): string {
   if (typeof window === "undefined") {
@@ -130,6 +162,11 @@ export function buildNanitesAgentConnectionCommands(
   ];
 }
 
+/**
+ * Shows copyable install commands for connecting an agent to Nanites.
+ * Use inside setup screens where users need Codex, Claude Code, skill-only,
+ * or raw MCP JSON connection instructions.
+ */
 export function AgentConnectionPanel({
   className,
   commands: commandsProp,
@@ -196,6 +233,9 @@ export function AgentConnectionPanel({
   );
 }
 
+/**
+ * Compact popover trigger for showing AgentConnectionPanel inline.
+ */
 export function AgentConnectionPopover({ className, ...props }: AgentConnectionPopoverProps) {
   return (
     <Popover.Root>

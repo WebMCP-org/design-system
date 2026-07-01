@@ -17,6 +17,8 @@ export interface PopoverTriggerProps extends Omit<
   className?: string;
 }
 
+export interface PopoverAnchorProps extends React.HTMLAttributes<HTMLDivElement> {}
+
 /**
  * Props for the Popover.Portal component.
  */
@@ -100,6 +102,37 @@ export interface PopoverCloseProps extends Omit<
   /** Additional CSS class names */
   className?: string;
 }
+type PopoverPlacementProps = Pick<
+  PopoverPositionerProps,
+  | "anchor"
+  | "positionMethod"
+  | "side"
+  | "sideOffset"
+  | "align"
+  | "alignOffset"
+  | "collisionBoundary"
+  | "collisionPadding"
+  | "sticky"
+  | "arrowPadding"
+  | "disableAnchorTracking"
+  | "collisionAvoidance"
+>;
+export type PopoverContentProps = PopoverPopupProps & PopoverPlacementProps;
+export interface PopoverHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const PopoverAnchorContext = React.createContext<React.RefObject<HTMLDivElement | null> | null>(
+  null,
+);
+
+function setRefs<T>(node: T, ...refs: Array<React.Ref<T> | undefined>) {
+  for (const ref of refs) {
+    if (typeof ref === "function") {
+      ref(node);
+    } else if (ref) {
+      ref.current = node;
+    }
+  }
+}
 
 /**
  * Controls the popover's open state and manages triggers.
@@ -121,40 +154,66 @@ export interface PopoverCloseProps extends Omit<
  *
  * @see {@link https://base-ui.com/react/components/popover | Base UI Popover}
  */
-const PopoverRoot = (props: PopoverProps) => {
-  return <BasePopover.Root {...props} />;
+export const PopoverRoot = (props: PopoverProps) => {
+  const anchorRef = React.useRef<HTMLDivElement | null>(null);
+  return (
+    <PopoverAnchorContext.Provider value={anchorRef}>
+      <BasePopover.Root data-slot="popover" {...props} />
+    </PopoverAnchorContext.Provider>
+  );
 };
+
+export function PopoverAnchor({
+  className = "",
+  ref,
+  ...props
+}: PopoverAnchorProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const anchorRef = React.useContext(PopoverAnchorContext);
+  const classes = ["popover__anchor", className].filter(Boolean).join(" ");
+  return (
+    <div
+      ref={(node) => setRefs(node, anchorRef, ref)}
+      data-slot="popover-anchor"
+      className={classes}
+      {...props}
+    />
+  );
+}
 
 /**
  * Button that toggles the popover visibility.
  * Renders a `<button>` element.
  */
-function PopoverTrigger({
+export function PopoverTrigger({
   className = "",
   ref,
   ...props
 }: PopoverTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["popover__trigger", className].filter(Boolean).join(" ");
-  return <BasePopover.Trigger ref={ref} className={classes} {...props} />;
+  return (
+    <BasePopover.Trigger ref={ref} data-slot="popover-trigger" className={classes} {...props} />
+  );
 }
 
 /**
  * Renders popover content in a portal outside the DOM hierarchy.
  */
-const PopoverPortal = (props: PopoverPortalProps) => {
+export const PopoverPortal = (props: PopoverPortalProps) => {
   return <BasePopover.Portal {...props} />;
 };
 
 /**
  * Optional backdrop that appears behind the popover.
  */
-function PopoverBackdrop({
+export function PopoverBackdrop({
   className = "",
   ref,
   ...props
 }: PopoverBackdropProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["popover__backdrop", className].filter(Boolean).join(" ");
-  return <BasePopover.Backdrop ref={ref} className={classes} {...props} />;
+  return (
+    <BasePopover.Backdrop ref={ref} data-slot="popover-backdrop" className={classes} {...props} />
+  );
 }
 
 /**
@@ -168,75 +227,137 @@ function PopoverBackdrop({
  * </Popover.Positioner>
  * ```
  */
-function PopoverPositioner({
+export function PopoverPositioner({
   className = "",
+  anchor,
   ref,
   ...props
 }: PopoverPositionerProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const anchorRef = React.useContext(PopoverAnchorContext);
   const classes = ["popover__positioner", className].filter(Boolean).join(" ");
-  return <BasePopover.Positioner ref={ref} className={classes} {...props} />;
+  return (
+    <BasePopover.Positioner
+      ref={ref}
+      anchor={anchor ?? anchorRef ?? undefined}
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * The popup container that holds the popover content.
  */
-function PopoverPopup({
+export function PopoverPopup({
   className = "",
   ref,
   ...props
 }: PopoverPopupProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["popover__popup", className].filter(Boolean).join(" ");
-  return <BasePopover.Popup ref={ref} className={classes} {...props} />;
+  return <BasePopover.Popup ref={ref} data-slot="popover-content" className={classes} {...props} />;
+}
+
+export function PopoverContent({
+  anchor,
+  positionMethod,
+  side,
+  sideOffset = 4,
+  align = "center",
+  alignOffset,
+  collisionBoundary,
+  collisionPadding,
+  sticky,
+  arrowPadding,
+  disableAnchorTracking,
+  collisionAvoidance,
+  ...props
+}: PopoverContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <PopoverPortal>
+      <PopoverPositioner
+        anchor={anchor}
+        positionMethod={positionMethod}
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        collisionBoundary={collisionBoundary}
+        collisionPadding={collisionPadding}
+        sticky={sticky}
+        arrowPadding={arrowPadding}
+        disableAnchorTracking={disableAnchorTracking}
+        collisionAvoidance={collisionAvoidance}
+      >
+        <PopoverPopup {...props} />
+      </PopoverPositioner>
+    </PopoverPortal>
+  );
+}
+
+export function PopoverHeader({
+  className = "",
+  ref,
+  ...props
+}: PopoverHeaderProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["popover__header", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="popover-header" className={classes} {...props} />;
 }
 
 /**
  * Directional arrow pointing to the trigger element.
  */
-function PopoverArrow({
+export function PopoverArrow({
   className = "",
   ref,
   ...props
 }: PopoverArrowProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["popover__arrow", className].filter(Boolean).join(" ");
-  return <BasePopover.Arrow ref={ref} className={classes} {...props} />;
+  return <BasePopover.Arrow ref={ref} data-slot="popover-arrow" className={classes} {...props} />;
 }
 
 /**
  * Semantic title for the popover content.
  * Renders an `<h2>` element.
  */
-function PopoverTitle({
+export function PopoverTitle({
   className = "",
   ref,
   ...props
 }: PopoverTitleProps & { ref?: React.Ref<HTMLHeadingElement> }) {
   const classes = ["popover__title", className].filter(Boolean).join(" ");
-  return <BasePopover.Title ref={ref} className={classes} {...props} />;
+  return <BasePopover.Title ref={ref} data-slot="popover-title" className={classes} {...props} />;
 }
 
 /**
  * Description text for the popover content.
  * Renders a `<p>` element.
  */
-function PopoverDescription({
+export function PopoverDescription({
   className = "",
   ref,
   ...props
 }: PopoverDescriptionProps & { ref?: React.Ref<HTMLParagraphElement> }) {
   const classes = ["popover__description", className].filter(Boolean).join(" ");
-  return <BasePopover.Description ref={ref} className={classes} {...props} />;
+  return (
+    <BasePopover.Description
+      ref={ref}
+      data-slot="popover-description"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * Button that closes the popover.
  */
-function PopoverClose({
+export function PopoverClose({
   className = "",
   ref,
   ...props
 }: PopoverCloseProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["popover__close", className].filter(Boolean).join(" ");
-  return <BasePopover.Close ref={ref} className={classes} {...props} />;
+  return <BasePopover.Close ref={ref} data-slot="popover-close" className={classes} {...props} />;
 }
 
 /**
@@ -280,15 +401,18 @@ function PopoverClose({
  *
  * @see {@link https://base-ui.com/react/components/popover | Base UI Popover}
  */
-export const Popover = {
+export const Popover = Object.assign(PopoverRoot, {
   Root: PopoverRoot,
+  Anchor: PopoverAnchor,
   Trigger: PopoverTrigger,
   Portal: PopoverPortal,
   Backdrop: PopoverBackdrop,
   Positioner: PopoverPositioner,
   Popup: PopoverPopup,
+  Content: PopoverContent,
+  Header: PopoverHeader,
   Arrow: PopoverArrow,
   Title: PopoverTitle,
   Description: PopoverDescription,
   Close: PopoverClose,
-};
+});

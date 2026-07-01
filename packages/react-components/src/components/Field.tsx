@@ -7,6 +7,7 @@ import { Field as BaseField } from "@base-ui/react/field";
 export interface FieldRootProps extends React.ComponentPropsWithoutRef<typeof BaseField.Root> {
   /** Additional CSS class names */
   className?: string;
+  orientation?: "vertical" | "horizontal" | "responsive";
 }
 
 /**
@@ -43,6 +44,7 @@ export interface FieldDescriptionProps extends React.ComponentPropsWithoutRef<
 export interface FieldErrorProps extends React.ComponentPropsWithoutRef<typeof BaseField.Error> {
   /** Additional CSS class names */
   className?: string;
+  errors?: Array<{ message?: string } | string | undefined>;
 }
 
 /**
@@ -51,6 +53,14 @@ export interface FieldErrorProps extends React.ComponentPropsWithoutRef<typeof B
 export interface FieldValidityProps extends React.ComponentPropsWithoutRef<
   typeof BaseField.Validity
 > {}
+export interface FieldSetProps extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {}
+export interface FieldLegendProps extends React.HTMLAttributes<HTMLLegendElement> {
+  variant?: "legend" | "label";
+}
+export interface FieldContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface FieldTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface FieldGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface FieldSeparatorProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**
  * Container that groups all field parts together.
@@ -67,13 +77,25 @@ export interface FieldValidityProps extends React.ComponentPropsWithoutRef<
  *
  * @see {@link https://base-ui.com/react/components/field | Base UI Field}
  */
-function FieldRoot({
+export function FieldRoot({
   className = "",
+  orientation = "vertical",
   ref,
   ...props
 }: FieldRootProps & { ref?: React.Ref<HTMLDivElement> }) {
-  const classes = ["field", className].filter(Boolean).join(" ");
-  return <BaseField.Root ref={ref} className={classes} {...props} />;
+  const classes = ["field", orientation !== "vertical" && `field--${orientation}`, className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <BaseField.Root
+      ref={ref}
+      role="group"
+      data-slot="field"
+      data-orientation={orientation}
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
@@ -88,13 +110,13 @@ function FieldRoot({
  * </Field.Root>
  * ```
  */
-function FieldLabel({
+export function FieldLabel({
   className = "",
   ref,
   ...props
 }: FieldLabelProps & { ref?: React.Ref<HTMLLabelElement> }) {
   const classes = ["field__label", className].filter(Boolean).join(" ");
-  return <BaseField.Label ref={ref} className={classes} {...props} />;
+  return <BaseField.Label ref={ref} data-slot="field-label" className={classes} {...props} />;
 }
 
 /**
@@ -110,13 +132,13 @@ function FieldLabel({
  * <Field.Control render={<Textarea />} />
  * ```
  */
-function FieldControl({
+export function FieldControl({
   className = "",
   ref,
   ...props
 }: FieldControlProps & { ref?: React.Ref<HTMLInputElement> }) {
   const classes = ["field__control", className].filter(Boolean).join(" ");
-  return <BaseField.Control ref={ref} className={classes} {...props} />;
+  return <BaseField.Control ref={ref} data-slot="field-control" className={classes} {...props} />;
 }
 
 /**
@@ -132,13 +154,15 @@ function FieldControl({
  * </Field.Root>
  * ```
  */
-function FieldDescription({
+export function FieldDescription({
   className = "",
   ref,
   ...props
 }: FieldDescriptionProps & { ref?: React.Ref<HTMLParagraphElement> }) {
   const classes = ["field__description", className].filter(Boolean).join(" ");
-  return <BaseField.Description ref={ref} className={classes} {...props} />;
+  return (
+    <BaseField.Description ref={ref} data-slot="field-description" className={classes} {...props} />
+  );
 }
 
 /**
@@ -164,13 +188,48 @@ function FieldDescription({
  * - `rangeUnderflow` - Number is less than `min`
  * - `rangeOverflow` - Number is greater than `max`
  */
-function FieldError({
+export function FieldError({
   className = "",
+  errors,
+  children,
   ref,
   ...props
 }: FieldErrorProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["field__error", className].filter(Boolean).join(" ");
-  return <BaseField.Error ref={ref} className={classes} {...props} />;
+  if (errors === undefined) {
+    return (
+      <BaseField.Error ref={ref} data-slot="field-error" className={classes} {...props}>
+        {children}
+      </BaseField.Error>
+    );
+  }
+
+  const messages = [
+    ...new Set(
+      errors.map((error) => (typeof error === "string" ? error : error?.message)).filter(Boolean),
+    ),
+  ];
+  const content =
+    children ??
+    (messages.length === 1 ? (
+      messages[0]
+    ) : messages.length > 1 ? (
+      <ul className="field__error-list">
+        {messages.map((message) => (
+          <li key={message}>{message}</li>
+        ))}
+      </ul>
+    ) : null);
+
+  if (!content) return null;
+
+  const divProps = props as React.HTMLAttributes<HTMLDivElement>;
+
+  return (
+    <div ref={ref} role="alert" data-slot="field-error" className={classes} {...divProps}>
+      {content}
+    </div>
+  );
 }
 
 /**
@@ -192,7 +251,86 @@ function FieldError({
  * </Field.Root>
  * ```
  */
-const FieldValidity = BaseField.Validity;
+export const FieldValidity = BaseField.Validity;
+
+export function FieldSet({
+  className = "",
+  ref,
+  ...props
+}: FieldSetProps & { ref?: React.Ref<HTMLFieldSetElement> }) {
+  const classes = ["field-set", className].filter(Boolean).join(" ");
+  return <fieldset ref={ref} data-slot="field-set" className={classes} {...props} />;
+}
+
+export function FieldLegend({
+  className = "",
+  variant = "legend",
+  ref,
+  ...props
+}: FieldLegendProps & { ref?: React.Ref<HTMLLegendElement> }) {
+  const classes = ["field-legend", className].filter(Boolean).join(" ");
+  return (
+    <legend
+      ref={ref}
+      data-slot="field-legend"
+      data-variant={variant}
+      className={classes}
+      {...props}
+    />
+  );
+}
+
+export function FieldContent({
+  className = "",
+  ref,
+  ...props
+}: FieldContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["field-content", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="field-content" className={classes} {...props} />;
+}
+
+export function FieldTitle({
+  className = "",
+  ref,
+  ...props
+}: FieldTitleProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["field-title", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="field-label" className={classes} {...props} />;
+}
+
+export function FieldGroup({
+  className = "",
+  ref,
+  ...props
+}: FieldGroupProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["field-group", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="field-group" className={classes} {...props} />;
+}
+
+export function FieldSeparator({
+  className = "",
+  children,
+  ref,
+  ...props
+}: FieldSeparatorProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["field-separator", className].filter(Boolean).join(" ");
+  return (
+    <div
+      ref={ref}
+      data-slot="field-separator"
+      data-content={Boolean(children)}
+      className={classes}
+      {...props}
+    >
+      <span aria-hidden="true" data-slot="separator" className="field-separator__line" />
+      {children ? (
+        <span data-slot="field-separator-content" className="field-separator__content">
+          {children}
+        </span>
+      ) : null}
+    </div>
+  );
+}
 
 /**
  * A form field component that provides labeling, description, and validation
@@ -226,11 +364,17 @@ const FieldValidity = BaseField.Validity;
  *
  * @see {@link https://base-ui.com/react/components/field | Base UI Field}
  */
-export const Field = {
+export const Field = Object.assign(FieldRoot, {
   Root: FieldRoot,
   Label: FieldLabel,
   Control: FieldControl,
   Description: FieldDescription,
   Error: FieldError,
   Validity: FieldValidity,
-};
+  Set: FieldSet,
+  Legend: FieldLegend,
+  Content: FieldContent,
+  Title: FieldTitle,
+  Group: FieldGroup,
+  Separator: FieldSeparator,
+});

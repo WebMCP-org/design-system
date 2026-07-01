@@ -1,12 +1,22 @@
 import * as React from "react";
-import { Collapsible as BaseCollapsible } from "@base-ui/react/collapsible";
+import {
+  CollapsiblePanel,
+  type CollapsiblePanelProps,
+  CollapsibleRoot,
+  type CollapsibleRootProps,
+  CollapsibleTrigger,
+  type CollapsibleTriggerProps,
+} from "./Collapsible.js";
 import { cx } from "./_internal/class-names.js";
-import { CheckIcon, ChevronRightIcon, DotIcon, SpinnerIcon } from "./_internal/icons.js";
+import {
+  CheckIcon,
+  ChevronRightIcon,
+  DotIcon,
+  type IconProps,
+  SpinnerIcon,
+} from "./_internal/icons.js";
 
-export interface ChainOfThoughtProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Root>,
-  "className"
-> {
+export interface ChainOfThoughtProps extends Omit<CollapsibleRootProps, "className" | "unstyled"> {
   className?: string;
 }
 
@@ -41,13 +51,13 @@ export function ChainOfThought({
   ...props
 }: ChainOfThoughtProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Root ref={ref} className={cx("chain-of-thought", className)} {...props} />
+    <CollapsibleRoot ref={ref} className={cx("chain-of-thought", className)} {...props} unstyled />
   );
 }
 
 export interface ChainOfThoughtHeaderProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Trigger>,
-  "className"
+  CollapsibleTriggerProps,
+  "className" | "unstyled"
 > {
   className?: string;
 }
@@ -57,27 +67,28 @@ export interface ChainOfThoughtHeaderProps extends Omit<
  */
 export function ChainOfThoughtHeader({
   className,
-  children = "Thinking",
+  children = "Chain of Thought",
   ref,
   ...props
 }: ChainOfThoughtHeaderProps & { ref?: React.Ref<HTMLButtonElement> }) {
   return (
-    <BaseCollapsible.Trigger
+    <CollapsibleTrigger
       ref={ref}
       className={cx("chain-of-thought__header", className)}
       {...props}
+      unstyled
     >
       <span className="chain-of-thought__header-icon" aria-hidden="true">
         <ChevronRightIcon />
       </span>
       <span className="chain-of-thought__header-label">{children}</span>
-    </BaseCollapsible.Trigger>
+    </CollapsibleTrigger>
   );
 }
 
 export interface ChainOfThoughtContentProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Panel>,
-  "className"
+  CollapsiblePanelProps,
+  "className" | "unstyled"
 > {
   className?: string;
 }
@@ -92,25 +103,28 @@ export function ChainOfThoughtContent({
   ...props
 }: ChainOfThoughtContentProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Panel
+    <CollapsiblePanel
       ref={ref}
       className={cx("chain-of-thought__content", className)}
       {...props}
+      unstyled
     >
       <ol className="chain-of-thought__steps">{children}</ol>
-    </BaseCollapsible.Panel>
+    </CollapsiblePanel>
   );
 }
 
 export type ChainOfThoughtStepStatus = "pending" | "active" | "complete";
 
 export interface ChainOfThoughtStepProps extends React.HTMLAttributes<HTMLLIElement> {
+  /** Optional icon component rendered instead of the default status icon. */
+  icon?: React.ComponentType<IconProps>;
   /** Visual status of this step. */
   status?: ChainOfThoughtStepStatus;
   /** Primary label text for the step. */
-  label: string;
+  label: React.ReactNode;
   /** Optional secondary description rendered beneath the label. */
-  description?: string;
+  description?: React.ReactNode;
 }
 
 /**
@@ -119,7 +133,8 @@ export interface ChainOfThoughtStepProps extends React.HTMLAttributes<HTMLLIElem
  */
 export function ChainOfThoughtStep({
   className,
-  status = "pending",
+  icon: Icon,
+  status = "complete",
   label,
   description,
   children,
@@ -134,7 +149,9 @@ export function ChainOfThoughtStep({
       {...props}
     >
       <span className="chain-of-thought__step-indicator" aria-hidden="true">
-        {status === "complete" ? (
+        {Icon ? (
+          <Icon />
+        ) : status === "complete" ? (
           <CheckIcon />
         ) : status === "active" ? (
           <SpinnerIcon />
@@ -175,7 +192,7 @@ export interface ChainOfThoughtSearchResultProps extends Omit<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
   "title"
 > {
-  title: string;
+  title?: React.ReactNode;
 }
 
 /**
@@ -183,6 +200,7 @@ export interface ChainOfThoughtSearchResultProps extends Omit<
  */
 export function ChainOfThoughtSearchResult({
   className,
+  children,
   title,
   href,
   ref,
@@ -198,7 +216,7 @@ export function ChainOfThoughtSearchResult({
         rel="noreferrer"
         {...props}
       >
-        {title}
+        {children ?? title}
       </a>
     </li>
   );
@@ -215,6 +233,7 @@ export interface ChainOfThoughtImageProps extends React.ImgHTMLAttributes<HTMLIm
  */
 export function ChainOfThoughtImage({
   className,
+  children,
   caption,
   alt = "",
   ref,
@@ -222,7 +241,11 @@ export function ChainOfThoughtImage({
 }: ChainOfThoughtImageProps & { ref?: React.Ref<HTMLImageElement> }) {
   return (
     <figure className={cx("chain-of-thought__image", className)}>
-      <img ref={ref} alt={alt} className="chain-of-thought__image-img" {...props} />
+      {children ? (
+        <div className="chain-of-thought__image-frame">{children}</div>
+      ) : (
+        <img ref={ref} alt={alt} className="chain-of-thought__image-img" {...props} />
+      )}
       {caption ? (
         <figcaption className="chain-of-thought__image-caption">{caption}</figcaption>
       ) : null}

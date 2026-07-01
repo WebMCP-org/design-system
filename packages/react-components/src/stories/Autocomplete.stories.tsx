@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import { Autocomplete } from "../components/Autocomplete";
 
@@ -7,6 +7,12 @@ const meta = {
   component: Autocomplete.Root,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Base UI Autocomplete wrapped with Sigvelo class names and CSS-token styling. Use it when free text should narrow a suggested list; use Combobox when the user is choosing from a bounded option set.",
+      },
+    },
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof Autocomplete.Root>;
@@ -28,6 +34,14 @@ const tags = [
 ];
 
 export const Default: Story = {
+  name: "Framework search",
+  parameters: {
+    docs: {
+      description: {
+        story: "Basic text input that filters suggested framework names as the user types.",
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -83,6 +97,15 @@ const cities: City[] = [
 ];
 
 export const WithObjects: Story = {
+  name: "Object items",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Renders structured item labels while preserving the item object as the selected value.",
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -125,6 +148,15 @@ export const WithObjects: Story = {
 };
 
 export const WithGroups: Story = {
+  name: "Grouped city search",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Groups suggestions by country while keeping keyboard and filtering behavior from Base UI.",
+      },
+    },
+  },
   render: () => {
     const groupedCities = cities.reduce(
       (acc, city) => {

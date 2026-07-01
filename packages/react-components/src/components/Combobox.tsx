@@ -3,7 +3,7 @@ import { Combobox as BaseCombobox } from "@base-ui/react/combobox";
 
 // Styled wrapper components
 
-function Input({
+export function ComboboxInput({
   className = "",
   ref,
   ...props
@@ -11,10 +11,10 @@ function Input({
   className?: string;
 } & { ref?: React.Ref<HTMLInputElement> }) {
   const classes = ["combobox__input", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Input ref={ref} className={classes} {...props} />;
+  return <BaseCombobox.Input ref={ref} data-slot="combobox-input" className={classes} {...props} />;
 }
 
-function Trigger({
+export function ComboboxTrigger({
   className = "",
   ref,
   ...props
@@ -22,7 +22,9 @@ function Trigger({
   className?: string;
 } & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["combobox__trigger", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Trigger ref={ref} className={classes} {...props} />;
+  return (
+    <BaseCombobox.Trigger ref={ref} data-slot="combobox-trigger" className={classes} {...props} />
+  );
 }
 
 function Clear({
@@ -33,10 +35,10 @@ function Clear({
   className?: string;
 } & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["combobox__clear", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Clear ref={ref} className={classes} {...props} />;
+  return <BaseCombobox.Clear ref={ref} data-slot="combobox-clear" className={classes} {...props} />;
 }
 
-function Positioner({
+export function ComboboxPositioner({
   className = "",
   ref,
   ...props
@@ -44,10 +46,17 @@ function Positioner({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["combobox__positioner", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Positioner ref={ref} className={classes} {...props} />;
+  return (
+    <BaseCombobox.Positioner
+      ref={ref}
+      data-slot="combobox-positioner"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
-function Popup({
+export function ComboboxPopup({
   className = "",
   tabIndex = 0,
   ref,
@@ -56,12 +65,29 @@ function Popup({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["combobox__popup", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Popup ref={ref} tabIndex={tabIndex} className={classes} {...props} />;
+  return (
+    <BaseCombobox.Popup
+      ref={ref}
+      data-slot="combobox-content"
+      tabIndex={tabIndex}
+      className={classes}
+      {...props}
+    />
+  );
 }
 
-const List = BaseCombobox.List;
+export function ComboboxList({
+  className = "",
+  ref,
+  ...props
+}: Omit<React.ComponentPropsWithRef<typeof BaseCombobox.List>, "className"> & {
+  className?: string;
+} & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["combobox__list", className].filter(Boolean).join(" ");
+  return <BaseCombobox.List ref={ref} data-slot="combobox-list" className={classes} {...props} />;
+}
 
-function Item({
+export function ComboboxItem({
   className = "",
   ref,
   ...props
@@ -69,7 +95,7 @@ function Item({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["combobox__item", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Item ref={ref} className={classes} {...props} />;
+  return <BaseCombobox.Item ref={ref} data-slot="combobox-item" className={classes} {...props} />;
 }
 
 function ItemIndicator({
@@ -80,10 +106,17 @@ function ItemIndicator({
   className?: string;
 } & { ref?: React.Ref<HTMLSpanElement> }) {
   const classes = ["combobox__item-indicator", className].filter(Boolean).join(" ");
-  return <BaseCombobox.ItemIndicator ref={ref} className={classes} {...props} />;
+  return (
+    <BaseCombobox.ItemIndicator
+      ref={ref}
+      data-slot="combobox-item-indicator"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
-function Empty({
+export function ComboboxEmpty({
   className = "",
   ref,
   ...props
@@ -91,10 +124,10 @@ function Empty({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["combobox__empty", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Empty ref={ref} className={classes} {...props} />;
+  return <BaseCombobox.Empty ref={ref} data-slot="combobox-empty" className={classes} {...props} />;
 }
 
-function Group({
+export function ComboboxGroup({
   className = "",
   ref,
   ...props
@@ -102,10 +135,10 @@ function Group({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["combobox__group", className].filter(Boolean).join(" ");
-  return <BaseCombobox.Group ref={ref} className={classes} {...props} />;
+  return <BaseCombobox.Group ref={ref} data-slot="combobox-group" className={classes} {...props} />;
 }
 
-function GroupLabel({
+export function ComboboxLabel({
   className = "",
   ref,
   ...props
@@ -113,7 +146,14 @@ function GroupLabel({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["combobox__group-label", className].filter(Boolean).join(" ");
-  return <BaseCombobox.GroupLabel ref={ref} className={classes} {...props} />;
+  return (
+    <BaseCombobox.GroupLabel
+      ref={ref}
+      data-slot="combobox-group-label"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
@@ -156,18 +196,38 @@ function GroupLabel({
  *
  * @see {@link https://base-ui.com/react/components/combobox | Base UI Combobox}
  */
-export const Combobox = {
+export const ComboboxContent = ComboboxPopup;
+export const ComboboxValue = BaseCombobox.Value;
+export const ComboboxChips = BaseCombobox.Chips;
+export const ComboboxChip = BaseCombobox.Chip;
+export const ComboboxChipsInput = ComboboxInput;
+export const ComboboxCollection = BaseCombobox.Collection;
+export const ComboboxSeparator = BaseCombobox.Separator;
+
+export function useComboboxAnchor() {
+  return React.useRef<HTMLDivElement | null>(null);
+}
+
+export const Combobox = Object.assign(BaseCombobox.Root, {
   Root: BaseCombobox.Root,
-  Input,
-  Trigger,
+  Input: ComboboxInput,
+  Trigger: ComboboxTrigger,
   Clear,
   Portal: BaseCombobox.Portal,
-  Positioner,
-  Popup,
-  List,
-  Item,
+  Positioner: ComboboxPositioner,
+  Popup: ComboboxPopup,
+  Content: ComboboxContent,
+  List: ComboboxList,
+  Item: ComboboxItem,
   ItemIndicator,
-  Empty,
-  Group,
-  GroupLabel,
-};
+  Empty: ComboboxEmpty,
+  Group: ComboboxGroup,
+  GroupLabel: ComboboxLabel,
+  Label: ComboboxLabel,
+  Value: ComboboxValue,
+  Chips: ComboboxChips,
+  Chip: ComboboxChip,
+  ChipsInput: ComboboxChipsInput,
+  Collection: ComboboxCollection,
+  Separator: ComboboxSeparator,
+});

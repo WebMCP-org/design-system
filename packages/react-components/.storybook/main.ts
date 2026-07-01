@@ -1,17 +1,27 @@
-import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { StorybookConfig } from "@storybook/react-vite";
 import { mergeConfig } from "vite";
 
-const require = createRequire(import.meta.url);
-const baseUiReactPackageDir = dirname(require.resolve("@base-ui/react/package.json"));
+const baseUiReactPackageDir = dirname(
+  fileURLToPath(import.meta.resolve("@base-ui/react/package.json")),
+);
 const baseUiStoreCjs = join(baseUiReactPackageDir, "../utils/store/index.js");
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
-  addons: ["@storybook/addon-vitest", "@storybook/addon-a11y", "@storybook/addon-docs"],
+  addons: [
+    "@storybook/addon-vitest",
+    "@storybook/addon-a11y",
+    "@storybook/addon-docs",
+    "@storybook/addon-mcp",
+  ],
   core: {
     disableTelemetry: true,
+  },
+  features: {
+    componentsManifest: true,
+    experimentalReactComponentMeta: true,
   },
   framework: "@storybook/react-vite",
   viteFinal: (config) =>

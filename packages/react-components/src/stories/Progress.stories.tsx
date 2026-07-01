@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { Progress, ProgressTrack, ProgressIndicator } from "../components/Progress";
 import { Label } from "../components/Label";

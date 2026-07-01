@@ -1,10 +1,19 @@
 import * as React from "react";
+import { cjk } from "@streamdown/cjk";
+import { code } from "@streamdown/code";
+import { math } from "@streamdown/math";
+import { mermaid } from "@streamdown/mermaid";
+import { Streamdown } from "streamdown";
 import {
-  Collapsible as BaseCollapsible,
-  type CollapsibleRootChangeEventDetails,
-} from "@base-ui/react/collapsible";
+  CollapsiblePanel,
+  type CollapsiblePanelProps,
+  CollapsibleRoot,
+  type CollapsibleRootProps,
+  CollapsibleTrigger,
+  type CollapsibleTriggerProps,
+} from "./Collapsible.js";
 import { cx } from "./_internal/class-names.js";
-import { ChevronRightIcon } from "./_internal/icons.js";
+import { BrainIcon, ChevronRightIcon } from "./_internal/icons.js";
 
 interface ReasoningContextValue {
   isStreaming: boolean;
@@ -27,8 +36,8 @@ export function useReasoning(): ReasoningContextValue {
 }
 
 export interface ReasoningProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Root>,
-  "className" | "onOpenChange"
+  CollapsibleRootProps,
+  "className" | "onOpenChange" | "unstyled"
 > {
   className?: string;
   /**
@@ -48,6 +57,7 @@ export interface ReasoningProps extends Omit<
 /**
  * A collapsible "thinking" block for showing model reasoning (e.g. DeepSeek
  * R1, OpenAI o-series). Auto-expands while streaming and collapses when done.
+ * Adapted from Vercel AI Elements and restyled with Sigvelo CSS tokens.
  *
  * @example
  * ```tsx
@@ -56,6 +66,8 @@ export interface ReasoningProps extends Omit<
  *   <ReasoningContent>{reasoningText}</ReasoningContent>
  * </Reasoning>
  * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/reasoning | AI Elements Reasoning}
  */
 export function Reasoning({
   className,
@@ -77,7 +89,7 @@ export function Reasoning({
 
   const isControlled = open !== undefined;
   const currentOpen = isControlled ? open : internalOpen;
-  const preventAutoOpen = defaultOpen === false && !isControlled;
+  const preventAutoOpen = defaultOpen === false;
   const resolvedDuration = duration ?? internalDuration;
 
   const setOpenState = React.useCallback(
@@ -123,7 +135,7 @@ export function Reasoning({
   React.useEffect(() => {
     const wasStreaming = previousStreamingRef.current;
 
-    if (isStreaming && !wasStreaming && !preventAutoOpen) {
+    if (isStreaming && !currentOpen && !preventAutoOpen) {
       setOpenState(true);
     }
 
@@ -147,7 +159,7 @@ export function Reasoning({
   }, [currentOpen, hasAutoClosed, isStreaming, preventAutoOpen, setOpenState]);
 
   const handleOpenChange = React.useCallback(
-    (next: boolean, _eventDetails: CollapsibleRootChangeEventDetails) => {
+    (next: boolean) => {
       setOpenState(next);
     },
     [setOpenState],
@@ -165,23 +177,24 @@ export function Reasoning({
 
   return (
     <ReasoningContext.Provider value={ctx}>
-      <BaseCollapsible.Root
+      <CollapsibleRoot
         ref={ref}
         className={cx("reasoning", className)}
         open={currentOpen}
         onOpenChange={handleOpenChange}
         data-streaming={isStreaming ? "" : undefined}
         {...props}
+        unstyled
       >
         {children}
-      </BaseCollapsible.Root>
+      </CollapsibleRoot>
     </ReasoningContext.Provider>
   );
 }
 
 export interface ReasoningTriggerProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Trigger>,
-  "className"
+  CollapsibleTriggerProps,
+  "className" | "unstyled"
 > {
   className?: string;
   getThinkingMessage?: (isStreaming: boolean, duration?: number) => React.ReactNode;
@@ -211,29 +224,48 @@ export function ReasoningTrigger({
   ...props
 }: ReasoningTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const { isStreaming, duration } = useReasoning();
-  const label = children ?? getThinkingMessage(isStreaming, duration);
+
+  if (children !== undefined && children !== null) {
+    return (
+      <CollapsibleTrigger
+        ref={ref}
+        className={cx("reasoning__trigger", className)}
+        data-streaming={isStreaming ? "" : undefined}
+        {...props}
+        unstyled
+      >
+        {children}
+      </CollapsibleTrigger>
+    );
+  }
 
   return (
-    <BaseCollapsible.Trigger
+    <CollapsibleTrigger
       ref={ref}
       className={cx("reasoning__trigger", className)}
       data-streaming={isStreaming ? "" : undefined}
       {...props}
+      unstyled
     >
+      <span className="reasoning__trigger-leading-icon" aria-hidden="true">
+        <BrainIcon />
+      </span>
+      <span className="reasoning__trigger-label">{getThinkingMessage(isStreaming, duration)}</span>
       <span className="reasoning__trigger-icon" aria-hidden="true">
         <ChevronRightIcon />
       </span>
-      <span className="reasoning__trigger-label">{label}</span>
-    </BaseCollapsible.Trigger>
+    </CollapsibleTrigger>
   );
 }
 
 export interface ReasoningContentProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Panel>,
-  "className"
+  CollapsiblePanelProps,
+  "className" | "unstyled"
 > {
   className?: string;
 }
+
+const streamdownPlugins = { cjk, code, math, mermaid };
 
 /**
  * The reasoning text panel. Accepts any React node but is optimized for
@@ -246,8 +278,14 @@ export function ReasoningContent({
   ...props
 }: ReasoningContentProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Panel ref={ref} className={cx("reasoning__content", className)} {...props}>
-      <div className="reasoning__text">{children}</div>
-    </BaseCollapsible.Panel>
+    <CollapsiblePanel ref={ref} className={cx("reasoning__content", className)} {...props} unstyled>
+      <div className="reasoning__text">
+        {typeof children === "string" ? (
+          <Streamdown plugins={streamdownPlugins}>{children}</Streamdown>
+        ) : (
+          children
+        )}
+      </div>
+    </CollapsiblePanel>
   );
 }

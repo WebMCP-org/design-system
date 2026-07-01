@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import {
   EnvironmentVariable,
   EnvironmentVariableCopyButton,
@@ -26,6 +26,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  name: "Masked production env",
+  parameters: {
+    docs: {
+      description: {
+        story: "Masked values with required markers, reveal toggle, and per-variable copy actions.",
+      },
+    },
+  },
   render: () => (
     <div style={{ width: "36rem" }}>
       <EnvironmentVariables>
@@ -67,6 +75,14 @@ export const Default: Story = {
 };
 
 export const Grouped: Story = {
+  name: "Grouped variables",
+  parameters: {
+    docs: {
+      description: {
+        story: "Groups related keys while sharing the same reveal state and copy behavior.",
+      },
+    },
+  },
   render: () => (
     <div style={{ width: "36rem" }}>
       <EnvironmentVariables defaultShowValues>

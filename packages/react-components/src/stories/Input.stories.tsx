@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Input } from "../components/Input";
 
 const meta = {
@@ -73,6 +73,20 @@ export const Disabled: Story = {
     placeholder: "Disabled input",
     disabled: true,
     "aria-label": "Disabled input",
+  },
+  render: (args) => (
+    <div style={{ width: "300px" }}>
+      <Input {...args} />
+    </div>
+  ),
+};
+
+export const Invalid: Story = {
+  args: {
+    type: "email",
+    placeholder: "you@example.com",
+    "aria-invalid": true,
+    "aria-label": "Invalid email",
   },
   render: (args) => (
     <div style={{ width: "300px" }}>

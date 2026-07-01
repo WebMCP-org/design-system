@@ -73,19 +73,19 @@ export interface ScrollAreaCornerProps extends Omit<
  *
  * @see {@link https://base-ui.com/react/components/scroll-area | Base UI ScrollArea}
  */
-function ScrollAreaRoot({
+export function ScrollAreaRoot({
   className = "",
   ref,
   ...props
 }: ScrollAreaRootProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["scroll-area", className].filter(Boolean).join(" ");
-  return <BaseScrollArea.Root ref={ref} className={classes} {...props} />;
+  return <BaseScrollArea.Root ref={ref} data-slot="scroll-area" className={classes} {...props} />;
 }
 
 /**
  * The scrollable viewport container.
  */
-function ScrollAreaViewport({
+export function ScrollAreaViewport({
   className = "",
   tabIndex = 0,
   role = "group",
@@ -98,6 +98,7 @@ function ScrollAreaViewport({
   return (
     <BaseScrollArea.Viewport
       ref={ref}
+      data-slot="scroll-area-viewport"
       role={role}
       aria-label={ariaLabel ?? (ariaLabelledBy ? undefined : "Scrollable content")}
       aria-labelledby={ariaLabelledBy}
@@ -111,37 +112,79 @@ function ScrollAreaViewport({
 /**
  * The scrollbar track, either vertical or horizontal.
  */
-function ScrollAreaScrollbar({
+export function ScrollAreaScrollbar({
   className = "",
+  orientation = "vertical",
   ref,
   ...props
 }: ScrollAreaScrollbarProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["scroll-area__scrollbar", className].filter(Boolean).join(" ");
-  return <BaseScrollArea.Scrollbar ref={ref} className={classes} {...props} />;
+  return (
+    <BaseScrollArea.Scrollbar
+      ref={ref}
+      data-slot="scroll-area-scrollbar"
+      orientation={orientation}
+      className={classes}
+      {...props}
+    />
+  );
 }
+
+export const ScrollBar = ScrollAreaScrollbar;
 
 /**
  * The draggable scrollbar thumb indicator.
  */
-function ScrollAreaThumb({
+export function ScrollAreaThumb({
   className = "",
   ref,
   ...props
 }: ScrollAreaThumbProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["scroll-area__thumb", className].filter(Boolean).join(" ");
-  return <BaseScrollArea.Thumb ref={ref} className={classes} {...props} />;
+  return (
+    <BaseScrollArea.Thumb ref={ref} data-slot="scroll-area-thumb" className={classes} {...props} />
+  );
 }
 
 /**
  * Small rectangle at the intersection of scrollbars.
  */
-function ScrollAreaCorner({
+export function ScrollAreaCorner({
   className = "",
   ref,
   ...props
 }: ScrollAreaCornerProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["scroll-area__corner", className].filter(Boolean).join(" ");
   return <BaseScrollArea.Corner ref={ref} className={classes} {...props} />;
+}
+
+function hasScrollAreaParts(children: React.ReactNode) {
+  return React.Children.toArray(children).some(
+    (child) =>
+      React.isValidElement(child) &&
+      (child.type === ScrollAreaViewport ||
+        child.type === ScrollAreaScrollbar ||
+        child.type === ScrollAreaCorner),
+  );
+}
+
+function ScrollAreaDefault({
+  children,
+  ...props
+}: ScrollAreaRootProps & { ref?: React.Ref<HTMLDivElement> }) {
+  if (hasScrollAreaParts(children)) {
+    return <ScrollAreaRoot {...props}>{children}</ScrollAreaRoot>;
+  }
+
+  return (
+    <ScrollAreaRoot {...props}>
+      <ScrollAreaViewport>{children}</ScrollAreaViewport>
+      <ScrollAreaScrollbar>
+        <ScrollAreaThumb />
+      </ScrollAreaScrollbar>
+      <ScrollAreaCorner />
+    </ScrollAreaRoot>
+  );
 }
 
 /**
@@ -180,10 +223,10 @@ function ScrollAreaCorner({
  *
  * @see {@link https://base-ui.com/react/components/scroll-area | Base UI ScrollArea}
  */
-export const ScrollArea = {
+export const ScrollArea = Object.assign(ScrollAreaDefault, {
   Root: ScrollAreaRoot,
   Viewport: ScrollAreaViewport,
   Scrollbar: ScrollAreaScrollbar,
   Thumb: ScrollAreaThumb,
   Corner: ScrollAreaCorner,
-};
+});

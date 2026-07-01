@@ -98,6 +98,15 @@
   flex-direction: column;
 }
 
+.message__branch-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.message__branch-panel[hidden] {
+  display: none;
+}
+
 .message__branch-selector {
   display: inline-flex;
   align-items: center;

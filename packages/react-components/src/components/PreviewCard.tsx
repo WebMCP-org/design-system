@@ -58,6 +58,22 @@ export interface PreviewCardPopupProps extends Omit<
   /** Additional CSS class names */
   className?: string;
 }
+type PreviewCardPlacementProps = Pick<
+  PreviewCardPositionerProps,
+  | "anchor"
+  | "positionMethod"
+  | "side"
+  | "sideOffset"
+  | "align"
+  | "alignOffset"
+  | "collisionBoundary"
+  | "collisionPadding"
+  | "sticky"
+  | "arrowPadding"
+  | "disableAnchorTracking"
+  | "collisionAvoidance"
+>;
+export type PreviewCardContentProps = PreviewCardPopupProps & PreviewCardPlacementProps;
 
 /**
  * Props for the PreviewCard.Arrow component.
@@ -106,14 +122,21 @@ function PreviewCardTrigger({
   ...props
 }: PreviewCardTriggerProps & { ref?: React.Ref<HTMLAnchorElement> }) {
   const classes = ["preview-card__trigger", className].filter(Boolean).join(" ");
-  return <BasePreviewCard.Trigger ref={ref} className={classes} {...props} />;
+  return (
+    <BasePreviewCard.Trigger
+      ref={ref}
+      data-slot="hover-card-trigger"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * Renders preview card content in a portal.
  */
 const PreviewCardPortal = (props: PreviewCardPortalProps) => {
-  return <BasePreviewCard.Portal {...props} />;
+  return <BasePreviewCard.Portal data-slot="hover-card-portal" {...props} />;
 };
 
 /**
@@ -125,7 +148,14 @@ function PreviewCardBackdrop({
   ...props
 }: PreviewCardBackdropProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["preview-card__backdrop", className].filter(Boolean).join(" ");
-  return <BasePreviewCard.Backdrop ref={ref} className={classes} {...props} />;
+  return (
+    <BasePreviewCard.Backdrop
+      ref={ref}
+      data-slot="hover-card-backdrop"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
@@ -137,7 +167,14 @@ function PreviewCardPositioner({
   ...props
 }: PreviewCardPositionerProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["preview-card__positioner", className].filter(Boolean).join(" ");
-  return <BasePreviewCard.Positioner ref={ref} className={classes} {...props} />;
+  return (
+    <BasePreviewCard.Positioner
+      ref={ref}
+      data-slot="hover-card-positioner"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
@@ -149,7 +186,51 @@ function PreviewCardPopup({
   ...props
 }: PreviewCardPopupProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["preview-card__popup", className].filter(Boolean).join(" ");
-  return <BasePreviewCard.Popup ref={ref} className={classes} {...props} />;
+  return (
+    <BasePreviewCard.Popup
+      ref={ref}
+      data-slot="hover-card-content"
+      className={classes}
+      {...props}
+    />
+  );
+}
+
+function PreviewCardContent({
+  anchor,
+  positionMethod,
+  side,
+  sideOffset = 4,
+  align = "center",
+  alignOffset,
+  collisionBoundary,
+  collisionPadding,
+  sticky,
+  arrowPadding,
+  disableAnchorTracking,
+  collisionAvoidance,
+  ...props
+}: PreviewCardContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <PreviewCardPortal>
+      <PreviewCardPositioner
+        anchor={anchor}
+        positionMethod={positionMethod}
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        collisionBoundary={collisionBoundary}
+        collisionPadding={collisionPadding}
+        sticky={sticky}
+        arrowPadding={arrowPadding}
+        disableAnchorTracking={disableAnchorTracking}
+        collisionAvoidance={collisionAvoidance}
+      >
+        <PreviewCardPopup {...props} />
+      </PreviewCardPositioner>
+    </PreviewCardPortal>
+  );
 }
 
 /**
@@ -161,7 +242,9 @@ function PreviewCardArrow({
   ...props
 }: PreviewCardArrowProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["preview-card__arrow", className].filter(Boolean).join(" ");
-  return <BasePreviewCard.Arrow ref={ref} className={classes} {...props} />;
+  return (
+    <BasePreviewCard.Arrow ref={ref} data-slot="hover-card-arrow" className={classes} {...props} />
+  );
 }
 
 /**
@@ -195,6 +278,7 @@ function PreviewCardArrow({
 export const PreviewCard = {
   Root: PreviewCardRoot,
   Trigger: PreviewCardTrigger,
+  Content: PreviewCardContent,
   Portal: PreviewCardPortal,
   Backdrop: PreviewCardBackdrop,
   Positioner: PreviewCardPositioner,

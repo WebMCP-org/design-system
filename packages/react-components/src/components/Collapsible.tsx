@@ -10,6 +10,8 @@ export interface CollapsibleRootProps extends Omit<
 > {
   /** Additional CSS class names */
   className?: string;
+  /** Skip the default design-system Collapsible classes for internal composition. */
+  unstyled?: boolean;
 }
 
 /**
@@ -21,6 +23,8 @@ export interface CollapsibleTriggerProps extends Omit<
 > {
   /** Additional CSS class names */
   className?: string;
+  /** Skip the default design-system Collapsible classes for internal composition. */
+  unstyled?: boolean;
 }
 
 /**
@@ -32,6 +36,8 @@ export interface CollapsiblePanelProps extends Omit<
 > {
   /** Additional CSS class names */
   className?: string;
+  /** Skip the default design-system Collapsible classes for internal composition. */
+  unstyled?: boolean;
 }
 
 /**
@@ -47,39 +53,62 @@ export interface CollapsiblePanelProps extends Omit<
  *
  * @see {@link https://base-ui.com/react/components/collapsible | Base UI Collapsible}
  */
-function CollapsibleRoot({
+export function CollapsibleRoot({
   className = "",
+  unstyled = false,
   ref,
   ...props
 }: CollapsibleRootProps & { ref?: React.Ref<HTMLDivElement> }) {
-  const classes = ["collapsible", className].filter(Boolean).join(" ");
-  return <BaseCollapsible.Root ref={ref} className={classes} {...props} />;
+  const classes = unstyled ? className : ["collapsible", className].filter(Boolean).join(" ");
+  return <BaseCollapsible.Root ref={ref} data-slot="collapsible" className={classes} {...props} />;
 }
 
 /**
  * Button that toggles the panel visibility. Renders a `<button>` element.
  */
-function CollapsibleTrigger({
+export function CollapsibleTrigger({
   className = "",
+  unstyled = false,
   ref,
   ...props
 }: CollapsibleTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
-  const classes = ["collapsible__trigger", className].filter(Boolean).join(" ");
-  return <BaseCollapsible.Trigger ref={ref} className={classes} {...props} />;
+  const classes = unstyled
+    ? className
+    : ["collapsible__trigger", className].filter(Boolean).join(" ");
+  return (
+    <BaseCollapsible.Trigger
+      ref={ref}
+      data-slot="collapsible-trigger"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * The collapsible panel containing hidden content. Renders a `<div>` element.
  * Supports CSS animations via `--collapsible-panel-height` variable.
  */
-function CollapsiblePanel({
+export function CollapsiblePanel({
   className = "",
+  unstyled = false,
   ref,
   ...props
 }: CollapsiblePanelProps & { ref?: React.Ref<HTMLDivElement> }) {
-  const classes = ["collapsible__panel", className].filter(Boolean).join(" ");
-  return <BaseCollapsible.Panel ref={ref} className={classes} {...props} />;
+  const classes = unstyled
+    ? className
+    : ["collapsible__panel", className].filter(Boolean).join(" ");
+  return (
+    <BaseCollapsible.Panel
+      ref={ref}
+      data-slot="collapsible-content"
+      className={classes}
+      {...props}
+    />
+  );
 }
+
+export const CollapsibleContent = CollapsiblePanel;
 
 /**
  * A collapsible panel controlled by a button.
@@ -124,8 +153,9 @@ function CollapsiblePanel({
  *
  * @see {@link https://base-ui.com/react/components/collapsible | Base UI Collapsible}
  */
-export const Collapsible = {
+export const Collapsible = Object.assign(CollapsibleRoot, {
   Root: CollapsibleRoot,
   Trigger: CollapsibleTrigger,
   Panel: CollapsiblePanel,
-};
+  Content: CollapsibleContent,
+});

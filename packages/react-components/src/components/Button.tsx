@@ -1,5 +1,5 @@
 import { Button as BaseButton } from "@base-ui/react/button";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ButtonHTMLAttributes, ComponentPropsWithoutRef } from "react";
 
 /**
  * The visual rendering style of the button.
@@ -30,17 +30,106 @@ export type ButtonColor = "neutral" | "primary" | "destructive";
  * - `xl` - Extra large, 3.25rem height
  * - `icon` - Square button for icon-only content
  */
-export type ButtonSize = "xs" | "sm" | "md" | "lg" | "xl" | "icon";
+export type ButtonSize =
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "icon"
+  | "icon-xs"
+  | "icon-sm"
+  | "icon-lg";
+
+export type ShadcnButtonVariant =
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link";
+export type ShadcnButtonSize =
+  | "default"
+  | "xs"
+  | "sm"
+  | "lg"
+  | "icon"
+  | "icon-xs"
+  | "icon-sm"
+  | "icon-lg";
+
+export interface ButtonVariantsOptions {
+  variant?: ShadcnButtonVariant | ButtonVariant | null;
+  color?: ButtonColor | null;
+  size?: ShadcnButtonSize | ButtonSize | null;
+  className?: string;
+}
+
+const SHADCN_BUTTON_VARIANT: Record<ShadcnButtonVariant, [ButtonVariant, ButtonColor]> = {
+  default: ["normal", "primary"],
+  destructive: ["normal", "destructive"],
+  outline: ["outline", "neutral"],
+  secondary: ["normal", "neutral"],
+  ghost: ["ghost", "neutral"],
+  link: ["link", "primary"],
+};
+
+const SHADCN_BUTTON_SIZE: Record<ShadcnButtonSize, ButtonSize> = {
+  default: "md",
+  xs: "xs",
+  sm: "sm",
+  lg: "lg",
+  icon: "icon",
+  "icon-xs": "icon-xs",
+  "icon-sm": "icon-sm",
+  "icon-lg": "icon-lg",
+};
+
+export function buttonVariants({
+  variant = "default",
+  color,
+  size = "default",
+  className,
+}: ButtonVariantsOptions = {}) {
+  const buttonVariant = variant ?? "default";
+  const mapped =
+    buttonVariant === "normal" ||
+    buttonVariant === "outline" ||
+    buttonVariant === "ghost" ||
+    buttonVariant === "link"
+      ? ([buttonVariant, color ?? "primary"] as const)
+      : SHADCN_BUTTON_VARIANT[buttonVariant];
+  const requestedSize = size ?? "default";
+  const buttonSize =
+    requestedSize === "default"
+      ? "md"
+      : (SHADCN_BUTTON_SIZE[requestedSize as ShadcnButtonSize] ?? requestedSize);
+
+  return [
+    "button",
+    `button--${mapped[0]}`,
+    `button--${color ?? mapped[1]}`,
+    `button--${buttonSize}`,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
 
 /**
  * Props for the Button component.
  */
-export interface ButtonProps extends ComponentPropsWithoutRef<typeof BaseButton> {
+type BaseButtonProps = ComponentPropsWithoutRef<typeof BaseButton>;
+
+export interface ButtonProps
+  extends
+    BaseButtonProps,
+    Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseButtonProps | "color"> {
   /**
    * The visual rendering style of the button.
-   * @default 'normal'
+   * @default 'default'
    */
-  variant?: ButtonVariant;
+  variant?: ShadcnButtonVariant | ButtonVariant;
 
   /**
    * The semantic color intent of the button.
@@ -52,7 +141,7 @@ export interface ButtonProps extends ComponentPropsWithoutRef<typeof BaseButton>
    * The size of the button.
    * @default 'md'
    */
-  size?: ButtonSize;
+  size?: ShadcnButtonSize | ButtonSize;
 }
 
 /**
@@ -60,7 +149,8 @@ export interface ButtonProps extends ComponentPropsWithoutRef<typeof BaseButton>
  *
  * Separates visual style (`variant`) from color intent (`color`) for
  * maximum flexibility. Supports keyboard navigation, focus management, and
- * accessibility out of the box.
+ * accessibility out of the box. Keeps shadcn-compatible variant and size
+ * aliases for migration, while styling through Sigvelo CSS tokens.
  *
  * @example
  * ```tsx
@@ -71,18 +161,21 @@ export interface ButtonProps extends ComponentPropsWithoutRef<typeof BaseButton>
  * ```
  *
  * @see {@link https://base-ui.com/react/components/button | Base UI Button}
+ * @see {@link https://ui.shadcn.com/docs/components/base/button | shadcn/ui Button}
  */
 export function Button({
-  variant = "normal",
-  color = "primary",
-  size = "md",
+  variant = "default",
+  color,
+  size = "default",
   className,
   ref,
   ...props
 }: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
-  const classes = ["button", `button--${variant}`, `button--${color}`, `button--${size}`, className]
-    .filter(Boolean)
-    .join(" ");
+  const classes =
+    typeof className === "function"
+      ? (state: BaseButton.State) =>
+          buttonVariants({ variant, color, size, className: className(state) })
+      : buttonVariants({ variant, color, size, className });
 
-  return <BaseButton ref={ref} className={classes} {...props} />;
+  return <BaseButton ref={ref} data-slot="button" className={classes} {...props} />;
 }

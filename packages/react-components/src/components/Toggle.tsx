@@ -1,15 +1,33 @@
 import * as React from "react";
 import { Toggle as BaseToggle } from "@base-ui/react/toggle";
 
+export interface ToggleVariantsOptions {
+  variant?: "default" | "outline" | null;
+  size?: "default" | "sm" | "lg" | null;
+  className?: string;
+}
+
 /**
  * Props for the Toggle component.
  */
-export interface ToggleProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseToggle>,
-  "className"
-> {
-  /** Additional CSS class names */
-  className?: string;
+export interface ToggleProps
+  extends
+    Omit<React.ComponentPropsWithoutRef<typeof BaseToggle>, "className">,
+    ToggleVariantsOptions {}
+
+export function toggleVariants({
+  variant = "default",
+  size = "default",
+  className,
+}: ToggleVariantsOptions = {}) {
+  return [
+    "toggle",
+    variant === "outline" && "toggle--outline",
+    size !== "default" && `toggle--${size}`,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
 
 /**
@@ -54,9 +72,11 @@ export interface ToggleProps extends Omit<
  */
 export function Toggle({
   className = "",
+  variant,
+  size,
   ref,
   ...props
 }: ToggleProps & { ref?: React.Ref<HTMLButtonElement> }) {
-  const classes = ["toggle", className].filter(Boolean).join(" ");
-  return <BaseToggle ref={ref} className={classes} {...props} />;
+  const classes = toggleVariants({ variant, size, className });
+  return <BaseToggle ref={ref} data-slot="toggle" className={classes} {...props} />;
 }

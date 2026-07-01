@@ -3,11 +3,65 @@ import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const sourceDirs = ["packages/design-tokens/src", "packages/react-components/src"];
+const sourceDirs = [
+  "packages/design-tokens/src",
+  "packages/react-components/.storybook",
+  "packages/react-components/src",
+];
 const sourceFiles = sourceDirs.flatMap((dir) => walk(join(root, dir)));
 const cssTokenFiles = walk(join(root, "packages/design-tokens/src")).filter((file) =>
   file.endsWith(".css"),
 );
+const reactStylesDir = join(root, "packages/react-components/src/styles");
+const reactComponentsDir = join(root, "packages/react-components/src/components");
+const reactStyleIndex = readFileSync(join(reactStylesDir, "index.css"), "utf8");
+const reactPackageIndex = readFileSync(
+  join(root, "packages/react-components/src/index.ts"),
+  "utf8",
+);
+const baseUiWrapperOwners = new Map([
+  ["@base-ui/react/accordion", "Accordion.tsx"],
+  ["@base-ui/react/alert-dialog", "AlertDialog.tsx"],
+  ["@base-ui/react/autocomplete", "Autocomplete.tsx"],
+  ["@base-ui/react/avatar", "Avatar.tsx"],
+  ["@base-ui/react/button", "Button.tsx"],
+  ["@base-ui/react/checkbox", "Checkbox.tsx"],
+  ["@base-ui/react/checkbox-group", "CheckboxGroup.tsx"],
+  ["@base-ui/react/collapsible", "Collapsible.tsx"],
+  ["@base-ui/react/combobox", "Combobox.tsx"],
+  ["@base-ui/react/context-menu", "ContextMenu.tsx"],
+  ["@base-ui/react/dialog", "Dialog.tsx"],
+  ["@base-ui/react/field", "Field.tsx"],
+  ["@base-ui/react/fieldset", "Fieldset.tsx"],
+  ["@base-ui/react/form", "Form.tsx"],
+  ["@base-ui/react/input", "Input.tsx"],
+  ["@base-ui/react/menu", "Menu.tsx"],
+  ["@base-ui/react/menubar", "Menubar.tsx"],
+  ["@base-ui/react/meter", "Meter.tsx"],
+  ["@base-ui/react/navigation-menu", "NavigationMenu.tsx"],
+  ["@base-ui/react/number-field", "NumberField.tsx"],
+  ["@base-ui/react/popover", "Popover.tsx"],
+  ["@base-ui/react/preview-card", "PreviewCard.tsx"],
+  ["@base-ui/react/progress", "Progress.tsx"],
+  ["@base-ui/react/radio", "RadioGroup.tsx"],
+  ["@base-ui/react/radio-group", "RadioGroup.tsx"],
+  ["@base-ui/react/scroll-area", "ScrollArea.tsx"],
+  ["@base-ui/react/select", "Select.tsx"],
+  ["@base-ui/react/separator", "Separator.tsx"],
+  ["@base-ui/react/slider", "Slider.tsx"],
+  ["@base-ui/react/switch", "Switch.tsx"],
+  ["@base-ui/react/tabs", "Tabs.tsx"],
+  ["@base-ui/react/toast", "Toast.tsx"],
+  ["@base-ui/react/toggle", "Toggle.tsx"],
+  ["@base-ui/react/toggle-group", "ToggleGroup.tsx"],
+  ["@base-ui/react/toolbar", "Toolbar.tsx"],
+  ["@base-ui/react/tooltip", "Tooltip.tsx"],
+]);
+const allowedBaseUiBypasses = new Set([
+  // These wrappers are intentionally implemented from two related Base UI primitives.
+  "Menubar.tsx:@base-ui/react/menu",
+  "ToggleGroup.tsx:@base-ui/react/toggle",
+]);
 
 const legacyTokens = [
   "accent",
@@ -84,6 +138,54 @@ for (const file of sourceFiles) {
 
   if (/@mcp-b\/design-tokens\/(?:compat|public-brand|presets|styles)\b/.test(text)) {
     failures.push(`${rel}: imports a removed design-token compatibility or preset path`);
+  }
+
+  const isReactRuntimeSource =
+    rel.startsWith("packages/react-components/src/components/") ||
+    rel.startsWith("packages/react-components/src/styles/");
+  if (
+    isReactRuntimeSource &&
+    /@tailwind\b|tailwindcss\b|tailwind-merge\b|class-variance-authority\b|@radix-ui\//.test(text)
+  ) {
+    failures.push(`${rel}: uses Tailwind, shadcn, or Radix runtime internals`);
+  }
+
+  if (rel.startsWith("packages/react-components/src/components/")) {
+    const fileName = rel.slice("packages/react-components/src/components/".length);
+    for (const match of text.matchAll(/from\s+["'](@base-ui\/react[^"']+)["']/g)) {
+      const owner = baseUiWrapperOwners.get(match[1]);
+      if (owner && owner !== fileName && !allowedBaseUiBypasses.has(`${fileName}:${match[1]}`)) {
+        failures.push(
+          `${rel}: imports ${match[1]} directly; use the internal ${owner.replace(
+            /\.tsx$/,
+            "",
+          )} wrapper`,
+        );
+      }
+    }
+  }
+}
+
+for (const file of readdirSync(reactStylesDir).filter((file) => file.endsWith(".css"))) {
+  if (["base.css", "index.css", "tokens.css"].includes(file)) {
+    continue;
+  }
+  if (!reactStyleIndex.includes(`"./${file}"`) && !reactStyleIndex.includes(`'./${file}'`)) {
+    failures.push(
+      `packages/react-components/src/styles/${file}: is not imported by styles/index.css`,
+    );
+  }
+}
+
+for (const file of readdirSync(reactComponentsDir).filter((file) => file.endsWith(".tsx"))) {
+  if (file.endsWith(".test.tsx")) {
+    continue;
+  }
+  const componentPath = `./components/${file.replace(/\.tsx$/, ".js")}`;
+  if (!reactPackageIndex.includes(componentPath)) {
+    failures.push(
+      `packages/react-components/src/components/${file}: is not exported by src/index.ts`,
+    );
   }
 }
 

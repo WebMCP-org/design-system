@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import { Task, TaskContent, TaskItem, TaskItemFile, TaskTrigger } from "../components/Task";
 
 const meta = {
@@ -39,7 +40,7 @@ export const Default: Story = {
 export const Collapsed: Story = {
   render: () => (
     <div style={{ width: "32rem" }}>
-      <Task>
+      <Task defaultOpen={false}>
         <TaskTrigger title="Generate report (12 steps)" />
         <TaskContent>
           <TaskItem>Gather input from the database</TaskItem>
@@ -63,7 +64,7 @@ export const Multiple: Story = {
           <TaskItem>Updated the affected selector</TaskItem>
         </TaskContent>
       </Task>
-      <Task>
+      <Task defaultOpen={false}>
         <TaskTrigger title="Run tests" />
         <TaskContent>
           <TaskItem>Lint pass</TaskItem>
@@ -73,4 +74,28 @@ export const Multiple: Story = {
       </Task>
     </div>
   ),
+};
+
+export const VercelCompatibleProps: Story = {
+  render: () => (
+    <div style={{ width: "32rem" }}>
+      <Task>
+        <TaskTrigger title="Fallback title">
+          <span>Custom trigger</span>
+        </TaskTrigger>
+        <TaskContent>
+          <TaskItem>
+            Updated <TaskItemFile>routes.ts</TaskItemFile>
+          </TaskItem>
+        </TaskContent>
+      </Task>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByText("Custom trigger")).toBeInTheDocument();
+    await expect(canvas.queryByText("Fallback title")).not.toBeInTheDocument();
+    await expect(canvas.getByText("routes.ts")).toBeInTheDocument();
+  },
 };

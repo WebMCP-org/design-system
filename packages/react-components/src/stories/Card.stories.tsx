@@ -1,5 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Card } from "../components/Card";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../components/Card";
 import { Button } from "../components/Button";
 
 const meta = {
@@ -59,6 +67,35 @@ export const WithButton: Story = {
         Cards can contain any content, including buttons.
       </p>
       <Button color="primary">Click Me</Button>
+    </Card>
+  ),
+};
+
+export const ShadcnAnatomy: Story = {
+  args: {
+    hover: false,
+  },
+  render: (args) => (
+    <Card {...args} style={{ width: "360px" }}>
+      <CardHeader>
+        <CardTitle>Team Plan</CardTitle>
+        <CardDescription>Usage and billing controls</CardDescription>
+        <CardAction>
+          <Button variant="ghost" color="neutral" size="sm">
+            Manage
+          </Button>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <p style={{ margin: 0, color: "var(--sigvelo-color-text-muted)" }}>
+          24 seats active this month.
+        </p>
+      </CardContent>
+      <CardFooter>
+        <Button color="primary" size="sm">
+          Upgrade
+        </Button>
+      </CardFooter>
     </Card>
   ),
 };

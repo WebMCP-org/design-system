@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Reasoning, ReasoningContent, ReasoningTrigger } from "../components/Reasoning";
@@ -81,5 +82,44 @@ export const Streaming: Story = {
         </Button>
       </div>
     );
+  },
+};
+
+export const ControlledStreamingRequest: Story = {
+  render: function ControlledStreamingRequest() {
+    const [requestedOpen, setRequestedOpen] = useState(false);
+
+    return (
+      <div style={{ width: "32rem" }}>
+        <Reasoning open={false} isStreaming onOpenChange={setRequestedOpen}>
+          <ReasoningTrigger />
+          <ReasoningContent>{SAMPLE_REASONING}</ReasoningContent>
+        </Reasoning>
+        <p>{requestedOpen ? "Requested open" : "No open request"}</p>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(await canvas.findByText("Requested open")).toBeInTheDocument();
+  },
+};
+
+export const CustomTriggerChildren: Story = {
+  render: () => (
+    <div style={{ width: "32rem" }}>
+      <Reasoning duration={3}>
+        <ReasoningTrigger>
+          <span>Custom reasoning trigger</span>
+        </ReasoningTrigger>
+        <ReasoningContent>{SAMPLE_REASONING}</ReasoningContent>
+      </Reasoning>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByText("Custom reasoning trigger")).toBeInTheDocument();
+    await expect(canvas.queryByText(/Thought for/)).not.toBeInTheDocument();
   },
 };

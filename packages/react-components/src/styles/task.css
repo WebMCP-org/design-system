@@ -44,9 +44,13 @@
   border-end-end-radius: 0;
 }
 
+.task__trigger-leading-icon,
 .task__trigger-icon {
   display: inline-flex;
   color: var(--sigvelo-color-text-muted);
+}
+
+.task__trigger-icon {
   transition: transform 200ms ease;
 }
 

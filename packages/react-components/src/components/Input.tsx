@@ -30,5 +30,5 @@ export function Input({
 }: InputProps & { ref?: React.Ref<HTMLInputElement> }) {
   const classes = ["input", className].filter(Boolean).join(" ");
 
-  return <BaseInput ref={ref} className={classes} {...props} />;
+  return <BaseInput ref={ref} data-slot="input" className={classes} {...props} />;
 }

@@ -1,13 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import {
   Dialog,
+  DialogTrigger,
   DialogPortal,
   DialogBackdrop,
   DialogPopup,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
   DialogTitle,
   DialogDescription,
+  DialogClose,
 } from "../components/Dialog";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
@@ -83,6 +88,32 @@ export const Default: Story = {
     await expect(
       screen.getByText("This is a description of what the dialog is for."),
     ).toBeInTheDocument();
+  },
+};
+
+export const ShadcnContentAlias: Story = {
+  render: () => (
+    <Dialog>
+      <DialogTrigger render={<Button color="primary" />}>Open Composed Dialog</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Composed Dialog</DialogTitle>
+          <DialogDescription>
+            Content includes the portal, backdrop, popup, and close button.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose>Done</DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByText("Open Composed Dialog"));
+
+    await expect(await screen.findByText("Composed Dialog")).toBeInTheDocument();
+    await expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
   },
 };
 

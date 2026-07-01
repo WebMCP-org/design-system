@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Select as BaseSelect } from "@base-ui/react/select";
+import { ArrowDownIcon, ArrowUpIcon, CheckIcon } from "./_internal/icons.js";
 
 // Context to track value -> label mappings
 type SelectLabelsContextType = {
@@ -23,9 +24,9 @@ export interface SelectTriggerProps extends Omit<BaseSelect.Trigger.Props, "clas
   className?: string;
   /**
    * The size of the select trigger.
-   * @default 'md'
+   * @default 'default'
    */
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "default";
 }
 
 export interface SelectValueProps extends Omit<BaseSelect.Value.Props, "children"> {
@@ -52,6 +53,44 @@ export interface SelectOptionGroupProps extends Omit<BaseSelect.Group.Props, "cl
   className?: string;
   label?: string;
 }
+export type SelectItemProps = SelectOptionProps;
+export type SelectGroupProps = SelectOptionGroupProps;
+export interface SelectLabelProps extends Omit<BaseSelect.GroupLabel.Props, "className"> {
+  className?: string;
+}
+export interface SelectSeparatorProps extends Omit<BaseSelect.Separator.Props, "className"> {
+  className?: string;
+}
+export interface SelectScrollUpButtonProps extends Omit<
+  BaseSelect.ScrollUpArrow.Props,
+  "className"
+> {
+  className?: string;
+}
+export interface SelectScrollDownButtonProps extends Omit<
+  BaseSelect.ScrollDownArrow.Props,
+  "className"
+> {
+  className?: string;
+}
+type SelectPlacementProps = Pick<
+  SelectPositionerProps,
+  | "anchor"
+  | "positionMethod"
+  | "side"
+  | "sideOffset"
+  | "align"
+  | "alignOffset"
+  | "collisionBoundary"
+  | "collisionPadding"
+  | "sticky"
+  | "arrowPadding"
+  | "disableAnchorTracking"
+  | "collisionAvoidance"
+> & {
+  position?: "popper" | "item-aligned";
+};
+export type SelectContentProps = SelectPopupProps & SelectPlacementProps;
 
 /**
  * A select component for choosing from a list of options.
@@ -125,21 +164,36 @@ export function Select({ items, ...props }: SelectProps) {
 
   return (
     <SelectLabelsContext.Provider value={contextValue}>
-      <BaseSelect.Root {...props} />
+      <BaseSelect.Root data-slot="select" {...props} />
     </SelectLabelsContext.Provider>
   );
 }
 
 export function SelectTrigger({
-  size = "md",
+  size = "default",
   className = "",
+  children,
   ref,
   ...props
 }: SelectTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
-  const classes = ["select__trigger", size !== "md" && `select__trigger--${size}`, className]
+  const normalizedSize = size === "md" ? "default" : size;
+  const classes = ["select__trigger", normalizedSize === "sm" && "select__trigger--sm", className]
     .filter(Boolean)
     .join(" ");
-  return <BaseSelect.Trigger ref={ref} className={classes} {...props} />;
+  return (
+    <BaseSelect.Trigger
+      ref={ref}
+      data-slot="select-trigger"
+      data-size={normalizedSize}
+      className={classes}
+      {...props}
+    >
+      {children}
+      <BaseSelect.Icon className="select__icon">
+        <ArrowDownIcon />
+      </BaseSelect.Icon>
+    </BaseSelect.Trigger>
+  );
 }
 
 export function SelectValue({
@@ -153,7 +207,7 @@ export function SelectValue({
   // If custom children provided, use that
   if (children) {
     return (
-      <BaseSelect.Value ref={ref} placeholder={placeholder} {...props}>
+      <BaseSelect.Value ref={ref} data-slot="select-value" placeholder={placeholder} {...props}>
         {children}
       </BaseSelect.Value>
     );
@@ -161,7 +215,7 @@ export function SelectValue({
 
   // Otherwise, look up the label from context
   return (
-    <BaseSelect.Value ref={ref} {...props}>
+    <BaseSelect.Value ref={ref} data-slot="select-value" {...props}>
       {(value) => {
         if (value === null || value === undefined || value === "") {
           return placeholder ? <span className="select__placeholder">{placeholder}</span> : null;
@@ -190,7 +244,50 @@ export function SelectPopup({
   ...props
 }: SelectPopupProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["select__popup", className].filter(Boolean).join(" ");
-  return <BaseSelect.Popup ref={ref} className={classes} {...props} />;
+  return <BaseSelect.Popup ref={ref} data-slot="select-content" className={classes} {...props} />;
+}
+
+export function SelectContent({
+  anchor,
+  positionMethod,
+  side,
+  sideOffset = 4,
+  align,
+  alignOffset,
+  collisionBoundary,
+  collisionPadding,
+  sticky,
+  arrowPadding,
+  disableAnchorTracking,
+  collisionAvoidance,
+  position,
+  children,
+  ...props
+}: SelectContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <BaseSelect.Portal>
+      <SelectPositioner
+        anchor={anchor}
+        positionMethod={positionMethod}
+        side={side}
+        sideOffset={position === "item-aligned" ? 0 : sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        collisionBoundary={collisionBoundary}
+        collisionPadding={collisionPadding}
+        sticky={sticky}
+        arrowPadding={arrowPadding}
+        disableAnchorTracking={disableAnchorTracking}
+        collisionAvoidance={collisionAvoidance}
+      >
+        <SelectPopup {...props}>
+          <SelectScrollUpButton />
+          <SelectList>{children}</SelectList>
+          <SelectScrollDownButton />
+        </SelectPopup>
+      </SelectPositioner>
+    </BaseSelect.Portal>
+  );
 }
 
 export function SelectList({
@@ -199,7 +296,7 @@ export function SelectList({
   ...props
 }: SelectListProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["select__list", className].filter(Boolean).join(" ");
-  return <BaseSelect.List ref={ref} className={classes} {...props} />;
+  return <BaseSelect.List ref={ref} data-slot="select-viewport" className={classes} {...props} />;
 }
 
 export function SelectOption({
@@ -226,11 +323,18 @@ export function SelectOption({
 
   const classes = ["select__option", className].filter(Boolean).join(" ");
   return (
-    <BaseSelect.Item ref={ref} className={classes} value={value} {...props}>
-      {children}
+    <BaseSelect.Item ref={ref} data-slot="select-item" className={classes} value={value} {...props}>
+      <span data-slot="select-item-indicator" className="select__item-indicator">
+        <BaseSelect.ItemIndicator>
+          <CheckIcon />
+        </BaseSelect.ItemIndicator>
+      </span>
+      <BaseSelect.ItemText>{children}</BaseSelect.ItemText>
     </BaseSelect.Item>
   );
 }
+
+export const SelectItem = SelectOption;
 
 export function SelectOptionGroup({
   label,
@@ -241,11 +345,79 @@ export function SelectOptionGroup({
 }: SelectOptionGroupProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["select__option-group", className].filter(Boolean).join(" ");
   return (
-    <BaseSelect.Group ref={ref} className={classes} {...props}>
+    <BaseSelect.Group ref={ref} data-slot="select-group" className={classes} {...props}>
       {label && (
-        <BaseSelect.GroupLabel className="select__group-label">{label}</BaseSelect.GroupLabel>
+        <BaseSelect.GroupLabel data-slot="select-label" className="select__group-label">
+          {label}
+        </BaseSelect.GroupLabel>
       )}
       {children}
     </BaseSelect.Group>
+  );
+}
+
+export const SelectGroup = SelectOptionGroup;
+
+export function SelectLabel({
+  className = "",
+  ref,
+  ...props
+}: SelectLabelProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["select__group-label", className].filter(Boolean).join(" ");
+  return (
+    <BaseSelect.GroupLabel ref={ref} data-slot="select-label" className={classes} {...props} />
+  );
+}
+
+export function SelectSeparator({
+  className = "",
+  ref,
+  ...props
+}: SelectSeparatorProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["select__separator", className].filter(Boolean).join(" ");
+  return (
+    <BaseSelect.Separator ref={ref} data-slot="select-separator" className={classes} {...props} />
+  );
+}
+
+export function SelectScrollUpButton({
+  className = "",
+  children,
+  ref,
+  ...props
+}: SelectScrollUpButtonProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["select__scroll-button", "select__scroll-button--up", className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <BaseSelect.ScrollUpArrow
+      ref={ref}
+      data-slot="select-scroll-up-button"
+      className={classes}
+      {...props}
+    >
+      {children ?? <ArrowUpIcon />}
+    </BaseSelect.ScrollUpArrow>
+  );
+}
+
+export function SelectScrollDownButton({
+  className = "",
+  children,
+  ref,
+  ...props
+}: SelectScrollDownButtonProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["select__scroll-button", "select__scroll-button--down", className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <BaseSelect.ScrollDownArrow
+      ref={ref}
+      data-slot="select-scroll-down-button"
+      className={classes}
+      {...props}
+    >
+      {children ?? <ArrowDownIcon />}
+    </BaseSelect.ScrollDownArrow>
   );
 }

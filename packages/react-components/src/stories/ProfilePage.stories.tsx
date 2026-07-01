@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { Avatar } from "../components/Avatar";
 import { Badge } from "../components/Badge";
@@ -26,6 +26,7 @@ const meta: Meta = {
   parameters: {
     layout: "centered",
   },
+  tags: ["!manifest"],
 };
 
 export default meta;

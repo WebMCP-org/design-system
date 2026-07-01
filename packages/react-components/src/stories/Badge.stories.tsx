@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Badge } from "../components/Badge";
 
 const meta: Meta<typeof Badge> = {
@@ -11,7 +11,7 @@ const meta: Meta<typeof Badge> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["normal", "outline"],
+      options: ["default", "secondary", "destructive", "outline", "ghost", "link", "normal"],
     },
     color: {
       control: "select",
@@ -72,6 +72,22 @@ export const Outline: Story = {
       </Badge>
       <Badge variant="outline" color="destructive">
         Destructive
+      </Badge>
+    </div>
+  ),
+};
+
+export const ShadcnVariants: Story = {
+  name: "shadcn Variants",
+  render: () => (
+    <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+      <Badge>Default</Badge>
+      <Badge variant="secondary">Secondary</Badge>
+      <Badge variant="destructive">Destructive</Badge>
+      <Badge variant="outline">Outline</Badge>
+      <Badge variant="ghost">Ghost</Badge>
+      <Badge asChild variant="link">
+        <a href="#badge-link">Link</a>
       </Badge>
     </div>
   ),

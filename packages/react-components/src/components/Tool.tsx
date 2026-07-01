@@ -1,10 +1,25 @@
 import * as React from "react";
-import { Collapsible as BaseCollapsible } from "@base-ui/react/collapsible";
 import { Badge, type BadgeColor } from "./Badge.js";
 import { CodeBlock, CodeBlockContainer, CodeBlockContent } from "./CodeBlock.js";
+import {
+  CollapsiblePanel,
+  type CollapsiblePanelProps,
+  CollapsibleRoot,
+  type CollapsibleRootProps,
+  CollapsibleTrigger,
+  type CollapsibleTriggerProps,
+} from "./Collapsible.js";
 import { formatStructuredCodeDisplay } from "../utils/structured-code.js";
 import { cx } from "./_internal/class-names.js";
-import { ChevronRightIcon } from "./_internal/icons.js";
+import {
+  CheckIcon,
+  ChevronRightIcon,
+  DotIcon,
+  SpinnerIcon,
+  WarningIcon,
+  WrenchIcon,
+  XIcon,
+} from "./_internal/icons.js";
 
 export type ToolState =
   | "input-streaming"
@@ -14,6 +29,13 @@ export type ToolState =
   | "output-available"
   | "output-error"
   | "output-denied";
+
+export interface ToolPart {
+  state: ToolState;
+  input?: unknown;
+  output?: unknown;
+  errorText?: string;
+}
 
 const STATE_TO_COLOR: Record<ToolState, BadgeColor> = {
   "input-streaming": "primary",
@@ -35,8 +57,27 @@ const STATE_LABEL: Record<ToolState, string> = {
   "output-denied": "Denied",
 };
 
+const STATE_ICON: Record<ToolState, React.ReactNode> = {
+  "input-streaming": <DotIcon />,
+  "input-available": <SpinnerIcon className="tool__status-spinner" />,
+  "approval-requested": <WarningIcon />,
+  "approval-responded": <CheckIcon />,
+  "output-available": <CheckIcon />,
+  "output-error": <XIcon />,
+  "output-denied": <XIcon />,
+};
+
+export function getStatusBadge(status: ToolState) {
+  return (
+    <Badge color={STATE_TO_COLOR[status]} size="sm" className="tool__header-badge">
+      {STATE_ICON[status]}
+      {STATE_LABEL[status]}
+    </Badge>
+  );
+}
+
 interface ToolContextValue {
-  state: ToolState;
+  state?: ToolState;
 }
 
 const ToolContext = React.createContext<ToolContextValue | null>(null);
@@ -49,19 +90,17 @@ function useToolContext(): ToolContextValue {
   return ctx;
 }
 
-export interface ToolProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Root>,
-  "className"
-> {
+export interface ToolProps extends Omit<CollapsibleRootProps, "className" | "unstyled"> {
   className?: string;
   /** Current state of the tool invocation. */
-  state: ToolState;
+  state?: ToolState;
 }
 
 /**
  * Displays a collapsible tool invocation (name, input, output, state).
  * The state drives the status badge color and default open behavior —
  * `output-available`, `output-error`, and `output-denied` auto-open.
+ * Adapted from Vercel AI Elements and restyled with Sigvelo CSS tokens.
  *
  * @example
  * ```tsx
@@ -73,6 +112,8 @@ export interface ToolProps extends Omit<
  *   </ToolContent>
  * </Tool>
  * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/tool | AI Elements Tool}
  */
 export function Tool({
   className,
@@ -87,20 +128,21 @@ export function Tool({
 
   return (
     <ToolContext.Provider value={ctx}>
-      <BaseCollapsible.Root
+      <CollapsibleRoot
         ref={ref}
         className={cx("tool", className)}
         defaultOpen={defaultOpen ?? autoOpen}
-        data-state={state}
+        data-state={state ?? undefined}
         {...props}
+        unstyled
       />
     </ToolContext.Provider>
   );
 }
 
 export interface ToolHeaderProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Trigger>,
-  "className" | "type"
+  CollapsibleTriggerProps,
+  "className" | "type" | "unstyled"
 > {
   className?: string;
   /** The tool "type" (e.g. "function", "retrieval"). */
@@ -109,6 +151,8 @@ export interface ToolHeaderProps extends Omit<
   toolName?: string;
   /** Optional human-readable title shown alongside the tool name. */
   title?: string;
+  /** Current state of the tool invocation. Matches Vercel AI Elements. */
+  state?: ToolState;
 }
 
 /**
@@ -119,31 +163,36 @@ export function ToolHeader({
   type,
   toolName,
   title,
+  state: stateProp,
   ref,
   ...props
 }: ToolHeaderProps & { ref?: React.Ref<HTMLButtonElement> }) {
-  const { state } = useToolContext();
+  const { state: contextState } = useToolContext();
+  const state = stateProp ?? contextState ?? "input-available";
+  const derivedName =
+    type === "dynamic-tool" && toolName
+      ? toolName
+      : type.startsWith("tool-")
+        ? type.split("-").slice(1).join("-")
+        : (toolName ?? type);
 
   return (
-    <BaseCollapsible.Trigger ref={ref} className={cx("tool__header", className)} {...props}>
+    <CollapsibleTrigger ref={ref} className={cx("tool__header", className)} {...props} unstyled>
+      <span className="tool__header-tool-icon" aria-hidden="true">
+        <WrenchIcon />
+      </span>
+      <span className="tool__header-type">{type}</span>
+      <span className="tool__header-name">{title ?? derivedName}</span>
+      <span className="tool__header-spacer" />
+      {getStatusBadge(state)}
       <span className="tool__header-icon" aria-hidden="true">
         <ChevronRightIcon />
       </span>
-      <span className="tool__header-type">{type}</span>
-      {toolName ? <span className="tool__header-name">{toolName}</span> : null}
-      {title ? <span className="tool__header-title">{title}</span> : null}
-      <span className="tool__header-spacer" />
-      <Badge color={STATE_TO_COLOR[state]} size="sm" className="tool__header-badge">
-        {STATE_LABEL[state]}
-      </Badge>
-    </BaseCollapsible.Trigger>
+    </CollapsibleTrigger>
   );
 }
 
-export interface ToolContentProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Panel>,
-  "className"
-> {
+export interface ToolContentProps extends Omit<CollapsiblePanelProps, "className" | "unstyled"> {
   className?: string;
 }
 
@@ -157,9 +206,9 @@ export function ToolContent({
   ...props
 }: ToolContentProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Panel ref={ref} className={cx("tool__content", className)} {...props}>
+    <CollapsiblePanel ref={ref} className={cx("tool__content", className)} {...props} unstyled>
       <div className="tool__content-inner">{children}</div>
-    </BaseCollapsible.Panel>
+    </CollapsiblePanel>
   );
 }
 
@@ -204,7 +253,7 @@ export function ToolInput({
 
 export interface ToolOutputProps extends React.HTMLAttributes<HTMLDivElement> {
   /** The tool output (any React node). Mutually exclusive with errorText. */
-  output?: React.ReactNode;
+  output?: unknown;
   /** Error message, rendered with destructive styling. */
   errorText?: string;
 }
@@ -219,7 +268,23 @@ export function ToolOutput({
   ref,
   ...props
 }: ToolOutputProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const formattedOutput = React.useMemo(() => {
+    if (output && typeof output === "object" && !React.isValidElement(output)) {
+      return formatStructuredCodeDisplay(output);
+    }
+
+    if (typeof output === "string") {
+      return { code: output, language: "json" as const };
+    }
+
+    return null;
+  }, [output]);
   const isError = errorText !== undefined;
+
+  if (!(output || errorText)) {
+    return null;
+  }
+
   return (
     <div
       ref={ref}
@@ -227,7 +292,21 @@ export function ToolOutput({
       {...props}
     >
       <div className="tool__section-label">{isError ? "Error" : "Output"}</div>
-      {isError ? <div className="tool__error-text">{errorText}</div> : <div>{output}</div>}
+      {isError ? (
+        <div className="tool__error-text">{errorText}</div>
+      ) : formattedOutput ? (
+        <CodeBlock
+          code={formattedOutput.code}
+          language={formattedOutput.language}
+          className="tool__code-block"
+        >
+          <CodeBlockContainer>
+            <CodeBlockContent />
+          </CodeBlockContainer>
+        </CodeBlock>
+      ) : (
+        <div>{output as React.ReactNode}</div>
+      )}
     </div>
   );
 }

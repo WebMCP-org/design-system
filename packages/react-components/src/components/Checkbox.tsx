@@ -49,8 +49,8 @@ export function Checkbox({
   const classes = ["checkbox", className].filter(Boolean).join(" ");
 
   return (
-    <BaseCheckbox.Root ref={ref} className={classes} {...props}>
-      <BaseCheckbox.Indicator className="checkbox__indicator">
+    <BaseCheckbox.Root ref={ref} data-slot="checkbox" className={classes} {...props}>
+      <BaseCheckbox.Indicator data-slot="checkbox-indicator" className="checkbox__indicator">
         <CheckIcon />
       </BaseCheckbox.Indicator>
     </BaseCheckbox.Root>

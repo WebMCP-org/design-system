@@ -10,11 +10,26 @@ import {
 import { cx } from "./_internal/class-names.js";
 import { XIcon } from "./_internal/icons.js";
 
-export interface ArtifactProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ArtifactProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Additional class names for layout only; do not restyle artifact internals from apps. */
+  className?: string;
+  /** Header and content slots, usually composed from Artifact subcomponents. */
+  children?: React.ReactNode;
+}
 
 /**
  * A container for generated content (code, documents, outputs) with a header
  * containing a title, description, and action buttons.
+ *
+ * Built internally for Sigvelo agent outputs. Use it for generated artifacts
+ * that need a title, optional description, content body, and compact actions.
+ * Do not use it as a page section or generic card; use Card or page layout
+ * instead.
+ *
+ * Styling is mapped to Sigvelo surface, border, spacing, radius, typography,
+ * and focus tokens. Extend with composition, action props, or a shared variant
+ * here when multiple apps need the same behavior. Avoid overriding nested
+ * `.artifact__*` selectors from app CSS.
  *
  * @example
  * ```tsx
@@ -112,32 +127,47 @@ export interface ArtifactActionProps extends Omit<
 > {
   className?: string;
   /** Accessible label for the button. */
-  label: string;
+  label?: string;
   /** Tooltip text shown on hover. Defaults to label. */
   tooltip?: string;
   /** The icon to render inside the button. */
-  icon: React.ReactNode;
+  icon?: React.ReactNode | React.ComponentType<{ className?: string }>;
+  children?: React.ReactNode;
 }
 
-export function ArtifactAction({ className, label, tooltip, icon, ...props }: ArtifactActionProps) {
+export function ArtifactAction({
+  className,
+  label,
+  tooltip,
+  icon,
+  children,
+  ...props
+}: ArtifactActionProps) {
+  const Icon = typeof icon === "function" ? icon : null;
+  const accessibleLabel = label ?? tooltip;
+  const button = (
+    <Button
+      variant="ghost"
+      size="icon"
+      aria-label={accessibleLabel}
+      className={cx("artifact__action", className)}
+      {...props}
+    >
+      {Icon ? <Icon /> : ((icon ?? children) as React.ReactNode)}
+      {accessibleLabel ? <span className="sr-only">{accessibleLabel}</span> : null}
+    </Button>
+  );
+
+  if (!tooltip) {
+    return button;
+  }
+
   return (
     <Tooltip>
-      <TooltipTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={label}
-            className={cx("artifact__action", className)}
-            {...props}
-          >
-            {icon}
-          </Button>
-        }
-      />
+      <TooltipTrigger render={button} />
       <TooltipPortal>
         <TooltipPositioner>
-          <TooltipPopup>{tooltip ?? label}</TooltipPopup>
+          <TooltipPopup>{tooltip}</TooltipPopup>
         </TooltipPositioner>
       </TooltipPortal>
     </Tooltip>
@@ -151,9 +181,15 @@ export interface ArtifactCloseProps extends Omit<
   className?: string;
   /** Accessible label for the close button. */
   label?: string;
+  children?: React.ReactNode;
 }
 
-export function ArtifactClose({ className, label = "Close", ...props }: ArtifactCloseProps) {
+export function ArtifactClose({
+  className,
+  label = "Close",
+  children,
+  ...props
+}: ArtifactCloseProps) {
   return (
     <Tooltip>
       <TooltipTrigger
@@ -165,7 +201,7 @@ export function ArtifactClose({ className, label = "Close", ...props }: Artifact
             className={cx("artifact__close", className)}
             {...props}
           >
-            <XIcon />
+            {children ?? <XIcon />}
           </Button>
         }
       />

@@ -4,14 +4,17 @@
   justify-content: center;
   width: 1rem;
   height: 1rem;
+  flex-shrink: 0;
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
     var(--sigvelo-color-neutral-border-muted);
   border-radius: calc(var(--sigvelo-radius-md) - 4px);
   background-color: var(--sigvelo-color-canvas);
+  outline: none;
   cursor: pointer;
   transition:
     background-color 150ms ease,
-    border-color 150ms ease;
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .checkbox:hover:not([data-disabled]) {
@@ -28,6 +31,16 @@
 .checkbox[data-checked] {
   background-color: var(--sigvelo-color-primary-bg);
   border-color: var(--sigvelo-color-primary-bg);
+}
+
+.checkbox:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]) {
+  border-color: var(--sigvelo-color-danger-bg);
+}
+
+.checkbox:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]):focus-visible {
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 80%);
 }
 
 .checkbox[data-disabled] {

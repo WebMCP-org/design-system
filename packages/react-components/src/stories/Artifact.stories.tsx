@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
 import {
   Artifact,
@@ -25,6 +25,14 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  name: "Generated report",
+  parameters: {
+    docs: {
+      description: {
+        story: "Generated content with title, description, toolbar actions, and close affordance.",
+      },
+    },
+  },
   render: () => (
     <div style={{ width: "34rem" }}>
       <Artifact>
@@ -64,6 +72,14 @@ export const Default: Story = {
 };
 
 export const WithoutDescription: Story = {
+  name: "Title and actions only",
+  parameters: {
+    docs: {
+      description: {
+        story: "Compact artifact when the title and content are enough context.",
+      },
+    },
+  },
   render: () => (
     <div style={{ width: "30rem" }}>
       <Artifact>

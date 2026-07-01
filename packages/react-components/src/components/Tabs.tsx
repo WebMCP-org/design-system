@@ -12,6 +12,7 @@ export interface TabsProps extends Omit<BaseTabs.Root.Props, "className"> {
 
 export interface TabsListProps extends Omit<BaseTabs.List.Props, "className"> {
   className?: string;
+  variant?: "default" | "line" | null;
 }
 
 export interface TabProps extends Omit<BaseTabs.Tab.Props, "className"> {
@@ -20,6 +21,19 @@ export interface TabProps extends Omit<BaseTabs.Tab.Props, "className"> {
 
 export interface TabPanelProps extends Omit<BaseTabs.Panel.Props, "className"> {
   className?: string;
+}
+export type TabsTriggerProps = TabProps;
+export type TabsContentProps = TabPanelProps;
+
+export interface TabsListVariantsOptions {
+  variant?: "default" | "line" | null;
+  className?: string;
+}
+
+export function tabsListVariants({ variant = "default", className }: TabsListVariantsOptions = {}) {
+  return ["tabs__list", variant === "line" && "tabs__list--line", className]
+    .filter(Boolean)
+    .join(" ");
 }
 
 /**
@@ -40,6 +54,7 @@ export interface TabPanelProps extends Omit<BaseTabs.Panel.Props, "className"> {
  * @see {@link https://base-ui.com/react/components/tabs | Base UI Tabs}
  */
 export function Tabs({
+  orientation = "horizontal",
   variant = "default",
   className = "",
   ref,
@@ -48,16 +63,34 @@ export function Tabs({
   const classes = ["tabs", variant !== "default" && `tabs--${variant}`, className]
     .filter(Boolean)
     .join(" ");
-  return <BaseTabs.Root ref={ref} className={classes} {...props} />;
+  return (
+    <BaseTabs.Root
+      ref={ref}
+      data-orientation={orientation}
+      data-slot="tabs"
+      orientation={orientation}
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 export function TabsList({
   className = "",
+  variant = "default",
   ref,
   ...props
 }: TabsListProps & { ref?: React.Ref<HTMLDivElement> }) {
-  const classes = ["tabs__list", className].filter(Boolean).join(" ");
-  return <BaseTabs.List ref={ref} className={classes} {...props} />;
+  const classes = tabsListVariants({ variant, className });
+  return (
+    <BaseTabs.List
+      ref={ref}
+      data-slot="tabs-list"
+      data-variant={variant}
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 export function Tab({
@@ -66,7 +99,7 @@ export function Tab({
   ...props
 }: TabProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["tabs__tab", className].filter(Boolean).join(" ");
-  return <BaseTabs.Tab ref={ref} className={classes} {...props} />;
+  return <BaseTabs.Tab ref={ref} data-slot="tabs-trigger" className={classes} {...props} />;
 }
 
 export function TabPanel({
@@ -75,5 +108,8 @@ export function TabPanel({
   ...props
 }: TabPanelProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["tabs__panel", className].filter(Boolean).join(" ");
-  return <BaseTabs.Panel ref={ref} className={classes} {...props} />;
+  return <BaseTabs.Panel ref={ref} data-slot="tabs-content" className={classes} {...props} />;
 }
+
+export const TabsTrigger = Tab;
+export const TabsContent = TabPanel;

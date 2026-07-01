@@ -6,26 +6,10 @@ import { Form as BaseForm } from "@base-ui/react/form";
  */
 export interface FormProps extends Omit<
   React.ComponentPropsWithoutRef<typeof BaseForm>,
-  "className" | "onFormSubmit" | "onSubmit"
+  "className"
 > {
   /** Additional CSS class names */
   className?: string;
-  /**
-   * Callback fired when the form is submitted.
-   * Receives form values as a plain object with field names as keys.
-   * Automatically calls `preventDefault()` on the event.
-   *
-   * @example
-   * ```tsx
-   * <Form onSubmit={(values) => console.log(values)}>
-   *   <Field.Root name="email">
-   *     <Field.Control type="email" />
-   *   </Field.Root>
-   * </Form>
-   * // On submit: { email: "user@example.com" }
-   * ```
-   */
-  onSubmit?: (values: Record<string, FormDataEntryValue>) => void;
 }
 
 /**
@@ -35,7 +19,7 @@ export interface FormProps extends Omit<
  * @example
  * ```tsx
  * // Basic usage with Field components
- * <Form onSubmit={(values) => console.log(values)}>
+ * <Form onFormSubmit={(values) => console.log(values)}>
  *   <Field.Root name="username">
  *     <Field.Label>Username</Field.Label>
  *     <Field.Control required />
@@ -65,11 +49,24 @@ export interface FormProps extends Omit<
  *   }
  * }
  *
- * <Form errors={errors} onSubmit={handleSubmit}>
+ * <Form errors={errors} onFormSubmit={handleSubmit}>
  *   <Field.Root name="email">
  *     <Field.Control type="email" />
  *     <Field.Error />
  *   </Field.Root>
+ * </Form>
+ * ```
+ *
+ * @example
+ * ```tsx
+ * // Native submit handlers remain native, so TanStack Form can own state.
+ * <Form
+ *   onSubmit={(event) => {
+ *     event.preventDefault();
+ *     void form.handleSubmit();
+ *   }}
+ * >
+ *   ...
  * </Form>
  * ```
  *
@@ -91,11 +88,10 @@ export interface FormProps extends Omit<
  */
 export function Form({
   className = "",
-  onSubmit,
   ref,
   ...props
 }: FormProps & { ref?: React.Ref<HTMLFormElement> }) {
   const classes = ["form", className].filter(Boolean).join(" ");
 
-  return <BaseForm ref={ref} className={classes} onFormSubmit={onSubmit} {...props} />;
+  return <BaseForm ref={ref} data-slot="form" className={classes} {...props} />;
 }

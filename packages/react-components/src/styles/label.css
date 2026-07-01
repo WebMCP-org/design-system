@@ -1,12 +1,29 @@
 .label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   line-height: 1;
   color: var(--sigvelo-color-text);
+  user-select: none;
 }
 
-.label[data-disabled] {
+.label[data-disabled],
+.label[data-disabled="true"],
+.group[data-disabled] .label,
+.group[data-disabled="true"] .label {
   color: var(--sigvelo-color-text-muted);
+  pointer-events: none;
+}
+
+.peer:disabled ~ .label {
+  color: var(--sigvelo-color-text-muted);
+  cursor: not-allowed;
+}
+
+.label[data-disabled],
+.label[data-disabled="true"] {
   cursor: not-allowed;
 }

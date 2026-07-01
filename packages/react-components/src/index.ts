@@ -5,22 +5,26 @@ export {
   AccordionHeader,
   AccordionTrigger,
   AccordionPanel,
+  AccordionContent,
 } from "./components/Accordion.js";
 export type {
   AccordionProps,
   AccordionItemProps,
   AccordionTriggerProps,
   AccordionPanelProps,
+  AccordionContentProps,
 } from "./components/Accordion.js";
 
 // AgentConnection
 export {
+  Connection,
   AgentConnectionPanel,
   AgentConnectionPopover,
   buildNanitesAgentConnectionCommands,
 } from "./components/AgentConnection.js";
 export type {
   AgentConnectionCommand,
+  ConnectionProps,
   AgentConnectionPanelProps,
   AgentConnectionPopoverProps,
   AgentConnectionTarget,
@@ -33,30 +37,55 @@ export {
   AlertDialogTrigger,
   AlertDialogPortal,
   AlertDialogBackdrop,
+  AlertDialogOverlay,
   AlertDialogPopup,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogMedia,
   AlertDialogTitle,
   AlertDialogDescription,
   AlertDialogClose,
+  AlertDialogAction,
+  AlertDialogCancel,
 } from "./components/AlertDialog.js";
 export type {
   AlertDialogProps,
   AlertDialogTriggerProps,
   AlertDialogBackdropProps,
+  AlertDialogOverlayProps,
   AlertDialogPopupProps,
+  AlertDialogContentProps,
+  AlertDialogHeaderProps,
+  AlertDialogFooterProps,
+  AlertDialogMediaProps,
   AlertDialogTitleProps,
   AlertDialogDescriptionProps,
   AlertDialogCloseProps,
+  AlertDialogActionProps,
+  AlertDialogCancelProps,
 } from "./components/AlertDialog.js";
 
 // Autocomplete
 export { Autocomplete } from "./components/Autocomplete.js";
 
 // Avatar
-export { Avatar } from "./components/Avatar.js";
+export {
+  Avatar,
+  AvatarRoot,
+  AvatarImage,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarBadge,
+} from "./components/Avatar.js";
 export type {
   AvatarRootProps,
   AvatarImageProps,
   AvatarFallbackProps,
+  AvatarGroupProps,
+  AvatarGroupCountProps,
+  AvatarBadgeProps,
 } from "./components/Avatar.js";
 
 // Nanites visuals
@@ -65,16 +94,32 @@ export { NaniteScene } from "./components/NaniteScene.js";
 export type { NaniteSceneProps, NaniteSceneVariant } from "./components/NaniteScene.js";
 
 // Badge
-export { Badge } from "./components/Badge.js";
+export { Badge, badgeVariants } from "./components/Badge.js";
 export type { BadgeProps, BadgeVariant, BadgeColor } from "./components/Badge.js";
 
 // Button
-export { Button } from "./components/Button.js";
+export { Button, buttonVariants } from "./components/Button.js";
 export type { ButtonProps, ButtonVariant, ButtonColor, ButtonSize } from "./components/Button.js";
 
 // Card
-export { Card } from "./components/Card.js";
-export type { CardProps } from "./components/Card.js";
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardAction,
+  CardContent,
+  CardFooter,
+} from "./components/Card.js";
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardTitleProps,
+  CardDescriptionProps,
+  CardActionProps,
+  CardContentProps,
+  CardFooterProps,
+} from "./components/Card.js";
 
 // Checkbox
 export { Checkbox } from "./components/Checkbox.js";
@@ -85,7 +130,13 @@ export { CheckboxGroup } from "./components/CheckboxGroup.js";
 export type { CheckboxGroupProps } from "./components/CheckboxGroup.js";
 
 // Collapsible
-export { Collapsible } from "./components/Collapsible.js";
+export {
+  Collapsible,
+  CollapsibleRoot,
+  CollapsibleTrigger,
+  CollapsiblePanel,
+  CollapsibleContent,
+} from "./components/Collapsible.js";
 export type {
   CollapsibleRootProps,
   CollapsibleTriggerProps,
@@ -93,19 +144,65 @@ export type {
 } from "./components/Collapsible.js";
 
 // ContextMenu
-export { ContextMenu } from "./components/ContextMenu.js";
+export {
+  ContextMenu,
+  ContextMenuRoot,
+  ContextMenuTrigger,
+  ContextMenuPortal,
+  ContextMenuPositioner,
+  ContextMenuPopup,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuGroup,
+  ContextMenuLabel,
+  ContextMenuCheckboxItem,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+} from "./components/ContextMenu.js";
 export type {
   ContextMenuProps,
   ContextMenuTriggerProps,
   ContextMenuPortalProps,
   ContextMenuPositionerProps,
   ContextMenuPopupProps,
+  ContextMenuContentProps,
   ContextMenuItemProps,
   ContextMenuSeparatorProps,
+  ContextMenuGroupProps,
+  ContextMenuLabelProps,
+  ContextMenuCheckboxItemProps,
+  ContextMenuRadioGroupProps,
+  ContextMenuRadioItemProps,
+  ContextMenuShortcutProps,
+  ContextMenuSubProps,
+  ContextMenuSubContentProps,
+  ContextMenuSubTriggerProps,
 } from "./components/ContextMenu.js";
 
 // Combobox
-export { Combobox } from "./components/Combobox.js";
+export {
+  Combobox,
+  ComboboxInput,
+  ComboboxContent,
+  ComboboxList,
+  ComboboxItem,
+  ComboboxGroup,
+  ComboboxLabel,
+  ComboboxCollection,
+  ComboboxEmpty,
+  ComboboxSeparator,
+  ComboboxChips,
+  ComboboxChip,
+  ComboboxChipsInput,
+  ComboboxTrigger,
+  ComboboxValue,
+  useComboboxAnchor,
+} from "./components/Combobox.js";
 
 // Dialog
 export {
@@ -113,7 +210,11 @@ export {
   DialogTrigger,
   DialogPortal,
   DialogBackdrop,
+  DialogOverlay,
   DialogPopup,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
   DialogTitle,
   DialogDescription,
   DialogClose,
@@ -122,14 +223,32 @@ export type {
   DialogProps,
   DialogTriggerProps,
   DialogBackdropProps,
+  DialogOverlayProps,
   DialogPopupProps,
+  DialogContentProps,
+  DialogHeaderProps,
+  DialogFooterProps,
   DialogTitleProps,
   DialogDescriptionProps,
   DialogCloseProps,
 } from "./components/Dialog.js";
 
 // Field
-export { Field } from "./components/Field.js";
+export {
+  Field,
+  FieldRoot,
+  FieldLabel,
+  FieldControl,
+  FieldDescription,
+  FieldError,
+  FieldValidity,
+  FieldSet,
+  FieldLegend,
+  FieldContent,
+  FieldTitle,
+  FieldGroup,
+  FieldSeparator,
+} from "./components/Field.js";
 export type {
   FieldRootProps,
   FieldLabelProps,
@@ -137,6 +256,12 @@ export type {
   FieldDescriptionProps,
   FieldErrorProps,
   FieldValidityProps,
+  FieldSetProps,
+  FieldLegendProps,
+  FieldContentProps,
+  FieldTitleProps,
+  FieldGroupProps,
+  FieldSeparatorProps,
 } from "./components/Field.js";
 
 // Fieldset
@@ -166,16 +291,42 @@ export type {
 } from "./components/Meter.js";
 
 // Menu
-export { Menu } from "./components/Menu.js";
+export {
+  Menu,
+  MenuRoot,
+  MenuTrigger,
+  MenuPortal,
+  MenuPositioner,
+  MenuPopup,
+  MenuContent,
+  MenuItem,
+  MenuGroup,
+  MenuGroupLabel,
+  MenuLabel,
+  MenuArrow,
+  MenuSeparator,
+  MenuRadioGroup,
+  MenuRadioItem,
+  MenuRadioItemIndicator,
+  MenuCheckboxItem,
+  MenuCheckboxItemIndicator,
+  MenuShortcut,
+  MenuSub,
+  MenuSubContent,
+  MenuSubTrigger,
+  MenuSubmenuTrigger,
+} from "./components/Menu.js";
 export type {
   MenuProps,
   MenuTriggerProps,
   MenuPortalProps,
   MenuPositionerProps,
   MenuPopupProps,
+  MenuContentProps,
   MenuItemProps,
   MenuGroupProps,
   MenuGroupLabelProps,
+  MenuLabelProps,
   MenuArrowProps,
   MenuSeparatorProps,
   MenuRadioGroupProps,
@@ -183,11 +334,36 @@ export type {
   MenuRadioItemIndicatorProps,
   MenuCheckboxItemProps,
   MenuCheckboxItemIndicatorProps,
+  MenuShortcutProps,
+  MenuSubProps,
+  MenuSubContentProps,
+  MenuSubTriggerProps,
   MenuSubmenuTriggerProps,
 } from "./components/Menu.js";
 
 // Menubar
-export { Menubar } from "./components/Menubar.js";
+export {
+  Menubar,
+  MenubarRoot,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarPortal,
+  MenubarPositioner,
+  MenubarPopup,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarGroup,
+  MenubarGroupLabel,
+  MenubarLabel,
+  MenubarCheckboxItem,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+} from "./components/Menubar.js";
 export type {
   MenubarProps,
   MenubarMenuProps,
@@ -195,14 +371,37 @@ export type {
   MenubarPortalProps,
   MenubarPositionerProps,
   MenubarPopupProps,
+  MenubarContentProps,
   MenubarItemProps,
   MenubarSeparatorProps,
   MenubarGroupProps,
   MenubarGroupLabelProps,
+  MenubarCheckboxItemProps,
+  MenubarRadioGroupProps,
+  MenubarRadioItemProps,
+  MenubarShortcutProps,
+  MenubarSubProps,
+  MenubarSubContentProps,
+  MenubarSubTriggerProps,
 } from "./components/Menubar.js";
 
 // NavigationMenu
-export { NavigationMenu } from "./components/NavigationMenu.js";
+export {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuIcon,
+  NavigationMenuIndicator,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  NavigationMenuPortal,
+  NavigationMenuPositioner,
+  NavigationMenuPopup,
+  NavigationMenuViewport,
+  NavigationMenuArrow,
+  navigationMenuTriggerStyle,
+} from "./components/NavigationMenu.js";
 export type {
   NavigationMenuProps,
   NavigationMenuListProps,
@@ -230,14 +429,32 @@ export type {
 } from "./components/NumberField.js";
 
 // Popover
-export { Popover } from "./components/Popover.js";
+export {
+  Popover,
+  PopoverRoot,
+  PopoverAnchor,
+  PopoverTrigger,
+  PopoverPortal,
+  PopoverBackdrop,
+  PopoverPositioner,
+  PopoverPopup,
+  PopoverContent,
+  PopoverHeader,
+  PopoverArrow,
+  PopoverTitle,
+  PopoverDescription,
+  PopoverClose,
+} from "./components/Popover.js";
 export type {
   PopoverProps,
+  PopoverAnchorProps,
   PopoverTriggerProps,
   PopoverPortalProps,
   PopoverBackdropProps,
   PopoverPositionerProps,
   PopoverPopupProps,
+  PopoverContentProps,
+  PopoverHeaderProps,
   PopoverArrowProps,
   PopoverTitleProps,
   PopoverDescriptionProps,
@@ -253,6 +470,7 @@ export type {
   PreviewCardBackdropProps,
   PreviewCardPositionerProps,
   PreviewCardPopupProps,
+  PreviewCardContentProps,
   PreviewCardArrowProps,
 } from "./components/PreviewCard.js";
 
@@ -266,7 +484,7 @@ export type {
 } from "./components/Progress.js";
 
 // RadioGroup
-export { RadioGroup, Radio, RadioIndicator } from "./components/RadioGroup.js";
+export { RadioGroup, Radio, RadioGroupItem, RadioIndicator } from "./components/RadioGroup.js";
 export type { RadioGroupProps, RadioProps, RadioIndicatorProps } from "./components/RadioGroup.js";
 
 // Select
@@ -277,9 +495,16 @@ export {
   SelectPortal,
   SelectPositioner,
   SelectPopup,
+  SelectContent,
   SelectList,
   SelectOption,
+  SelectItem,
   SelectOptionGroup,
+  SelectGroup,
+  SelectLabel,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
 } from "./components/Select.js";
 export type {
   SelectProps,
@@ -288,13 +513,28 @@ export type {
   SelectPortalProps,
   SelectPositionerProps,
   SelectPopupProps,
+  SelectContentProps,
   SelectListProps,
   SelectOptionProps,
+  SelectItemProps,
   SelectOptionGroupProps,
+  SelectGroupProps,
+  SelectLabelProps,
+  SelectSeparatorProps,
+  SelectScrollUpButtonProps,
+  SelectScrollDownButtonProps,
 } from "./components/Select.js";
 
 // ScrollArea
-export { ScrollArea } from "./components/ScrollArea.js";
+export {
+  ScrollArea,
+  ScrollAreaRoot,
+  ScrollAreaViewport,
+  ScrollAreaScrollbar,
+  ScrollBar,
+  ScrollAreaThumb,
+  ScrollAreaCorner,
+} from "./components/ScrollArea.js";
 export type {
   ScrollAreaRootProps,
   ScrollAreaViewportProps,
@@ -361,8 +601,23 @@ export { Switch, SwitchThumb } from "./components/Switch.js";
 export type { SwitchProps, SwitchThumbProps } from "./components/Switch.js";
 
 // Tabs
-export { Tabs, TabsList, Tab, TabPanel } from "./components/Tabs.js";
-export type { TabsProps, TabsListProps, TabProps, TabPanelProps } from "./components/Tabs.js";
+export {
+  Tabs,
+  TabsList,
+  tabsListVariants,
+  Tab,
+  TabsTrigger,
+  TabPanel,
+  TabsContent,
+} from "./components/Tabs.js";
+export type {
+  TabsProps,
+  TabsListProps,
+  TabProps,
+  TabsTriggerProps,
+  TabPanelProps,
+  TabsContentProps,
+} from "./components/Tabs.js";
 
 // Toast
 export { Toast } from "./components/Toast.js";
@@ -378,7 +633,7 @@ export type {
 } from "./components/Toast.js";
 
 // Toggle
-export { Toggle } from "./components/Toggle.js";
+export { Toggle, toggleVariants } from "./components/Toggle.js";
 export type { ToggleProps } from "./components/Toggle.js";
 
 // Toolbar
@@ -399,10 +654,12 @@ export type { ToggleGroupProps, ToggleGroupItemProps } from "./components/Toggle
 // Tooltip
 export {
   Tooltip,
+  TooltipProvider,
   TooltipTrigger,
   TooltipPortal,
   TooltipPositioner,
   TooltipPopup,
+  TooltipContent,
   TooltipArrow,
 } from "./components/Tooltip.js";
 export type {
@@ -411,6 +668,7 @@ export type {
   TooltipPortalProps,
   TooltipPositionerProps,
   TooltipPopupProps,
+  TooltipContentProps,
   TooltipArrowProps,
 } from "./components/Tooltip.js";
 
@@ -439,12 +697,17 @@ export type {
 // CodeBlock
 export {
   CodeBlock,
+  highlightCode,
   CodeBlockHeader,
   CodeBlockTitle,
   CodeBlockFilename,
   CodeBlockActions,
   CodeBlockCopyButton,
   CodeBlockLanguageSelector,
+  CodeBlockLanguageSelectorTrigger,
+  CodeBlockLanguageSelectorValue,
+  CodeBlockLanguageSelectorContent,
+  CodeBlockLanguageSelectorItem,
   CodeBlockContainer,
   CodeBlockContent,
   CODE_BLOCK_LANGUAGES,
@@ -452,12 +715,17 @@ export {
 export type {
   CodeBlockProps,
   CodeBlockLanguage,
+  TokenizedCode,
   CodeBlockHeaderProps,
   CodeBlockTitleProps,
   CodeBlockFilenameProps,
   CodeBlockActionsProps,
   CodeBlockCopyButtonProps,
   CodeBlockLanguageSelectorProps,
+  CodeBlockLanguageSelectorTriggerProps,
+  CodeBlockLanguageSelectorValueProps,
+  CodeBlockLanguageSelectorContentProps,
+  CodeBlockLanguageSelectorItemProps,
   CodeBlockContainerProps,
   CodeBlockContentProps,
 } from "./components/CodeBlock.js";
@@ -491,6 +759,10 @@ export {
   ContextContentHeader,
   ContextContentBody,
   ContextContentFooter,
+  ContextInputUsage,
+  ContextOutputUsage,
+  ContextReasoningUsage,
+  ContextCacheUsage,
 } from "./components/Context.js";
 export type {
   ContextProps,
@@ -501,6 +773,10 @@ export type {
   ContextContentHeaderProps,
   ContextContentBodyProps,
   ContextContentFooterProps,
+  ContextInputUsageProps,
+  ContextOutputUsageProps,
+  ContextReasoningUsageProps,
+  ContextCacheUsageProps,
 } from "./components/Context.js";
 
 // Commit
@@ -510,6 +786,9 @@ export {
   CommitAuthor,
   CommitAuthorAvatar,
   CommitInfo,
+  CommitMessage,
+  CommitMetadata,
+  CommitSeparator,
   CommitHash,
   CommitCopyButton,
   CommitTimestamp,
@@ -520,8 +799,10 @@ export {
   CommitFileStatus,
   CommitFileIcon,
   CommitFilePath,
+  CommitFileInfo,
   CommitFileAdditions,
   CommitFileDeletions,
+  CommitFileChanges,
 } from "./components/Commit.js";
 export type {
   CommitProps,
@@ -529,6 +810,9 @@ export type {
   CommitAuthorProps,
   CommitAuthorAvatarProps,
   CommitInfoProps,
+  CommitMessageProps,
+  CommitMetadataProps,
+  CommitSeparatorProps,
   CommitHashProps,
   CommitCopyButtonProps,
   CommitTimestampProps,
@@ -540,8 +824,10 @@ export type {
   CommitFileStatusValue,
   CommitFileIconProps,
   CommitFilePathProps,
+  CommitFileInfoProps,
   CommitFileAdditionsProps,
   CommitFileDeletionsProps,
+  CommitFileChangesProps,
 } from "./components/Commit.js";
 
 // Conversation
@@ -613,6 +899,7 @@ export type {
 export {
   Message,
   MessageContent,
+  MessageResponse,
   MessageActions,
   MessageAction,
   MessageToolbar,
@@ -627,6 +914,7 @@ export type {
   MessageProps,
   MessageRole,
   MessageContentProps,
+  MessageResponseProps,
   MessageActionsProps,
   MessageActionProps,
   MessageToolbarProps,
@@ -674,26 +962,91 @@ export type {
 
 // PromptInput
 export {
+  PromptInputProvider,
+  usePromptInputController,
+  useProviderAttachments,
+  usePromptInputAttachments,
+  usePromptInputReferencedSources,
   PromptInput,
+  PromptInputActionAddAttachments,
+  PromptInputActionAddScreenshot,
+  PromptInputActionMenu,
+  PromptInputActionMenuContent,
+  PromptInputActionMenuItem,
+  PromptInputActionMenuTrigger,
   PromptInputHeader,
   PromptInputBody,
   PromptInputFooter,
   PromptInputTools,
   PromptInputTextarea,
   PromptInputButton,
+  PromptInputCommand,
+  PromptInputCommandEmpty,
+  PromptInputCommandGroup,
+  PromptInputCommandInput,
+  PromptInputCommandItem,
+  PromptInputCommandList,
+  PromptInputCommandSeparator,
+  PromptInputHoverCard,
+  PromptInputHoverCardContent,
+  PromptInputHoverCardTrigger,
+  PromptInputSelect,
+  PromptInputSelectContent,
+  PromptInputSelectItem,
+  PromptInputSelectTrigger,
+  PromptInputSelectValue,
   PromptInputSubmit,
+  PromptInputTab,
+  PromptInputTabBody,
+  PromptInputTabItem,
+  PromptInputTabLabel,
+  PromptInputTabsList,
 } from "./components/PromptInput.js";
 export type {
+  AttachmentsContext,
+  TextInputContext,
+  PromptInputControllerProps,
+  ReferencedSourcesContext,
+  PromptInputProviderProps,
   PromptInputProps,
+  PromptInputActionAddAttachmentsProps,
+  PromptInputActionAddScreenshotProps,
+  PromptInputActionMenuProps,
+  PromptInputActionMenuContentProps,
+  PromptInputActionMenuItemProps,
+  PromptInputActionMenuTriggerProps,
   PromptInputHeaderProps,
   PromptInputBodyProps,
   PromptInputFooterProps,
   PromptInputToolsProps,
   PromptInputTextareaProps,
   PromptInputButtonProps,
+  PromptInputButtonTooltip,
   PromptInputTooltipConfig,
+  PromptInputCommandProps,
+  PromptInputCommandEmptyProps,
+  PromptInputCommandGroupProps,
+  PromptInputCommandInputProps,
+  PromptInputCommandItemProps,
+  PromptInputCommandListProps,
+  PromptInputCommandSeparatorProps,
+  PromptInputHoverCardProps,
+  PromptInputHoverCardContentProps,
+  PromptInputHoverCardTriggerProps,
+  PromptInputSelectProps,
+  PromptInputSelectContentProps,
+  PromptInputSelectItemProps,
+  PromptInputSelectTriggerProps,
+  PromptInputSelectValueProps,
   PromptInputSubmitProps,
+  PromptInputTabProps,
+  PromptInputTabBodyProps,
+  PromptInputTabItemProps,
+  PromptInputTabLabelProps,
+  PromptInputTabsListProps,
   PromptInputMessage,
+  PromptInputFilePart,
+  PromptInputReferencedSource,
   PromptInputStatus,
 } from "./components/PromptInput.js";
 
@@ -704,11 +1057,13 @@ export {
   QueueSectionTrigger,
   QueueSectionLabel,
   QueueList,
+  QueueSectionContent,
   QueueItem,
   QueueItemIndicator,
   QueueItemContent,
   QueueItemDescription,
   QueueItemActions,
+  QueueItemAction,
   QueueItemAttachment,
   QueueItemImage,
   QueueItemFile,
@@ -719,12 +1074,17 @@ export type {
   QueueSectionTriggerProps,
   QueueSectionLabelProps,
   QueueListProps,
+  QueueSectionContentProps,
+  QueueMessagePart,
+  QueueMessage,
+  QueueTodo,
   QueueItemProps,
   QueueItemStatus,
   QueueItemIndicatorProps,
   QueueItemContentProps,
   QueueItemDescriptionProps,
   QueueItemActionsProps,
+  QueueItemActionProps,
   QueueItemAttachmentProps,
   QueueItemImageProps,
   QueueItemFileProps,
@@ -786,22 +1146,60 @@ export type {
 } from "./components/Terminal.js";
 
 // TestResults
-export { TestResults, TestSuite, Test, TestStatus, TestError } from "./components/TestResults.js";
+export {
+  TestResults,
+  TestResultsHeader,
+  TestResultsDuration,
+  TestResultsSummary,
+  TestResultsProgress,
+  TestResultsContent,
+  TestSuite,
+  TestSuiteName,
+  TestSuiteStats,
+  TestSuiteContent,
+  Test,
+  TestName,
+  TestDuration,
+  TestStatus,
+  TestError,
+  TestErrorMessage,
+  TestErrorStack,
+} from "./components/TestResults.js";
 export type {
   TestResultsProps,
+  TestResultsHeaderProps,
+  TestResultsDurationProps,
+  TestResultsSummaryProps,
+  TestResultsProgressProps,
+  TestResultsContentProps,
   TestSuiteProps,
+  TestSuiteNameProps,
+  TestSuiteStatsProps,
+  TestSuiteContentProps,
   TestProps,
+  TestNameProps,
+  TestDurationProps,
   TestStatusProps,
   TestStatusValue,
   TestSummary,
   TestErrorProps,
+  TestErrorMessageProps,
+  TestErrorStackProps,
 } from "./components/TestResults.js";
 
 // Tool
-export { Tool, ToolHeader, ToolContent, ToolInput, ToolOutput } from "./components/Tool.js";
+export {
+  Tool,
+  ToolHeader,
+  ToolContent,
+  ToolInput,
+  ToolOutput,
+  getStatusBadge,
+} from "./components/Tool.js";
 export type {
   ToolProps,
   ToolState,
+  ToolPart,
   ToolHeaderProps,
   ToolContentProps,
   ToolInputProps,
@@ -826,6 +1224,7 @@ export type {
   WebPreviewUrlProps,
   WebPreviewBodyProps,
   WebPreviewConsoleProps,
+  WebPreviewContextValue,
   ConsoleLog,
   ConsoleLogLevel,
 } from "./components/WebPreview.js";

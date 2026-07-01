@@ -45,14 +45,32 @@ function useVariableContext(): VariableContextValue {
 }
 
 export interface EnvironmentVariablesProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Controlled visibility for all variable values. */
   showValues?: boolean;
+  /** Initial visibility for uncontrolled value reveal state. */
   defaultShowValues?: boolean;
+  /** Called when the reveal switch changes value visibility. */
   onShowValuesChange?: (show: boolean) => void;
+  /** Additional class names for layout only; do not override masking styles from apps. */
+  className?: string;
+  /** Header, content, groups, and variable rows. */
+  children?: React.ReactNode;
 }
 
 /**
  * A panel displaying environment variables with masked values and per-variable
  * copy actions. Toggle the reveal switch to show all values at once.
+ *
+ * Built internally for deployment/setup screens. Use it to display known
+ * environment keys and copyable values. Do not treat masking as a security
+ * boundary; do not render secrets for users who are not allowed to see them.
+ *
+ * Sigvelo changes: composes Badge, Button, Switch, and Tooltip; maps copy and
+ * reveal controls to Sigvelo CSS tokens; keeps masking local to the component.
+ *
+ * Values need visible labels and copy buttons need accessible labels. Styling
+ * consumes text, muted text, border, surface, spacing, radius, and focus tokens.
+ * Add shared formats here if multiple apps need them.
  *
  * @example
  * ```tsx
@@ -132,7 +150,7 @@ export function EnvironmentVariablesTitle({
 }: EnvironmentVariablesTitleProps & { ref?: React.Ref<HTMLHeadingElement> }) {
   return (
     <h3 ref={ref} className={cx("environment-variables__title", className)} {...props}>
-      {children}
+      {children ?? "Environment Variables"}
     </h3>
   );
 }
@@ -216,7 +234,12 @@ export function EnvironmentVariable({
   return (
     <VariableContext.Provider value={ctxValue}>
       <div ref={ref} className={cx("environment-variables__row", className)} {...props}>
-        {children}
+        {children ?? (
+          <>
+            <EnvironmentVariableName />
+            <EnvironmentVariableValue />
+          </>
+        )}
       </div>
     </VariableContext.Provider>
   );
@@ -226,13 +249,14 @@ export interface EnvironmentVariableNameProps extends React.HTMLAttributes<HTMLS
 
 export function EnvironmentVariableName({
   className,
+  children,
   ref,
   ...props
 }: EnvironmentVariableNameProps & { ref?: React.Ref<HTMLSpanElement> }) {
   const { name } = useVariableContext();
   return (
     <span ref={ref} className={cx("environment-variables__name", className)} {...props}>
-      {name}
+      {children ?? name}
     </span>
   );
 }
@@ -241,6 +265,7 @@ export interface EnvironmentVariableValueProps extends React.HTMLAttributes<HTML
 
 export function EnvironmentVariableValue({
   className,
+  children,
   ref,
   ...props
 }: EnvironmentVariableValueProps & { ref?: React.Ref<HTMLSpanElement> }) {
@@ -249,7 +274,7 @@ export function EnvironmentVariableValue({
   const masked = "•".repeat(Math.min(value.length, 12));
   return (
     <span ref={ref} className={cx("environment-variables__value", className)} {...props}>
-      {showValues ? value : masked}
+      {children ?? (showValues ? value : masked)}
     </span>
   );
 }
@@ -258,40 +283,64 @@ export type EnvironmentVariableCopyFormat = "name" | "value" | "export";
 
 export interface EnvironmentVariableCopyButtonProps extends Omit<
   ButtonProps,
-  "children" | "variant" | "size" | "color" | "className" | "onClick"
+  "children" | "variant" | "size" | "color" | "className" | "onClick" | "onError"
 > {
   format?: EnvironmentVariableCopyFormat;
+  copyFormat?: EnvironmentVariableCopyFormat;
   label?: string;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onCopy?: () => void;
+  onError?: (error: Error) => void;
+  timeout?: number;
 }
 
 export function EnvironmentVariableCopyButton({
   className,
   format = "value",
+  copyFormat,
   label,
   onClick,
+  onCopy,
+  onError,
+  timeout = 1500,
   ...props
 }: EnvironmentVariableCopyButtonProps) {
   const { name, value } = useVariableContext();
   const [copied, setCopied] = React.useState(false);
+  const timeoutRef = React.useRef<number | null>(null);
 
-  const text = format === "name" ? name : format === "export" ? `export ${name}="${value}"` : value;
+  const resolvedFormat = copyFormat ?? format;
+  const text =
+    resolvedFormat === "name"
+      ? name
+      : resolvedFormat === "export"
+        ? `export ${name}="${value}"`
+        : value;
 
-  const buttonLabel = label ?? `Copy ${format}`;
+  const buttonLabel = label ?? `Copy ${resolvedFormat}`;
 
   const handleClick = React.useCallback(
     async (e: React.MouseEvent<HTMLButtonElement>) => {
       try {
         await navigator.clipboard.writeText(text);
         setCopied(true);
-        window.setTimeout(() => setCopied(false), 1500);
-      } catch {
-        /* ignore */
+        onCopy?.();
+        if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current);
+        timeoutRef.current = window.setTimeout(() => setCopied(false), timeout);
+      } catch (error) {
+        onError?.(error as Error);
       }
       onClick?.(e);
     },
-    [text, onClick],
+    [onClick, onCopy, onError, text, timeout],
+  );
+
+  React.useEffect(
+    () => () => {
+      if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current);
+    },
+    [],
   );
 
   return (
@@ -326,6 +375,7 @@ export interface EnvironmentVariableRequiredProps extends Omit<
 
 export function EnvironmentVariableRequired({
   className,
+  children,
   ref,
   ...props
 }: EnvironmentVariableRequiredProps & { ref?: React.Ref<HTMLSpanElement> }) {
@@ -337,7 +387,7 @@ export function EnvironmentVariableRequired({
       size="sm"
       className={cx("environment-variables__required", className)}
     >
-      Required
+      {children ?? "Required"}
     </Badge>
   );
 }

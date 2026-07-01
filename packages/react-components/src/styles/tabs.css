@@ -18,6 +18,12 @@
   padding-inline: 0.25rem;
 }
 
+.tabs__list--line {
+  gap: 0.5rem;
+  border-bottom-color: transparent;
+  padding-inline: 0;
+}
+
 .tabs--bordered .tabs__list {
   background-color: var(--sigvelo-color-neutral-bg-subtle);
   border-bottom: none;

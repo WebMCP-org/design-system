@@ -2,7 +2,8 @@
 
 Reusable design tokens and React components shared by SigVelo, Nanites, and WebMCP.
 
-Storybook: https://mcp-b-design-system-storybook.alexmnahas.workers.dev
+Storybook: https://design-system.sigvelo.com
+Storybook MCP: https://design-system.sigvelo.com/mcp
 
 ## Packages
 
@@ -31,7 +32,8 @@ vp run build:storybook-worker
 
 For hosted docs, connect the GitHub repo in Cloudflare Workers Builds and use
 `vp run build:storybook-worker`. The Worker name in Cloudflare must match
-`mcp-b-design-system-storybook` from `wrangler.jsonc`.
+`mcp-b-design-system-storybook` from `wrangler.jsonc`; the custom domain is
+`design-system.sigvelo.com`.
 
 Use Chrome's modern web guidance CLI before web-facing changes:
 
@@ -41,3 +43,7 @@ vp run guidance:retrieve -- "accessibility,css,dark-mode"
 ```
 
 The public package scope is `@mcp-b`; the CSS token prefix is `--sigvelo-*`. Apps should not redefine that contract unless they own a documented theme override.
+
+Apps may use Tailwind for page layout, responsive composition, and local glue around these components. Reusable or bespoke Sigvelo UI belongs in `@mcp-b/react-components`, and component internals stay authored CSS over `--sigvelo-*` tokens.
+
+This repo is being put in place as the shared target before every existing app has migrated. Legacy local component packages can remain during migration, but new reusable UI should land here.

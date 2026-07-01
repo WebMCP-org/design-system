@@ -43,6 +43,22 @@ export interface MenuPopupProps extends Omit<
   /** Additional CSS class names */
   className?: string;
 }
+type MenuPlacementProps = Pick<
+  MenuPositionerProps,
+  | "anchor"
+  | "positionMethod"
+  | "side"
+  | "sideOffset"
+  | "align"
+  | "alignOffset"
+  | "collisionBoundary"
+  | "collisionPadding"
+  | "sticky"
+  | "arrowPadding"
+  | "disableAnchorTracking"
+  | "collisionAvoidance"
+>;
+export type MenuContentProps = MenuPopupProps & MenuPlacementProps;
 
 /**
  * Props for the Menu.Item component.
@@ -53,6 +69,8 @@ export interface MenuItemProps extends Omit<
 > {
   /** Additional CSS class names */
   className?: string;
+  inset?: boolean;
+  variant?: "default" | "destructive";
 }
 
 /**
@@ -75,7 +93,9 @@ export interface MenuGroupLabelProps extends Omit<
 > {
   /** Additional CSS class names */
   className?: string;
+  inset?: boolean;
 }
+export type MenuLabelProps = MenuGroupLabelProps;
 
 /**
  * Props for the Menu.Arrow component.
@@ -153,6 +173,9 @@ export interface MenuCheckboxItemIndicatorProps extends Omit<
   /** Additional CSS class names */
   className?: string;
 }
+export interface MenuShortcutProps extends React.HTMLAttributes<HTMLSpanElement> {}
+export interface MenuSubProps extends React.ComponentPropsWithoutRef<typeof BaseMenu.SubmenuRoot> {}
+export type MenuSubContentProps = MenuContentProps;
 
 /**
  * Props for the Menu.SubmenuTrigger component.
@@ -163,7 +186,9 @@ export interface MenuSubmenuTriggerProps extends Omit<
 > {
   /** Additional CSS class names */
   className?: string;
+  inset?: boolean;
 }
+export type MenuSubTriggerProps = MenuSubmenuTriggerProps;
 
 /**
  * Root component that manages menu state.
@@ -185,183 +210,370 @@ export interface MenuSubmenuTriggerProps extends Omit<
  *
  * @see {@link https://base-ui.com/react/components/menu | Base UI Menu}
  */
-const MenuRoot = (props: MenuProps) => {
-  return <BaseMenu.Root {...props} />;
+export const MenuRoot = (props: MenuProps) => {
+  return <BaseMenu.Root data-slot="dropdown-menu" {...props} />;
 };
 
 /**
  * Button that toggles the menu visibility.
  */
-function MenuTrigger({
+export function MenuTrigger({
   className = "",
   ref,
   ...props
 }: MenuTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["menu__trigger", className].filter(Boolean).join(" ");
-  return <BaseMenu.Trigger ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.Trigger ref={ref} data-slot="dropdown-menu-trigger" className={classes} {...props} />
+  );
 }
 
 /**
  * Renders menu content in a portal.
  */
-const MenuPortal = (props: MenuPortalProps) => {
-  return <BaseMenu.Portal {...props} />;
+export const MenuPortal = (props: MenuPortalProps) => {
+  return <BaseMenu.Portal data-slot="dropdown-menu-portal" {...props} />;
 };
 
 /**
  * Positions the menu popup relative to the trigger.
  */
-function MenuPositioner({
+export function MenuPositioner({
   className = "",
   ref,
   ...props
 }: MenuPositionerProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__positioner", className].filter(Boolean).join(" ");
-  return <BaseMenu.Positioner ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.Positioner
+      ref={ref}
+      data-slot="dropdown-menu-positioner"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * Container for menu items.
  */
-function MenuPopup({
+export function MenuPopup({
   className = "",
   ref,
   ...props
 }: MenuPopupProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__popup", className].filter(Boolean).join(" ");
-  return <BaseMenu.Popup ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.Popup ref={ref} data-slot="dropdown-menu-content" className={classes} {...props} />
+  );
+}
+
+export function MenuContent({
+  anchor,
+  positionMethod,
+  side,
+  sideOffset = 4,
+  align,
+  alignOffset,
+  collisionBoundary,
+  collisionPadding,
+  sticky,
+  arrowPadding,
+  disableAnchorTracking,
+  collisionAvoidance,
+  ...props
+}: MenuContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <MenuPortal>
+      <MenuPositioner
+        anchor={anchor}
+        positionMethod={positionMethod}
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        collisionBoundary={collisionBoundary}
+        collisionPadding={collisionPadding}
+        sticky={sticky}
+        arrowPadding={arrowPadding}
+        disableAnchorTracking={disableAnchorTracking}
+        collisionAvoidance={collisionAvoidance}
+      >
+        <MenuPopup {...props} />
+      </MenuPositioner>
+    </MenuPortal>
+  );
 }
 
 /**
  * Interactive menu item.
  */
-function MenuItem({
+export function MenuItem({
   className = "",
+  inset,
+  variant = "default",
   ref,
   ...props
 }: MenuItemProps & { ref?: React.Ref<HTMLDivElement> }) {
-  const classes = ["menu__item", className].filter(Boolean).join(" ");
-  return <BaseMenu.Item ref={ref} className={classes} {...props} />;
+  const classes = ["menu__item", inset && "menu__item--inset", className].filter(Boolean).join(" ");
+  return (
+    <BaseMenu.Item
+      ref={ref}
+      data-slot="dropdown-menu-item"
+      data-inset={inset || undefined}
+      data-variant={variant}
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * Groups related menu items.
  */
-function MenuGroup({
+export function MenuGroup({
   className = "",
   ref,
   ...props
 }: MenuGroupProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__group", className].filter(Boolean).join(" ");
-  return <BaseMenu.Group ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.Group ref={ref} data-slot="dropdown-menu-group" className={classes} {...props} />
+  );
 }
 
 /**
  * Label for a group of menu items.
  */
-function MenuGroupLabel({
+export function MenuGroupLabel({
   className = "",
+  inset,
   ref,
   ...props
 }: MenuGroupLabelProps & { ref?: React.Ref<HTMLDivElement> }) {
-  const classes = ["menu__group-label", className].filter(Boolean).join(" ");
-  return <BaseMenu.GroupLabel ref={ref} className={classes} {...props} />;
+  const classes = ["menu__group-label", inset && "menu__group-label--inset", className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <BaseMenu.GroupLabel
+      ref={ref}
+      data-slot="dropdown-menu-label"
+      data-inset={inset || undefined}
+      className={classes}
+      {...props}
+    />
+  );
 }
+
+export const MenuLabel = MenuGroupLabel;
 
 /**
  * Arrow pointing to the trigger.
  */
-function MenuArrow({
+export function MenuArrow({
   className = "",
   ref,
   ...props
 }: MenuArrowProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__arrow", className].filter(Boolean).join(" ");
-  return <BaseMenu.Arrow ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.Arrow ref={ref} data-slot="dropdown-menu-arrow" className={classes} {...props} />
+  );
 }
 
 /**
  * Visual separator between menu sections.
  */
-function MenuSeparator({
+export function MenuSeparator({
   className = "",
   ref,
   ...props
 }: MenuSeparatorProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__separator", className].filter(Boolean).join(" ");
-  return <BaseMenu.Separator ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.Separator
+      ref={ref}
+      data-slot="dropdown-menu-separator"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * Group for exclusive radio selection.
  */
-function MenuRadioGroup({
+export function MenuRadioGroup({
   className = "",
   ref,
   ...props
 }: MenuRadioGroupProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__radio-group", className].filter(Boolean).join(" ");
-  return <BaseMenu.RadioGroup ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.RadioGroup
+      ref={ref}
+      data-slot="dropdown-menu-radio-group"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * Radio item for exclusive selection.
  */
-function MenuRadioItem({
+export function MenuRadioItem({
   className = "",
+  children,
   ref,
   ...props
 }: MenuRadioItemProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__radio-item", className].filter(Boolean).join(" ");
-  return <BaseMenu.RadioItem ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.RadioItem
+      ref={ref}
+      data-slot="dropdown-menu-radio-item"
+      className={classes}
+      {...props}
+    >
+      {hasChildOfType(children, MenuRadioItemIndicator) ? (
+        children
+      ) : (
+        <>
+          <MenuRadioItemIndicator />
+          {children}
+        </>
+      )}
+    </BaseMenu.RadioItem>
+  );
 }
 
 /**
  * Indicator for selected radio item.
  */
-function MenuRadioItemIndicator({
+export function MenuRadioItemIndicator({
   className = "",
   ref,
   ...props
 }: MenuRadioItemIndicatorProps & { ref?: React.Ref<HTMLSpanElement> }) {
   const classes = ["menu__radio-indicator", className].filter(Boolean).join(" ");
-  return <BaseMenu.RadioItemIndicator ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.RadioItemIndicator
+      ref={ref}
+      data-slot="dropdown-menu-radio-item-indicator"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**
  * Checkbox item for toggling options.
  */
-function MenuCheckboxItem({
+export function MenuCheckboxItem({
   className = "",
+  children,
   ref,
   ...props
 }: MenuCheckboxItemProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["menu__checkbox-item", className].filter(Boolean).join(" ");
-  return <BaseMenu.CheckboxItem ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.CheckboxItem
+      ref={ref}
+      data-slot="dropdown-menu-checkbox-item"
+      className={classes}
+      {...props}
+    >
+      {hasChildOfType(children, MenuCheckboxItemIndicator) ? (
+        children
+      ) : (
+        <>
+          <MenuCheckboxItemIndicator />
+          {children}
+        </>
+      )}
+    </BaseMenu.CheckboxItem>
+  );
 }
 
 /**
  * Indicator for checked checkbox item.
  */
-function MenuCheckboxItemIndicator({
+export function MenuCheckboxItemIndicator({
   className = "",
   ref,
   ...props
 }: MenuCheckboxItemIndicatorProps & { ref?: React.Ref<HTMLSpanElement> }) {
   const classes = ["menu__checkbox-indicator", className].filter(Boolean).join(" ");
-  return <BaseMenu.CheckboxItemIndicator ref={ref} className={classes} {...props} />;
+  return (
+    <BaseMenu.CheckboxItemIndicator
+      ref={ref}
+      data-slot="dropdown-menu-checkbox-item-indicator"
+      className={classes}
+      {...props}
+    />
+  );
+}
+
+export function MenuShortcut({
+  className = "",
+  ref,
+  ...props
+}: MenuShortcutProps & { ref?: React.Ref<HTMLSpanElement> }) {
+  const classes = ["menu__shortcut", className].filter(Boolean).join(" ");
+  return <span ref={ref} data-slot="dropdown-menu-shortcut" className={classes} {...props} />;
+}
+
+export function MenuSub(props: MenuSubProps) {
+  return <BaseMenu.SubmenuRoot data-slot="dropdown-menu-sub" {...props} />;
+}
+
+export function MenuSubContent({
+  side = "right",
+  align,
+  sideOffset = 4,
+  ...props
+}: MenuSubContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <MenuContent
+      data-slot="dropdown-menu-sub-content"
+      side={side}
+      align={align}
+      sideOffset={sideOffset}
+      {...props}
+    />
+  );
 }
 
 /**
  * Trigger that opens a submenu.
  */
-function MenuSubmenuTrigger({
+export function MenuSubmenuTrigger({
   className = "",
+  inset,
   ref,
   ...props
 }: MenuSubmenuTriggerProps & { ref?: React.Ref<HTMLDivElement> }) {
-  const classes = ["menu__submenu-trigger", className].filter(Boolean).join(" ");
-  return <BaseMenu.SubmenuTrigger ref={ref} className={classes} {...props} />;
+  const classes = ["menu__submenu-trigger", inset && "menu__item--inset", className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <BaseMenu.SubmenuTrigger
+      ref={ref}
+      data-slot="dropdown-menu-sub-trigger"
+      data-inset={inset || undefined}
+      className={classes}
+      {...props}
+    />
+  );
+}
+
+export const MenuSubTrigger = MenuSubmenuTrigger;
+
+function hasChildOfType(children: React.ReactNode, type: React.ElementType) {
+  return React.Children.toArray(children).some(
+    (child) => React.isValidElement(child) && child.type === type,
+  );
 }
 
 /**
@@ -406,15 +618,17 @@ function MenuSubmenuTrigger({
  *
  * @see {@link https://base-ui.com/react/components/menu | Base UI Menu}
  */
-export const Menu = {
+export const Menu = Object.assign(MenuRoot, {
   Root: MenuRoot,
   Trigger: MenuTrigger,
   Portal: MenuPortal,
   Positioner: MenuPositioner,
   Popup: MenuPopup,
+  Content: MenuContent,
   Item: MenuItem,
   Group: MenuGroup,
   GroupLabel: MenuGroupLabel,
+  Label: MenuLabel,
   Arrow: MenuArrow,
   Separator: MenuSeparator,
   RadioGroup: MenuRadioGroup,
@@ -422,5 +636,9 @@ export const Menu = {
   RadioItemIndicator: MenuRadioItemIndicator,
   CheckboxItem: MenuCheckboxItem,
   CheckboxItemIndicator: MenuCheckboxItemIndicator,
+  Shortcut: MenuShortcut,
+  Sub: MenuSub,
+  SubContent: MenuSubContent,
+  SubTrigger: MenuSubTrigger,
   SubmenuTrigger: MenuSubmenuTrigger,
-};
+});

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Button, type ButtonProps } from "./Button.js";
-import { Popover } from "./Popover.js";
+import { Popover, type PopoverProps } from "./Popover.js";
 import { Separator } from "./Separator.js";
 import { cx } from "./_internal/class-names.js";
 
@@ -12,9 +12,13 @@ export interface ContextUsageCategory {
 
 export interface ContextUsage {
   input?: number;
+  inputTokens?: number;
   output?: number;
+  outputTokens?: number;
   reasoning?: number;
+  reasoningTokens?: number;
   cache?: number;
+  cachedInputTokens?: number;
   categories?: ContextUsageCategory[];
 }
 
@@ -29,6 +33,9 @@ export interface ContextProps extends React.HTMLAttributes<HTMLDivElement> {
   modelId?: string;
   /** Optional total cost in USD. */
   totalCostUsd?: number;
+  open?: PopoverProps["open"];
+  defaultOpen?: PopoverProps["defaultOpen"];
+  onOpenChange?: PopoverProps["onOpenChange"];
 }
 
 interface ContextContextValue {
@@ -79,6 +86,9 @@ export function Context({
   usage,
   modelId,
   totalCostUsd,
+  open,
+  defaultOpen,
+  onOpenChange,
   children,
   ref,
   ...props
@@ -91,22 +101,29 @@ export function Context({
   return (
     <ContextContext.Provider value={ctxValue}>
       <div ref={ref} className={cx("context", className)} {...props}>
-        <Popover.Root>{children}</Popover.Root>
+        <Popover.Root open={open} defaultOpen={defaultOpen} onOpenChange={onOpenChange}>
+          {children}
+        </Popover.Root>
       </div>
     </ContextContext.Provider>
   );
 }
 
-export interface ContextTriggerProps extends Omit<
-  ButtonProps,
-  "variant" | "color" | "children" | "className"
-> {
+export interface ContextTriggerProps extends Omit<ButtonProps, "variant" | "color" | "className"> {
   className?: string;
 }
 
-export function ContextTrigger({ className, ...props }: ContextTriggerProps) {
+export function ContextTrigger({ className, children, ...props }: ContextTriggerProps) {
   const { usedTokens, maxTokens } = useContextContext();
   const percent = maxTokens > 0 ? (usedTokens / maxTokens) * 100 : 0;
+
+  if (React.isValidElement(children)) {
+    return <Popover.Trigger render={children} />;
+  }
+
+  if (children) {
+    return <Popover.Trigger>{children}</Popover.Trigger>;
+  }
 
   return (
     <Popover.Trigger
@@ -154,6 +171,14 @@ export function ContextContentHeader({
   const { usedTokens, maxTokens, modelId } = useContextContext();
   const percent = maxTokens > 0 ? (usedTokens / maxTokens) * 100 : 0;
 
+  if (children) {
+    return (
+      <div ref={ref} className={cx("context__header", className)} {...props}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div ref={ref} className={cx("context__header", className)} {...props}>
       <div className="context__ring" aria-hidden="true">
@@ -167,7 +192,6 @@ export function ContextContentHeader({
         </div>
         {modelId ? <div className="context__header-model">{modelId}</div> : null}
       </div>
-      {children}
     </div>
   );
 }
@@ -182,11 +206,23 @@ export function ContextContentBody({
 }: ContextContentBodyProps & { ref?: React.Ref<HTMLDivElement> }) {
   const { usage } = useContextContext();
 
+  if (children) {
+    return (
+      <div ref={ref} className={cx("context__body", className)} {...props}>
+        {children}
+      </div>
+    );
+  }
+
   const rows: { label: string; tokens: number; costUsd?: number }[] = [];
-  if (usage?.input !== undefined) rows.push({ label: "Input", tokens: usage.input });
-  if (usage?.output !== undefined) rows.push({ label: "Output", tokens: usage.output });
-  if (usage?.reasoning !== undefined) rows.push({ label: "Reasoning", tokens: usage.reasoning });
-  if (usage?.cache !== undefined) rows.push({ label: "Cache", tokens: usage.cache });
+  const inputTokens = getUsageTokens(usage, "input");
+  const outputTokens = getUsageTokens(usage, "output");
+  const reasoningTokens = getUsageTokens(usage, "reasoning");
+  const cacheTokens = getUsageTokens(usage, "cache");
+  if (inputTokens !== undefined) rows.push({ label: "Input", tokens: inputTokens });
+  if (outputTokens !== undefined) rows.push({ label: "Output", tokens: outputTokens });
+  if (reasoningTokens !== undefined) rows.push({ label: "Reasoning", tokens: reasoningTokens });
+  if (cacheTokens !== undefined) rows.push({ label: "Cache", tokens: cacheTokens });
   if (usage?.categories) rows.push(...usage.categories);
 
   return (
@@ -203,7 +239,6 @@ export function ContextContentBody({
           </li>
         ))}
       </ul>
-      {children}
     </div>
   );
 }
@@ -217,6 +252,15 @@ export function ContextContentFooter({
   ...props
 }: ContextContentFooterProps & { ref?: React.Ref<HTMLDivElement> }) {
   const { totalCostUsd } = useContextContext();
+
+  if (children) {
+    return (
+      <div ref={ref} className={cx("context__footer", className)} {...props}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <div ref={ref} className={cx("context__footer", className)} {...props}>
       <Separator />
@@ -226,9 +270,74 @@ export function ContextContentFooter({
           <span className="context__footer-cost">${totalCostUsd.toFixed(4)}</span>
         </div>
       ) : null}
-      {children}
     </div>
   );
+}
+
+export interface ContextUsageRowProps extends React.HTMLAttributes<HTMLDivElement> {
+  label?: string;
+}
+
+export type ContextInputUsageProps = ContextUsageRowProps;
+export type ContextOutputUsageProps = ContextUsageRowProps;
+export type ContextReasoningUsageProps = ContextUsageRowProps;
+export type ContextCacheUsageProps = ContextUsageRowProps;
+
+export function ContextInputUsage(props: ContextInputUsageProps) {
+  return <ContextUsageRow usageKey="input" defaultLabel="Input" {...props} />;
+}
+
+export function ContextOutputUsage(props: ContextOutputUsageProps) {
+  return <ContextUsageRow usageKey="output" defaultLabel="Output" {...props} />;
+}
+
+export function ContextReasoningUsage(props: ContextReasoningUsageProps) {
+  return <ContextUsageRow usageKey="reasoning" defaultLabel="Reasoning" {...props} />;
+}
+
+export function ContextCacheUsage(props: ContextCacheUsageProps) {
+  return <ContextUsageRow usageKey="cache" defaultLabel="Cache" {...props} />;
+}
+
+function ContextUsageRow({
+  className,
+  children,
+  label,
+  usageKey,
+  defaultLabel,
+  ref,
+  ...props
+}: ContextUsageRowProps & {
+  usageKey: "input" | "output" | "reasoning" | "cache";
+  defaultLabel: string;
+  ref?: React.Ref<HTMLDivElement>;
+}) {
+  const { usage } = useContextContext();
+  const tokens = getUsageTokens(usage, usageKey) ?? 0;
+
+  if (children) {
+    return children;
+  }
+
+  if (!tokens) return null;
+
+  return (
+    <div ref={ref} className={cx("context__row", className)} {...props}>
+      <span className="context__row-label">{label ?? defaultLabel}</span>
+      <span className="context__row-value">{tokens.toLocaleString()}</span>
+    </div>
+  );
+}
+
+function getUsageTokens(
+  usage: ContextUsage | undefined,
+  key: "input" | "output" | "reasoning" | "cache",
+) {
+  if (!usage) return undefined;
+  if (key === "input") return usage.input ?? usage.inputTokens;
+  if (key === "output") return usage.output ?? usage.outputTokens;
+  if (key === "reasoning") return usage.reasoning ?? usage.reasoningTokens;
+  return usage.cache ?? usage.cachedInputTokens;
 }
 
 function ProgressRing({

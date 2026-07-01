@@ -1,6 +1,7 @@
 .input {
   display: flex;
   width: 100%;
+  min-width: 0;
   height: var(--sigvelo-control-height-md);
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
@@ -13,12 +14,32 @@
     var(--sigvelo-color-neutral-border-muted);
   border-radius: var(--sigvelo-radius-md);
   transition:
+    color 150ms ease,
     border-color 150ms ease,
     box-shadow 150ms ease;
 }
 
+.input::selection {
+  color: var(--sigvelo-color-selection-text);
+  background-color: var(--sigvelo-color-selection-bg);
+}
+
 .input::placeholder {
   color: var(--sigvelo-color-text-muted);
+}
+
+.input::file-selector-button {
+  display: inline-flex;
+  align-items: center;
+  height: 1.75rem;
+  margin-inline-end: 0.75rem;
+  padding: 0;
+  font: inherit;
+  font-size: var(--sigvelo-text-sm);
+  font-weight: var(--sigvelo-font-weight-semibold);
+  color: var(--sigvelo-color-text);
+  background-color: transparent;
+  border: 0;
 }
 
 .input:focus-visible {
@@ -30,6 +51,18 @@
 }
 
 .input:disabled {
+  pointer-events: none;
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.input:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]) {
+  border-color: var(--sigvelo-color-danger-bg);
+}
+
+.input:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]):focus-visible {
+  border-color: var(--sigvelo-color-danger-bg);
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 80%);
 }

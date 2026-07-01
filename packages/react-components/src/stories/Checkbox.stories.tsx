@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { Checkbox } from "../components/Checkbox";
 import { Label } from "../components/Label";
@@ -51,6 +51,13 @@ export const DisabledChecked: Story = {
     checked: true,
     disabled: true,
     "aria-label": "Disabled checked checkbox",
+  },
+};
+
+export const Invalid: Story = {
+  args: {
+    "aria-invalid": true,
+    "aria-label": "Invalid checkbox",
   },
 };
 
