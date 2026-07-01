@@ -45,3 +45,21 @@ test("maps shadcn button variants and sizes", () => {
   expect(button?.className).toContain("button--icon-sm");
   mounted.cleanup();
 });
+
+test("keeps button semantics when a render override substitutes a non-button element", () => {
+  const mounted = mount(
+    <Button variant="outline" render={<a href="/docs" />}>
+      Docs
+    </Button>,
+  );
+
+  // A `render` override renders the anchor, not a native <button>...
+  const anchor = mounted.container.querySelector("a");
+  expect(anchor?.dataset.slot).toBe("button");
+  expect(anchor?.className).toContain("button--outline");
+  expect(mounted.container.querySelector("button")).toBeNull();
+  // ...and `nativeButton` defaults to false, so Base UI adds explicit button semantics to the
+  // anchor instead of warning about lost native semantics.
+  expect(anchor?.getAttribute("role")).toBe("button");
+  mounted.cleanup();
+});

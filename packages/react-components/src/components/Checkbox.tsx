@@ -31,10 +31,10 @@ function CheckIcon(props: React.ComponentProps<"svg">) {
  *
  * @example
  * ```tsx
- * <Checkbox defaultChecked onChange={(checked) => console.log(checked)} />
+ * <Checkbox defaultChecked onCheckedChange={(checked) => console.log(checked)} />
  *
  * <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
- *   <Checkbox id="terms" checked={agreed} onChange={setAgreed} />
+ *   <Checkbox id="terms" checked={agreed} onCheckedChange={setAgreed} />
  *   <Label htmlFor="terms">I agree to the terms</Label>
  * </div>
  * ```
