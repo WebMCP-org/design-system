@@ -168,6 +168,7 @@ export function Button({
   color,
   size = "default",
   className,
+  nativeButton,
   ref,
   ...props
 }: ButtonProps & { ref?: React.Ref<HTMLButtonElement> }) {
@@ -177,5 +178,20 @@ export function Button({
           buttonVariants({ variant, color, size, className: className(state) })
       : buttonVariants({ variant, color, size, className });
 
-  return <BaseButton ref={ref} data-slot="button" className={classes} {...props} />;
+  // A `render` override means the caller is substituting the underlying element — very often a
+  // non-<button> (a link or router component). In that case default Base UI's `nativeButton` to
+  // false so the rendered element keeps proper button semantics (role/keyboard) instead of warning
+  // about lost native semantics. With no `render`, keep the native <button> default. An explicit
+  // `nativeButton` prop always wins.
+  const resolvedNativeButton = nativeButton ?? props.render == null;
+
+  return (
+    <BaseButton
+      ref={ref}
+      data-slot="button"
+      className={classes}
+      nativeButton={resolvedNativeButton}
+      {...props}
+    />
+  );
 }
