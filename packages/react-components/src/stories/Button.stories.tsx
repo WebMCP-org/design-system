@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "storybook/test";
 import { Button } from "../components/Button";
 
@@ -13,21 +13,17 @@ const meta = {
     variant: {
       control: "select",
       options: ["normal", "outline", "ghost", "link"],
-      description: "Visual rendering style",
     },
     color: {
       control: "select",
       options: ["neutral", "primary", "destructive"],
-      description: "Semantic color intent",
     },
     size: {
       control: "select",
       options: ["xs", "sm", "md", "lg", "xl", "icon"],
-      description: "Button size",
     },
     disabled: {
       control: "boolean",
-      description: "Disabled state",
     },
   },
   args: { onClick: fn() },

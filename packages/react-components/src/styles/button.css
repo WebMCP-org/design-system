@@ -157,6 +157,26 @@
   padding: 0;
 }
 
+.button--icon-xs {
+  min-height: var(--sigvelo-control-height-xs);
+  width: var(--sigvelo-control-height-xs);
+  padding: 0;
+  border-radius: var(--sigvelo-radius-sm);
+}
+
+.button--icon-sm {
+  min-height: var(--sigvelo-control-height-sm);
+  width: var(--sigvelo-control-height-sm);
+  padding: 0;
+  border-radius: var(--sigvelo-radius-sm);
+}
+
+.button--icon-lg {
+  min-height: var(--sigvelo-control-height-lg);
+  width: var(--sigvelo-control-height-lg);
+  padding: 0;
+}
+
 @media (forced-colors: active) {
   .button {
     border: 1px solid ButtonText;

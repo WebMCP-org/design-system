@@ -1,13 +1,17 @@
 import * as React from "react";
+import type { BundledLanguage, ThemedToken, TokensResult } from "shiki";
 import {
   Select,
+  SelectContent,
+  SelectItem,
   SelectList,
-  SelectOption,
-  SelectPopup,
-  SelectPortal,
-  SelectPositioner,
   SelectTrigger,
   SelectValue,
+  type SelectProps,
+  type SelectContentProps,
+  type SelectItemProps,
+  type SelectTriggerProps,
+  type SelectValueProps,
 } from "./Select.js";
 import { cx } from "./_internal/class-names.js";
 import { CopyButton, type CopyButtonProps } from "./_internal/copy-button.js";
@@ -15,10 +19,108 @@ import {
   CODE_BLOCK_LANGUAGES,
   type CodeBlockLanguage,
   getHighlighterInstance,
+  loadShikiLanguage,
   toShikiLang,
 } from "./_internal/shiki.js";
 
 export { CODE_BLOCK_LANGUAGES, type CodeBlockLanguage };
+
+export interface TokenizedCode {
+  tokens: ThemedToken[][];
+  fg: string;
+  bg: string;
+}
+
+const tokensCache = new Map<string, TokenizedCode>();
+const subscribers = new Map<string, Set<(result: TokenizedCode) => void>>();
+
+function getTokensCacheKey(code: string, language: CodeBlockLanguage | BundledLanguage) {
+  return JSON.stringify([language, code]);
+}
+
+function createRawTokens(code: string): TokenizedCode {
+  return {
+    bg: "transparent",
+    fg: "inherit",
+    tokens: code.split("\n").map((line) =>
+      line
+        ? [
+            {
+              content: line,
+              color: "inherit",
+            } as ThemedToken,
+          ]
+        : [],
+    ),
+  };
+}
+
+function resolveCodeBlockLanguage(language: CodeBlockLanguage | BundledLanguage): BundledLanguage {
+  return CODE_BLOCK_LANGUAGES.includes(language as CodeBlockLanguage)
+    ? toShikiLang(language as CodeBlockLanguage)
+    : language;
+}
+
+export function highlightCode(
+  code: string,
+  language: CodeBlockLanguage | BundledLanguage,
+  callback?: (result: TokenizedCode) => void,
+): TokenizedCode | null {
+  const tokensCacheKey = getTokensCacheKey(code, language);
+  const cached = tokensCache.get(tokensCacheKey);
+  if (cached) return cached;
+
+  if (callback) {
+    const tokenSubscribers = subscribers.get(tokensCacheKey) ?? new Set();
+    tokenSubscribers.add(callback);
+    subscribers.set(tokensCacheKey, tokenSubscribers);
+  }
+
+  void getHighlighterInstance()
+    .then(async (highlighter) => {
+      const lang = resolveCodeBlockLanguage(language);
+      let result: TokensResult;
+      try {
+        const loadedLang = await loadShikiLanguage(highlighter, lang);
+        result = highlighter.codeToTokens(code, {
+          lang: loadedLang,
+          themes: {
+            light: "github-light-high-contrast",
+            dark: "github-dark-high-contrast",
+          },
+        });
+      } catch {
+        const raw = createRawTokens(code);
+        tokensCache.set(tokensCacheKey, raw);
+        notifyTokenSubscribers(tokensCacheKey, raw);
+        return;
+      }
+
+      const tokenized: TokenizedCode = {
+        tokens: result.tokens,
+        fg: result.fg ?? "inherit",
+        bg: result.bg ?? "transparent",
+      };
+      tokensCache.set(tokensCacheKey, tokenized);
+      notifyTokenSubscribers(tokensCacheKey, tokenized);
+    })
+    .catch(() => {
+      const raw = createRawTokens(code);
+      tokensCache.set(tokensCacheKey, raw);
+      notifyTokenSubscribers(tokensCacheKey, raw);
+    });
+
+  return null;
+}
+
+function notifyTokenSubscribers(tokensCacheKey: string, result: TokenizedCode) {
+  const tokenSubscribers = subscribers.get(tokensCacheKey);
+  if (!tokenSubscribers) return;
+  for (const subscriber of tokenSubscribers) {
+    subscriber(result);
+  }
+  subscribers.delete(tokensCacheKey);
+}
 
 interface CodeBlockContextValue {
   code: string;
@@ -36,6 +138,24 @@ function useCodeBlockContext(): CodeBlockContextValue {
     throw new Error("CodeBlock subcomponents must be used inside <CodeBlock>.");
   }
   return ctx;
+}
+
+function renderPlainCode(code: string, showLineNumbers: boolean) {
+  if (!showLineNumbers) return code;
+
+  return code.split("\n").map((line, index) => (
+    <span className="line" key={`${index}-${line}`}>
+      {line || " "}
+    </span>
+  ));
+}
+
+function hasCustomCodeBlockContent(children: React.ReactNode) {
+  return React.Children.toArray(children).some(
+    (child) =>
+      React.isValidElement(child) &&
+      (child.type === CodeBlockContainer || child.type === CodeBlockContent),
+  );
 }
 
 export interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -59,9 +179,10 @@ export interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
  * A syntax-highlighted code block powered by Shiki. Supports line numbers,
  * inline language switching, and a copy-to-clipboard action.
  *
- * Supported languages: `ts`, `tsx`, `js`, `jsx`, `css`, `html`, `json`,
- * `bash`, `md`. The highlighter is loaded lazily on first render and cached
- * at module scope.
+ * Supports Shiki bundled language names plus the short aliases in
+ * `CODE_BLOCK_LANGUAGES`. The highlighter is loaded lazily on first render and
+ * cached at module scope. Adapted from Vercel AI Elements and restyled with
+ * Sigvelo CSS tokens.
  *
  * @example
  * ```tsx
@@ -77,6 +198,8 @@ export interface CodeBlockProps extends React.HTMLAttributes<HTMLDivElement> {
  *   </CodeBlockContainer>
  * </CodeBlock>
  * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/code-block | AI Elements Code Block}
  */
 export function CodeBlock({
   className,
@@ -108,11 +231,17 @@ export function CodeBlock({
     () => ({ code, language: internalLanguage, setLanguage, showLineNumbers, isStreaming }),
     [code, internalLanguage, setLanguage, showLineNumbers, isStreaming],
   );
+  const hasCustomContent = hasCustomCodeBlockContent(children);
 
   return (
     <CodeBlockContext.Provider value={ctxValue}>
       <div ref={ref} className={cx("code-block", className)} {...props}>
         {children}
+        {!hasCustomContent && (
+          <CodeBlockContainer>
+            <CodeBlockContent />
+          </CodeBlockContainer>
+        )}
       </div>
     </CodeBlockContext.Provider>
   );
@@ -185,6 +314,7 @@ export interface CodeBlockCopyButtonProps extends Omit<CopyButtonProps, "text" |
 export function CodeBlockCopyButton({
   className,
   label = "Copy code",
+  timeout = 2000,
   onClick,
   ...props
 }: CodeBlockCopyButtonProps) {
@@ -195,48 +325,91 @@ export function CodeBlockCopyButton({
       {...props}
       text={code}
       label={label}
+      timeout={timeout}
       className={cx("code-block__copy", className)}
       onClick={onClick}
     />
   );
 }
 
-export interface CodeBlockLanguageSelectorProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CodeBlockLanguageSelectorProps extends Omit<
+  SelectProps,
+  "children" | "onValueChange" | "value"
+> {
   languages?: ReadonlyArray<CodeBlockLanguage>;
+  value?: SelectProps["value"];
+  onValueChange?: SelectProps["onValueChange"];
+  children?: React.ReactNode;
+  className?: string;
 }
 
 export function CodeBlockLanguageSelector({
+  children,
   className,
   languages = CODE_BLOCK_LANGUAGES,
+  onValueChange,
   ref,
+  value,
   ...props
 }: CodeBlockLanguageSelectorProps & { ref?: React.Ref<HTMLDivElement> }) {
   const { language, setLanguage } = useCodeBlockContext();
+  const handleValueChange = React.useCallback<NonNullable<SelectProps["onValueChange"]>>(
+    (next, eventDetails) => {
+      setLanguage(next as CodeBlockLanguage);
+      onValueChange?.(next, eventDetails);
+    },
+    [onValueChange, setLanguage],
+  );
+
   return (
-    <div ref={ref} className={cx("code-block__language-selector", className)} {...props}>
-      <Select
-        value={language}
-        onValueChange={(value: unknown) => setLanguage(value as CodeBlockLanguage)}
-      >
-        <SelectTrigger size="sm" aria-label="Code language">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectPortal>
-          <SelectPositioner>
-            <SelectPopup>
+    <div ref={ref} className={cx("code-block__language-selector", className)}>
+      <Select {...props} value={value ?? language} onValueChange={handleValueChange}>
+        {children ?? (
+          <>
+            <CodeBlockLanguageSelectorTrigger aria-label="Code language">
+              <CodeBlockLanguageSelectorValue />
+            </CodeBlockLanguageSelectorTrigger>
+            <CodeBlockLanguageSelectorContent>
               <SelectList>
                 {languages.map((lang) => (
-                  <SelectOption key={lang} value={lang}>
+                  <CodeBlockLanguageSelectorItem key={lang} value={lang}>
                     {lang}
-                  </SelectOption>
+                  </CodeBlockLanguageSelectorItem>
                 ))}
               </SelectList>
-            </SelectPopup>
-          </SelectPositioner>
-        </SelectPortal>
+            </CodeBlockLanguageSelectorContent>
+          </>
+        )}
       </Select>
     </div>
   );
+}
+
+export type CodeBlockLanguageSelectorTriggerProps = SelectTriggerProps;
+export type CodeBlockLanguageSelectorValueProps = SelectValueProps;
+export type CodeBlockLanguageSelectorContentProps = SelectContentProps;
+export type CodeBlockLanguageSelectorItemProps = SelectItemProps;
+
+export function CodeBlockLanguageSelectorTrigger({
+  size = "sm",
+  ...props
+}: CodeBlockLanguageSelectorTriggerProps) {
+  return <SelectTrigger size={size} {...props} />;
+}
+
+export function CodeBlockLanguageSelectorValue(props: CodeBlockLanguageSelectorValueProps) {
+  return <SelectValue {...props} />;
+}
+
+export function CodeBlockLanguageSelectorContent({
+  align = "end",
+  ...props
+}: CodeBlockLanguageSelectorContentProps) {
+  return <SelectContent align={align} {...props} />;
+}
+
+export function CodeBlockLanguageSelectorItem(props: CodeBlockLanguageSelectorItemProps) {
+  return <SelectItem {...props} />;
 }
 
 export interface CodeBlockContainerProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -295,8 +468,9 @@ export function CodeBlockContent({
     void (async () => {
       try {
         const highlighter = await getHighlighterInstance();
+        const loadedLang = await loadShikiLanguage(highlighter, language);
         const out = highlighter.codeToHtml(code, {
-          lang: toShikiLang(language),
+          lang: loadedLang,
           theme,
         });
         if (!cancelled) setHtml(out);
@@ -320,7 +494,7 @@ export function CodeBlockContent({
         )}
         {...props}
       >
-        <code>{code}</code>
+        <code>{renderPlainCode(code, showLineNumbers)}</code>
       </pre>
     );
   }

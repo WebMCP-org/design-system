@@ -12,7 +12,7 @@ import {
 import { cx } from "./_internal/class-names.js";
 import { type AnsiSegment, parseAnsi } from "./_internal/ansi.js";
 import { CopyButton, type CopyButtonProps } from "./_internal/copy-button.js";
-import { XIcon } from "./_internal/icons.js";
+import { TerminalIcon, XIcon } from "./_internal/icons.js";
 
 interface TerminalContextValue {
   output: string;
@@ -84,7 +84,18 @@ export function Terminal({
         data-streaming={isStreaming ? "" : undefined}
         {...props}
       >
-        {children}
+        {children ?? (
+          <>
+            <TerminalHeader>
+              <TerminalTitle />
+              <TerminalActions>
+                <TerminalCopyButton />
+                {onClear ? <TerminalClearButton /> : null}
+              </TerminalActions>
+            </TerminalHeader>
+            <TerminalContent />
+          </>
+        )}
       </div>
     </TerminalContext.Provider>
   );
@@ -115,7 +126,8 @@ export function TerminalTitle({
 }: TerminalTitleProps & { ref?: React.Ref<HTMLSpanElement> }) {
   return (
     <span ref={ref} className={cx("terminal__title", className)} {...props}>
-      {children}
+      <TerminalIcon aria-hidden="true" />
+      {children ?? "Terminal"}
     </span>
   );
 }

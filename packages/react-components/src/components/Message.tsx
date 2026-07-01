@@ -1,4 +1,9 @@
 import * as React from "react";
+import { cjk } from "@streamdown/cjk";
+import { code } from "@streamdown/code";
+import { math } from "@streamdown/math";
+import { mermaid } from "@streamdown/mermaid";
+import { Streamdown, type StreamdownProps } from "streamdown";
 import { Button, type ButtonProps } from "./Button.js";
 import {
   Tooltip,
@@ -22,6 +27,7 @@ export interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
 
 /**
  * A chat message row. Aligns and styles itself based on {@link from}.
+ * Adapted from Vercel AI Elements and restyled with Sigvelo CSS tokens.
  *
  * Compose with {@link MessageContent} for the bubble, {@link MessageActions}
  * for toolbar actions, and {@link MessageBranch} for multi-version responses.
@@ -37,6 +43,8 @@ export interface MessageProps extends React.HTMLAttributes<HTMLDivElement> {
  *   </MessageActions>
  * </Message>
  * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/message | AI Elements Message}
  */
 export function Message({
   className,
@@ -71,6 +79,23 @@ export function MessageContent({
   );
 }
 
+export type MessageResponseProps = StreamdownProps;
+
+const streamdownPlugins = { cjk, code, math, mermaid };
+
+export const MessageResponse = React.memo(function MessageResponse({
+  className,
+  ...props
+}: MessageResponseProps) {
+  return (
+    <Streamdown
+      className={cx("message__response", className)}
+      plugins={streamdownPlugins}
+      {...props}
+    />
+  );
+});
+
 export interface MessageActionsProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**
@@ -93,7 +118,7 @@ export function MessageActions({
 export interface MessageActionProps extends Omit<ButtonProps, "children" | "className"> {
   className?: string;
   /** Accessible name for the button. Required when no visible text children. */
-  label: string;
+  label?: string;
   /** Optional tooltip text shown on hover/focus. Defaults to {@link label}. */
   tooltip?: string;
   children?: React.ReactNode;
@@ -122,7 +147,7 @@ export function MessageAction({
       color={color}
       size={size}
       className={cx("message__action", className)}
-      aria-label={label}
+      aria-label={label ?? tooltip}
       {...props}
     >
       {children}
@@ -256,11 +281,18 @@ export function MessageBranchContent({
   }, [items.length, registerCount]);
 
   const safeIndex = items.length === 0 ? 0 : Math.min(Math.max(branchIndex, 0), items.length - 1);
-  const active = items[safeIndex] ?? null;
 
   return (
     <div ref={ref} className={cx("message__branch-content", className)} {...props}>
-      {active}
+      {items.map((item, index) => (
+        <div
+          key={React.isValidElement(item) && item.key != null ? item.key : index}
+          className="message__branch-panel"
+          hidden={index !== safeIndex}
+        >
+          {item}
+        </div>
+      ))}
     </div>
   );
 }
@@ -306,7 +338,6 @@ export function MessageBranchPrevious({
   ...props
 }: MessageBranchPreviousProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const { branchIndex, branchCount, setBranchIndex } = useMessageBranch("MessageBranchPrevious");
-  const disabled = branchIndex <= 0;
 
   return (
     <Button
@@ -315,13 +346,13 @@ export function MessageBranchPrevious({
       variant={variant}
       color={color}
       size={size}
-      disabled={disabled || branchCount === 0}
+      disabled={branchCount <= 1}
       className={cx("message__branch-prev", className)}
       aria-label={label}
       onClick={(event) => {
         onClick?.(event);
         if (!event.defaultPrevented) {
-          setBranchIndex(Math.max(0, branchIndex - 1));
+          setBranchIndex(branchIndex > 0 ? branchIndex - 1 : branchCount - 1);
         }
       }}
       {...props}
@@ -350,7 +381,6 @@ export function MessageBranchNext({
   ...props
 }: MessageBranchNextProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const { branchIndex, branchCount, setBranchIndex } = useMessageBranch("MessageBranchNext");
-  const disabled = branchIndex >= branchCount - 1;
 
   return (
     <Button
@@ -359,13 +389,13 @@ export function MessageBranchNext({
       variant={variant}
       color={color}
       size={size}
-      disabled={disabled || branchCount === 0}
+      disabled={branchCount <= 1}
       className={cx("message__branch-next", className)}
       aria-label={label}
       onClick={(event) => {
         onClick?.(event);
         if (!event.defaultPrevented) {
-          setBranchIndex(Math.min(branchCount - 1, branchIndex + 1));
+          setBranchIndex(branchIndex < branchCount - 1 ? branchIndex + 1 : 0);
         }
       }}
       {...props}

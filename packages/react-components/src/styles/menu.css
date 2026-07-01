@@ -81,9 +81,23 @@
   transition: background-color 100ms ease;
 }
 
+.menu__item--inset,
+.menu__group-label--inset {
+  padding-inline-start: 2rem;
+}
+
 .menu__item[data-highlighted] {
   background-color: var(--sigvelo-color-neutral-bg-subtle);
   color: var(--sigvelo-color-neutral-text-on-subtle);
+}
+
+.menu__item[data-variant="destructive"] {
+  color: var(--sigvelo-color-danger-text);
+}
+
+.menu__item[data-variant="destructive"][data-highlighted] {
+  background-color: var(--sigvelo-color-danger-bg-subtle);
+  color: var(--sigvelo-color-danger-text-on-subtle);
 }
 
 .menu__item[data-disabled] {
@@ -197,6 +211,12 @@
   border-inline-start: 2px solid currentColor;
   border-block-end: 2px solid currentColor;
   transform: rotate(-45deg) translateY(-1px);
+}
+
+.menu__shortcut {
+  margin-inline-start: auto;
+  color: var(--sigvelo-color-text-muted);
+  font-size: 0.75rem;
 }
 
 .menu__submenu-trigger {

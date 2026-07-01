@@ -11,7 +11,14 @@ function Input({
   className?: string;
 } & { ref?: React.Ref<HTMLInputElement> }) {
   const classes = ["autocomplete__input", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Input ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Input
+      ref={ref}
+      data-slot="autocomplete-input"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 function Trigger({
@@ -22,7 +29,14 @@ function Trigger({
   className?: string;
 } & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["autocomplete__trigger", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Trigger ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Trigger
+      ref={ref}
+      data-slot="autocomplete-trigger"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 function Clear({
@@ -33,7 +47,14 @@ function Clear({
   className?: string;
 } & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["autocomplete__clear", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Clear ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Clear
+      ref={ref}
+      data-slot="autocomplete-clear"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 function Positioner({
@@ -44,7 +65,14 @@ function Positioner({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["autocomplete__positioner", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Positioner ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Positioner
+      ref={ref}
+      data-slot="autocomplete-positioner"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 function Popup({
@@ -55,10 +83,28 @@ function Popup({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["autocomplete__popup", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Popup ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Popup
+      ref={ref}
+      data-slot="autocomplete-content"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
-const List = BaseAutocomplete.List;
+function List({
+  className = "",
+  ref,
+  ...props
+}: Omit<React.ComponentPropsWithRef<typeof BaseAutocomplete.List>, "className"> & {
+  className?: string;
+} & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["autocomplete__list", className].filter(Boolean).join(" ");
+  return (
+    <BaseAutocomplete.List ref={ref} data-slot="autocomplete-list" className={classes} {...props} />
+  );
+}
 
 function Item({
   className = "",
@@ -68,7 +114,9 @@ function Item({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["autocomplete__item", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Item ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Item ref={ref} data-slot="autocomplete-item" className={classes} {...props} />
+  );
 }
 
 function Empty({
@@ -79,7 +127,14 @@ function Empty({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["autocomplete__empty", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Empty ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Empty
+      ref={ref}
+      data-slot="autocomplete-empty"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 function Status({
@@ -90,7 +145,14 @@ function Status({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["autocomplete__status", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Status ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Status
+      ref={ref}
+      data-slot="autocomplete-status"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 function Group({
@@ -101,7 +163,14 @@ function Group({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["autocomplete__group", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.Group ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.Group
+      ref={ref}
+      data-slot="autocomplete-group"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 function GroupLabel({
@@ -112,7 +181,14 @@ function GroupLabel({
   className?: string;
 } & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["autocomplete__group-label", className].filter(Boolean).join(" ");
-  return <BaseAutocomplete.GroupLabel ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAutocomplete.GroupLabel
+      ref={ref}
+      data-slot="autocomplete-group-label"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 /**

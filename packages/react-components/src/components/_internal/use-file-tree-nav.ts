@@ -137,6 +137,7 @@ export function useFileTreeNav({
       },
       Enter(path, kind) {
         if (kind === "folder") {
+          onSelect(path);
           toggleFolderExpanded(path);
         } else {
           onSelect(path);
@@ -144,6 +145,7 @@ export function useFileTreeNav({
       },
       " "(path, kind) {
         if (kind === "folder") {
+          onSelect(path);
           toggleFolderExpanded(path);
         } else {
           onSelect(path);

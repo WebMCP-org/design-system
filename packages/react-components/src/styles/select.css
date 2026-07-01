@@ -16,8 +16,26 @@
   border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
+    color 150ms ease,
     border-color 150ms ease,
     box-shadow 150ms ease;
+}
+
+.select__trigger > [data-slot="select-value"] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select__icon {
+  display: flex;
+  flex-shrink: 0;
+  pointer-events: none;
+  color: var(--sigvelo-color-text-muted);
+  opacity: 0.7;
 }
 
 .select__trigger:hover:not([data-disabled]) {
@@ -35,6 +53,17 @@
 .select__trigger[data-disabled] {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.select__trigger:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]) {
+  border-color: var(--sigvelo-color-danger-bg);
+}
+
+.select__trigger:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]):focus-visible {
+  border-color: var(--sigvelo-color-danger-bg);
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 80%);
 }
 
 .select__trigger--sm {
@@ -75,16 +104,20 @@
 }
 
 .select__option {
+  position: relative;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  width: 100%;
   padding-block: 0.5rem;
-  padding-inline: 0.75rem;
+  padding-inline: 0.75rem 2rem;
   font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   color: var(--sigvelo-color-text);
   border-radius: calc(var(--sigvelo-radius-md) - 2px);
   cursor: pointer;
   outline: none;
+  user-select: none;
   transition: background-color 100ms ease;
 }
 
@@ -104,6 +137,16 @@
   cursor: not-allowed;
 }
 
+.select__item-indicator {
+  position: absolute;
+  inset-inline-end: 0.5rem;
+  display: flex;
+  width: 0.875rem;
+  height: 0.875rem;
+  align-items: center;
+  justify-content: center;
+}
+
 .select__option-group {
   padding: 0.25rem 0;
 }
@@ -114,5 +157,19 @@
   font-family: var(--sigvelo-font-sans);
   font-size: 0.75rem;
   font-weight: var(--sigvelo-font-weight-semibold);
+  color: var(--sigvelo-color-text-muted);
+}
+
+.select__separator {
+  height: 1px;
+  margin-block: 0.25rem;
+  background-color: var(--sigvelo-color-neutral-border-muted);
+}
+
+.select__scroll-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.5rem;
   color: var(--sigvelo-color-text-muted);
 }

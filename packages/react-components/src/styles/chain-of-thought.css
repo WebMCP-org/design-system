@@ -208,6 +208,19 @@
     var(--sigvelo-color-neutral-border-subtle);
 }
 
+.chain-of-thought__image-frame {
+  display: flex;
+  max-height: 22rem;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.75rem;
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-sm);
+}
+
 .chain-of-thought__image-caption {
   font-size: 0.6875rem;
   color: var(--sigvelo-color-text-muted);

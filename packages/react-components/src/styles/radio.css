@@ -19,14 +19,18 @@
   justify-content: center;
   width: 1.125rem;
   height: 1.125rem;
+  flex-shrink: 0;
   background-color: var(--sigvelo-color-canvas);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
     var(--sigvelo-color-neutral-border-muted);
   border-radius: var(--sigvelo-radius-full);
+  outline: none;
   cursor: pointer;
   transition:
+    color 150ms ease,
     border-color 150ms ease,
-    background-color 150ms ease;
+    background-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .radio:hover:not([data-disabled]) {
@@ -43,6 +47,16 @@
 .radio[data-checked] {
   border-color: var(--sigvelo-color-primary-bg);
   background-color: var(--sigvelo-color-primary-bg);
+}
+
+.radio:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]) {
+  border-color: var(--sigvelo-color-danger-bg);
+}
+
+.radio:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]):focus-visible {
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 80%);
 }
 
 .radio[data-disabled] {

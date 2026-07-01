@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import { Popover } from "../components/Popover";
@@ -40,6 +40,26 @@ export const Default: Story = {
     await expect(
       screen.getByText("This is a popover with some helpful information."),
     ).toBeInTheDocument();
+  },
+};
+
+export const ShadcnContentAlias: Story = {
+  render: () => (
+    <Popover.Root>
+      <Popover.Trigger>Open Composed Popover</Popover.Trigger>
+      <Popover.Content>
+        <Popover.Title>Composed Popover</Popover.Title>
+        <Popover.Description>
+          Content includes the portal and positioner by default.
+        </Popover.Description>
+      </Popover.Content>
+    </Popover.Root>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByText("Open Composed Popover"));
+
+    await expect(await screen.findByText("Composed Popover")).toBeInTheDocument();
   },
 };
 

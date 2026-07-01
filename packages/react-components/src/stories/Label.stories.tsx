@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Label } from "../components/Label";
 import { Input } from "../components/Input";
 
@@ -34,6 +34,14 @@ export const Default: Story = {
 };
 
 export const WithInput: Story = {
+  name: "Associated input",
+  parameters: {
+    docs: {
+      description: {
+        story: "Use htmlFor with the matching input id when the label does not wrap the control.",
+      },
+    },
+  },
   args: {
     htmlFor: "email",
   },
@@ -46,6 +54,14 @@ export const WithInput: Story = {
 };
 
 export const FormExample: Story = {
+  name: "Form fields",
+  parameters: {
+    docs: {
+      description: {
+        story: "Repeated field labels in a compact form layout.",
+      },
+    },
+  },
   argTypes: {
     htmlFor: {
       table: {

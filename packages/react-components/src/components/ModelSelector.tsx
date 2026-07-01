@@ -1,6 +1,13 @@
 import * as React from "react";
 import { Button, type ButtonProps } from "./Button.js";
-import { Dialog, DialogBackdrop, DialogPopup, DialogPortal, DialogTrigger } from "./Dialog.js";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPopup,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from "./Dialog.js";
 import { cx } from "./_internal/class-names.js";
 import { ChevronDownIcon, SearchIcon } from "./_internal/icons.js";
 import { ProviderLogo } from "./_internal/provider-logos.js";
@@ -22,14 +29,34 @@ function useModelSelectorContext(): ModelSelectorContextValue {
 }
 
 export interface ModelSelectorProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Controlled dialog open state. */
   open?: boolean;
+  /** Initial dialog open state for uncontrolled usage. */
   defaultOpen?: boolean;
+  /** Called when the dialog opens or closes. */
   onOpenChange?: (open: boolean) => void;
+  /** Additional class names for layout only; do not restyle dialog internals from apps. */
+  className?: string;
+  /** Trigger, content, search input, grouped list, and items. */
+  children?: React.ReactNode;
 }
 
 /**
  * A searchable model picker. Click the trigger to open a dialog containing a
  * search input and a grouped list of available models.
+ *
+ * Built internally for AI model selection. Use it when users choose one model
+ * from a grouped provider list. Do not use it as a general command palette or
+ * multiselect; use Combobox or a dedicated component for that.
+ *
+ * Sigvelo changes: composes the design-system Dialog and Button, filters item
+ * children locally, and maps provider logos plus listbox styling to Sigvelo
+ * CSS tokens.
+ *
+ * The dialog owns focus while open, the list uses `role="listbox"`, and items
+ * use `role="option"` with `aria-selected`. Styling consumes surface, border,
+ * spacing, radius, focus, and typography tokens. Add provider/item affordances
+ * here when they need to be shared.
  *
  * @example
  * ```tsx
@@ -125,13 +152,25 @@ export function ModelSelectorTrigger({ className, children, ...props }: ModelSel
   );
 }
 
-export interface ModelSelectorContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface ModelSelectorContentProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "title"
+> {
+  title?: React.ReactNode;
+}
 
-export function ModelSelectorContent({ children, ...props }: ModelSelectorContentProps) {
+export function ModelSelectorContent({
+  children,
+  title = "Model Selector",
+  ...props
+}: ModelSelectorContentProps) {
   return (
     <DialogPortal>
       <DialogBackdrop />
-      <DialogPopup {...props}>{children}</DialogPopup>
+      <DialogPopup {...props}>
+        <DialogTitle className="model-selector__title">{title}</DialogTitle>
+        {children}
+      </DialogPopup>
     </DialogPortal>
   );
 }

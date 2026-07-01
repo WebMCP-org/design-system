@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import { Menubar } from "../components/Menubar";
 
@@ -223,6 +223,37 @@ export const TextEditor: Story = {
 
     await expect(await screen.findByText("Text Style")).toBeInTheDocument();
     await expect(screen.getByText("Bold")).toBeInTheDocument();
+  },
+};
+
+export const ShadcnContentAliases: Story = {
+  render: () => (
+    <Menubar.Root>
+      <Menubar.Menu>
+        <Menubar.Trigger>View</Menubar.Trigger>
+        <Menubar.Content>
+          <Menubar.CheckboxItem checked>Show sidebar</Menubar.CheckboxItem>
+          <Menubar.Separator />
+          <Menubar.Sub>
+            <Menubar.SubTrigger>Theme</Menubar.SubTrigger>
+            <Menubar.SubContent>
+              <Menubar.RadioGroup value="system">
+                <Menubar.RadioItem value="light">Light</Menubar.RadioItem>
+                <Menubar.RadioItem value="dark">Dark</Menubar.RadioItem>
+                <Menubar.RadioItem value="system">System</Menubar.RadioItem>
+              </Menubar.RadioGroup>
+            </Menubar.SubContent>
+          </Menubar.Sub>
+        </Menubar.Content>
+      </Menubar.Menu>
+    </Menubar.Root>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByText("View"));
+
+    await expect(await screen.findByText("Show sidebar")).toBeInTheDocument();
+    await expect(screen.getByText("Theme")).toBeInTheDocument();
   },
 };
 

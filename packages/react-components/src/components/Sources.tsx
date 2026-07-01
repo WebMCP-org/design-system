@@ -1,22 +1,27 @@
 import * as React from "react";
-import { Collapsible as BaseCollapsible } from "@base-ui/react/collapsible";
+import {
+  CollapsiblePanel,
+  type CollapsiblePanelProps,
+  CollapsibleRoot,
+  type CollapsibleRootProps,
+  CollapsibleTrigger,
+  type CollapsibleTriggerProps,
+} from "./Collapsible.js";
 import { cx } from "./_internal/class-names.js";
 import { ChevronRightIcon, LinkIcon } from "./_internal/icons.js";
 
 /**
  * Props for the Sources root. Wraps Base UI Collapsible.Root.
  */
-export interface SourcesProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Root>,
-  "className"
-> {
+export interface SourcesProps extends Omit<CollapsibleRootProps, "className" | "unstyled"> {
   className?: string;
 }
 
 /**
  * Displays a collapsible list of citations used by an AI to generate a
  * response. Compose with SourcesTrigger, SourcesContent, and one or more
- * Source children.
+ * Source children. Adapted from Vercel AI Elements and restyled with Sigvelo
+ * CSS tokens.
  *
  * @example
  * ```tsx
@@ -29,18 +34,20 @@ export interface SourcesProps extends Omit<
  *   </SourcesContent>
  * </Sources>
  * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/sources | AI Elements Sources}
  */
 export function Sources({
   className,
   ref,
   ...props
 }: SourcesProps & { ref?: React.Ref<HTMLDivElement> }) {
-  return <BaseCollapsible.Root ref={ref} className={cx("sources", className)} {...props} />;
+  return <CollapsibleRoot ref={ref} className={cx("sources", className)} {...props} unstyled />;
 }
 
 export interface SourcesTriggerProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Trigger>,
-  "className"
+  CollapsibleTriggerProps,
+  "className" | "unstyled"
 > {
   className?: string;
   /** Number of sources to show in the trigger label. */
@@ -59,21 +66,22 @@ export function SourcesTrigger({
   ...props
 }: SourcesTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
   return (
-    <BaseCollapsible.Trigger ref={ref} className={cx("sources__trigger", className)} {...props}>
-      <span className="sources__trigger-icon" aria-hidden="true">
-        <ChevronRightIcon />
-      </span>
-      <span className="sources__trigger-label">
-        {children ?? `Used ${count} ${count === 1 ? "source" : "sources"}`}
-      </span>
-    </BaseCollapsible.Trigger>
+    <CollapsibleTrigger ref={ref} className={cx("sources__trigger", className)} {...props} unstyled>
+      {children ?? (
+        <>
+          <span className="sources__trigger-label">
+            Used {count} {count === 1 ? "source" : "sources"}
+          </span>
+          <span className="sources__trigger-icon" aria-hidden="true">
+            <ChevronRightIcon />
+          </span>
+        </>
+      )}
+    </CollapsibleTrigger>
   );
 }
 
-export interface SourcesContentProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Panel>,
-  "className"
-> {
+export interface SourcesContentProps extends Omit<CollapsiblePanelProps, "className" | "unstyled"> {
   className?: string;
 }
 
@@ -87,15 +95,17 @@ export function SourcesContent({
   ...props
 }: SourcesContentProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Panel ref={ref} className={cx("sources__content", className)} {...props}>
-      <ol className="sources__list">{children}</ol>
-    </BaseCollapsible.Panel>
+    <CollapsiblePanel ref={ref} className={cx("sources__content", className)} {...props} unstyled>
+      <ol className="sources__list" role="list">
+        {children}
+      </ol>
+    </CollapsiblePanel>
   );
 }
 
 export interface SourceProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "title"> {
   /** The display title for this citation. */
-  title: string;
+  title?: string;
   /** Optional description rendered beneath the title. */
   description?: string;
 }
@@ -106,6 +116,7 @@ export interface SourceProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorE
 export function Source({
   title,
   description,
+  children,
   className,
   href,
   ref,
@@ -121,14 +132,20 @@ export function Source({
         rel="noreferrer"
         {...props}
       >
-        <span className="sources__link-icon" aria-hidden="true">
-          <LinkIcon />
-        </span>
-        <span className="sources__link-body">
-          <span className="sources__link-title">{title}</span>
-          {description ? <span className="sources__link-description">{description}</span> : null}
-          {href ? <span className="sources__link-host">{hostnameFrom(href)}</span> : null}
-        </span>
+        {children ?? (
+          <>
+            <span className="sources__link-icon" aria-hidden="true">
+              <LinkIcon />
+            </span>
+            <span className="sources__link-body">
+              {title ? <span className="sources__link-title">{title}</span> : null}
+              {description ? (
+                <span className="sources__link-description">{description}</span>
+              ) : null}
+              {href ? <span className="sources__link-host">{hostnameFrom(href)}</span> : null}
+            </span>
+          </>
+        )}
       </a>
     </li>
   );

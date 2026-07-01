@@ -1,5 +1,8 @@
 import { cx } from "./_internal/class-names.js";
 
+/**
+ * Small GitHub motion mark used next to install or repository connection text.
+ */
 export function GithubMotionMark({
   className,
   size = 18,

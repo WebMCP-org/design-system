@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, within } from "storybook/test";
 import { Source, Sources, SourcesContent, SourcesTrigger } from "../components/Sources";
 
@@ -78,11 +78,32 @@ export const SingleSource: Story = {
   ),
 };
 
+export const CustomSourceChildren: Story = {
+  render: () => (
+    <div style={{ width: "28rem" }}>
+      <Sources defaultOpen>
+        <SourcesTrigger count={1} />
+        <SourcesContent>
+          <Source href="https://example.com/custom">
+            <span>Custom source content</span>
+          </Source>
+        </SourcesContent>
+      </Sources>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("link", { name: /custom source content/i })).toBeInTheDocument();
+  },
+};
+
 export const Interactive: Story = {
   render: () => (
     <div style={{ width: "28rem" }}>
       <Sources>
-        <SourcesTrigger count={2}>Used 2 sources</SourcesTrigger>
+        <SourcesTrigger count={2}>
+          <span data-testid="custom-sources-trigger">Used 2 sources</span>
+        </SourcesTrigger>
         <SourcesContent>
           <Source href="https://example.com/a" title="Example A" />
           <Source href="https://example.com/b" title="Example B" />
@@ -93,6 +114,7 @@ export const Interactive: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const trigger = canvas.getByRole("button", { name: /used 2 sources/i });
+    await expect(canvas.getByTestId("custom-sources-trigger")).toBeInTheDocument();
     await userEvent.click(trigger);
     await expect(trigger).toHaveAttribute("aria-expanded", "true");
     await expect(canvas.getByRole("link", { name: /example a/i })).toBeInTheDocument();

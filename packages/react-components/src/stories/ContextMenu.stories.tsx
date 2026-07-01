@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import { ContextMenu } from "../components/ContextMenu";
 
@@ -53,6 +53,48 @@ export const Default: Story = {
     await expect(screen.getByText("Copy")).toBeInTheDocument();
     await expect(screen.getByText("Paste")).toBeInTheDocument();
     await expect(screen.getByText("Delete")).toBeInTheDocument();
+  },
+};
+
+export const ShadcnContentAliases: Story = {
+  render: () => (
+    <ContextMenu.Root>
+      <ContextMenu.Trigger>
+        <div
+          style={{
+            padding: "3rem 4rem",
+            border: "2px dashed var(--sigvelo-color-neutral-border-muted)",
+            borderRadius: "var(--sigvelo-radius-md)",
+            textAlign: "center",
+            color: "var(--sigvelo-color-text-muted)",
+            fontSize: "0.875rem",
+          }}
+        >
+          Right-click alias target
+        </div>
+      </ContextMenu.Trigger>
+      <ContextMenu.Content>
+        <ContextMenu.CheckboxItem checked>Show details</ContextMenu.CheckboxItem>
+        <ContextMenu.Separator />
+        <ContextMenu.Sub>
+          <ContextMenu.SubTrigger>Open with</ContextMenu.SubTrigger>
+          <ContextMenu.SubContent>
+            <ContextMenu.Item>Preview</ContextMenu.Item>
+            <ContextMenu.Item>Editor</ContextMenu.Item>
+          </ContextMenu.SubContent>
+        </ContextMenu.Sub>
+      </ContextMenu.Content>
+    </ContextMenu.Root>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.pointer({
+      keys: "[MouseRight]",
+      target: canvas.getByText("Right-click alias target"),
+    });
+
+    await expect(await screen.findByText("Show details")).toBeInTheDocument();
+    await expect(screen.getByText("Open with")).toBeInTheDocument();
   },
 };
 

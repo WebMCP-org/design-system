@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import {
   Message,
@@ -140,6 +141,18 @@ const BRANCHES = [
   "The hook model has two rules: only call hooks at the top level (not inside conditions or loops), and only call them from React functions.",
 ];
 
+function StatefulBranch() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <MessageContent>
+      <button type="button" onClick={() => setCount((value) => value + 1)}>
+        First branch count {count}
+      </button>
+    </MessageContent>
+  );
+}
+
 export const Branching: Story = {
   render: () => (
     <Frame>
@@ -172,6 +185,35 @@ export const Branching: Story = {
       </Message>
     </Frame>
   ),
+};
+
+export const BranchStatePreserved: Story = {
+  render: () => (
+    <Frame>
+      <Message from="assistant">
+        <MessageBranch defaultBranch={0}>
+          <MessageBranchContent>
+            <StatefulBranch />
+            <MessageContent>Second branch</MessageContent>
+          </MessageBranchContent>
+          <MessageBranchSelector>
+            <MessageBranchPrevious />
+            <MessageBranchPage />
+            <MessageBranchNext />
+          </MessageBranchSelector>
+        </MessageBranch>
+      </Message>
+    </Frame>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "First branch count 0" }));
+    await expect(canvas.getByRole("button", { name: "First branch count 1" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Next response" }));
+    await expect(canvas.getByText("Second branch")).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Previous response" }));
+    await expect(canvas.getByRole("button", { name: "First branch count 1" })).toBeInTheDocument();
+  },
 };
 
 export const System: Story = {

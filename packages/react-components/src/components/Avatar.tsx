@@ -10,6 +10,7 @@ export interface AvatarRootProps extends Omit<
 > {
   /** Additional CSS class names */
   className?: string;
+  size?: "default" | "sm" | "lg";
 }
 
 /**
@@ -33,6 +34,9 @@ export interface AvatarFallbackProps extends Omit<
   /** Additional CSS class names */
   className?: string;
 }
+export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface AvatarGroupCountProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface AvatarBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 /**
  * Container for the avatar. Renders a `<span>` element.
@@ -47,38 +51,70 @@ export interface AvatarFallbackProps extends Omit<
  *
  * @see {@link https://base-ui.com/react/components/avatar | Base UI Avatar}
  */
-function AvatarRoot({
+export function AvatarRoot({
   className = "",
+  size = "default",
   ref,
   ...props
 }: AvatarRootProps & { ref?: React.Ref<HTMLSpanElement> }) {
   const classes = ["avatar", className].filter(Boolean).join(" ");
-  return <BaseAvatar.Root ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAvatar.Root ref={ref} data-slot="avatar" data-size={size} className={classes} {...props} />
+  );
 }
 
 /**
  * Displays the avatar image. Renders an `<img>` element.
  */
-function AvatarImage({
+export function AvatarImage({
   className = "",
   ref,
   ...props
 }: AvatarImageProps & { ref?: React.Ref<HTMLImageElement> }) {
   const classes = ["avatar__image", className].filter(Boolean).join(" ");
-  return <BaseAvatar.Image ref={ref} className={classes} {...props} />;
+  return <BaseAvatar.Image ref={ref} data-slot="avatar-image" className={classes} {...props} />;
 }
 
 /**
  * Displays when the image fails to load or isn't provided.
  * Typically contains initials or an icon. Renders a `<span>` element.
  */
-function AvatarFallback({
+export function AvatarFallback({
   className = "",
   ref,
   ...props
 }: AvatarFallbackProps & { ref?: React.Ref<HTMLSpanElement> }) {
   const classes = ["avatar__fallback", className].filter(Boolean).join(" ");
-  return <BaseAvatar.Fallback ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAvatar.Fallback ref={ref} data-slot="avatar-fallback" className={classes} {...props} />
+  );
+}
+
+export function AvatarGroup({
+  className = "",
+  ref,
+  ...props
+}: AvatarGroupProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["avatar-group", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="avatar-group" className={classes} {...props} />;
+}
+
+export function AvatarGroupCount({
+  className = "",
+  ref,
+  ...props
+}: AvatarGroupCountProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["avatar-group__count", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="avatar-group-count" className={classes} {...props} />;
+}
+
+export function AvatarBadge({
+  className = "",
+  ref,
+  ...props
+}: AvatarBadgeProps & { ref?: React.Ref<HTMLSpanElement> }) {
+  const classes = ["avatar__badge", className].filter(Boolean).join(" ");
+  return <span ref={ref} data-slot="avatar-badge" className={classes} {...props} />;
 }
 
 /**
@@ -113,8 +149,11 @@ function AvatarFallback({
  *
  * @see {@link https://base-ui.com/react/components/avatar | Base UI Avatar}
  */
-export const Avatar = {
+export const Avatar = Object.assign(AvatarRoot, {
   Root: AvatarRoot,
   Image: AvatarImage,
   Fallback: AvatarFallback,
-};
+  Group: AvatarGroup,
+  GroupCount: AvatarGroupCount,
+  Badge: AvatarBadge,
+});

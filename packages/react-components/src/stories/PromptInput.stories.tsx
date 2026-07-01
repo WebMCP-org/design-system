@@ -1,7 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import {
   PromptInput,
+  PromptInputActionAddAttachments,
+  PromptInputActionAddScreenshot,
+  PromptInputActionMenu,
+  PromptInputActionMenuContent,
+  PromptInputActionMenuTrigger,
   PromptInputBody,
   PromptInputButton,
   PromptInputFooter,
@@ -97,6 +103,43 @@ export const WithTools: Story = {
         </PromptInput>
       </Frame>
     );
+  },
+};
+
+export const ActionMenu: Story = {
+  render: () => (
+    <Frame>
+      <PromptInput onSubmit={() => undefined}>
+        <PromptInputBody>
+          <PromptInputTextarea placeholder="Attach context..." />
+        </PromptInputBody>
+        <PromptInputFooter>
+          <PromptInputTools>
+            <PromptInputActionMenu>
+              <PromptInputActionMenuTrigger aria-label="Add context" />
+              <PromptInputActionMenuContent>
+                <PromptInputActionAddAttachments />
+                <PromptInputActionAddScreenshot
+                  onClick={(event) => {
+                    event.preventDefault();
+                  }}
+                />
+              </PromptInputActionMenuContent>
+            </PromptInputActionMenu>
+          </PromptInputTools>
+          <PromptInputSubmit />
+        </PromptInputFooter>
+      </PromptInput>
+    </Frame>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(canvasElement.ownerDocument.body);
+    await userEvent.click(canvas.getByRole("button", { name: /add context/i }));
+    await expect(
+      await body.findByRole("menuitem", { name: /add photos or files/i }),
+    ).toBeInTheDocument();
+    await expect(body.getByRole("menuitem", { name: /take screenshot/i })).toBeInTheDocument();
   },
 };
 

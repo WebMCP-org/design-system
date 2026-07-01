@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as React from "react";
 import { Switch, SwitchThumb } from "../components/Switch";
 import { Label } from "../components/Label";
@@ -95,6 +95,14 @@ export const Disabled: Story = {
         <Label data-disabled>Disabled on</Label>
       </div>
     </div>
+  ),
+};
+
+export const Invalid: Story = {
+  render: () => (
+    <Switch aria-invalid aria-label="Invalid switch">
+      <SwitchThumb />
+    </Switch>
   ),
 };
 

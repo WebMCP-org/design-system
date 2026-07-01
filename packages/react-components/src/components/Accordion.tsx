@@ -28,6 +28,7 @@ export interface AccordionPanelProps extends Omit<
 > {
   className?: string;
 }
+export type AccordionContentProps = AccordionPanelProps;
 
 /**
  * An accordion component for showing collapsible content sections.
@@ -123,3 +124,5 @@ export function AccordionPanel({
   const classes = ["accordion__panel", className].filter(Boolean).join(" ");
   return <BaseAccordion.Panel ref={ref} className={classes} {...props} />;
 }
+
+export const AccordionContent = AccordionPanel;

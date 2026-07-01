@@ -22,6 +22,9 @@
 }
 
 .code-block__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.75rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   color: var(--sigvelo-color-text);
@@ -78,14 +81,18 @@
   overflow-x: auto;
 }
 
+.code-block__content--numbered:is(pre) > code,
 .code-block__content--numbered pre code {
   counter-reset: line;
 }
 
+.code-block__content--numbered:is(pre) > code .line,
 .code-block__content--numbered pre code .line {
+  display: block;
   counter-increment: line;
 }
 
+.code-block__content--numbered:is(pre) > code .line::before,
 .code-block__content--numbered pre code .line::before {
   content: counter(line);
   display: inline-block;

@@ -1,14 +1,81 @@
 import * as React from "react";
-import { Collapsible as BaseCollapsible } from "@base-ui/react/collapsible";
 import { Badge } from "./Badge.js";
+import { Button, type ButtonProps } from "./Button.js";
+import {
+  CollapsiblePanel,
+  type CollapsiblePanelProps,
+  CollapsibleRoot,
+  type CollapsibleRootProps,
+  CollapsibleTrigger,
+  type CollapsibleTriggerProps,
+} from "./Collapsible.js";
+import { ScrollArea, type ScrollAreaRootProps } from "./ScrollArea.js";
 import { cx } from "./_internal/class-names.js";
 import { CheckIcon, ChevronRightIcon, DotIcon, FileIcon } from "./_internal/icons.js";
 
-export interface QueueProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface QueueMessagePart {
+  type: string;
+  text?: string;
+  url?: string;
+  filename?: string;
+  mediaType?: string;
+}
+
+export interface QueueMessage {
+  id: string;
+  parts: QueueMessagePart[];
+}
+
+export interface QueueTodo {
+  id: string;
+  title: string;
+  description?: string;
+  status?: "pending" | "completed";
+}
+
+export interface QueueProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Additional class names for layout only; do not override item states from apps. */
+  className?: string;
+  /** QueueSection children. */
+  children?: React.ReactNode;
+}
 
 /**
  * Container for a grouped list of queue items (e.g. messages, todos,
- * attachments). Compose with QueueSection as direct children.
+ * attachments). Compose with QueueSection as direct children. Adapted from
+ * Vercel AI Elements and restyled with Sigvelo CSS tokens.
+ *
+ * Use for agent work queues, todo groups, and attachment queues. Do not use it
+ * for navigation or arbitrary card lists.
+ *
+ * Sigvelo changes: uses shared Collapsible, ScrollArea, Badge, and Button
+ * components; normalizes Vercel-compatible `completed` status to `complete`;
+ * maps all styling to Sigvelo queue CSS tokens/classes.
+ *
+ * Section triggers inherit Collapsible keyboard behavior. Status indicators
+ * are decorative, so visible item text must carry the real meaning. Add new
+ * statuses or item affordances here when multiple apps need them.
+ *
+ * @example
+ * ```tsx
+ * <Queue>
+ *   <QueueSection>
+ *     <QueueSectionTrigger>
+ *       <QueueSectionLabel count={2}>Todos</QueueSectionLabel>
+ *     </QueueSectionTrigger>
+ *     <QueueSectionContent>
+ *       <QueueList>
+ *         <QueueItem status="active">
+ *           <QueueItemIndicator status="active" />
+ *           <QueueItemContent>Running checks</QueueItemContent>
+ *         </QueueItem>
+ *       </QueueList>
+ *     </QueueSectionContent>
+ *   </QueueSection>
+ * </Queue>
+ * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/queue | AI Elements Queue}
  */
 export function Queue({
   className,
@@ -23,10 +90,7 @@ export function Queue({
   );
 }
 
-export interface QueueSectionProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Root>,
-  "className"
-> {
+export interface QueueSectionProps extends Omit<CollapsibleRootProps, "className" | "unstyled"> {
   className?: string;
 }
 
@@ -41,18 +105,19 @@ export function QueueSection({
   ...props
 }: QueueSectionProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Root
+    <CollapsibleRoot
       ref={ref}
       className={cx("queue__section", className)}
       defaultOpen={defaultOpen}
       {...props}
+      unstyled
     />
   );
 }
 
 export interface QueueSectionTriggerProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Trigger>,
-  "className"
+  CollapsibleTriggerProps,
+  "className" | "unstyled"
 > {
   className?: string;
 }
@@ -64,35 +129,43 @@ export function QueueSectionTrigger({
   ...props
 }: QueueSectionTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
   return (
-    <BaseCollapsible.Trigger
+    <CollapsibleTrigger
       ref={ref}
       className={cx("queue__section-trigger", className)}
       {...props}
+      unstyled
     >
       <span className="queue__section-icon" aria-hidden="true">
         <ChevronRightIcon />
       </span>
       {children}
-    </BaseCollapsible.Trigger>
+    </CollapsibleTrigger>
   );
 }
 
 export interface QueueSectionLabelProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Optional count rendered as a trailing badge. */
   count?: number;
+  label?: string;
+  icon?: React.ReactNode;
 }
 
 export function QueueSectionLabel({
   className,
   children,
   count,
+  label,
+  icon,
   ref,
   ...props
 }: QueueSectionLabelProps & { ref?: React.Ref<HTMLSpanElement> }) {
+  const content = children ?? (label ? `${count ?? ""} ${label}`.trim() : null);
+
   return (
     <span ref={ref} className={cx("queue__section-label", className)} {...props}>
-      <span>{children}</span>
-      {count !== undefined ? (
+      {icon}
+      <span>{content}</span>
+      {children !== undefined && count !== undefined ? (
         <Badge color="neutral" size="sm" className="queue__section-count">
           {count}
         </Badge>
@@ -101,10 +174,7 @@ export function QueueSectionLabel({
   );
 }
 
-export interface QueueListProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Panel>,
-  "className"
-> {
+export interface QueueListProps extends Omit<ScrollAreaRootProps, "className"> {
   className?: string;
 }
 
@@ -115,13 +185,46 @@ export function QueueList({
   ...props
 }: QueueListProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Panel ref={ref} className={cx("queue__list", className)} {...props}>
-      <ul className="queue__list-inner">{children}</ul>
-    </BaseCollapsible.Panel>
+    <ScrollArea ref={ref} className={cx("queue__list", className)} {...props}>
+      <ScrollArea.Viewport className="queue__list-viewport">
+        <div className="queue__list-scroll">
+          <ul className="queue__list-inner">{children}</ul>
+        </div>
+      </ScrollArea.Viewport>
+      <ScrollArea.Scrollbar orientation="vertical">
+        <ScrollArea.Thumb />
+      </ScrollArea.Scrollbar>
+    </ScrollArea>
   );
 }
 
-export type QueueItemStatus = "pending" | "active" | "complete";
+export interface QueueSectionContentProps extends Omit<
+  CollapsiblePanelProps,
+  "className" | "unstyled"
+> {
+  className?: string;
+}
+
+export function QueueSectionContent({
+  className,
+  ref,
+  ...props
+}: QueueSectionContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <CollapsiblePanel
+      ref={ref}
+      className={cx("queue__section-content", className)}
+      {...props}
+      unstyled
+    />
+  );
+}
+
+export type QueueItemStatus = "pending" | "active" | "complete" | "completed";
+
+function normalizeQueueItemStatus(status: QueueItemStatus) {
+  return status === "completed" ? "complete" : status;
+}
 
 export interface QueueItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
   status?: QueueItemStatus;
@@ -134,11 +237,13 @@ export function QueueItem({
   ref,
   ...props
 }: QueueItemProps & { ref?: React.Ref<HTMLLIElement> }) {
+  const resolvedStatus = normalizeQueueItemStatus(status);
+
   return (
     <li
       ref={ref}
-      className={cx("queue__item", `queue__item--${status}`, className)}
-      data-status={status}
+      className={cx("queue__item", `queue__item--${resolvedStatus}`, className)}
+      data-status={resolvedStatus}
       {...props}
     >
       {children}
@@ -148,19 +253,22 @@ export function QueueItem({
 
 export interface QueueItemIndicatorProps extends React.HTMLAttributes<HTMLSpanElement> {
   status?: QueueItemStatus;
+  completed?: boolean;
 }
 
 export function QueueItemIndicator({
   className,
   status = "pending",
+  completed = false,
   ref,
   ...props
 }: QueueItemIndicatorProps & { ref?: React.Ref<HTMLSpanElement> }) {
-  const icon = status === "complete" ? <CheckIcon /> : <DotIcon />;
+  const resolvedStatus = completed ? "complete" : normalizeQueueItemStatus(status);
+  const icon = resolvedStatus === "complete" ? <CheckIcon /> : <DotIcon />;
   return (
     <span
       ref={ref}
-      className={cx("queue__item-indicator", `queue__item-indicator--${status}`, className)}
+      className={cx("queue__item-indicator", `queue__item-indicator--${resolvedStatus}`, className)}
       aria-hidden="true"
       {...props}
     >
@@ -169,37 +277,61 @@ export function QueueItemIndicator({
   );
 }
 
-export interface QueueItemContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface QueueItemContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  completed?: boolean;
+}
 
 export function QueueItemContent({
   className,
   children,
+  completed = false,
   ref,
   ...props
 }: QueueItemContentProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <div ref={ref} className={cx("queue__item-content", className)} {...props}>
+    <div
+      ref={ref}
+      className={cx("queue__item-content", completed && "queue__item-content--complete", className)}
+      {...props}
+    >
       {children}
     </div>
   );
 }
 
-export interface QueueItemDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+export interface QueueItemDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+  completed?: boolean;
+}
 
 export function QueueItemDescription({
   className,
   children,
+  completed = false,
   ref,
   ...props
 }: QueueItemDescriptionProps & { ref?: React.Ref<HTMLParagraphElement> }) {
   return (
-    <p ref={ref} className={cx("queue__item-description", className)} {...props}>
+    <p
+      ref={ref}
+      className={cx(
+        "queue__item-description",
+        completed && "queue__item-description--complete",
+        className,
+      )}
+      {...props}
+    >
       {children}
     </p>
   );
 }
 
 export interface QueueItemActionsProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface QueueItemActionProps extends Omit<
+  ButtonProps,
+  "variant" | "color" | "size" | "className"
+> {
+  className?: string;
+}
 
 export function QueueItemActions({
   className,
@@ -211,6 +343,24 @@ export function QueueItemActions({
     <div ref={ref} className={cx("queue__item-actions", className)} {...props}>
       {children}
     </div>
+  );
+}
+
+export function QueueItemAction({
+  className,
+  ref,
+  ...props
+}: QueueItemActionProps & { ref?: React.Ref<HTMLButtonElement> }) {
+  return (
+    <Button
+      ref={ref}
+      type="button"
+      variant="ghost"
+      color="neutral"
+      size="sm"
+      className={cx("queue__item-action", className)}
+      {...props}
+    />
   );
 }
 
@@ -241,12 +391,13 @@ export function QueueItemImage({
 }
 
 export interface QueueItemFileProps extends React.HTMLAttributes<HTMLDivElement> {
-  name: string;
+  name?: string;
   size?: string;
 }
 
 export function QueueItemFile({
   className,
+  children,
   name,
   size,
   ref,
@@ -257,7 +408,7 @@ export function QueueItemFile({
       <span className="queue__item-file-icon" aria-hidden="true">
         <FileIcon />
       </span>
-      <span className="queue__item-file-name">{name}</span>
+      <span className="queue__item-file-name">{children ?? name}</span>
       {size ? <span className="queue__item-file-size">{size}</span> : null}
     </div>
   );

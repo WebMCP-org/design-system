@@ -65,25 +65,37 @@
   /* Badge sm already sized appropriately */
 }
 
-.queue__list {
+.queue__section-content {
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
 }
 
-.queue__list[data-closed] {
+.queue__section-content[data-closed] {
   height: 0;
 }
 
-.queue__list[data-open] {
+.queue__section-content[data-open] {
   height: var(--collapsible-panel-height);
 }
 
-.queue__list[data-starting-style],
-.queue__list[data-ending-style] {
+.queue__section-content[data-starting-style],
+.queue__section-content[data-ending-style] {
   height: 0;
   opacity: 0;
+}
+
+.queue__list {
+  margin-block: 0.5rem 0.25rem;
+}
+
+.queue__list-viewport {
+  max-height: 10rem;
+}
+
+.queue__list-scroll {
+  padding-inline-end: 1rem;
 }
 
 .queue__list-inner {
@@ -114,6 +126,11 @@
 }
 
 .queue__item--complete .queue__item-content {
+  color: var(--sigvelo-color-text-muted);
+  text-decoration: line-through;
+}
+
+.queue__item-content--complete {
   color: var(--sigvelo-color-text-muted);
   text-decoration: line-through;
 }
@@ -157,6 +174,11 @@
   line-height: 1.4;
 }
 
+.queue__item-description--complete {
+  color: var(--sigvelo-color-text-muted);
+  text-decoration: line-through;
+}
+
 .queue__item-actions {
   display: inline-flex;
   align-items: center;
@@ -168,6 +190,10 @@
 
 .queue__item-actions:focus-within {
   opacity: 1;
+}
+
+.queue__item-action {
+  min-width: 0;
 }
 
 .queue__item-attachment {

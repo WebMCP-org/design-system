@@ -118,6 +118,12 @@
   color: var(--sigvelo-color-text-muted);
 }
 
+.popover__header {
+  display: grid;
+  gap: 0.5rem;
+  margin-block-end: 0.75rem;
+}
+
 .popover__close {
   display: inline-flex;
   align-items: center;

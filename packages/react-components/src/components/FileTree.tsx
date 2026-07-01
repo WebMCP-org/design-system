@@ -25,7 +25,7 @@ export interface FileTreeProps extends Omit<React.HTMLAttributes<HTMLDivElement>
  * FileTreeFolder and FileTreeFile children.
  *
  * Keyboard: ↑/↓ move focus, →/← expand/collapse folders, Enter/Space
- * selects a file or toggles a folder, Home/End jump to first/last node.
+ * selects files and selects/toggles folders, Home/End jump to first/last node.
  *
  * @example
  * ```tsx
@@ -131,10 +131,19 @@ export function FileTreeFolder({
   ref,
   ...props
 }: FileTreeFolderProps & { ref?: React.Ref<HTMLLIElement> }) {
-  const { expanded, focusedPath, onFocus, register, handleKeyDown, onExpandedChange } =
-    useFileTreeContext();
+  const {
+    expanded,
+    focusedPath,
+    selectedPath,
+    onFocus,
+    onSelect,
+    register,
+    handleKeyDown,
+    onExpandedChange,
+  } = useFileTreeContext();
   const isExpanded = expanded.has(path);
   const isFocused = focusedPath === path;
+  const isSelected = selectedPath === path;
 
   // Register this node on every render. Pass parent's "visible" status so
   // nav can skip collapsed branches.
@@ -144,11 +153,17 @@ export function FileTreeFolder({
     onExpandedChange(path, !isExpanded);
   }, [isExpanded, onExpandedChange, path]);
 
+  const handleClick = React.useCallback(() => {
+    onSelect(path);
+    toggle();
+  }, [onSelect, path, toggle]);
+
   return (
     <li
       ref={ref}
       role="treeitem"
       aria-expanded={isExpanded}
+      aria-selected={isSelected}
       className={cx("file-tree__folder", className)}
       {...props}
     >
@@ -156,8 +171,9 @@ export function FileTreeFolder({
         type="button"
         className="file-tree__node file-tree__node--folder"
         data-focused={dataFlag(isFocused)}
+        data-selected={dataFlag(isSelected)}
         tabIndex={getFileTreeNodeTabIndex(focusedPath, path, level)}
-        onClick={toggle}
+        onClick={handleClick}
         onFocus={() => onFocus(path)}
         onKeyDown={(e) => handleKeyDown(e, path, "folder")}
         style={{ paddingInlineStart: getFileTreeNodeIndent(level, 0.5) }}

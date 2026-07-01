@@ -35,12 +35,27 @@ function useConversationContext(component: string): ConversationContextValue {
 }
 
 export interface ConversationProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+  /** Additional class names for layout only; do not override scroll behavior from apps. */
+  className?: string;
+  /** ConversationContent, messages, empty state, scroll button, or download button. */
   children?: React.ReactNode;
 }
 
 /**
  * Scrollable container for a chat conversation. Sticks the viewport to the
- * bottom as new content arrives, unless the user has scrolled up.
+ * bottom as new content arrives, unless the user has scrolled up. Adapted
+ * from Vercel AI Elements and restyled with Sigvelo CSS tokens.
+ *
+ * Use for assistant/user message streams. Do not use for static lists or
+ * logs that should not auto-stick to the latest item.
+ *
+ * Sigvelo changes: removed Tailwind classes, uses a native scroll region with
+ * the local stick-to-bottom hook, emits `role="log"` with polite updates, and
+ * keeps transcript export in a separate ConversationDownload action.
+ *
+ * Styling consumes Sigvelo canvas, surface, border, spacing, radius, shadow,
+ * and motion tokens. Add new behavior in this package when multiple apps need
+ * it; app code should compose children and avoid reaching into scroll internals.
  *
  * Pair with {@link ConversationContent} for layout, {@link ConversationScrollButton}
  * for a "jump to latest" affordance, and {@link ConversationDownload} to export
@@ -55,6 +70,8 @@ export interface ConversationProps extends Omit<React.HTMLAttributes<HTMLDivElem
  *   <ConversationScrollButton />
  * </Conversation>
  * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/conversation | AI Elements Conversation}
  */
 export function Conversation({
   className,
@@ -150,8 +167,8 @@ export interface ConversationEmptyStateProps extends Omit<
  */
 export function ConversationEmptyState({
   className,
-  title,
-  description,
+  title = "No messages yet",
+  description = "Start a conversation to see messages here",
   icon,
   children,
   ref,

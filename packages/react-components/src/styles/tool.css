@@ -40,9 +40,13 @@
     0 0 0 4px var(--sigvelo-color-focus);
 }
 
+.tool__header-tool-icon,
 .tool__header-icon {
   display: inline-flex;
   color: var(--sigvelo-color-text-muted);
+}
+
+.tool__header-icon {
   transition: transform var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized);
 }
 
@@ -77,6 +81,14 @@
 
 .tool__header-spacer {
   flex: 1;
+}
+
+.tool__header-badge {
+  gap: 0.25rem;
+}
+
+.tool__status-spinner {
+  animation: tool-spin 900ms linear infinite;
 }
 
 .tool__content {
@@ -174,5 +186,17 @@
   .tool__header:focus-visible {
     outline: 2px solid Highlight;
     outline-offset: 2px;
+  }
+}
+
+@keyframes tool-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool__status-spinner {
+    animation: none;
   }
 }

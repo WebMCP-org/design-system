@@ -37,11 +37,15 @@ export interface SliderThumbProps extends Omit<
 }
 
 export interface SliderOutputProps extends Omit<
-  React.HTMLAttributes<HTMLOutputElement>,
+  React.ComponentPropsWithRef<typeof BaseSlider.Value>,
   "children"
 > {
   className?: string;
-  children?: (value: number) => React.ReactNode;
+  children?: (
+    value: number,
+    values: readonly number[],
+    formattedValues: readonly string[],
+  ) => React.ReactNode;
 }
 
 /**
@@ -77,11 +81,48 @@ export interface SliderOutputProps extends Omit<
  */
 export function Slider({
   className = "",
+  children,
+  defaultValue,
+  max = 100,
+  min = 0,
   ref,
+  value,
   ...props
 }: SliderProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["slider", className].filter(Boolean).join(" ");
-  return <BaseSlider.Root ref={ref} className={classes} {...props} />;
+  const resolvedDefaultValue =
+    children == null && value === undefined && defaultValue === undefined
+      ? [min, max]
+      : defaultValue;
+  const thumbValues = Array.isArray(value)
+    ? value
+    : Array.isArray(resolvedDefaultValue)
+      ? resolvedDefaultValue
+      : [value ?? resolvedDefaultValue ?? min];
+
+  return (
+    <BaseSlider.Root
+      ref={ref}
+      data-slot="slider"
+      className={classes}
+      defaultValue={resolvedDefaultValue}
+      max={max}
+      min={min}
+      value={value}
+      {...props}
+    >
+      {children ?? (
+        <SliderControl>
+          <SliderTrack>
+            <SliderIndicator />
+            {thumbValues.map((_, index) => (
+              <SliderThumb key={index} index={index} />
+            ))}
+          </SliderTrack>
+        </SliderControl>
+      )}
+    </BaseSlider.Root>
+  );
 }
 
 /**
@@ -93,7 +134,7 @@ export function SliderControl({
   ...props
 }: SliderControlProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["slider__control", className].filter(Boolean).join(" ");
-  return <BaseSlider.Control ref={ref} className={classes} {...props} />;
+  return <BaseSlider.Control ref={ref} data-slot="slider-control" className={classes} {...props} />;
 }
 
 /**
@@ -105,7 +146,7 @@ export function SliderTrack({
   ...props
 }: SliderTrackProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["slider__track", className].filter(Boolean).join(" ");
-  return <BaseSlider.Track ref={ref} className={classes} {...props} />;
+  return <BaseSlider.Track ref={ref} data-slot="slider-track" className={classes} {...props} />;
 }
 
 /**
@@ -117,7 +158,7 @@ export function SliderIndicator({
   ...props
 }: SliderIndicatorProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["slider__indicator", className].filter(Boolean).join(" ");
-  return <BaseSlider.Indicator ref={ref} className={classes} {...props} />;
+  return <BaseSlider.Indicator ref={ref} data-slot="slider-range" className={classes} {...props} />;
 }
 
 /**
@@ -129,7 +170,7 @@ export function SliderThumb({
   ...props
 }: SliderThumbProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["slider__thumb", className].filter(Boolean).join(" ");
-  return <BaseSlider.Thumb ref={ref} className={classes} {...props} />;
+  return <BaseSlider.Thumb ref={ref} data-slot="slider-thumb" className={classes} {...props} />;
 }
 
 /**
@@ -144,15 +185,12 @@ export function SliderOutput({
 }: SliderOutputProps & { ref?: React.Ref<HTMLOutputElement> }) {
   const classes = ["slider__output", className].filter(Boolean).join(" ");
   return (
-    <BaseSlider.Value ref={ref}>
-      {(state) => {
-        const value = Array.isArray(state) ? state[0] : 0;
-        return (
-          <output className={classes} {...props}>
-            {typeof children === "function" ? children(value) : value}
-          </output>
-        );
-      }}
+    <BaseSlider.Value ref={ref} data-slot="slider-output" className={classes} {...props}>
+      {(formattedValues, values) =>
+        typeof children === "function"
+          ? children(values[0] ?? 0, values, formattedValues)
+          : formattedValues.join(" - ")
+      }
     </BaseSlider.Value>
   );
 }

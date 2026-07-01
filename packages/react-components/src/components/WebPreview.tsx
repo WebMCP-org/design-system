@@ -11,11 +11,13 @@ import {
   TooltipTrigger,
 } from "./Tooltip.js";
 import { cx } from "./_internal/class-names.js";
-import { ArrowLeftIcon, ArrowRightIcon, RefreshIcon } from "./_internal/icons.js";
+import { ArrowLeftIcon, ArrowRightIcon, ChevronDownIcon, RefreshIcon } from "./_internal/icons.js";
 
-interface WebPreviewContextValue {
+export interface WebPreviewContextValue {
   url: string;
   setUrl: (next: string) => void;
+  consoleOpen: boolean;
+  setConsoleOpen: (open: boolean) => void;
   canGoBack: boolean;
   canGoForward: boolean;
   goBack: () => void;
@@ -35,16 +37,48 @@ function useWebPreviewContext(): WebPreviewContextValue {
 }
 
 export interface WebPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Initial URL for uncontrolled preview history. */
   defaultUrl?: string;
+  /** Controlled URL pushed into preview history when it changes. */
   url?: string;
   /** Called when the displayed URL changes. */
   onUrlChange?: (url: string) => void;
+  /** Additional class names for layout only; do not override iframe sandboxing from apps. */
+  className?: string;
+  /** Navigation, body, and optional console slots. */
+  children?: React.ReactNode;
 }
 
 /**
  * An iframe preview with a navigation bar, URL input, and optional console
  * panel. Tracks browsing history internally so back/forward buttons work
  * without depending on the iframe's own history.
+ *
+ * Built internally for agent/browser preview surfaces. Use it to display a
+ * known URL with local navigation controls. Do not use it for trusted app
+ * embedding that needs custom iframe permissions; add those explicitly here.
+ *
+ * Sigvelo changes: composes Button, Input, ScrollArea, Tooltip, and Badge;
+ * keeps a conservative sandbox; maps navigation and console UI to Sigvelo CSS
+ * tokens.
+ *
+ * The iframe has a fixed title and sandbox. Navigation buttons provide
+ * accessible labels and tooltips. Add new permissions or console behaviors
+ * here when multiple apps need them.
+ *
+ * @example
+ * ```tsx
+ * <WebPreview defaultUrl="https://example.com">
+ *   <WebPreviewNavigation>
+ *     <WebPreviewNavigationButton action="back" />
+ *     <WebPreviewNavigationButton action="forward" />
+ *     <WebPreviewNavigationButton action="reload" />
+ *     <WebPreviewUrl />
+ *   </WebPreviewNavigation>
+ *   <WebPreviewBody />
+ *   <WebPreviewConsole logs={logs} />
+ * </WebPreview>
+ * ```
  */
 export function WebPreview({
   className,
@@ -59,6 +93,7 @@ export function WebPreview({
   const [history, setHistory] = React.useState<string[]>(() => (initialUrl ? [initialUrl] : []));
   const [index, setIndex] = React.useState(initialUrl ? 0 : -1);
   const [reloadToken, setReloadToken] = React.useState(0);
+  const [consoleOpen, setConsoleOpen] = React.useState(false);
 
   const url = index >= 0 ? (history[index] ?? "") : "";
 
@@ -121,6 +156,8 @@ export function WebPreview({
     () => ({
       url,
       setUrl,
+      consoleOpen,
+      setConsoleOpen,
       canGoBack: index > 0,
       canGoForward: index >= 0 && index < history.length - 1,
       goBack,
@@ -128,7 +165,7 @@ export function WebPreview({
       reload,
       reloadToken,
     }),
-    [url, setUrl, index, history.length, goBack, goForward, reload, reloadToken],
+    [url, setUrl, consoleOpen, index, history.length, goBack, goForward, reload, reloadToken],
   );
 
   return (
@@ -157,11 +194,13 @@ export function WebPreviewNavigation({
 
 export interface WebPreviewNavigationButtonProps extends Omit<
   ButtonProps,
-  "children" | "variant" | "size" | "color" | "className" | "onClick"
+  "variant" | "size" | "color" | "className" | "onClick"
 > {
   className?: string;
-  action: "back" | "forward" | "reload";
+  action?: "back" | "forward" | "reload";
   label?: string;
+  tooltip?: string;
+  children?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -169,13 +208,15 @@ export function WebPreviewNavigationButton({
   className,
   action,
   label,
+  tooltip,
+  children,
   onClick,
   ...props
 }: WebPreviewNavigationButtonProps) {
   const { canGoBack, canGoForward, goBack, goForward, reload } = useWebPreviewContext();
 
   const defaults: Record<
-    WebPreviewNavigationButtonProps["action"],
+    NonNullable<WebPreviewNavigationButtonProps["action"]>,
     { label: string; icon: React.ReactNode; disabled: boolean; onAction: () => void }
   > = {
     back: { label: "Back", icon: <ArrowLeftIcon />, disabled: !canGoBack, onAction: goBack },
@@ -188,31 +229,37 @@ export function WebPreviewNavigationButton({
     reload: { label: "Reload", icon: <RefreshIcon />, disabled: false, onAction: reload },
   };
 
-  const def = defaults[action];
-  const resolvedLabel = label ?? def.label;
+  const def = action ? defaults[action] : null;
+  const resolvedLabel = label ?? tooltip ?? def?.label;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    def.onAction();
+    def?.onAction();
     onClick?.(e);
   };
 
+  const button = (
+    <Button
+      variant="ghost"
+      size="icon"
+      aria-label={resolvedLabel}
+      disabled={def?.disabled}
+      className={cx(
+        "web-preview__nav-button",
+        action && `web-preview__nav-button--${action}`,
+        className,
+      )}
+      {...props}
+      onClick={handleClick}
+    >
+      {children ?? def?.icon}
+    </Button>
+  );
+
+  if (!resolvedLabel) return button;
+
   return (
     <Tooltip>
-      <TooltipTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label={resolvedLabel}
-            disabled={def.disabled}
-            className={cx(`web-preview__nav-button web-preview__nav-button--${action}`, className)}
-            {...props}
-            onClick={handleClick}
-          >
-            {def.icon}
-          </Button>
-        }
-      />
+      <TooltipTrigger render={button} />
       <TooltipPortal>
         <TooltipPositioner>
           <TooltipPopup>{resolvedLabel}</TooltipPopup>
@@ -222,19 +269,20 @@ export function WebPreviewNavigationButton({
   );
 }
 
-export interface WebPreviewUrlProps extends Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  "onChange" | "value"
-> {}
+export interface WebPreviewUrlProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export function WebPreviewUrl({
   className,
   placeholder = "Enter URL…",
+  value,
+  onChange,
+  onKeyDown,
   ref,
   ...props
 }: WebPreviewUrlProps & { ref?: React.Ref<HTMLInputElement> }) {
   const { url, setUrl } = useWebPreviewContext();
   const [draft, setDraft] = React.useState(url);
+  const inputValue = value ?? draft;
 
   React.useEffect(() => {
     setDraft(url);
@@ -245,14 +293,24 @@ export function WebPreviewUrl({
       className="web-preview__url-form"
       onSubmit={(e) => {
         e.preventDefault();
-        if (draft) setUrl(draft);
+        const next = Array.isArray(inputValue) ? inputValue[0] : String(inputValue ?? "");
+        if (next) setUrl(next);
       }}
     >
       <Input
         ref={ref}
         type="text"
-        value={draft}
-        onChange={(e) => setDraft(e.target.value)}
+        value={inputValue}
+        onChange={(e) => {
+          setDraft(e.target.value);
+          onChange?.(e);
+        }}
+        onKeyDown={(e) => {
+          onKeyDown?.(e);
+          if (!e.defaultPrevented && e.key === "Enter") {
+            setUrl(e.currentTarget.value);
+          }
+        }}
         placeholder={placeholder}
         className={cx("web-preview__url", className)}
         {...props}
@@ -294,14 +352,22 @@ export function WebPreviewBody({
   }
 
   return (
-    <iframe
-      ref={ref}
-      key={iframeSrc}
-      src={iframeSrc}
-      title="Web preview"
-      className={cx("web-preview__body", !interactive && "web-preview__body--readonly", className)}
-      {...props}
-    />
+    <>
+      <iframe
+        ref={ref}
+        key={iframeSrc}
+        src={iframeSrc}
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+        title="Web preview"
+        className={cx(
+          "web-preview__body",
+          !interactive && "web-preview__body--readonly",
+          className,
+        )}
+        {...props}
+      />
+      {loading}
+    </>
   );
 }
 
@@ -321,49 +387,63 @@ const LEVEL_COLOR: Record<ConsoleLogLevel, BadgeColor> = {
 };
 
 export interface WebPreviewConsoleProps extends React.HTMLAttributes<HTMLDivElement> {
-  logs: ConsoleLog[];
+  logs?: ConsoleLog[];
 }
 
 export function WebPreviewConsole({
   className,
-  logs,
+  logs = [],
+  children,
   ref,
   ...props
 }: WebPreviewConsoleProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const { consoleOpen, setConsoleOpen } = useWebPreviewContext();
+
   return (
     <div ref={ref} className={cx("web-preview__console", className)} {...props}>
-      <div className="web-preview__console-header">Console</div>
-      <ScrollArea.Root className="web-preview__console-scroll">
-        <ScrollArea.Viewport className="web-preview__console-viewport">
-          <ul className="web-preview__console-list">
-            {logs.length === 0 ? (
-              <li className="web-preview__console-empty">No messages</li>
-            ) : (
-              logs.map((log, i) => (
-                <li
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={i}
-                  className={cx(
-                    "web-preview__console-item",
-                    `web-preview__console-item--${log.level}`,
-                  )}
-                >
-                  <Badge color={LEVEL_COLOR[log.level]} size="sm">
-                    {log.level}
-                  </Badge>
-                  <span className="web-preview__console-message">{log.message}</span>
-                  <span className="web-preview__console-time">
-                    {log.timestamp.toLocaleTimeString()}
-                  </span>
-                </li>
-              ))
-            )}
-          </ul>
-        </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar orientation="vertical">
-          <ScrollArea.Thumb />
-        </ScrollArea.Scrollbar>
-      </ScrollArea.Root>
+      <button
+        type="button"
+        className="web-preview__console-header"
+        aria-expanded={consoleOpen}
+        onClick={() => setConsoleOpen(!consoleOpen)}
+      >
+        <span>Console</span>
+        <ChevronDownIcon aria-hidden="true" />
+      </button>
+      {consoleOpen ? (
+        <ScrollArea.Root className="web-preview__console-scroll">
+          <ScrollArea.Viewport className="web-preview__console-viewport">
+            <ul className="web-preview__console-list">
+              {logs.length === 0 ? (
+                <li className="web-preview__console-empty">No console output</li>
+              ) : (
+                logs.map((log, i) => (
+                  <li
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={i}
+                    className={cx(
+                      "web-preview__console-item",
+                      `web-preview__console-item--${log.level}`,
+                    )}
+                  >
+                    <Badge color={LEVEL_COLOR[log.level]} size="sm">
+                      {log.level}
+                    </Badge>
+                    <span className="web-preview__console-message">{log.message}</span>
+                    <span className="web-preview__console-time">
+                      {log.timestamp.toLocaleTimeString()}
+                    </span>
+                  </li>
+                ))
+              )}
+            </ul>
+            {children}
+          </ScrollArea.Viewport>
+          <ScrollArea.Scrollbar orientation="vertical">
+            <ScrollArea.Thumb />
+          </ScrollArea.Scrollbar>
+        </ScrollArea.Root>
+      ) : null}
     </div>
   );
 }

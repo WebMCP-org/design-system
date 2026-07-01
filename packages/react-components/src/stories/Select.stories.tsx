@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, screen, userEvent, within } from "storybook/test";
 import { useState } from "react";
 import {
@@ -8,8 +8,10 @@ import {
   SelectPortal,
   SelectPositioner,
   SelectPopup,
+  SelectContent,
   SelectList,
   SelectOption,
+  SelectItem,
   SelectOptionGroup,
 } from "../components/Select";
 
@@ -55,6 +57,32 @@ export const Default: Story = {
     await expect(await screen.findByText("Option 1")).toBeInTheDocument();
     await expect(screen.getByText("Option 2")).toBeInTheDocument();
     await expect(screen.getByText("Option 3")).toBeInTheDocument();
+  },
+};
+
+export const ShadcnContent: Story = {
+  render: () => {
+    const [value, setValue] = useState("");
+
+    return (
+      <Select value={value} onValueChange={(v) => setValue(v as string)}>
+        <SelectTrigger aria-label="Select status">
+          <SelectValue placeholder="Select status..." />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="draft">Draft</SelectItem>
+          <SelectItem value="review">In review</SelectItem>
+          <SelectItem value="published">Published</SelectItem>
+        </SelectContent>
+      </Select>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByLabelText("Select status"));
+
+    await expect(await screen.findByText("Draft")).toBeInTheDocument();
+    await expect(screen.getByText("Published")).toBeInTheDocument();
   },
 };
 
@@ -127,6 +155,24 @@ export const Disabled: Story = {
             </SelectPopup>
           </SelectPositioner>
         </SelectPortal>
+      </Select>
+    );
+  },
+};
+
+export const Invalid: Story = {
+  render: () => {
+    const [value, setValue] = useState("");
+
+    return (
+      <Select value={value} onValueChange={(v) => setValue(v as string)}>
+        <SelectTrigger aria-invalid aria-label="Select a required option">
+          <SelectValue placeholder="Select a required option..." />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="option1">Option 1</SelectItem>
+          <SelectItem value="option2">Option 2</SelectItem>
+        </SelectContent>
       </Select>
     );
   },

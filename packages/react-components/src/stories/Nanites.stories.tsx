@@ -1,20 +1,42 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AgentConnectionPanel } from "../components/AgentConnection";
 import { GithubMotionMark } from "../components/GithubMotionMark";
 import { NaniteScene } from "../components/NaniteScene";
 
 const meta = {
   title: "Components/Nanites",
+  component: NaniteScene,
+  subcomponents: {
+    AgentConnectionPanel,
+    GithubMotionMark,
+  },
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Nanites visual and connection helpers: NaniteScene for setup/status illustration, GithubMotionMark for GitHub install affordances, and AgentConnectionPanel for copyable agent connection commands.",
+      },
+    },
   },
   tags: ["autodocs"],
-} satisfies Meta;
+  args: {
+    variant: "idle",
+  },
+} satisfies Meta<typeof NaniteScene>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Scenes: Story = {
+  name: "Status illustrations",
+  parameters: {
+    docs: {
+      description: {
+        story: "Reusable Nanite states for setup, working, success, and problem surfaces.",
+      },
+    },
+  },
   render: () => (
     <div style={{ display: "grid", gap: "1.5rem", minWidth: "32rem" }}>
       {(["idle", "helmet", "working", "celebrating", "concerned"] as const).map((variant) => (
@@ -37,6 +59,14 @@ export const Scenes: Story = {
 };
 
 export const GithubMotion: Story = {
+  name: "GitHub install affordance",
+  parameters: {
+    docs: {
+      description: {
+        story: "Inline motion mark for GitHub authorization or installation prompts.",
+      },
+    },
+  },
   render: () => (
     <div
       style={{
@@ -54,6 +84,14 @@ export const GithubMotion: Story = {
 };
 
 export const AgentConnection: Story = {
+  name: "Agent connection panel",
+  parameters: {
+    docs: {
+      description: {
+        story: "Copyable connection commands for wiring coding agents to a hosted MCP endpoint.",
+      },
+    },
+  },
   render: () => (
     <div style={{ width: "36rem" }}>
       <AgentConnectionPanel origin="https://nanites.example.com" />

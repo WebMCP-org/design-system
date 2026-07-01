@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import { Tool, ToolContent, ToolHeader, ToolInput, ToolOutput } from "../components/Tool";
 
 const meta = {
@@ -59,6 +60,12 @@ export const Default: Story = {
       </Tool>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await expect(canvas.getByText("Completed")).toBeInTheDocument();
+    await expect(canvasElement.querySelector(".tool__header-badge svg")).toBeInTheDocument();
+  },
 };
 
 export const InputStreaming: Story = {
@@ -145,4 +152,23 @@ export const OutputError: Story = {
       </Tool>
     </div>
   ),
+};
+
+export const EmptyOutput: Story = {
+  args: { state: "input-available", defaultOpen: true },
+  render: (args) => (
+    <div style={{ width: "32rem" }}>
+      <Tool {...args}>
+        <ToolHeader type="function" toolName="search_web" />
+        <ToolContent>
+          <ToolInput input={SAMPLE_INPUT} />
+          <ToolOutput />
+        </ToolContent>
+      </Tool>
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.queryByText("Output")).not.toBeInTheDocument();
+  },
 };

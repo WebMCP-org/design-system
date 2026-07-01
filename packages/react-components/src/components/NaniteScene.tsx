@@ -1,9 +1,13 @@
 export type NaniteSceneVariant = "idle" | "helmet" | "working" | "celebrating" | "concerned";
 
 export type NaniteSceneProps = {
+  /** Visual state to render. */
   readonly variant: NaniteSceneVariant;
+  /** Render three compact Nanites or one status Nanite with optional screen art. */
   readonly mode?: "trio" | "solo";
+  /** Additional class names for layout only. */
   readonly className?: string;
+  /** Accessible title when the illustration communicates state. */
   readonly title?: string;
 };
 
@@ -22,6 +26,23 @@ const BADGE_SUCCESS = "#0f7b6c";
 const BADGE_FAIL = "#dc2626";
 const TRIO_XS = [40, 100, 160] as const;
 
+/**
+ * Decorative Nanites illustration used in setup, status, and empty states.
+ * Pass a title when the illustration communicates state; otherwise it remains
+ * hidden from assistive technology.
+ *
+ * Built internally for Sigvelo onboarding and agent-connection surfaces. Use
+ * it as supporting status art, not as a control or primary content.
+ *
+ * Styling consumes Nanite scene CSS animation hooks plus Sigvelo layout context.
+ * Respect reduced-motion CSS when adding animation. Add variants here when a
+ * state is reused across apps; keep one-off art local to the app.
+ *
+ * @example
+ * ```tsx
+ * <NaniteScene variant="working" mode="solo" title="Agent is checking GitHub" />
+ * ```
+ */
 export function NaniteScene({ variant, mode = "trio", className, title }: NaniteSceneProps) {
   const wrapperClass = [
     "nanite-scene",

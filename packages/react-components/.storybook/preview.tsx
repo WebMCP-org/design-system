@@ -37,8 +37,8 @@ const withTheme = (Story: React.ComponentType, context: { globals: { theme?: str
       document.documentElement.classList.toggle("sigvelo-light", resolvedTheme === "light");
 
       // Also apply background to Storybook's body for full theming
-      document.body.style.backgroundColor = `var(--sigvelo-background-color)`;
-      document.body.style.color = `var(--sigvelo-text-body)`;
+      document.body.style.backgroundColor = `var(--sigvelo-color-canvas)`;
+      document.body.style.color = `var(--sigvelo-color-text)`;
       document.body.style.transition = "background-color 150ms ease, color 150ms ease";
     };
 
@@ -84,9 +84,6 @@ const preview: Preview = {
     },
     docs: {
       codePanel: true,
-    },
-    backgrounds: {
-      disable: true,
     },
     a11y: {
       test: "error",

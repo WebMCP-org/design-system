@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState } from "react";
 import {
   Conversation,
@@ -145,6 +145,15 @@ const FrameBox = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const Default: Story = {
+  name: "Message stream",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Scrollable assistant conversation with auto-stick behavior and jump-to-latest control.",
+      },
+    },
+  },
   render: () => (
     <FrameBox>
       <Conversation>
@@ -160,6 +169,15 @@ export const Default: Story = {
 };
 
 export const EmptyState: Story = {
+  name: "Empty conversation",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Initial state before messages exist; use copy that tells the user what appears here.",
+      },
+    },
+  },
   render: () => (
     <FrameBox>
       <Conversation>
@@ -176,6 +194,14 @@ export const EmptyState: Story = {
 };
 
 export const WithDownload: Story = {
+  name: "Transcript download",
+  parameters: {
+    docs: {
+      description: {
+        story: "Adds a Markdown export action for the currently available messages.",
+      },
+    },
+  },
   render: () => (
     <FrameBox>
       <Conversation>
@@ -192,6 +218,15 @@ export const WithDownload: Story = {
 };
 
 export const Streaming: Story = {
+  name: "Streaming replies",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Messages append over time while the viewport stays pinned unless the user scrolls away.",
+      },
+    },
+  },
   render: function StreamingStory() {
     const [visible, setVisible] = useState<ConversationMessage[]>([]);
 

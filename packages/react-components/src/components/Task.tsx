@@ -1,19 +1,24 @@
 import * as React from "react";
-import { Collapsible as BaseCollapsible } from "@base-ui/react/collapsible";
+import {
+  CollapsiblePanel,
+  type CollapsiblePanelProps,
+  CollapsibleRoot,
+  type CollapsibleRootProps,
+  CollapsibleTrigger,
+  type CollapsibleTriggerProps,
+} from "./Collapsible.js";
 import { cx } from "./_internal/class-names.js";
-import { ChevronRightIcon, FileIcon } from "./_internal/icons.js";
+import { ChevronRightIcon, FileIcon, SearchIcon } from "./_internal/icons.js";
 
-export interface TaskProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Root>,
-  "className"
-> {
+export interface TaskProps extends Omit<CollapsibleRootProps, "className" | "unstyled"> {
   className?: string;
 }
 
 /**
  * A collapsible task/workflow list. Compose with TaskTrigger, TaskContent,
  * TaskItem, and TaskItemFile to show structured progress for a multi-step
- * workflow like file edits.
+ * workflow like file edits. Adapted from Vercel AI Elements and restyled
+ * with Sigvelo CSS tokens.
  *
  * @example
  * ```tsx
@@ -29,19 +34,27 @@ export interface TaskProps extends Omit<
  *   </TaskContent>
  * </Task>
  * ```
+ *
+ * @see {@link https://elements.ai-sdk.dev/components/task | AI Elements Task}
  */
 export function Task({
   className,
+  defaultOpen = true,
   ref,
   ...props
 }: TaskProps & { ref?: React.Ref<HTMLDivElement> }) {
-  return <BaseCollapsible.Root ref={ref} className={cx("task", className)} {...props} />;
+  return (
+    <CollapsibleRoot
+      ref={ref}
+      className={cx("task", className)}
+      defaultOpen={defaultOpen}
+      {...props}
+      unstyled
+    />
+  );
 }
 
-export interface TaskTriggerProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Trigger>,
-  "className"
-> {
+export interface TaskTriggerProps extends Omit<CollapsibleTriggerProps, "className" | "unstyled"> {
   className?: string;
   /** Heading text shown in the trigger row. */
   title: string;
@@ -57,21 +70,28 @@ export function TaskTrigger({
   ref,
   ...props
 }: TaskTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
+  if (children !== undefined && children !== null) {
+    return (
+      <CollapsibleTrigger ref={ref} className={cx("task__trigger", className)} {...props} unstyled>
+        {children}
+      </CollapsibleTrigger>
+    );
+  }
+
   return (
-    <BaseCollapsible.Trigger ref={ref} className={cx("task__trigger", className)} {...props}>
+    <CollapsibleTrigger ref={ref} className={cx("task__trigger", className)} {...props} unstyled>
+      <span className="task__trigger-leading-icon" aria-hidden="true">
+        <SearchIcon />
+      </span>
+      <span className="task__trigger-title">{title}</span>
       <span className="task__trigger-icon" aria-hidden="true">
         <ChevronRightIcon />
       </span>
-      <span className="task__trigger-title">{title}</span>
-      {children ? <span className="task__trigger-extras">{children}</span> : null}
-    </BaseCollapsible.Trigger>
+    </CollapsibleTrigger>
   );
 }
 
-export interface TaskContentProps extends Omit<
-  React.ComponentPropsWithoutRef<typeof BaseCollapsible.Panel>,
-  "className"
-> {
+export interface TaskContentProps extends Omit<CollapsiblePanelProps, "className" | "unstyled"> {
   className?: string;
 }
 
@@ -85,9 +105,11 @@ export function TaskContent({
   ...props
 }: TaskContentProps & { ref?: React.Ref<HTMLDivElement> }) {
   return (
-    <BaseCollapsible.Panel ref={ref} className={cx("task__content", className)} {...props}>
-      <ul className="task__list">{children}</ul>
-    </BaseCollapsible.Panel>
+    <CollapsiblePanel ref={ref} className={cx("task__content", className)} {...props} unstyled>
+      <ul className="task__list" role="list">
+        {children}
+      </ul>
+    </CollapsiblePanel>
   );
 }
 
@@ -112,7 +134,7 @@ export function TaskItem({
 
 export interface TaskItemFileProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** The file name or path to display. Used to derive the language badge. */
-  name: string;
+  name?: string;
 }
 
 /**

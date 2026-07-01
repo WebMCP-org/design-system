@@ -3,7 +3,12 @@ import { createRoot } from "react-dom/client";
 import { afterEach, beforeEach, expect, test } from "vite-plus/test";
 import { Message, MessageContent } from "./Message.js";
 import { Reasoning, ReasoningContent, ReasoningTrigger } from "./Reasoning.js";
-import { Conversation, ConversationContent, ConversationScrollButton } from "./Conversation.js";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationEmptyState,
+  ConversationScrollButton,
+} from "./Conversation.js";
 import { Tool, ToolContent, ToolHeader, ToolInput, ToolOutput } from "./Tool.js";
 
 type ResizeObserverRecord = {
@@ -114,6 +119,16 @@ function buildStreamingConversation(text: string) {
         </Message>
       </ConversationContent>
       <ConversationScrollButton />
+    </Conversation>
+  );
+}
+
+function buildEmptyConversation() {
+  return (
+    <Conversation>
+      <ConversationContent>
+        <ConversationEmptyState />
+      </ConversationContent>
     </Conversation>
   );
 }
@@ -253,5 +268,13 @@ test("stays stable while reasoning, tool panels, and text all grow during stream
   console.error = originalConsoleError;
   expect(getConsoleErrors(consoleErrors)).not.toContain("Maximum update depth exceeded");
   expect(mounted.container.textContent).toContain("Assistant update 4");
+  mounted.cleanup();
+});
+
+test("renders upstream empty-state copy by default", () => {
+  const mounted = mount(buildEmptyConversation());
+
+  expect(mounted.container.textContent).toContain("No messages yet");
+  expect(mounted.container.textContent).toContain("Start a conversation to see messages here");
   mounted.cleanup();
 });

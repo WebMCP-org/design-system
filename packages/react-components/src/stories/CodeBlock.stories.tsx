@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, within } from "storybook/test";
 import {
   CodeBlock,
   CodeBlockActions,
@@ -122,4 +123,20 @@ export const CSS: Story = {
       </CodeBlock>
     </div>
   ),
+};
+
+export const VercelCompatibleProps: Story = {
+  args: {
+    code: "console.log('hello from code block');",
+    language: "js",
+  },
+  render: (args) => (
+    <div style={{ width: "40rem" }}>
+      <CodeBlock {...args} />
+    </div>
+  ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByText(/hello from code block/)).toBeInTheDocument();
+  },
 };

@@ -56,6 +56,13 @@ export interface AlertDialogCloseProps extends Omit<
    */
   variant?: "primary" | "secondary" | "destructive" | "outline" | "ghost";
 }
+export type AlertDialogOverlayProps = AlertDialogBackdropProps;
+export type AlertDialogContentProps = AlertDialogPopupProps;
+export type AlertDialogActionProps = AlertDialogCloseProps;
+export type AlertDialogCancelProps = AlertDialogCloseProps;
+export interface AlertDialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface AlertDialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+export interface AlertDialogMediaProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 /**
  * An alert dialog component for important confirmations and warnings.
@@ -91,7 +98,14 @@ export function AlertDialogTrigger({
   ...props
 }: AlertDialogTriggerProps & { ref?: React.Ref<HTMLButtonElement> }) {
   const classes = ["alert-dialog__trigger", className].filter(Boolean).join(" ");
-  return <BaseAlertDialog.Trigger ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAlertDialog.Trigger
+      ref={ref}
+      data-slot="alert-dialog-trigger"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 export const AlertDialogPortal = BaseAlertDialog.Portal;
@@ -102,8 +116,17 @@ export function AlertDialogBackdrop({
   ...props
 }: AlertDialogBackdropProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["alert-dialog__backdrop", className].filter(Boolean).join(" ");
-  return <BaseAlertDialog.Backdrop ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAlertDialog.Backdrop
+      ref={ref}
+      data-slot="alert-dialog-overlay"
+      className={classes}
+      {...props}
+    />
+  );
 }
+
+export const AlertDialogOverlay = AlertDialogBackdrop;
 
 export function AlertDialogPopup({
   size = "md",
@@ -119,7 +142,53 @@ export function AlertDialogPopup({
     .filter(Boolean)
     .join(" ");
 
-  return <BaseAlertDialog.Popup ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAlertDialog.Popup
+      ref={ref}
+      data-slot="alert-dialog-content"
+      className={classes}
+      {...props}
+    />
+  );
+}
+
+export function AlertDialogContent({
+  ref,
+  ...props
+}: AlertDialogContentProps & { ref?: React.Ref<HTMLDivElement> }) {
+  return (
+    <AlertDialogPortal>
+      <AlertDialogBackdrop />
+      <AlertDialogPopup ref={ref} {...props} />
+    </AlertDialogPortal>
+  );
+}
+
+export function AlertDialogHeader({
+  className = "",
+  ref,
+  ...props
+}: AlertDialogHeaderProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["alert-dialog__header", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="alert-dialog-header" className={classes} {...props} />;
+}
+
+export function AlertDialogFooter({
+  className = "",
+  ref,
+  ...props
+}: AlertDialogFooterProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["alert-dialog__footer", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="alert-dialog-footer" className={classes} {...props} />;
+}
+
+export function AlertDialogMedia({
+  className = "",
+  ref,
+  ...props
+}: AlertDialogMediaProps & { ref?: React.Ref<HTMLDivElement> }) {
+  const classes = ["alert-dialog__media", className].filter(Boolean).join(" ");
+  return <div ref={ref} data-slot="alert-dialog-media" className={classes} {...props} />;
 }
 
 export function AlertDialogTitle({
@@ -128,7 +197,14 @@ export function AlertDialogTitle({
   ...props
 }: AlertDialogTitleProps & { ref?: React.Ref<HTMLHeadingElement> }) {
   const classes = ["alert-dialog__title", className].filter(Boolean).join(" ");
-  return <BaseAlertDialog.Title ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAlertDialog.Title
+      ref={ref}
+      data-slot="alert-dialog-title"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 export function AlertDialogDescription({
@@ -137,7 +213,14 @@ export function AlertDialogDescription({
   ...props
 }: AlertDialogDescriptionProps & { ref?: React.Ref<HTMLParagraphElement> }) {
   const classes = ["alert-dialog__description", className].filter(Boolean).join(" ");
-  return <BaseAlertDialog.Description ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAlertDialog.Description
+      ref={ref}
+      data-slot="alert-dialog-description"
+      className={classes}
+      {...props}
+    />
+  );
 }
 
 export function AlertDialogClose({
@@ -150,5 +233,24 @@ export function AlertDialogClose({
     .filter(Boolean)
     .join(" ");
 
-  return <BaseAlertDialog.Close ref={ref} className={classes} {...props} />;
+  return (
+    <BaseAlertDialog.Close
+      ref={ref}
+      data-slot="alert-dialog-close"
+      className={classes}
+      {...props}
+    />
+  );
+}
+
+export function AlertDialogAction(
+  props: AlertDialogActionProps & { ref?: React.Ref<HTMLButtonElement> },
+) {
+  return <AlertDialogClose data-slot="alert-dialog-action" variant="primary" {...props} />;
+}
+
+export function AlertDialogCancel(
+  props: AlertDialogCancelProps & { ref?: React.Ref<HTMLButtonElement> },
+) {
+  return <AlertDialogClose data-slot="alert-dialog-cancel" variant="outline" {...props} />;
 }

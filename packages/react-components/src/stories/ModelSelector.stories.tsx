@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import {
   ModelSelector,
@@ -53,6 +53,14 @@ const MODELS: Record<string, Model[]> = {
 };
 
 export const Default: Story = {
+  name: "Grouped provider picker",
+  parameters: {
+    docs: {
+      description: {
+        story: "Dialog-based model picker with provider groups, logos, search, and selected state.",
+      },
+    },
+  },
   render: function Default() {
     const [selected, setSelected] = useState("claude-opus-4-6");
     const selectedModel = Object.values(MODELS)

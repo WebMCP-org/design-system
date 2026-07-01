@@ -1,12 +1,17 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 
-<Meta title="Architecture" />
+<Meta
+  title="Architecture"
+  summary="Reference for package ownership, token CSS, component CSS, Storybook expectations, MCP docs, and the shared UI migration rules."
+/>
 
 # Architecture
 
 ## Overview
 
 Built on Base UI and provides a framework-agnostic component library with a clear separation of concerns between design tokens and application-specific styles.
+
+This package is the migration target for shared Sigvelo UI. Existing apps may still contain legacy local component packages until they are moved over; new reusable UI should land here instead of expanding those copies.
 
 ## CSS Architecture
 
@@ -38,9 +43,10 @@ This file contains:
 
 - **Font definitions**: `@font-face` declarations for custom fonts
 - **Base HTML element styles**: `body`, `h1-h6`, `a`, `p`, `img`, etc.
-- **Utility classes**: App-specific helpers like `.sr-only`, `.prose`, etc.
+- **Layout glue**: App-specific CSS or Tailwind utilities for page layout, responsive composition, `.sr-only`, `.prose`, etc.
 
 Do not redefine the `--sigvelo-*` contract in application styles. Override documented tokens only when the app intentionally owns a theme.
+Do not use app-level Tailwind to restyle Sigvelo component internals; add a component variant, component token, or shared component here instead.
 
 ## Import Order
 
@@ -89,10 +95,41 @@ All components:
 
 1. Import design system styles before application styles.
 2. Use semantic tokens in component CSS instead of raw palette values.
-3. Keep app layout and page-specific CSS out of this package.
+3. Keep app layout and page-specific CSS or Tailwind utilities out of this package.
 4. Cover public component states with CSF stories and Storybook interaction tests.
 5. Run `vp run audit:tokens` before publishing token changes.
 6. Run `vp run guidance:search -- "<task>"` before HTML, CSS, or client-side React changes.
+
+## Documentation Source of Truth
+
+Storybook, TypeScript, and the hosted MCP endpoint should read the same colocated facts:
+
+1. Put component purpose, upstream provenance, public props, defaults, examples, and `@see` links in JSDoc next to the component export.
+2. Put usage examples in CSF stories. Add JSDoc above a story export when the story teaches a usage rule that is not obvious from the args.
+3. Use `argTypes` for Storybook controls only. Do not duplicate prop descriptions there unless Storybook needs an override.
+4. Use MDX for cross-cutting guidance such as architecture, accessibility, tokens, Base UI composition, and component contribution workflow.
+5. Add `tags: ["!manifest"]` to regression, audit, or private fixture stories that should not be recommended to agents as reusable components.
+6. Let Storybook generate package import paths from CSF stories. Do not hand-write import paths into every component JSDoc block.
+7. Run `vp run audit:storybook-manifest` after `vp run build:storybook-worker` to verify the hosted MCP manifest has descriptions, prop docs, and `@mcp-b/react-components` imports.
+
+Minimal component JSDoc shape:
+
+````typescript
+/**
+ * Short purpose sentence.
+ *
+ * Use for...
+ * Do not use for...
+ *
+ * @example
+ * ```tsx
+ * <Component />
+ * ```
+ *
+ * @see {@link https://base-ui.com/react/components/example | Base UI Example}
+ */
+export function Component() {}
+````
 
 ## Files Structure
 

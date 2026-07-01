@@ -48,6 +48,19 @@ export const ChevronLeftIcon = (props: IconProps) => (
   </Icon>
 );
 
+export const BrainIcon = (props: IconProps) => (
+  <Icon viewBox="0 0 24 24" {...props}>
+    <path d="M12 18V5" />
+    <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" />
+    <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" />
+    <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" />
+    <path d="M18 18a4 4 0 0 0 2-7.464" />
+    <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" />
+    <path d="M6 18a4 4 0 0 1-2-7.464" />
+    <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" />
+  </Icon>
+);
+
 export const CheckIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M3 8.5L6.5 12L13 4.5" />
@@ -209,10 +222,32 @@ export const WarningIcon = (props: IconProps) => (
   </Icon>
 );
 
+export const WrenchIcon = (props: IconProps) => (
+  <Icon viewBox="0 0 24 24" {...props}>
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z" />
+  </Icon>
+);
+
 export const InfoIcon = (props: IconProps) => (
   <Icon {...props}>
     <circle cx="8" cy="8" r="6" />
     <path d="M8 7v4" />
     <path d="M8 5v.01" />
+  </Icon>
+);
+
+export const ImageIcon = (props: IconProps) => (
+  <Icon viewBox="0 0 24 24" {...props}>
+    <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+    <circle cx="9" cy="9" r="2" />
+    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+  </Icon>
+);
+
+export const MonitorIcon = (props: IconProps) => (
+  <Icon viewBox="0 0 24 24" {...props}>
+    <rect width="20" height="14" x="2" y="3" rx="2" />
+    <path d="M8 21h8" />
+    <path d="M12 17v4" />
   </Icon>
 );

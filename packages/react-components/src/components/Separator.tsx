@@ -9,6 +9,11 @@ export interface SeparatorProps extends Omit<
   "className"
 > {
   /**
+   * Whether the separator is purely visual.
+   * @default true
+   */
+  decorative?: boolean;
+  /**
    * Additional CSS class names.
    */
   className?: string;
@@ -32,11 +37,26 @@ export interface SeparatorProps extends Omit<
  */
 export function Separator({
   orientation = "horizontal",
+  decorative = true,
   className = "",
   ref,
   ...props
 }: SeparatorProps & { ref?: React.Ref<HTMLDivElement> }) {
   const classes = ["separator", `separator--${orientation}`, className].filter(Boolean).join(" ");
+  const accessibilityProps = decorative
+    ? ({ role: "none", "aria-orientation": undefined } as const)
+    : ({
+        "aria-orientation": orientation === "vertical" ? orientation : undefined,
+      } as const);
 
-  return <BaseSeparator ref={ref} orientation={orientation} className={classes} {...props} />;
+  return (
+    <BaseSeparator
+      ref={ref}
+      data-slot="separator"
+      {...accessibilityProps}
+      orientation={orientation}
+      className={classes}
+      {...props}
+    />
+  );
 }

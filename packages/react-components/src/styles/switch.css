@@ -4,12 +4,17 @@
   align-items: center;
   width: 2.75rem;
   height: 1.5rem;
+  flex-shrink: 0;
   padding: 0.125rem;
   background-color: var(--sigvelo-color-neutral-bg-subtle);
-  border: none;
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width) transparent;
   border-radius: var(--sigvelo-radius-full);
+  outline: none;
   cursor: pointer;
-  transition: background-color 150ms ease;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .switch:hover:not([data-disabled]) {
@@ -29,6 +34,17 @@
 
 .switch[data-checked]:hover:not([data-disabled]) {
   background-color: color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 10%);
+}
+
+.switch:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]) {
+  box-shadow: inset 0 0 0 var(--sigvelo-border-width) var(--sigvelo-color-danger-bg);
+}
+
+.switch:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]):focus-visible {
+  box-shadow:
+    inset 0 0 0 var(--sigvelo-border-width) var(--sigvelo-color-danger-bg),
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 80%);
 }
 
 .switch[data-disabled] {

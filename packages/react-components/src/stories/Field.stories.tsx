@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useForm } from "@tanstack/react-form";
 import { useState } from "react";
 import { Field } from "../components/Field";
 import { Form } from "../components/Form";
@@ -223,7 +224,7 @@ export const FormExample: Story = {
     };
 
     return (
-      <Form onSubmit={handleSubmit} style={{ width: "320px" }}>
+      <Form onFormSubmit={handleSubmit} style={{ width: "320px" }}>
         <Field.Root name="name">
           <Field.Label>
             Name <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
@@ -265,6 +266,116 @@ export const FormExample: Story = {
           {submitted ? "Submitted!" : "Create Account"}
         </Button>
       </Form>
+    );
+  },
+};
+
+export const TanStackForm: Story = {
+  render: function TanStackForm() {
+    const [submitted, setSubmitted] = useState<{ email: string; username: string } | null>(null);
+    const form = useForm({
+      defaultValues: {
+        email: "",
+        username: "",
+      },
+      onSubmit: ({ value }) => {
+        setSubmitted(value);
+      },
+    });
+
+    return (
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          void form.handleSubmit();
+        }}
+        style={{ width: "360px" }}
+      >
+        <Field.Set>
+          <Field.Legend>TanStack Form</Field.Legend>
+          <Field.Group>
+            <form.Field
+              name="email"
+              validators={{
+                onBlur: ({ value }) => {
+                  if (!value) return "Email is required";
+                  if (!/^\S+@\S+\.\S+$/.test(value)) return "Enter a valid email address";
+                  return undefined;
+                },
+              }}
+            >
+              {(field) => {
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
+                return (
+                  <Field.Root data-invalid={isInvalid}>
+                    <Field.Label htmlFor={field.name}>Email</Field.Label>
+                    <Field.Control
+                      id={field.name}
+                      name={field.name}
+                      type="email"
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) => field.handleChange(event.target.value)}
+                      aria-invalid={isInvalid}
+                      placeholder="you@example.com"
+                      autoComplete="email"
+                    />
+                    <Field.Description>Validated by TanStack Form on blur.</Field.Description>
+                    {isInvalid && <Field.Error errors={field.state.meta.errors} />}
+                  </Field.Root>
+                );
+              }}
+            </form.Field>
+
+            <form.Field
+              name="username"
+              validators={{
+                onChange: ({ value }) => {
+                  if (value.length < 3) return "Username must be at least 3 characters";
+                  return undefined;
+                },
+              }}
+            >
+              {(field) => {
+                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
+                return (
+                  <Field.Root data-invalid={isInvalid}>
+                    <Field.Label htmlFor={field.name}>Username</Field.Label>
+                    <Field.Control
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(event) => field.handleChange(event.target.value)}
+                      aria-invalid={isInvalid}
+                      placeholder="mcp-builder"
+                      autoComplete="username"
+                    />
+                    {isInvalid && <Field.Error errors={field.state.meta.errors} />}
+                  </Field.Root>
+                );
+              }}
+            </form.Field>
+          </Field.Group>
+
+          <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting] as const}>
+            {([canSubmit, isSubmitting]) => (
+              <Button type="submit" color="primary" disabled={!canSubmit || isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Create Account"}
+              </Button>
+            )}
+          </form.Subscribe>
+
+          {submitted ? (
+            <Field.Description>
+              Submitted {submitted.email} as {submitted.username}
+            </Field.Description>
+          ) : null}
+        </Field.Set>
+      </form>
     );
   },
 };

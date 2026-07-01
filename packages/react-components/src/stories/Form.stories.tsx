@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useState } from "react";
 import { Form } from "../components/Form";
 import { Field } from "../components/Field";
@@ -42,7 +42,7 @@ function handleCustomValidationSubmit(values: Record<string, FormDataEntryValue>
 export const Default: Story = {
   render: () => {
     return (
-      <Form onSubmit={handleDefaultSubmit} style={{ width: "320px" }}>
+      <Form onFormSubmit={handleDefaultSubmit} style={{ width: "320px" }}>
         <Field.Root name="name">
           <Field.Label>Name</Field.Label>
           <Field.Control required placeholder="Enter your name" />
@@ -60,7 +60,7 @@ export const Default: Story = {
 export const WithValidation: Story = {
   render: () => {
     return (
-      <Form onSubmit={handleWithValidationSubmit} style={{ width: "320px" }}>
+      <Form onFormSubmit={handleWithValidationSubmit} style={{ width: "320px" }}>
         <Field.Root name="name">
           <Field.Label>
             Name <span style={{ color: "var(--sigvelo-color-danger-bg)" }}>*</span>
@@ -110,7 +110,7 @@ export const ValidateOnBlur: Story = {
   render: () => {
     return (
       <Form
-        onSubmit={handleValidateOnBlurSubmit}
+        onFormSubmit={handleValidateOnBlurSubmit}
         validationMode="onBlur"
         style={{ width: "320px" }}
       >
@@ -141,7 +141,7 @@ export const ValidateOnChange: Story = {
   render: () => {
     return (
       <Form
-        onSubmit={handleValidateOnChangeSubmit}
+        onFormSubmit={handleValidateOnChangeSubmit}
         validationMode="onChange"
         style={{ width: "320px" }}
       >
@@ -194,7 +194,7 @@ export const WithServerErrors: Story = {
     };
 
     return (
-      <Form onSubmit={handleSubmit} errors={errors} style={{ width: "320px" }}>
+      <Form onFormSubmit={handleSubmit} errors={errors} style={{ width: "320px" }}>
         <Field.Root name="username">
           <Field.Label>Username</Field.Label>
           <Field.Control required placeholder="Choose a username" />
@@ -223,7 +223,7 @@ export const WithServerErrors: Story = {
 export const CustomValidation: Story = {
   render: () => {
     return (
-      <Form onSubmit={handleCustomValidationSubmit} style={{ width: "320px" }}>
+      <Form onFormSubmit={handleCustomValidationSubmit} style={{ width: "320px" }}>
         <Field.Root name="password">
           <Field.Label>Password</Field.Label>
           <Field.Control type="password" required minLength={8} placeholder="Enter password" />
@@ -265,7 +265,7 @@ export const ContactForm: Story = {
     };
 
     return (
-      <Form onSubmit={handleSubmit} style={{ width: "360px" }}>
+      <Form onFormSubmit={handleSubmit} style={{ width: "360px" }}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <Field.Root name="firstName" style={{ flex: 1 }}>
             <Field.Label>First Name</Field.Label>
