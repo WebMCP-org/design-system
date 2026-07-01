@@ -31,9 +31,29 @@ vp run build:storybook-worker
 ```
 
 For hosted docs, connect the GitHub repo in Cloudflare Workers Builds and use
-`vp run build:storybook-worker`. The Worker name in Cloudflare must match
-`mcp-b-design-system-storybook` from `wrangler.jsonc`; the custom domain is
-`design-system.sigvelo.com`.
+these commands:
+
+```bash
+# Build command
+pnpm run build:storybook-worker
+
+# Production deploy command
+pnpm exec wrangler deploy --config dist/mcp_b_design_system_storybook/mcp_b_design_system_storybook/wrangler.json
+
+# Non-production branch deploy command
+pnpm exec wrangler versions upload --config dist/mcp_b_design_system_storybook/mcp_b_design_system_storybook/wrangler.json
+```
+
+Set these build variables in both production and non-production branch builds:
+
+```bash
+CLOUDFLARE_ACCOUNT_ID=ad0d45931959d888de55865d02260ef8
+NODE_VERSION=24.18.0
+PNPM_CONFIG_OPTIONAL=true
+```
+
+The Worker name in Cloudflare must match `mcp-b-design-system-storybook` from
+`wrangler.jsonc`; the custom domain is `design-system.sigvelo.com`.
 
 Use Chrome's modern web guidance CLI before web-facing changes:
 
