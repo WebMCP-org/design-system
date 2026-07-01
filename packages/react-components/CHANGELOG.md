@@ -1,5 +1,12 @@
 # @mcp-b/react-components
 
+## 0.1.4
+
+### Patch Changes
+
+- Republish React components with the grouped design token dependency.
+  - @mcp-b/design-tokens@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
