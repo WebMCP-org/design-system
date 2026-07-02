@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
 
@@ -27,6 +28,13 @@ export default defineConfig({
   fmt: {},
   test: {
     setupFiles: ["../../vitest.setup.ts"],
+    // Leaf exports resolve to react-components/dist, which may not be built
+    // yet — test against source, like .storybook/main.ts does for stories.
+    alias: {
+      "@mcp-b/react-components/components": fileURLToPath(
+        new URL("../react-components/src/components", import.meta.url),
+      ),
+    },
     browser: {
       enabled: true,
       headless: true,
