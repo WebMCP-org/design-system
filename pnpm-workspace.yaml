@@ -33,7 +33,10 @@ catalog:
   publint: 0.3.20
   react: ^19.2.7
   react-dom: ^19.2.7
-  shiki: ^4.2.0
+  # shiki 4.x ships rolldown-runtime helper chunks that rolldown-vite (vite 8)
+  # dedupes incorrectly at build time — "__reExport is not defined" in the
+  # built storybook. 3.x matches streamdown's pin, so one copy bundles clean.
+  shiki: ^3.23.0
   storybook: ^10.4.6
   streamdown: ^2.5.0
   "@streamdown/cjk": ^1.0.3
