@@ -85,8 +85,12 @@ test-results
 skills/
 
 # Repo-authored agent skills are source, not generated compatibility copies.
+# Vendored copies under .agents/skills are reproducible from skills-lock.json —
+# track the lock, not the copies.
 !.agents/skills/
-!.agents/skills/**
+.agents/skills/*
+!.agents/skills/use-mcp-b-design-system/
+!.agents/skills/shadcn-ds-intake/
 
 # Local secrets
 *.private-key.pem

@@ -30,8 +30,8 @@
   cursor: pointer;
   text-align: start;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .queue__section-trigger:hover:not([data-disabled]) {
@@ -66,18 +66,11 @@
 }
 
 .queue__section-content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.queue__section-content[data-closed] {
-  height: 0;
-}
-
-.queue__section-content[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .queue__section-content[data-starting-style],
@@ -114,7 +107,7 @@
   padding-block: 0.5rem;
   padding-inline: 0.5rem;
   border-radius: var(--sigvelo-radius-sm);
-  transition: background-color 150ms ease;
+  transition: background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .queue__item:hover {
@@ -185,7 +178,7 @@
   gap: 0.25rem;
   flex-shrink: 0;
   opacity: 0;
-  transition: opacity 150ms ease;
+  transition: opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .queue__item-actions:focus-within {
@@ -218,9 +211,7 @@
   gap: 0.375rem;
   padding-block: 0.3125rem;
   padding-inline: 0.5rem;
-  background-color: var(--sigvelo-color-surface);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-color-neutral-border-subtle);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
   border-radius: var(--sigvelo-radius-sm);
   font-size: 0.75rem;
   color: var(--sigvelo-color-text);

@@ -210,7 +210,7 @@ test("keeps streaming content growth from recursing through resize-driven auto-s
     consoleErrors.push(args.map((value) => String(value)).join(" "));
   };
   const mounted = mount(buildStreamingConversation("alpha"));
-  const viewport = mounted.container.querySelector(".conversation");
+  const viewport = mounted.container.querySelector(".conversation__viewport");
   const content = mounted.container.querySelector(".conversation__content");
 
   if (!(viewport instanceof HTMLDivElement) || !(content instanceof HTMLDivElement)) {
@@ -247,7 +247,7 @@ test("stays stable while reasoning, tool panels, and text all grow during stream
     consoleErrors.push(args.map((value) => String(value)).join(" "));
   };
   const mounted = mount(buildRichConversation(1));
-  const viewport = mounted.container.querySelector(".conversation");
+  const viewport = mounted.container.querySelector(".conversation__viewport");
   const content = mounted.container.querySelector(".conversation__content");
 
   if (!(viewport instanceof HTMLDivElement) || !(content instanceof HTMLDivElement)) {

@@ -12,15 +12,23 @@
   text-decoration: none;
   border-radius: var(--sigvelo-radius-md);
   transition:
-    background-color 150ms ease,
-    color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
+}
+
+/* ponytail: one brightness rule covers press feedback for every variant;
+   upgrade to per-variant color-mix rules if filter side effects ever bite */
+.button:active:not([data-disabled]) {
+  filter: brightness(0.94);
 }
 
 .button:focus-visible {
-  outline: var(--sigvelo-focus-ring);
-  outline-offset: var(--sigvelo-focus-offset);
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .button[data-disabled] {

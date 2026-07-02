@@ -63,6 +63,16 @@ export function useStickToBottom(options: UseStickToBottomOptions = {}): UseStic
 
     const readIsAtBottom = () => el.scrollHeight - el.scrollTop - el.clientHeight < slackPx;
 
+    /* Resizes caused by the user (expanding a collapsible, toggling a panel)
+       must not yank the viewport to the bottom — content should open downward
+       under the cursor. Streaming growth arrives without interaction, so it
+       still sticks. The window outlasts the panel height transition. */
+    let lastInteractionAt = 0;
+    const markInteraction = () => {
+      lastInteractionAt = Date.now();
+    };
+    const isUserResize = () => Date.now() - lastInteractionAt < 600;
+
     const updateIsAtBottom = () => {
       const next = readIsAtBottom();
       if (isAtBottomRef.current === next) return;
@@ -73,7 +83,7 @@ export function useStickToBottom(options: UseStickToBottomOptions = {}): UseStic
     let resizeFrameId: number | null = null;
     const flushResize = () => {
       resizeFrameId = null;
-      if (!isAtBottomRef.current) {
+      if (!isAtBottomRef.current || isUserResize()) {
         updateIsAtBottom();
         return;
       }
@@ -92,6 +102,8 @@ export function useStickToBottom(options: UseStickToBottomOptions = {}): UseStic
 
     handleScroll();
     el.addEventListener("scroll", handleScroll, { passive: true });
+    el.addEventListener("pointerdown", markInteraction, { passive: true });
+    el.addEventListener("keydown", markInteraction, { passive: true });
 
     const observer = new ResizeObserver(() => {
       scheduleResize();
@@ -103,6 +115,8 @@ export function useStickToBottom(options: UseStickToBottomOptions = {}): UseStic
         window.cancelAnimationFrame(resizeFrameId);
       }
       el.removeEventListener("scroll", handleScroll);
+      el.removeEventListener("pointerdown", markInteraction);
+      el.removeEventListener("keydown", markInteraction);
       observer.disconnect();
     };
   }, [contentElement, viewportElement, slackPx]);

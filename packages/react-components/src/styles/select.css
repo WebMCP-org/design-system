@@ -16,9 +16,9 @@
   border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
-    color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .select__trigger > [data-slot="select-value"] {

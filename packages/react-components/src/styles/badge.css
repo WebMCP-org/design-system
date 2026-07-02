@@ -18,10 +18,10 @@
   border-radius: var(--sigvelo-radius-full);
   white-space: nowrap;
   transition:
-    background-color 150ms ease,
-    color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .badge:where(a, button) {
@@ -29,8 +29,10 @@
 }
 
 .badge:focus-visible {
-  outline: var(--sigvelo-focus-ring);
-  outline-offset: var(--sigvelo-focus-offset);
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .badge:is([aria-invalid="true"], [data-invalid="true"], [data-invalid=""]) {

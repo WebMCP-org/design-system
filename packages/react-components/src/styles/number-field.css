@@ -25,8 +25,8 @@
     var(--sigvelo-color-neutral-border-muted);
   border-inline: none;
   transition:
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .number-field__input:focus-visible {
@@ -61,8 +61,8 @@
   cursor: pointer;
   user-select: none;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .number-field__decrement {

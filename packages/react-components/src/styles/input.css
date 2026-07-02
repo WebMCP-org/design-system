@@ -14,9 +14,14 @@
     var(--sigvelo-color-neutral-border-muted);
   border-radius: var(--sigvelo-radius-md);
   transition:
-    color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
+}
+
+/* :where keeps specificity below the invalid rules so danger borders win on hover */
+.input:where(:hover:not(:disabled)) {
+  border-color: var(--sigvelo-color-focus);
 }
 
 .input::selection {

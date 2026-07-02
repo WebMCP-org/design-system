@@ -16,9 +16,9 @@
   border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .toggle--outline {

@@ -7,9 +7,14 @@ const baseUiReactPackageDir = dirname(
   fileURLToPath(import.meta.resolve("@base-ui/react/package.json")),
 );
 const baseUiStoreCjs = join(baseUiReactPackageDir, "../utils/store/index.js");
+const storybookDir = dirname(fileURLToPath(import.meta.url));
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: [
+    "../src/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../../think-chat/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+  ],
   addons: [
     "@storybook/addon-vitest",
     "@storybook/addon-a11y",
@@ -31,6 +36,7 @@ const config: StorybookConfig = {
           // Storybook's production build currently drops the reselect import used by
           // Base UI's ESM store helper while preserving its top-level selector call.
           "@base-ui/utils/store": baseUiStoreCjs,
+          "@mcp-b/react-components/components": join(storybookDir, "../src/components"),
         },
       },
     }),

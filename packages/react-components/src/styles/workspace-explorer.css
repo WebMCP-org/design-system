@@ -1,0 +1,108 @@
+.workspace-explorer {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
+}
+
+.workspace-explorer__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-subtle);
+}
+
+.workspace-explorer__title {
+  font-size: 0.8125rem;
+  font-weight: 550;
+}
+
+.workspace-explorer__count {
+  font-size: 0.75rem;
+  color: var(--sigvelo-color-text-muted);
+}
+
+.workspace-explorer__path {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-family: var(--sigvelo-font-mono);
+  color: var(--sigvelo-color-text-muted);
+}
+
+.workspace-explorer__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-inline-start: auto;
+}
+
+.workspace-explorer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 0;
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  overflow: auto;
+}
+
+.workspace-explorer__filter {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding-inline: 0.5rem;
+  color: var(--sigvelo-color-text-muted);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-md);
+}
+
+.workspace-explorer__filter:focus-within {
+  border-color: var(--sigvelo-color-focus);
+}
+
+.workspace-explorer__filter input {
+  flex: 1;
+  min-width: 0;
+  padding-block: 0.375rem;
+  border: none;
+  background: transparent;
+  color: var(--sigvelo-color-text);
+  font-family: inherit;
+  font-size: 0.8125rem;
+  outline: none;
+}
+
+.workspace-explorer__tree {
+  border: none;
+  background: transparent;
+  padding-block: 0;
+}
+
+.workspace-explorer__empty {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--sigvelo-color-text-muted);
+  text-align: center;
+}
+
+.workspace-explorer__file {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+  padding: 0.5rem 0.75rem;
+}

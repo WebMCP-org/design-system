@@ -21,8 +21,8 @@
   font-weight: var(--sigvelo-font-weight-semibold);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .chain-of-thought__header:hover:not([data-disabled]) {
@@ -47,18 +47,11 @@
 }
 
 .chain-of-thought__content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.chain-of-thought__content[data-closed] {
-  height: 0;
-}
-
-.chain-of-thought__content[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .chain-of-thought__content[data-starting-style],
@@ -176,8 +169,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .chain-of-thought__search-result:hover {

@@ -23,8 +23,8 @@
   border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .collapsible__trigger:hover {
@@ -63,7 +63,12 @@
   border-block-end-color: transparent;
 }
 
+/* The measured height sits on the base class, not behind [data-open]: during
+   close the open rule stops matching before the ending style lands, height
+   computes to `auto`, and `auto → 0` can't transition — the panel snaps shut
+   instead of folding. (Base UI's documented panel pattern.) */
 .collapsible__panel {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
@@ -71,14 +76,6 @@
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.collapsible__panel[data-closed] {
-  height: 0;
-}
-
-.collapsible__panel[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .collapsible__panel[data-starting-style],

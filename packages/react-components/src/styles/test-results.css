@@ -118,7 +118,7 @@
   font-weight: var(--sigvelo-font-weight-semibold);
   text-align: start;
   cursor: pointer;
-  transition: background-color 150ms ease;
+  transition: background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .test-results__suite-trigger:hover:not([data-disabled]) {
@@ -164,18 +164,11 @@
 }
 
 .test-results__suite-content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.test-results__suite-content[data-closed] {
-  height: 0;
-}
-
-.test-results__suite-content[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .test-results__suite-content[data-starting-style],

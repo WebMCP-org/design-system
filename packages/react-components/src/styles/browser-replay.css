@@ -1,0 +1,189 @@
+/* Styles the BrowserReplay component from @mcp-b/think-chat. The CSS lives in
+   this shared stylesheet because think-chat ships no CSS of its own — its
+   consumers already load @mcp-b/react-components/styles. */
+.browser-replay {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--sigvelo-font-sans);
+  color: var(--sigvelo-color-text);
+  background-color: var(--sigvelo-color-surface);
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-subtle);
+  border-radius: var(--sigvelo-radius-lg);
+  overflow: hidden;
+}
+
+.browser-replay__stage-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  overflow: hidden;
+}
+
+.browser-replay__stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.browser-replay__stage iframe {
+  border: 0;
+  background-color: var(--sigvelo-color-surface);
+  pointer-events: none;
+}
+
+.browser-replay__empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding: 1rem;
+  color: var(--sigvelo-color-text-muted);
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.browser-replay__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  border-block-start: var(--sigvelo-border-style) var(--sigvelo-border-width)
+    var(--sigvelo-color-neutral-border-subtle);
+  background-color: var(--sigvelo-color-surface);
+}
+
+/* Play/pause is the library Button (ghost/icon-sm) and the scrubber is the
+   library Slider — only flex sizing lives here. */
+.browser-replay__toggle {
+  flex: 0 0 auto;
+}
+
+.browser-replay__scrubber {
+  flex: 1;
+  min-width: 0;
+}
+
+.browser-replay__time {
+  color: var(--sigvelo-color-text-muted);
+  font-family: var(--sigvelo-font-mono);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Vendored from @rrweb/replay/dist/style.css so consumers do not need CSS package imports. */
+.browser-replay .replayer-wrapper {
+  position: relative;
+}
+
+.browser-replay .replayer-mouse {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  transition:
+    left 50ms linear,
+    top 50ms linear;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGRhdGEtbmFtZT0iTGF5ZXIgMSIgdmlld0JveD0iMCAwIDUwIDUwIiB4PSIwcHgiIHk9IjBweCI+PHRpdGxlPkRlc2lnbl90bnA8L3RpdGxlPjxwYXRoIGQ9Ik00OC43MSw0Mi45MUwzNC4wOCwyOC4yOSw0NC4zMywxOEExLDEsMCwwLDAsNDQsMTYuMzlMMi4zNSwxLjA2QTEsMSwwLDAsMCwxLjA2LDIuMzVMMTYuMzksNDRhMSwxLDAsMCwwLDEuNjUuMzZMMjguMjksMzQuMDgsNDIuOTEsNDguNzFhMSwxLDAsMCwwLDEuNDEsMGw0LjM4LTQuMzhBMSwxLDAsMCwwLDQ4LjcxLDQyLjkxWm0tNS4wOSwzLjY3TDI5LDMyYTEsMSwwLDAsMC0xLjQxLDBsLTkuODUsOS44NUwzLjY5LDMuNjlsMzguMTIsMTRMMzIsMjcuNThBMSwxLDAsMCwwLDMyLDI5TDQ2LjU5LDQzLjYyWiI+PC9wYXRoPjwvc3ZnPg==");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-color: transparent;
+}
+
+.browser-replay .replayer-mouse::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: var(--sigvelo-color-focus);
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+}
+
+.browser-replay .replayer-mouse.active::after {
+  animation: browser-replay-click 200ms ease-in-out 1;
+}
+
+.browser-replay .replayer-mouse.touch-device {
+  width: 70px;
+  height: 70px;
+  margin-top: -37px;
+  margin-left: -37px;
+  background-image: none;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 100%;
+  transition:
+    left 0s linear,
+    top 0s linear,
+    border-color 200ms ease-in-out;
+}
+
+.browser-replay .replayer-mouse.touch-device.touch-active {
+  border-color: var(--sigvelo-color-focus);
+  transition:
+    left 250ms linear,
+    top 250ms linear,
+    border-color 200ms ease-in-out;
+}
+
+.browser-replay .replayer-mouse.touch-device::after {
+  opacity: 0;
+}
+
+.browser-replay .replayer-mouse.touch-device.active::after {
+  animation: browser-replay-touch-click 200ms ease-in-out 1;
+}
+
+.browser-replay .replayer-mouse-tail {
+  position: absolute;
+  pointer-events: none;
+}
+
+@keyframes browser-replay-click {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 0.3;
+  }
+
+  50% {
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+  }
+}
+
+@keyframes browser-replay-touch-click {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+  }
+
+  50% {
+    width: 10px;
+    height: 10px;
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .browser-replay .replayer-mouse,
+  .browser-replay .replayer-mouse.active::after {
+    animation: none;
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .browser-replay {
+    border: 1px solid CanvasText;
+  }
+}

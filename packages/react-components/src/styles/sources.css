@@ -21,8 +21,8 @@
   font-weight: var(--sigvelo-font-weight-semibold);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .sources__trigger:hover:not([data-disabled]) {
@@ -52,18 +52,11 @@
 }
 
 .sources__content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.sources__content[data-closed] {
-  height: 0;
-}
-
-.sources__content[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .sources__content[data-starting-style],
@@ -99,8 +92,8 @@
   border-radius: var(--sigvelo-radius-sm);
   text-decoration: none;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .sources__link:hover {

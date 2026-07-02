@@ -46,9 +46,9 @@
   margin-block-end: -1px;
   cursor: pointer;
   transition:
-    color 150ms ease,
-    border-color 150ms ease,
-    background-color 150ms ease;
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .tabs__tab:hover:not([data-disabled]) {

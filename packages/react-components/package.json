@@ -70,6 +70,7 @@
     "@vitest/browser-playwright": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "@vitest/mocker": "catalog:",
+    "ai": "catalog:",
     "playwright": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -80,7 +81,13 @@
     "vitest": "catalog:"
   },
   "peerDependencies": {
+    "ai": "^6.0.182",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "ai": {
+      "optional": true
+    }
   }
 }

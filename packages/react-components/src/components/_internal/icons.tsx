@@ -134,6 +134,13 @@ export const PlayIcon = (props: IconProps) => (
   </Icon>
 );
 
+export const PauseIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M5.5 3.5v9" />
+    <path d="M10.5 3.5v9" />
+  </Icon>
+);
+
 export const SquareIcon = (props: IconProps) => (
   <Icon {...props}>
     <rect x="3.5" y="3.5" width="9" height="9" rx="1" />
@@ -249,5 +256,14 @@ export const MonitorIcon = (props: IconProps) => (
     <rect width="20" height="14" x="2" y="3" rx="2" />
     <path d="M8 21h8" />
     <path d="M12 17v4" />
+  </Icon>
+);
+
+export const MaximizeIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M9.5 3h3.5v3.5" />
+    <path d="M13 3L9 7" />
+    <path d="M6.5 13H3V9.5" />
+    <path d="M3 13l4-4" />
   </Icon>
 );

@@ -5,9 +5,7 @@
   font-family: var(--sigvelo-font-sans);
   background-color: var(--sigvelo-color-neutral-950, var(--sigvelo-color-neutral-900));
   color: var(--sigvelo-color-neutral-100);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-color-neutral-border-subtle);
-  border-radius: var(--sigvelo-radius-md);
+  border-radius: var(--sigvelo-radius-lg);
   overflow: hidden;
 }
 

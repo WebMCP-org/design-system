@@ -15,8 +15,8 @@
   border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .popover__trigger:hover {
@@ -36,7 +36,7 @@
   inset: 0;
   z-index: 50;
   background-color: color-mix(in oklab, var(--sigvelo-color-text), transparent 50%);
-  transition: opacity 150ms ease;
+  transition: opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .popover__backdrop[data-starting-style],
@@ -64,8 +64,8 @@
   outline: none;
   transform-origin: var(--transform-origin);
   transition:
-    opacity 150ms ease,
-    transform 150ms ease;
+    opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    transform var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .popover__popup[data-starting-style],
@@ -141,8 +141,8 @@
   border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .popover__close:hover {

@@ -3,7 +3,7 @@
   text-decoration: underline;
   text-underline-offset: 2px;
   cursor: pointer;
-  transition: color 150ms ease;
+  transition: color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .preview-card__trigger:hover {
@@ -40,7 +40,7 @@
   box-shadow:
     0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
     0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
-  animation: preview-card-enter 150ms ease;
+  animation: preview-card-enter var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .preview-card__popup[data-ending-style] {

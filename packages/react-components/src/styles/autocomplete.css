@@ -8,11 +8,19 @@
   color: var(--sigvelo-color-text);
   background-color: transparent;
   border: none;
+  border-radius: var(--sigvelo-radius-sm);
   outline: none;
 }
 
 .autocomplete__input::placeholder {
   color: var(--sigvelo-color-text-muted);
+}
+
+.autocomplete__input:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .autocomplete__trigger {
@@ -23,8 +31,9 @@
   color: var(--sigvelo-color-text-muted);
   background-color: transparent;
   border: none;
+  border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
-  transition: color 150ms ease;
+  transition: color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .autocomplete__trigger:hover {
@@ -33,6 +42,9 @@
 
 .autocomplete__trigger:focus-visible {
   outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .autocomplete__clear {
@@ -46,13 +58,20 @@
   border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   transition:
-    color 150ms ease,
-    background-color 150ms ease;
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .autocomplete__clear:hover {
   color: var(--sigvelo-color-text);
   background-color: var(--sigvelo-color-neutral-bg-subtle);
+}
+
+.autocomplete__clear:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .autocomplete__positioner {
@@ -71,7 +90,7 @@
   box-shadow:
     0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
     0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
-  animation: autocomplete-popup-enter 150ms ease;
+  animation: autocomplete-popup-enter var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .autocomplete__popup[data-ending-style] {
@@ -117,8 +136,8 @@
   cursor: pointer;
   outline: none;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .autocomplete__item:hover,

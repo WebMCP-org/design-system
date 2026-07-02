@@ -83,8 +83,8 @@
   border-radius: var(--sigvelo-radius-full);
   cursor: grab;
   transition:
-    box-shadow 150ms ease,
-    transform 150ms ease;
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    transform var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .slider__thumb:hover {

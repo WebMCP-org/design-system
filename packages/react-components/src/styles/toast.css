@@ -89,7 +89,7 @@
   border: none;
   border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
-  transition: background-color 150ms ease;
+  transition: background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .toast__action:hover {
@@ -121,8 +121,8 @@
   cursor: pointer;
   opacity: 0;
   transition:
-    opacity 150ms ease,
-    background-color 150ms ease;
+    opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .toast:hover .toast__close {
