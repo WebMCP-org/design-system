@@ -44,6 +44,13 @@ const packages = [
       /(^|\/)(tests?|stories?|\.storybook)\//,
     ],
   },
+  {
+    build: true,
+    dir: "packages/think-chat",
+    name: "@mcp-b/think-chat",
+    requiredFiles: ["package.json", "dist/index.d.ts", "dist/index.js"],
+    forbiddenFiles: [/^src\//, /(^|\/)(tests?|stories?|\.storybook)\//],
+  },
 ];
 
 for (const pkg of packages) {
@@ -130,10 +137,12 @@ function verifyConsumer(tempDir, tarballs) {
       "-e",
       [
         'const button = await import("@mcp-b/react-components/components/Button");',
+        'const thinkChat = await import("@mcp-b/think-chat");',
         'const utils = await import("@mcp-b/react-components/utils/structured-code");',
         'if (!("Button" in button)) throw new Error("Missing Button export");',
+        'if (!("ThinkChat" in thinkChat)) throw new Error("Missing ThinkChat export");',
         'if (!("formatStructuredCodeDisplay" in utils)) throw new Error("Missing structured-code export");',
-        'for (const spec of ["@mcp-b/design-tokens", "@mcp-b/design-tokens/palettes.css", "@mcp-b/design-tokens/semantic-light.css", "@mcp-b/react-components/styles", "@mcp-b/react-components/styles/base"]) import.meta.resolve(spec);',
+        'for (const spec of ["@mcp-b/design-tokens", "@mcp-b/design-tokens/palettes.css", "@mcp-b/design-tokens/semantic-light.css", "@mcp-b/react-components/styles", "@mcp-b/react-components/styles/base", "@mcp-b/think-chat"]) import.meta.resolve(spec);',
         "let rootExported = true;",
         'try { await import("@mcp-b/react-components"); }',
         'catch (error) { if (error.code !== "ERR_PACKAGE_PATH_NOT_EXPORTED") throw error; rootExported = false; }',
@@ -146,9 +155,10 @@ function verifyConsumer(tempDir, tarballs) {
     join(tempDir, "index.ts"),
     [
       'import { Button, type ButtonProps } from "@mcp-b/react-components/components/Button";',
+      'import { ThinkChat } from "@mcp-b/think-chat";',
       "",
       'const props: ButtonProps = { children: "Save" };',
-      "console.log(Boolean(Button) && Boolean(props));",
+      "console.log(Boolean(Button) && Boolean(props) && Boolean(ThinkChat));",
       "",
     ].join("\n"),
   );

@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "skills": {
+    "accessibility": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/accessibility/SKILL.md",
+      "computedHash": "10e83284d3395ab5ec2f2db602b663480a37a4ff404d16510eefe86b034fcc1a"
+    },
+    "aria-live-regions": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/aria-live-regions/SKILL.md",
+      "computedHash": "2e28131039d6dc27e31ea1eda1e17434343329cc13e3f6c010f480574b433f02"
+    },
+    "best-practices": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/best-practices/SKILL.md",
+      "computedHash": "2de17c9838c439f6ed12b9963d303e058cd46f1ba0c2700814fe4762e0e307b9"
+    },
+    "color-contrast": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/color-contrast/SKILL.md",
+      "computedHash": "98886106901bb4fe082fe7e6af365d353182dc9d5d66dcf676bc846d6197ad67"
+    },
+    "core-web-vitals": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/core-web-vitals/SKILL.md",
+      "computedHash": "8e55888cc177e994e2cbfa0ee0a277e1273c6d43c8cf7649165f9e2f39489a48"
+    },
+    "css-coder": {
+      "source": "schalkneethling/claude-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/css-coder/SKILL.md",
+      "computedHash": "f8acb51a969a1b676ff43687f4720191540b8575bff409e44d0ee5e237b6db7e"
+    },
+    "css-tokens": {
+      "source": "schalkneethling/claude-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/css-tokens/SKILL.md",
+      "computedHash": "28f190438e6f299711ab00dd235f58941f950735137ac9bdc4fea5ee7a2b14a6"
+    },
+    "forms": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/forms/SKILL.md",
+      "computedHash": "1ee75edec20d4798e392331058aef2cc0ce2832feabe08ec49ff2e4640b3e36a"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "4eabc66183767153e404b39d1b839b1c37f2d82d86f0a0d7e880a579d8d62336"
+    },
+    "frontend-design-review": {
+      "source": "microsoft/skills",
+      "sourceType": "github",
+      "skillPath": ".github/skills/frontend-design-review/SKILL.md",
+      "computedHash": "bdfcadec9604ec0225f337ffbcecb8c8a5ddf69b6b1a1335963df97a0665472e"
+    },
+    "frontend-ui-engineering": {
+      "source": "addyosmani/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-ui-engineering/SKILL.md",
+      "computedHash": "917f6cf8c3d694c2b145463799ee492a2b88d7bf22ff479e08111d3ea5501e65"
+    },
+    "image-alt-text": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/image-alt-text/SKILL.md",
+      "computedHash": "385000d485d4ce12333e10933d17c1e1b3e36743ea34335c8537bb06bf500dab"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "1e310d65fb286f8bd22c193f48e4aef8dc6c8b9caa6816eecca582b8faa5a096"
+    },
+    "keyboard": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/keyboard/SKILL.md",
+      "computedHash": "0c78c9a5d86c07a780f36909590165cdce4f9de25ee7b8d299a9eb2d64456c35"
+    },
+    "light-dark-mode": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/light-dark-mode/SKILL.md",
+      "computedHash": "39e224dab21d582579847910b2a8a89e6ab3199f4c4b40ce09989ea16bd4f3e3"
+    },
+    "motion-design": {
+      "source": "LottieFiles/motion-design-skill",
+      "sourceType": "github",
+      "skillPath": "skills/motion-design/SKILL.md",
+      "computedHash": "9fcf9130cc46ee8fd1d8e09a9263347a9d76efbcbfa46591cc4cefaf19bbb453"
+    },
+    "navigation": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/navigation/SKILL.md",
+      "computedHash": "56a47bf07d7b3a88830700772e761061edc957b8054579c03f7d450053ce5020"
+    },
+    "performance": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/performance/SKILL.md",
+      "computedHash": "38e9a28b0a5ce04a9e3bd6e9cfb2e52e4012f0e93d763eb863b15218a7abccd6"
+    },
+    "semantic-html": {
+      "source": "schalkneethling/claude-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/semantic-html/SKILL.md",
+      "computedHash": "b826c82393dd7b65993dc15d64fe4beebb044878a5dd17607d59a31dd75500f4"
+    },
+    "svg": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/svg/SKILL.md",
+      "computedHash": "6d5c67f9fba38c936b1e1d149385e10fed2ad6e503c628340526d41c1da7ad36"
+    },
+    "tooltips": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/tooltips/SKILL.md",
+      "computedHash": "8eca705490364dc9bbdb90d46e83e53d9839a76233e0cc062a9edd5f2b185afd"
+    },
+    "touch-pointer": {
+      "source": "mgifford/accessibility-skills",
+      "sourceType": "github",
+      "skillPath": "skills/touch-pointer/SKILL.md",
+      "computedHash": "9bd071b2b4e74a5895320a4e2e75c4fa92bacffd12170d1380fadcb389c8b8d2"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    },
+    "web-quality-audit": {
+      "source": "addyosmani/web-quality-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-quality-audit/SKILL.md",
+      "computedHash": "48e90790e9269d46c6471bbc61d109db05bdc2ef834734dff21c039880934e9b"
+    },
+    "webapp-testing": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/webapp-testing/SKILL.md",
+      "computedHash": "ad5b1fc52807e9afa4635e59218a026b164dc58b6c3f41b0f7c644dcd6ccf572"
+    }
+  }
+}

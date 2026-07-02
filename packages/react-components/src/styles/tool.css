@@ -4,10 +4,11 @@
   width: 100%;
   font-family: var(--sigvelo-font-sans);
   color: var(--sigvelo-color-text);
-  background-color: var(--sigvelo-color-surface);
+  /* Ploy-style: hairline outline on the canvas, plain content inside */
+  background-color: transparent;
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
     var(--sigvelo-color-neutral-border-subtle);
-  border-radius: var(--sigvelo-radius-md);
+  border-radius: var(--sigvelo-radius-lg);
   overflow: hidden;
 }
 
@@ -17,10 +18,11 @@
   gap: 0.5rem;
   width: 100%;
   padding-block: 0.625rem;
-  padding-inline: 0.75rem;
+  padding-inline: 0.875rem;
   background-color: transparent;
   border: none;
-  color: var(--sigvelo-color-text);
+  /* Muted header row, Ploy/Codex style — content carries the emphasis */
+  color: var(--sigvelo-color-text-muted);
   font-family: inherit;
   font-size: 0.8125rem;
   font-weight: var(--sigvelo-font-weight-semibold);
@@ -71,7 +73,14 @@
 .tool__header-name {
   font-family: var(--sigvelo-font-mono);
   font-size: 0.8125rem;
-  color: var(--sigvelo-color-text);
+}
+
+.tool__header-name,
+.tool__header-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tool__header-title {
@@ -92,20 +101,11 @@
 }
 
 .tool__content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
-    height var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized),
+    height var(--sigvelo-duration-medium) var(--sigvelo-ease-standard),
     opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
-}
-
-.tool__content[data-closed] {
-  height: 0;
-  opacity: 0;
-}
-
-.tool__content[data-open] {
-  height: var(--collapsible-panel-height);
-  opacity: 1;
 }
 
 .tool__content[data-starting-style],
@@ -119,9 +119,7 @@
   flex-direction: column;
   gap: 0.75rem;
   padding-block: 0.75rem;
-  padding-inline: 0.75rem;
-  border-block-start: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-color-neutral-border-subtle);
+  padding-inline: 0.875rem;
   transition:
     transform var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized),
     opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
@@ -158,6 +156,11 @@
   min-width: 0;
 }
 
+/* Blend nested code into the outlined box — plain content, no panel-in-panel */
+.code-block.tool__code-block {
+  background-color: transparent;
+}
+
 .tool__code-block .code-block__content,
 .tool__code-block .code-block__content--highlighted pre.shiki,
 .tool__code-block .code-block__content--highlighted pre.shiki code {
@@ -172,8 +175,6 @@
   font-size: 0.75rem;
   color: var(--sigvelo-color-danger-text);
   background-color: var(--sigvelo-color-danger-bg-subtle);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-color-danger-border-subtle);
   border-radius: var(--sigvelo-radius-sm);
   white-space: pre-wrap;
 }

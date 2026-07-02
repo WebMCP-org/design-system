@@ -51,7 +51,7 @@
   font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
   color: var(--sigvelo-color-text-muted);
-  transition: color 150ms ease;
+  transition: color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .pricing-page__period-label--active {
@@ -198,7 +198,7 @@
   border: none;
   color: var(--sigvelo-color-text-muted);
   cursor: pointer;
-  transition: color 150ms ease;
+  transition: color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .pricing-page__feature-info:hover {

@@ -30,9 +30,9 @@
   border-radius: calc(var(--sigvelo-radius-md) - 2px);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    color 150ms ease,
-    box-shadow 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .toggle-group--sm .toggle-group__item {

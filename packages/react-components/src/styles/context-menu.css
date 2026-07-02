@@ -21,8 +21,8 @@
   outline: none;
   transform-origin: var(--transform-origin);
   transition:
-    opacity 150ms ease,
-    transform 150ms ease;
+    opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    transform var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .context-menu__popup[data-starting-style],

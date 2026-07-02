@@ -8,7 +8,9 @@
 
 /* Components */
 @import "./accordion.css" layer(components);
+@import "./activity.css" layer(components);
 @import "./agent-connection.css" layer(components);
+@import "./agent-chat.css" layer(components);
 @import "./alert-dialog.css" layer(components);
 @import "./autocomplete.css" layer(components);
 @import "./avatar.css" layer(components);
@@ -53,6 +55,8 @@
 
 /* AI Chat & Code Components */
 @import "./artifact.css" layer(components);
+@import "./browser-live-view.css" layer(components);
+@import "./browser-replay.css" layer(components);
 @import "./chain-of-thought.css" layer(components);
 @import "./code-block.css" layer(components);
 @import "./commit.css" layer(components);
@@ -71,6 +75,7 @@
 @import "./test-results.css" layer(components);
 @import "./tool.css" layer(components);
 @import "./web-preview.css" layer(components);
+@import "./workspace-explorer.css" layer(components);
 
 /* Layout Components */
 @import "./shell.css" layer(components);

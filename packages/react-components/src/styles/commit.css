@@ -25,7 +25,7 @@
   font-size: 0.8125rem;
   text-align: start;
   cursor: pointer;
-  transition: background-color 150ms ease;
+  transition: background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .commit__header:hover:not([data-disabled]) {
@@ -123,18 +123,11 @@
 }
 
 .commit__content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.commit__content[data-closed] {
-  height: 0;
-}
-
-.commit__content[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .commit__content[data-starting-style],

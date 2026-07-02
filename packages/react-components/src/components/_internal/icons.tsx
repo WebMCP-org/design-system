@@ -134,6 +134,13 @@ export const PlayIcon = (props: IconProps) => (
   </Icon>
 );
 
+export const PauseIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M5.5 3.5v9" />
+    <path d="M10.5 3.5v9" />
+  </Icon>
+);
+
 export const SquareIcon = (props: IconProps) => (
   <Icon {...props}>
     <rect x="3.5" y="3.5" width="9" height="9" rx="1" />

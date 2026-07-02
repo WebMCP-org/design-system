@@ -24,7 +24,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  transition: color 150ms ease;
+  transition: color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .combobox__trigger:hover {
@@ -50,8 +50,8 @@
   border-radius: var(--sigvelo-radius-sm);
   cursor: pointer;
   transition:
-    color 150ms ease,
-    background-color 150ms ease;
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .combobox__clear:hover {
@@ -75,7 +75,7 @@
   box-shadow:
     0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
     0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
-  animation: combobox-popup-enter 150ms ease;
+  animation: combobox-popup-enter var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .combobox__popup[data-ending-style] {
@@ -121,8 +121,8 @@
   cursor: pointer;
   outline: none;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .combobox__item:hover,

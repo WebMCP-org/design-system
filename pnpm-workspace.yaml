@@ -4,10 +4,15 @@ packages:
 catalogMode: prefer
 
 catalog:
+  "@ai-sdk/react": ^3.0.194
   "@base-ui/react": ~1.6.0
   "@changesets/cli": 2.31.0
   "@cloudflare/vite-plugin": ^1.42.4
+  "@cloudflare/think": ^0.12.1
+  "@cloudflare/shell": ^0.4.1
+  "@cloudflare/codemode": ^0.4.2
   "@cloudflare/workers-types": ^4.20260630.1
+  "@rrweb/replay": ^2.1.0
   "@storybook/addon-a11y": ^10.4.6
   "@storybook/addon-docs": ^10.4.6
   "@storybook/addon-mcp": ^0.6.0
@@ -21,6 +26,8 @@ catalog:
   "@vitest/browser-playwright": ^4.1.9
   "@vitest/coverage-v8": ^4.1.9
   "@vitest/mocker": ^4.1.9
+  agents: ^0.17.3
+  ai: ^6.0.182
   anser: ^2.3.5
   playwright: ^1.61.0
   publint: 0.3.20

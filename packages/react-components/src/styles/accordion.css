@@ -1,13 +1,13 @@
 .accordion {
-  width: 100%;
+  inline-size: 100%;
 }
 
 .accordion__item {
-  border-bottom: 1px solid var(--sigvelo-color-neutral-border-muted);
+  border-block-end: 1px solid var(--sigvelo-color-neutral-border-muted);
 }
 
 .accordion__item:last-child {
-  border-bottom: none;
+  border-block-end: none;
 }
 
 .accordion__header {
@@ -18,8 +18,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  gap: 0.75rem;
+  inline-size: 100%;
+  min-block-size: var(--sigvelo-control-height-md);
   padding-block: 1rem;
+  padding-inline: 0.5rem;
   font-family: var(--sigvelo-font-sans);
   font-size: 0.9375rem;
   font-weight: var(--sigvelo-font-weight-semibold);
@@ -27,12 +30,15 @@
   color: var(--sigvelo-color-text);
   background-color: transparent;
   border: none;
+  border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
-  transition: color 150ms ease;
+  transition:
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
-.accordion__trigger:hover {
-  color: color-mix(in oklab, var(--sigvelo-color-text), transparent 20%);
+.accordion__trigger:hover:not(:disabled):not([data-disabled]) {
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
 }
 
 .accordion__trigger:focus-visible {
@@ -40,24 +46,34 @@
   box-shadow:
     0 0 0 2px var(--sigvelo-color-canvas),
     0 0 0 4px var(--sigvelo-color-focus);
-  border-radius: var(--sigvelo-radius-md);
+}
+
+.accordion__trigger:is(:disabled, [data-disabled]) {
+  color: var(--sigvelo-color-text-muted);
+  cursor: not-allowed;
 }
 
 .accordion__trigger-text {
   flex: 1;
+  min-inline-size: 0;
+  overflow-wrap: break-word;
 }
 
 .accordion__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.25rem;
-  height: 1.25rem;
+  flex: 0 0 auto;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
   color: var(--sigvelo-color-text-muted);
-  transition: transform 200ms ease;
+  transition:
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    transform var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized);
 }
 
 .accordion__item[data-open] .accordion__icon {
+  color: var(--sigvelo-color-text);
   transform: rotate(180deg);
 }
 
@@ -70,35 +86,36 @@
 }
 
 .accordion__panel[data-open] {
-  animation: accordion-expand 200ms ease-out;
+  animation: accordion-expand var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized);
 }
 
 .accordion__panel[data-ending-style] {
-  animation: accordion-collapse 200ms ease-out;
+  animation: accordion-collapse var(--sigvelo-duration-medium) var(--sigvelo-ease-accelerate);
 }
 
 .accordion__panel > * {
   padding-block-end: 1rem;
+  padding-inline: 0.5rem;
 }
 
 @keyframes accordion-expand {
   from {
-    height: 0;
+    block-size: 0;
     opacity: 0;
   }
   to {
-    height: var(--accordion-panel-height);
+    block-size: var(--accordion-panel-height);
     opacity: 1;
   }
 }
 
 @keyframes accordion-collapse {
   from {
-    height: var(--accordion-panel-height);
+    block-size: var(--accordion-panel-height);
     opacity: 1;
   }
   to {
-    height: 0;
+    block-size: 0;
     opacity: 0;
   }
 }

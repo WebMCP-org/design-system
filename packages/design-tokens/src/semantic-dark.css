@@ -59,10 +59,11 @@
   --sigvelo-color-neutral-text-on-bg: white;
   --sigvelo-color-neutral-text-on-strong: black;
   --sigvelo-color-neutral-text: var(--sigvelo-color-neutral-500);
+  /* Hairline: separation comes from fill and whitespace; borders only hint */
   --sigvelo-color-neutral-border-subtle: color-mix(
     in oklab,
     var(--sigvelo-color-neutral-900),
-    white 7.5%
+    white 4%
   );
   --sigvelo-color-neutral-border-muted: var(--sigvelo-color-neutral-800);
   --sigvelo-color-neutral-border: var(--sigvelo-color-neutral-600);

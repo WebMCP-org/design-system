@@ -1,14 +1,13 @@
 .artifact {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  inline-size: 100%;
   font-family: var(--sigvelo-font-sans);
   color: var(--sigvelo-color-text);
+  /* Shadow-led elevation: no perimeter border */
   background-color: var(--sigvelo-color-surface);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-color-neutral-border-subtle);
   border-radius: var(--sigvelo-radius-lg, var(--sigvelo-radius-md));
-  box-shadow: var(--sigvelo-shadow-xs);
+  box-shadow: var(--sigvelo-shadow-sm);
   overflow: hidden;
 }
 
@@ -19,9 +18,11 @@
   gap: 0.75rem;
   padding-block: 0.75rem;
   padding-inline: 1rem;
-  border-block-end: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-color-neutral-border-subtle);
   background-color: var(--sigvelo-color-surface);
+}
+
+.artifact__header > :not(.artifact__actions) {
+  min-inline-size: 0;
 }
 
 .artifact__title {
@@ -31,6 +32,8 @@
   font-weight: var(--sigvelo-font-weight-bold);
   color: var(--sigvelo-color-text);
   line-height: 1.3;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .artifact__description {
@@ -39,6 +42,8 @@
   font-size: 0.8125rem;
   color: var(--sigvelo-color-text-muted);
   line-height: 1.4;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 
 .artifact__actions {
@@ -53,11 +58,24 @@
   /* Inherits from Button variant=ghost size=icon; overrides only when needed */
 }
 
+.artifact__action .sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
 .artifact__content {
   padding-block: 1rem;
   padding-inline: 1rem;
   font-size: 0.875rem;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 @media (forced-colors: active) {

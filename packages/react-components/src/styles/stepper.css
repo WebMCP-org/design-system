@@ -61,8 +61,10 @@
 }
 
 .stepper__trigger:focus-visible {
-  outline: var(--sigvelo-focus-ring);
-  outline-offset: var(--sigvelo-focus-offset);
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .stepper__trigger:disabled {
@@ -87,10 +89,10 @@
     var(--sigvelo-color-neutral-border-subtle);
   border-radius: var(--sigvelo-radius-full);
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .stepper__indicator[data-state="active"],
@@ -126,7 +128,7 @@
   margin-inline: 0.5rem;
   background-color: var(--sigvelo-color-neutral-border-subtle);
   border-radius: var(--sigvelo-radius-full);
-  transition: background-color 150ms ease;
+  transition: background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .stepper__separator[data-state="completed"] {
@@ -178,8 +180,10 @@
 }
 
 .stepper__content:focus-visible {
-  outline: var(--sigvelo-focus-ring);
-  outline-offset: var(--sigvelo-focus-offset);
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
   border-radius: var(--sigvelo-radius-md);
 }
 

@@ -21,8 +21,8 @@
   font-weight: var(--sigvelo-font-weight-semibold);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .reasoning__trigger:hover:not([data-disabled]) {
@@ -66,18 +66,11 @@
 }
 
 .reasoning__content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.reasoning__content[data-closed] {
-  height: 0;
-}
-
-.reasoning__content[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .reasoning__content[data-starting-style],
@@ -87,6 +80,9 @@
 }
 
 .reasoning__text {
+  /* Bounded so expanding never blows out the conversation scroll position */
+  max-height: 20rem;
+  overflow-y: auto;
   padding-block: 0.5rem;
   padding-inline: 0.75rem;
   margin-inline-start: 0.75rem;

@@ -11,11 +11,20 @@
   color: inherit;
 }
 
+.alert-dialog__trigger:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
+}
+
 .alert-dialog__backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgb(0 0 0 / 0.5);
+  background-color: var(--sigvelo-color-backdrop);
+  opacity: 1;
   z-index: 50;
+  transition: opacity var(--sigvelo-duration-medium) var(--sigvelo-ease-standard);
 }
 
 .alert-dialog__backdrop[data-starting-style],
@@ -25,12 +34,14 @@
 
 .alert-dialog__popup {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
   transform: translate(-50%, -50%);
   z-index: 50;
-  width: calc(100% - 2rem);
-  max-width: 28rem;
+  inline-size: calc(100% - 2rem);
+  max-inline-size: 28rem;
+  max-block-size: calc(100dvb - 2rem);
+  overflow: auto;
   background-color: var(--sigvelo-color-canvas);
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
     var(--sigvelo-color-neutral-border-muted);
@@ -39,6 +50,9 @@
   box-shadow:
     0 10px 15px -3px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%),
     0 4px 6px -4px color-mix(in oklab, var(--sigvelo-color-text), transparent 90%);
+  transition:
+    opacity var(--sigvelo-duration-medium) var(--sigvelo-ease-standard),
+    transform var(--sigvelo-duration-medium) var(--sigvelo-ease-emphasized);
 }
 
 .alert-dialog__popup[data-starting-style],
@@ -48,11 +62,11 @@
 }
 
 .alert-dialog__popup--sm {
-  max-width: 20rem;
+  max-inline-size: 20rem;
 }
 
 .alert-dialog__popup--lg {
-  max-width: 36rem;
+  max-inline-size: 36rem;
 }
 
 .alert-dialog__title {
@@ -62,6 +76,7 @@
   line-height: 1.25;
   color: var(--sigvelo-color-text);
   margin: 0 0 0.5rem;
+  text-wrap: balance;
 }
 
 .alert-dialog__description {
@@ -70,6 +85,7 @@
   line-height: 1.5;
   color: var(--sigvelo-color-text-muted);
   margin: 0 0 1.5rem;
+  text-wrap: pretty;
 }
 
 .alert-dialog__header {
@@ -93,7 +109,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 2.5rem;
+  min-block-size: 2.5rem;
   padding: 0 1rem;
   font-family: var(--sigvelo-font-sans);
   font-size: 0.875rem;
@@ -102,8 +118,9 @@
   border-radius: var(--sigvelo-radius-md);
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .alert-dialog__action:focus-visible {
@@ -113,12 +130,17 @@
     0 0 0 4px var(--sigvelo-color-focus);
 }
 
+.alert-dialog__action:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 .alert-dialog__action--primary {
   background-color: var(--sigvelo-color-primary-bg);
   color: var(--sigvelo-color-primary-text-on-bg);
 }
 
-.alert-dialog__action--primary:hover {
+.alert-dialog__action--primary:hover:not(:disabled) {
   background-color: color-mix(in oklab, var(--sigvelo-color-primary-bg), transparent 10%);
 }
 
@@ -127,7 +149,7 @@
   color: var(--sigvelo-color-neutral-text-on-subtle);
 }
 
-.alert-dialog__action--secondary:hover {
+.alert-dialog__action--secondary:hover:not(:disabled) {
   background-color: color-mix(in oklab, var(--sigvelo-color-neutral-bg-subtle), transparent 20%);
 }
 
@@ -136,7 +158,7 @@
   color: var(--sigvelo-color-danger-text-on-bg);
 }
 
-.alert-dialog__action--destructive:hover {
+.alert-dialog__action--destructive:hover:not(:disabled) {
   background-color: color-mix(in oklab, var(--sigvelo-color-danger-bg), transparent 10%);
 }
 
@@ -147,7 +169,7 @@
     var(--sigvelo-color-neutral-border-muted);
 }
 
-.alert-dialog__action--outline:hover {
+.alert-dialog__action--outline:hover:not(:disabled) {
   background-color: var(--sigvelo-color-neutral-bg-subtle);
   color: var(--sigvelo-color-neutral-text-on-subtle);
 }
@@ -157,7 +179,7 @@
   color: var(--sigvelo-color-text);
 }
 
-.alert-dialog__action--ghost:hover {
+.alert-dialog__action--ghost:hover:not(:disabled) {
   background-color: var(--sigvelo-color-neutral-bg-subtle);
   color: var(--sigvelo-color-neutral-text-on-subtle);
 }

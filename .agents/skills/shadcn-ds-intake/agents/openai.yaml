@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shadcn DS Intake"
+  short_description: "Stage shadcn components for MCP-B ports."
+  default_prompt: "Use $shadcn-ds-intake to import a shadcn Base UI component and port it into the MCP-B design system."

@@ -1,0 +1,63 @@
+{
+  "name": "@mcp-b/think-chat",
+  "version": "0.1.3",
+  "description": "Cloudflare Think chat primitives for MCP-B apps.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebMCP-org/design-system.git",
+    "directory": "packages/think-chat"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "check": "vp check",
+    "test": "vp test"
+  },
+  "dependencies": {
+    "@cloudflare/codemode": "catalog:",
+    "@mcp-b/react-components": "workspace:*",
+    "@rrweb/replay": "catalog:"
+  },
+  "devDependencies": {
+    "@ai-sdk/react": "catalog:",
+    "@cloudflare/shell": "catalog:",
+    "@cloudflare/think": "catalog:",
+    "@cloudflare/workers-types": "catalog:",
+    "@storybook/react-vite": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "agents": "catalog:",
+    "ai": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "@ai-sdk/react": "^3.0.194",
+    "@cloudflare/shell": "^0.4.1",
+    "@cloudflare/think": "^0.12.1",
+    "agents": "^0.17.3",
+    "ai": "^6.0.182",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

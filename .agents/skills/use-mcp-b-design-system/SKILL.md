@@ -20,8 +20,9 @@ import "@mcp-b/react-components/styles";
 ```
 
 4. Import components from `@mcp-b/react-components`; do not import Base UI directly for normal product UI.
-5. Use app CSS or Tailwind only for page layout, product-specific composition, and local states.
-6. Do not redeclare `--sigvelo-*` tokens in apps unless the app owns a theme override.
+5. Before adding CSS around shared components, check what Base UI behavior/data attributes and `styles/base.css` already provide. Style only missing visual states; do not duplicate Base UI state affordances or global rules such as reduced motion and forced-colors focus.
+6. Use app CSS or Tailwind only for page layout, product-specific composition, and local states.
+7. Do not redeclare `--sigvelo-*` tokens in apps unless the app owns a theme override.
 
 ## Storybook MCP
 
@@ -48,9 +49,10 @@ Keep it app-local only when it is page-specific, data-specific, experimental, or
 2. Run the Modern Web Guidance commands from `AGENTS.md` before component markup, CSS, or client React changes.
 3. Implement React wrappers in `packages/react-components/src/components`.
 4. Implement styles in `packages/react-components/src/styles` using semantic `--sigvelo-*` tokens.
-5. Export the component from the package entrypoint and import its CSS from `styles/index.css`.
-6. Add the smallest useful Storybook story or interaction test for the public behavior.
-7. Run `vp check`, `vp test`, `vp run audit:tokens`, and `vp run audit:modern-web-guidance`.
+5. Reuse Base UI behavior and data attributes as the state contract; add wrapper CSS only for MCP-B visuals that are not already covered by `styles/base.css`.
+6. Export the component from the package entrypoint and import its CSS from `styles/index.css`.
+7. Add the smallest useful Storybook story or interaction test for the public behavior.
+8. Run `vp check`, `vp test`, `vp run audit:tokens`, and `vp run audit:modern-web-guidance`.
 
 Use shadcn only as an intake catalog if useful. The committed result should still be MCP-B wrappers plus authored CSS.
 

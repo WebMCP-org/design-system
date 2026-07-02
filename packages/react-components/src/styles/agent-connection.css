@@ -41,10 +41,12 @@
 }
 
 .agent-connect__title-group p {
+  max-inline-size: 62ch;
   margin: 0;
   color: var(--sigvelo-color-text-muted);
   font-size: 0.78rem;
   line-height: 1.35;
+  text-wrap: pretty;
 }
 
 .agent-connect__targets {
@@ -88,7 +90,17 @@
   font-size: 0.72rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   line-height: 1.15;
+  overflow-wrap: anywhere;
   text-align: center;
+}
+
+.agent-connect .agent-connect__target {
+  border: var(--sigvelo-border-style) var(--sigvelo-border-width) transparent;
+  transition:
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 @media (pointer: coarse) {
@@ -104,14 +116,19 @@
 }
 
 .agent-connect__target:focus-visible {
-  outline: var(--sigvelo-focus-ring);
-  outline-offset: var(--sigvelo-focus-offset);
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sigvelo-color-canvas),
+    0 0 0 4px var(--sigvelo-color-focus);
 }
 
 .agent-connect__target[data-selected="true"] {
+  border-color: var(--sigvelo-color-primary-border-muted);
   background: var(--sigvelo-color-surface);
   color: var(--sigvelo-color-text);
-  box-shadow: var(--sigvelo-shadow-xs);
+  box-shadow:
+    var(--sigvelo-shadow-xs),
+    inset 0 0 0 1px var(--sigvelo-color-primary-border-subtle);
 }
 
 .agent-connect .code-block {

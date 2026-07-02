@@ -12,20 +12,21 @@
   gap: 0.5rem;
   width: 100%;
   padding-block: 0.625rem;
-  padding-inline: 0.75rem;
+  padding-inline: 0.875rem;
+  /* Ploy-style: hairline outline on the canvas, plain content inside */
   background-color: transparent;
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
     var(--sigvelo-color-neutral-border-subtle);
-  border-radius: var(--sigvelo-radius-md);
-  color: var(--sigvelo-color-text);
+  border-radius: var(--sigvelo-radius-lg);
+  color: var(--sigvelo-color-text-muted);
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: var(--sigvelo-font-weight-semibold);
   text-align: start;
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .task__trigger:hover:not([data-disabled]) {
@@ -75,18 +76,11 @@
 }
 
 .task__content {
+  height: var(--collapsible-panel-height);
   overflow: hidden;
   transition:
     height 200ms ease,
     opacity 200ms ease;
-}
-
-.task__content[data-closed] {
-  height: 0;
-}
-
-.task__content[data-open] {
-  height: var(--collapsible-panel-height);
 }
 
 .task__content[data-starting-style],
@@ -103,12 +97,15 @@
   padding-block: 0.75rem;
   padding-inline: 1.5rem;
   list-style: none;
-  background-color: var(--sigvelo-color-surface);
+  /* Bounded so expanding never blows out the conversation scroll position */
+  max-height: 20rem;
+  overflow-y: auto;
+  background-color: transparent;
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
     var(--sigvelo-color-neutral-border-subtle);
   border-block-start: none;
-  border-end-start-radius: var(--sigvelo-radius-md);
-  border-end-end-radius: var(--sigvelo-radius-md);
+  border-end-start-radius: var(--sigvelo-radius-lg);
+  border-end-end-radius: var(--sigvelo-radius-lg);
 }
 
 .task__item {
@@ -137,8 +134,6 @@
   padding-inline: 0.375rem;
   margin-inline: 0.125rem;
   background-color: var(--sigvelo-color-neutral-bg-subtle);
-  border: var(--sigvelo-border-style) var(--sigvelo-border-width)
-    var(--sigvelo-color-neutral-border-subtle);
   border-radius: var(--sigvelo-radius-sm);
   font-family: var(--sigvelo-font-mono);
   font-size: 0.75rem;

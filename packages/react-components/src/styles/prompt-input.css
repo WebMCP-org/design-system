@@ -2,18 +2,19 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding-block: 0.75rem;
-  padding-inline: 0.75rem;
+  padding-block: 0.875rem;
+  padding-inline: 1rem;
   background-color: var(--sigvelo-color-surface);
+  /* Fields keep their border; hairline + soft shadow for the floating-composer look */
   border: var(--sigvelo-border-style) var(--sigvelo-border-width)
     var(--sigvelo-color-neutral-border-subtle);
-  border-radius: var(--sigvelo-radius-md);
-  box-shadow: var(--sigvelo-shadow-xs);
+  border-radius: var(--sigvelo-radius-xl);
+  box-shadow: var(--sigvelo-shadow-sm);
   font-family: var(--sigvelo-font-sans);
   color: var(--sigvelo-color-text);
   transition:
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .prompt-input__file-input {
@@ -26,11 +27,12 @@
   pointer-events: none;
 }
 
+/* Match the Input focus idiom: focus-color border + soft outer ring */
 .prompt-input:focus-within {
-  border-color: var(--sigvelo-color-neutral-border-muted);
+  border-color: var(--sigvelo-color-focus);
   box-shadow:
-    var(--sigvelo-shadow-xs),
-    0 0 0 3px var(--sigvelo-color-focus);
+    var(--sigvelo-shadow-sm),
+    0 0 0 4px color-mix(in oklab, var(--sigvelo-color-focus), transparent 80%);
 }
 
 .prompt-input__header {

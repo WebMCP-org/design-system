@@ -182,7 +182,8 @@ export function ToolHeader({
         <WrenchIcon />
       </span>
       <span className="tool__header-type">{type}</span>
-      <span className="tool__header-name">{title ?? derivedName}</span>
+      <span className="tool__header-name">{derivedName}</span>
+      {title ? <span className="tool__header-title">{title}</span> : null}
       <span className="tool__header-spacer" />
       {getStatusBadge(state)}
       <span className="tool__header-icon" aria-hidden="true">

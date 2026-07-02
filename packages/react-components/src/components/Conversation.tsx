@@ -102,16 +102,12 @@ export function Conversation({
 
   return (
     <ConversationContext.Provider value={ctx}>
-      <div
-        ref={handleViewportRef}
-        role="log"
-        aria-live="polite"
-        aria-relevant="additions text"
-        tabIndex={0}
-        className={cx("conversation", className)}
-        {...props}
-      >
-        {children}
+      {/* The wrapper anchors the floating buttons; the inner viewport scrolls.
+          Absolutely-positioned children of a scroller scroll away with content. */}
+      <div className={cx("conversation", className)}>
+        <div ref={handleViewportRef} tabIndex={0} className="conversation__viewport" {...props}>
+          {children}
+        </div>
       </div>
     </ConversationContext.Provider>
   );
@@ -145,7 +141,14 @@ export function ConversationContent({
   );
 
   return (
-    <div ref={handleRef} className={cx("conversation__content", className)} {...props}>
+    <div
+      ref={handleRef}
+      role="log"
+      aria-live="polite"
+      aria-relevant="additions text"
+      className={cx("conversation__content", className)}
+      {...props}
+    >
       {children}
     </div>
   );

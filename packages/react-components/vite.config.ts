@@ -23,7 +23,7 @@ export default defineConfig(
         fixedExtension: false,
         copy: [{ from: "src/styles", to: "dist", flatten: false }],
         deps: {
-          neverBundle: ["react", "react-dom"],
+          neverBundle: ["react", "react-dom", "ai"],
         },
         dts: true,
       },

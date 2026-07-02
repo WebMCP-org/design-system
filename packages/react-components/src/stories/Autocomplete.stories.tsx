@@ -53,7 +53,7 @@ export const Default: Story = {
       }}
     >
       <Autocomplete.Root items={tags}>
-        <Autocomplete.Input placeholder="Search frameworks..." />
+        <Autocomplete.Input aria-label="Framework" placeholder="Search frameworks..." />
         <Autocomplete.Portal>
           <Autocomplete.Positioner sideOffset={4}>
             <Autocomplete.Popup>
@@ -117,7 +117,7 @@ export const WithObjects: Story = {
       }}
     >
       <Autocomplete.Root items={cities}>
-        <Autocomplete.Input placeholder="Search cities..." />
+        <Autocomplete.Input aria-label="City" placeholder="Search cities..." />
         <Autocomplete.Portal>
           <Autocomplete.Positioner sideOffset={4}>
             <Autocomplete.Popup>
@@ -185,7 +185,7 @@ export const WithGroups: Story = {
         }}
       >
         <Autocomplete.Root items={groups}>
-          <Autocomplete.Input placeholder="Search cities..." />
+          <Autocomplete.Input aria-label="City" placeholder="Search cities..." />
           <Autocomplete.Portal>
             <Autocomplete.Positioner sideOffset={4}>
               <Autocomplete.Popup>
@@ -229,6 +229,7 @@ export const SearchField: Story = {
           fontSize: "0.875rem",
           fontWeight: 500,
         }}
+        htmlFor="autocomplete-search"
       >
         Search
       </label>
@@ -254,7 +255,7 @@ export const SearchField: Story = {
           </svg>
         </span>
         <Autocomplete.Root items={tags}>
-          <Autocomplete.Input placeholder="Type to search..." />
+          <Autocomplete.Input id="autocomplete-search" placeholder="Type to search..." />
           <Autocomplete.Portal>
             <Autocomplete.Positioner sideOffset={4}>
               <Autocomplete.Popup>
@@ -296,7 +297,7 @@ export const WithClear: Story = {
       }}
     >
       <Autocomplete.Root items={tags} defaultValue="React">
-        <Autocomplete.Input placeholder="Search frameworks..." />
+        <Autocomplete.Input aria-label="Framework" placeholder="Search frameworks..." />
         <Autocomplete.Clear aria-label="Clear selection">
           <svg
             width="14"

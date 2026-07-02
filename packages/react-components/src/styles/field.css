@@ -100,8 +100,8 @@
     var(--sigvelo-color-neutral-border-muted);
   border-radius: var(--sigvelo-radius-md);
   transition:
-    border-color 150ms ease,
-    box-shadow 150ms ease;
+    border-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    box-shadow var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
 }
 
 .field__control::placeholder {
