@@ -1,6 +1,6 @@
 {
   "name": "@mcp-b/design-tokens",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Shared design tokens for MCP-B React applications.",
   "homepage": "https://mcp-b-design-system-storybook.alexmnahas.workers.dev",
   "bugs": {
