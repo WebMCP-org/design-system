@@ -25,6 +25,8 @@ const FILES: Record<string, string> = {
   "/workspace/src/tools/fetch-page.ts": `export async function fetchPage(url: string) {\n  const response = await fetch(url);\n  return response.text();\n}`,
 };
 
+/* WorkspaceSource is upstream's full Workspace/WorkspaceLike shape; demo
+   fakes stub only the methods the explorer calls, hence the casts. */
 function createDemoSource({ delay = 300 }: { delay?: number } = {}): WorkspaceSource {
   const wait = () => new Promise((resolve) => setTimeout(resolve, delay));
   const list = (path: string): FileInfo[] => {
@@ -53,7 +55,7 @@ function createDemoSource({ delay = 300 }: { delay?: number } = {}): WorkspaceSo
       await wait();
       return list(dir);
     },
-    readFile: async (path) => {
+    readFile: async (path: string) => {
       await wait();
       return FILES[path] ?? null;
     },
@@ -66,7 +68,7 @@ function createDemoSource({ delay = 300 }: { delay?: number } = {}): WorkspaceSo
         r2FileCount: 0,
       };
     },
-  };
+  } as WorkspaceSource;
 }
 
 function Demo({ source }: { source: WorkspaceSource }) {
@@ -87,11 +89,12 @@ export const Default: Story = {
 
 export const Empty: Story = {
   render: function Empty() {
-    const source = useMemo<WorkspaceSource>(
-      () => ({
-        readDir: async () => [],
-        readFile: async () => null,
-      }),
+    const source = useMemo(
+      () =>
+        ({
+          readDir: async (): Promise<FileInfo[]> => [],
+          readFile: async (_path: string): Promise<string | null> => null,
+        }) as WorkspaceSource,
       [],
     );
     return <Demo source={source} />;
@@ -100,15 +103,16 @@ export const Empty: Story = {
 
 export const LoadFailure: Story = {
   render: function LoadFailure() {
-    const source = useMemo<WorkspaceSource>(
-      () => ({
-        readDir: async () => {
-          throw new Error("Workspace is not reachable.");
-        },
-        readFile: async () => {
-          throw new Error("Workspace is not reachable.");
-        },
-      }),
+    const source = useMemo(
+      () =>
+        ({
+          readDir: async (): Promise<FileInfo[]> => {
+            throw new Error("Workspace is not reachable.");
+          },
+          readFile: async (_path: string): Promise<string | null> => {
+            throw new Error("Workspace is not reachable.");
+          },
+        }) as WorkspaceSource,
       [],
     );
     return <Demo source={source} />;

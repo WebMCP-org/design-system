@@ -32,14 +32,13 @@ export type { FileInfo };
 export type WorkspaceInfo = Awaited<ReturnType<Workspace["getWorkspaceInfo"]>>;
 
 /**
- * The slice of a Think workspace the explorer reads. This is upstream's own
- * shape — a `Workspace` from `@cloudflare/shell`, anything satisfying Think's
- * `WorkspaceLike`, or a cross-DO RPC proxy forwarding to one all plug in
- * directly. `getWorkspaceInfo` is optional because `WorkspaceLike` omits it;
- * when present it feeds the header's file-count chip.
+ * Upstream's workspace shapes, taken whole: pass a `Workspace` from
+ * `@cloudflare/shell` or anything satisfying Think's `WorkspaceLike` (e.g. a
+ * cross-DO RPC proxy). The explorer only calls `readDir` and `readFile` —
+ * plus `getWorkspaceInfo` for the header's file-count chip when given a full
+ * `Workspace` — and ignores the rest.
  */
-export type WorkspaceSource = Pick<WorkspaceLike, "readDir" | "readFile"> &
-  Partial<Pick<Workspace, "getWorkspaceInfo">>;
+export type WorkspaceSource = Workspace | WorkspaceLike;
 
 export interface UseWorkspaceOptions {
   /** Must be referentially stable (memoize in the app) — a new source resets the workspace. */
@@ -165,7 +164,7 @@ export function useWorkspace({ source, root = "/" }: UseWorkspaceOptions): Works
   );
 
   const loadInfo = React.useCallback(async () => {
-    if (!source.getWorkspaceInfo) return;
+    if (!("getWorkspaceInfo" in source)) return;
     try {
       setInfo(await source.getWorkspaceInfo());
     } catch {

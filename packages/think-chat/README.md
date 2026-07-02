@@ -46,6 +46,12 @@ Two seams keep apps from forking the renderer for their own tools:
   splits around them and they fall through to your `renderPart` or the
   generic `Tool` card.
 
+Custom panels should compose `ActivityPanel` / `ActivityOutput` /
+`ActivityText` from `@mcp-b/react-components/components/Activity` so they
+match the built-in tool panels; part types and helpers (`ToolUIPart`,
+`isToolUIPart`, `getToolName`) come from `ai` — the same upstream surface
+this package uses.
+
 ```tsx
 // Label/panel overrides inside the log:
 <ThinkChat.Messages
@@ -93,12 +99,12 @@ more.
 ### Workspace explorer
 
 `useWorkspace(source)` + `WorkspaceExplorer` render a Think workspace as a
-lazy file tree with a syntax-highlighted preview pane. The source type is
-upstream's, not a mirror: `WorkspaceSource` is
-`Pick<WorkspaceLike, "readDir" | "readFile"> & Partial<Pick<Workspace, "getWorkspaceInfo">>`,
-and entries are `FileInfo` from `@cloudflare/shell`. A Think agent's
-`Workspace`, or a cross-DO RPC proxy forwarding to one, plugs in as-is;
-`vp check` fails here the moment upstream changes those shapes.
+lazy file tree with a syntax-highlighted preview pane. `WorkspaceSource` is
+upstream's shape taken whole — `Workspace | WorkspaceLike` — so a Think
+agent's `Workspace`, or a cross-DO RPC proxy forwarding to one, plugs in
+as-is; entries are `FileInfo` from `@cloudflare/shell`. The explorer only
+calls `readDir` and `readFile` (plus `getWorkspaceInfo` for the header chip
+when given a full `Workspace`) and ignores the rest.
 
 ```tsx
 const workspace = useWorkspace({ source: agentStub, root: "/workspace" });
@@ -190,6 +196,7 @@ result whenever a human should watch or take over.
    `FetchResult`, `ProxyToolOutput`) fail loudly here.
 2. Diff the untyped mirrors against upstream runtime schemas: `SkillUITools`
    vs `agents/dist/skills`, fetch inputs vs `createFetchTools`'s zod schema.
+   (`WorkspaceSource` needs no manual diff — it IS the upstream types.)
 3. `findBrowserResultMedia` sniffs the literal `live.browser.run` substring
    and the `BrowserLiveViewUrl` field names — confirm both if Browser Run's
    live-view URL format changes.

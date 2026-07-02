@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useEffect, useState, type ComponentProps } from "react";
+import { ActivityPanel } from "@mcp-b/react-components/components/Activity";
 import {
   readUIMessageStream,
   simulateReadableStream,
@@ -128,6 +129,76 @@ export const ActivityWithShell: Story = {
     <Frame>
       <ThinkChat.Provider chat={bashChat}>
         <ThinkChat.Messages placeholder="Ask your Think agent..." />
+      </ThinkChat.Provider>
+    </Frame>
+  ),
+};
+
+const customToolChat = {
+  ...chat,
+  messages: [
+    {
+      id: "u1",
+      role: "user",
+      parts: [{ type: "text", text: "Add the espresso grinder to my cart." }],
+    },
+    {
+      id: "a1",
+      role: "assistant",
+      parts: [
+        {
+          type: "reasoning",
+          text: "The page exposes an add_to_cart tool — call it with the grinder's id.",
+          state: "done",
+        },
+        {
+          type: "tool-run_tool",
+          state: "output-available",
+          toolCallId: "call-run-tool",
+          input: { name: "add_to_cart", args: { productId: "grinder-01", quantity: 1 } },
+          output: { ok: true, cartCount: 3 },
+        },
+        { type: "text", text: "Added — your cart now has 3 items." },
+      ],
+    },
+  ],
+} satisfies ComponentProps<typeof ThinkChat.Provider>["chat"];
+
+/**
+ * The app-specific tool recipe (README "App-specific tools"): `run_tool` is a
+ * WebMCP-style tool this package has never seen. Without overrides it renders
+ * as a generic "Ran run_tool" row; here `toolRenderers` derives a label from
+ * the tool input and builds the panel from `ActivityPanel`
+ * (`@mcp-b/react-components/components/Activity`) so it matches the built-in
+ * panels. For a standalone card outside the activity log, use `excludeTools`
+ * plus your own `renderPart` instead.
+ */
+export const CustomToolPanel: Story = {
+  render: () => (
+    <Frame>
+      <ThinkChat.Provider chat={customToolChat}>
+        <ThinkChat.Messages
+          placeholder="Ask your Think agent..."
+          toolRenderers={{
+            run_tool: {
+              describe: (part) => {
+                const input = part.input as { name?: string } | undefined;
+                return input?.name ? `Called the ${input.name} page tool` : "Called a page tool";
+              },
+              panel: (part) => {
+                const input = part.input as { name?: string; args?: unknown } | undefined;
+                const output = part.state === "output-available" ? part.output : undefined;
+                return (
+                  <ActivityPanel
+                    label={input?.name ?? "page tool"}
+                    text={JSON.stringify({ args: input?.args, result: output }, null, 2)}
+                    status={output !== undefined ? "ok" : undefined}
+                  />
+                );
+              },
+            },
+          }}
+        />
       </ThinkChat.Provider>
     </Frame>
   ),

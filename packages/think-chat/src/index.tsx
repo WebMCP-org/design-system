@@ -158,17 +158,24 @@ export interface ThinkChatProviderProps {
 }
 
 export interface ThinkChatRootProps<State = unknown> {
+  /** Agent to connect to: a kebab-case class name, or full `useAgent` options. */
   agent: string | UseAgentOptions<State>;
+  /** Instance name (e.g. a session or room id). Wins over `agent.name`. */
   name?: string;
   children: React.ReactNode;
 }
 
 export interface ThinkChatMessagesProps extends ThinkChatActivityRendererOptions {
   className?: string;
+  /** Disable the composer (e.g. while the agent is unreachable). */
   disabled?: boolean;
+  /** Shown in place of the list while there are no messages. */
   emptyState?: React.ReactNode;
+  /** Extra controls rendered inside the composer, next to the send button. */
   composerTools?: React.ReactNode;
+  /** Composer placeholder text. */
   placeholder?: string;
+  /** Rendered after each message (e.g. per-message actions). */
   renderMessageAfter?: AgentChatProps["renderMessageAfter"];
   /** Full replacement for part rendering; wins over excludeTools/toolRenderers. */
   renderPart?: AgentChatProps["renderPart"];
@@ -225,6 +232,18 @@ export function ThinkChatProvider({ chat, children }: ThinkChatProviderProps) {
   return <ThinkChatContext.Provider value={chat}>{children}</ThinkChatContext.Provider>;
 }
 
+/**
+ * Batteries-included root: connects to the named Think agent (upstream's
+ * `useAgent` + `useAgentChat`) and provides the live chat to everything
+ * inside. If the app already owns the chat hook, use `ThinkChat.Provider`.
+ *
+ * @example
+ * ```tsx
+ * <ThinkChat.Root agent="my-agent" name="session-1">
+ *   <ThinkChat.Messages />
+ * </ThinkChat.Root>
+ * ```
+ */
 export function ThinkChatRoot<State = unknown>({
   agent: agentOption,
   name,
@@ -240,6 +259,14 @@ export function ThinkChatRoot<State = unknown>({
   return <ThinkChatProvider chat={chat}>{children}</ThinkChatProvider>;
 }
 
+/**
+ * The full conversation surface — message list plus composer — with the
+ * activity renderer as the default `renderPart`: runs of reasoning/tool parts
+ * fold into one collapsed Activity block with derived labels and per-tool
+ * panels. Extend for app-specific tools with `toolRenderers` (label/panel
+ * inside the log) or `excludeTools` + your own `renderPart` (standalone
+ * card) — see README "App-specific tools" and the Custom Tool Panel story.
+ */
 export function ThinkChatMessages({
   renderPart,
   excludeTools,
@@ -303,6 +330,12 @@ function summarizeToolInput(input: unknown): string | null {
   return null;
 }
 
+/**
+ * One-line natural-language label for an activity part ("Ran vp test",
+ * "Fetched developers.cloudflare.com/agents/"); `null` for boundaries that
+ * aren't steps (step-start). Exported so a custom `renderPart` can reuse the
+ * built-in labels for tools it doesn't override.
+ */
 export function describeThinkChatActivityPart(
   part: ThinkChatPart,
   toolRenderers?: ThinkChatToolRenderers,
@@ -509,6 +542,13 @@ export interface ThinkChatActivityProps {
   toolRenderers?: ThinkChatToolRenderers;
 }
 
+/**
+ * One run of agent work as a collapsed Activity block: while streaming the
+ * label shimmers with the live step; settled, it becomes a short summary
+ * ("Thought, read 2 files and ran a command") over an expandable step log
+ * with per-tool panels. Normally reached through `ThinkChat.Messages`;
+ * exported for apps that lay out messages themselves.
+ */
 export function ThinkChatActivity({
   parts,
   defaultOpen,
@@ -1034,10 +1074,21 @@ export function createThinkChatActivityRenderer({
 /** Default activity renderer — `createThinkChatActivityRenderer()` with no overrides. */
 export const renderThinkChatActivityPart = createThinkChatActivityRenderer();
 
+/**
+ * The ambient chat value from `ThinkChat.Root`/`Provider` — for custom tool
+ * panels, cards, or composer actions that need `messages`, `status`, or
+ * `sendMessage`. Throws outside a provider.
+ */
 export function useThinkChat() {
   return useThinkChatContext("useThinkChat");
 }
 
+/**
+ * Namespace entry point. `Root` + `Messages` is the standard surface;
+ * `Provider` + `useThinkChat` when the app owns the chat hook; `Activity`,
+ * `renderActivityPart`, and `createActivityRenderer` for custom layouts and
+ * app-specific tools.
+ */
 export const ThinkChat = {
   Provider: ThinkChatProvider,
   Root: ThinkChatRoot,

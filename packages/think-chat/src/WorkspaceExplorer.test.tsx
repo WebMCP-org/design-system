@@ -58,12 +58,14 @@ function createFakeSource() {
     "/src": [entry("/src/index.ts", "file")],
   };
   const calls: string[] = [];
-  const source: WorkspaceSource = {
+  // WorkspaceSource is upstream's full Workspace/WorkspaceLike shape; the
+  // explorer only calls these three methods, so the fake stubs just those.
+  const source = {
     readDir: (dir = "/") => {
       calls.push(`readDir ${dir}`);
       return Promise.resolve(listings[dir] ?? []);
     },
-    readFile: (path) => {
+    readFile: (path: string) => {
       calls.push(`readFile ${path}`);
       if (path === "/src/index.ts") return Promise.resolve("export const x = 1;");
       if (path === "/logo.png") return Promise.resolve(null); // binary
@@ -71,7 +73,7 @@ function createFakeSource() {
     },
     getWorkspaceInfo: () =>
       Promise.resolve({ fileCount: 3, directoryCount: 1, totalBytes: 64, r2FileCount: 0 }),
-  };
+  } as WorkspaceSource;
   return { source, calls };
 }
 

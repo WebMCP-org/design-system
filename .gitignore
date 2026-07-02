@@ -91,6 +91,7 @@ skills/
 .agents/skills/*
 !.agents/skills/use-mcp-b-design-system/
 !.agents/skills/shadcn-ds-intake/
+!.agents/skills/use-upstream-types-whole/
 
 # Local secrets
 *.private-key.pem
