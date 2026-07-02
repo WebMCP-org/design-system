@@ -152,6 +152,7 @@ function isBrowserToolPart(part: ThinkChatPart): part is BrowserToolPart {
 }
 
 export interface ThinkChatProviderProps {
+  /** The `useAgentChat` value from the `agents` SDK that descendants read. */
   chat: ThinkChatValue;
   children: React.ReactNode;
 }
@@ -215,6 +216,11 @@ function toAgentChatStatus(chat: ThinkChatValue): AgentChatProps["status"] {
   return chat.status ?? "ready";
 }
 
+/**
+ * Chat UI for Cloudflare Think agents. Provide a `useAgentChat` value (or let
+ * `ThinkChat.Root` create one) and `ThinkChat.Messages` renders the message
+ * stream with agent work folded into collapsed Activity blocks.
+ */
 export function ThinkChatProvider({ chat, children }: ThinkChatProviderProps) {
   return <ThinkChatContext.Provider value={chat}>{children}</ThinkChatContext.Provider>;
 }

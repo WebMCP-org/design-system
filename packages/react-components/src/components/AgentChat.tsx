@@ -54,15 +54,23 @@ export interface AgentChatRenderMessageContext<
 
 export interface AgentChatProps<MessageT extends AgentChatMessage = AgentChatMessage> {
   className?: string;
+  /** AI SDK `UIMessage`s to render, oldest first. */
   messages: readonly MessageT[];
+  /** Drives the composer's send/stop affordance and streaming indicators. */
   status?: PromptInputStatus;
+  /** Called with the composed message when the user submits. Omit for a read-only transcript. */
   onSubmit?: (message: PromptInputMessage) => void | Promise<void>;
+  /** Called when the user hits stop while `status` is streaming/submitted. */
   onStop?: () => void;
   placeholder?: string;
   disabled?: boolean;
+  /** Rendered in place of the transcript while `messages` is empty. */
   emptyState?: React.ReactNode;
+  /** Extra controls rendered in the composer toolbar. */
   composerTools?: React.ReactNode;
+  /** Override rendering per part; return `undefined` to fall back to the default part UI. */
   renderPart?: (context: AgentChatRenderPartContext<MessageT>) => React.ReactNode | undefined;
+  /** Rendered after each message's parts — for actions, citations, and the like. */
   renderMessageAfter?: (context: AgentChatRenderMessageContext<MessageT>) => React.ReactNode;
 }
 
@@ -105,6 +113,11 @@ function renderDefaultPart(part: AgentChatPart) {
   return null;
 }
 
+/**
+ * A complete agent chat surface: auto-scrolling conversation of AI SDK
+ * `UIMessage`s (text, reasoning, and tool parts rendered by default) plus a
+ * prompt composer. Customize per-part rendering with `renderPart`.
+ */
 export function AgentChat<MessageT extends AgentChatMessage = AgentChatMessage>({
   className,
   messages,

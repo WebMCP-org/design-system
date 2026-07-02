@@ -2,7 +2,10 @@ import fs from "node:fs";
 
 const manifestPath = "dist/mcp_b_design_system_storybook/client/manifests/components.json";
 const docsManifestPath = "dist/mcp_b_design_system_storybook/client/manifests/docs.json";
-const packageJsonPath = "packages/react-components/package.json";
+const packageJsonPaths = [
+  "packages/react-components/package.json",
+  "packages/think-chat/package.json",
+];
 const hiddenNames = new Set(["RegressionTests", "LearnPage", "ProfilePage"]);
 
 function fail(message) {
@@ -17,7 +20,7 @@ if (!fs.existsSync(manifestPath)) {
 }
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
-const packageName = JSON.parse(fs.readFileSync(packageJsonPath, "utf8")).name;
+const packageNames = packageJsonPaths.map((path) => JSON.parse(fs.readFileSync(path, "utf8")).name);
 const components = Object.values(manifest.components ?? {});
 const docsManifest = fs.existsSync(docsManifestPath)
   ? JSON.parse(fs.readFileSync(docsManifestPath, "utf8"))
@@ -37,8 +40,8 @@ for (const component of components) {
   if (!props.some((prop) => prop.description?.trim())) {
     fail(`${component.name}: missing documented prop`);
   }
-  if (!importStatement.includes(`from "${packageName}"`)) {
-    fail(`${component.name}: import path is not ${packageName}`);
+  if (!packageNames.some((name) => importStatement.includes(`from "${name}"`))) {
+    fail(`${component.name}: import path is not one of ${packageNames.join(", ")}`);
   }
 }
 
