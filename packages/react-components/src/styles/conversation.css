@@ -13,6 +13,9 @@
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  /* Zero intrinsic inline size: wide message content (nowrap activity rows,
+     code) must never resize the chat column — overflow clips it instead. */
+  contain: inline-size;
 }
 
 .conversation__content {

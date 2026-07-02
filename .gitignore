@@ -41,6 +41,7 @@ test-results
 .claude/worktrees/
 .claude/skills/
 .claude/settings.local.json
+.claude/launch.json
 
 # Generated agent compatibility skill copies we do not use in this repo.
 .adal/
