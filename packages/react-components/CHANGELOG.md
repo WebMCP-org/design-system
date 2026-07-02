@@ -1,5 +1,12 @@
 # @mcp-b/react-components
 
+## 0.2.2
+
+### Patch Changes
+
+- ab9d50c: Let the expanded Activity log flow in the conversation scroll (only subsection panels stay height-bounded), and stop wide activity content from resizing the chat column: the conversation viewport now has `contain: inline-size`, and Activity's width cap is a plain `max-width: 36rem` so it clamps intrinsic sizing.
+  - @mcp-b/design-tokens@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
