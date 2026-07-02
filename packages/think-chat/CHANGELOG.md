@@ -1,5 +1,12 @@
 # @mcp-b/think-chat
 
+## 0.2.1
+
+### Patch Changes
+
+- Updated dependencies [af38c0a]
+  - @mcp-b/react-components@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

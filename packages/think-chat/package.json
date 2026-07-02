@@ -1,6 +1,6 @@
 {
   "name": "@mcp-b/think-chat",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Cloudflare Think chat primitives for MCP-B apps.",
   "license": "MIT",
   "repository": {

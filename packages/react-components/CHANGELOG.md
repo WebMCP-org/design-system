@@ -1,5 +1,12 @@
 # @mcp-b/react-components
 
+## 0.2.1
+
+### Patch Changes
+
+- af38c0a: Pin shiki to ^3.23.0. shiki 4.x ships rolldown-runtime helper chunks that rolldown-vite (vite 8) dedupes incorrectly when bundling, crashing CodeBlock at runtime with `__reExport is not defined`. 3.x also matches streamdown's shiki range, so apps bundle a single copy.
+  - @mcp-b/design-tokens@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes
