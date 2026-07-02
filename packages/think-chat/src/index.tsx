@@ -904,7 +904,7 @@ function ThinkChatBrowserPanel({ part }: { part: BrowserToolPart }) {
         {browserView && (code || sections.length) ? (
           <Tabs className="activity__browser-tabs" defaultValue="browser">
             <TabsList variant="line">
-              <Tab value="browser">Browser</Tab>
+              <Tab value="browser">Preview</Tab>
               <Tab value="code">Code</Tab>
             </TabsList>
             <TabPanel value="browser">{browserView}</TabPanel>

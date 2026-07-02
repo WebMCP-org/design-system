@@ -258,3 +258,12 @@ export const MonitorIcon = (props: IconProps) => (
     <path d="M12 17v4" />
   </Icon>
 );
+
+export const MaximizeIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M9.5 3h3.5v3.5" />
+    <path d="M13 3L9 7" />
+    <path d="M6.5 13H3V9.5" />
+    <path d="M3 13l4-4" />
+  </Icon>
+);

@@ -228,9 +228,21 @@ test("browser tools get derived labels, live view, and default panels", () => {
   const open = container.innerHTML;
   expect(open).toContain("browser-live-view__frame"); // the live iframe renders
   expect(open).toContain("https://live.browser.run/session/abc?mode=tab");
-  expect(open).toContain("attached to page"); // logs
   expect(open).toContain("completed");
   expect(open).toContain("# Example Domain"); // quick-action markdown panel
+
+  // browser_execute splits into Browser/Code tabs; code + logs sit behind Code
+  const codeTab = [...container.querySelectorAll<HTMLButtonElement>(".tabs__tab")].find(
+    (tab) => tab.textContent === "Code",
+  );
+  expect(codeTab).toBeDefined();
+  act(() => {
+    codeTab?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  });
+  const codePanel = container.innerHTML;
+  expect(codePanel).toContain("code-block"); // the driving code, syntax-highlightable
+  expect(codePanel).toContain("Target.getTargets");
+  expect(codePanel).toContain("attached to page"); // logs
 
   act(() => {
     root.unmount();

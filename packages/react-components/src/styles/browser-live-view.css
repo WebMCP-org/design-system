@@ -72,6 +72,74 @@
   object-fit: cover;
 }
 
+/* Connecting overlay: opaque so the hosted viewer's own loading/error page
+   never flashes through; cleared on the iframe's load event. */
+.browser-live-view__state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  color: var(--sigvelo-color-text-muted);
+  font-size: 0.8125rem;
+}
+
+.browser-live-view__state-spinner {
+  animation: browser-live-view-spin 900ms linear infinite;
+}
+
+/* Expand affordance, video-player style: quiet until the box is hovered or
+   the button is focused */
+.browser-live-view__expand {
+  position: absolute;
+  inset-block-end: 0.5rem;
+  inset-inline-end: 0.5rem;
+  z-index: 1;
+  background-color: var(--sigvelo-color-surface);
+  box-shadow: var(--sigvelo-shadow-sm);
+  opacity: 0;
+  transition:
+    opacity var(--sigvelo-duration-fast) var(--sigvelo-ease-standard),
+    background-color var(--sigvelo-duration-fast) var(--sigvelo-ease-standard);
+}
+
+.browser-live-view:hover .browser-live-view__expand,
+.browser-live-view__expand:focus-visible {
+  opacity: 1;
+}
+
+/* Fullscreen dialog: the view fills everything under the title row */
+.browser-live-view__dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.browser-live-view__dialog-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  border-radius: var(--sigvelo-radius-md);
+  background-color: var(--sigvelo-color-neutral-bg-subtle);
+  overflow: hidden;
+}
+
+.browser-live-view__dialog-body > iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.browser-live-view__dialog-body > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @keyframes browser-live-view-pulse {
   0%,
   100% {
@@ -82,8 +150,15 @@
   }
 }
 
+@keyframes browser-live-view-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .browser-live-view__badge-dot {
+  .browser-live-view__badge-dot,
+  .browser-live-view__state-spinner {
     animation: none;
   }
 }
