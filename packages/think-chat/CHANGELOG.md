@@ -1,5 +1,11 @@
 # @mcp-b/think-chat
 
+## 0.3.0
+
+### Minor Changes
+
+- acb9c6e: `WorkspaceSource` is now upstream's shapes taken whole — `Workspace | WorkspaceLike` from `@cloudflare/shell`/`@cloudflare/think` — instead of a Pick-composed slice, so agent stubs and RPC proxies plug in without shaping. Adds JSDoc across the public API (Root, Messages, Activity, describeThinkChatActivityPart, tool renderer seam) and a custom-tool-panel story.
+
 ## 0.2.1
 
 ### Patch Changes
